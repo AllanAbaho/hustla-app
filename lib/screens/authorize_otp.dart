@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:active_ecommerce_flutter/helpers/auth_helper.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:active_ecommerce_flutter/repositories/payment_repository.dart';
@@ -18,12 +20,10 @@ class AuthorizeOTP extends StatefulWidget {
       {Key key,
       this.verify_by = "email",
       this.user_id,
-      this.transactionId,
       this.selected_payment_method_key})
       : super(key: key);
   final String verify_by;
   final int user_id;
-  final String transactionId;
   final String selected_payment_method_key;
 
   @override
@@ -33,9 +33,10 @@ class AuthorizeOTP extends StatefulWidget {
 class _AuthorizeOTPState extends State<AuthorizeOTP> {
   //controllers
   TextEditingController _verificationCodeController = TextEditingController();
-
+  String myOTP;
   @override
   void initState() {
+    sendSMS();
     //on Splash Screen hide statusbar
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     super.initState();
@@ -62,6 +63,24 @@ class _AuthorizeOTPState extends State<AuthorizeOTP> {
     }
   }
 
+  sendSMS() async {
+    final int rndNumber = Random().nextInt(900000) + 100000;
+    String myNumber = rndNumber.toString();
+    var smsResponse = await AuthRepository().authorizeOTPResponse(myNumber);
+    if (smsResponse.status == 'SUCCESS') {
+      setState(() {
+        myOTP = myNumber;
+      });
+      ToastComponent.showDialog('Please enter OTP',
+          gravity: Toast.center, duration: Toast.lengthLong);
+      return;
+    } else {
+      ToastComponent.showDialog('OTP not sent please click resend',
+          gravity: Toast.center, duration: Toast.lengthLong);
+      return;
+    }
+  }
+
   onPressConfirm() async {
     var code = _verificationCodeController.text.toString();
 
@@ -73,35 +92,30 @@ class _AuthorizeOTPState extends State<AuthorizeOTP> {
       return;
     }
 
-    var authorizeOTPResponse =
-        await AuthRepository().authorizeOTPResponse(code, widget.transactionId);
-    if (authorizeOTPResponse.status != 'SUCCESS') {
-      ToastComponent.showDialog(authorizeOTPResponse.message,
+    if (code != myOTP) {
+      ToastComponent.showDialog('Invalid OTP entered',
           gravity: Toast.center, duration: Toast.lengthLong);
-    } else {
-      // ToastComponent.showDialog(authorizeOTPResponse.message,
-      //     gravity: Toast.center, duration: Toast.lengthLong);
-
-      var orderCreateResponse = await PaymentRepository()
-          .getOrderCreateResponseFromCod(widget.selected_payment_method_key);
-      if (orderCreateResponse.result == false) {
-        ToastComponent.showDialog(orderCreateResponse.message,
-            gravity: Toast.center, duration: Toast.lengthLong);
-        Navigator.of(context).pop();
-        return;
-      }
+      return;
+    }
+    var orderCreateResponse = await PaymentRepository()
+        .getOrderCreateResponseFromCod(widget.selected_payment_method_key);
+    if (orderCreateResponse.result == false) {
       ToastComponent.showDialog(orderCreateResponse.message,
           gravity: Toast.center, duration: Toast.lengthLong);
-      access_token.load().whenComplete(() {
-        AuthHelper().fetch_and_set();
-        Future.delayed(const Duration(seconds: 1)).then((value) async {
-          Navigator.pushAndRemoveUntil(context,
-              MaterialPageRoute(builder: (context) {
-            return Main();
-          }), (route) => false);
-        });
-      });
+      Navigator.of(context).pop();
+      return;
     }
+    ToastComponent.showDialog(orderCreateResponse.message,
+        gravity: Toast.center, duration: Toast.lengthLong);
+    access_token.load().whenComplete(() {
+      AuthHelper().fetch_and_set();
+      Future.delayed(const Duration(seconds: 1)).then((value) async {
+        Navigator.pushAndRemoveUntil(context,
+            MaterialPageRoute(builder: (context) {
+          return Main();
+        }), (route) => false);
+      });
+    });
   }
 
   @override

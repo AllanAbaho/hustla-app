@@ -459,16 +459,16 @@ class _CheckoutState extends State<Checkout> {
       return;
     }
 
-    loading();
-    var paySellerResponse = await PaymentRepository().paySellerResponse(
-        '89890', account_number.$, _grandTotalValue, 'AllanAbaho');
-    Navigator.of(loadingcontext).pop();
-    if (paySellerResponse.status != 'RECEIVED') {
-      ToastComponent.showDialog(paySellerResponse.message,
-          gravity: Toast.center, duration: Toast.lengthLong);
-      Navigator.of(context).pop();
-      return;
-    }
+    // loading();
+    // var paySellerResponse = await PaymentRepository().paySellerResponse(
+    //     '89890', account_number.$, _grandTotalValue, 'AllanAbaho');
+    // Navigator.of(loadingcontext).pop();
+    // if (paySellerResponse.status != 'RECEIVED') {
+    //   ToastComponent.showDialog(paySellerResponse.message,
+    //       gravity: Toast.center, duration: Toast.lengthLong);
+    //   Navigator.of(context).pop();
+    //   return;
+    // }
 
     // var orderCreateResponse = await PaymentRepository()
     //     .getOrderCreateResponseFromCod(_selected_payment_method_key);
@@ -479,11 +479,10 @@ class _CheckoutState extends State<Checkout> {
     //   Navigator.of(context).pop();
     //   return;
     // }
-    print(paySellerResponse.transactionId);
+    // print(paySellerResponse.transactionId);
 
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return AuthorizeOTP(
-        transactionId: paySellerResponse.transactionId,
         selected_payment_method_key: _selected_payment_method_key,
       );
     }));
