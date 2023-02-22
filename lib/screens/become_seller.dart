@@ -7,6 +7,7 @@ import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
 import 'package:active_ecommerce_flutter/repositories/add_shop_repository.dart';
 import 'package:active_ecommerce_flutter/repositories/auth_repository.dart';
 import 'package:active_ecommerce_flutter/screens/home.dart';
+import 'package:active_ecommerce_flutter/screens/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
@@ -306,7 +307,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
       ToastComponent.showDialog(addShopResponse.message,
           gravity: Toast.center, duration: Toast.lengthLong);
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return Home();
+        return Main();
       }));
       sendSMS();
     }
