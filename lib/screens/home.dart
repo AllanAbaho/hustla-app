@@ -9,6 +9,7 @@ import 'package:active_ecommerce_flutter/helpers/auth_helper.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:active_ecommerce_flutter/presenter/cart_counter.dart';
 import 'package:active_ecommerce_flutter/repositories/cart_repository.dart';
+import 'package:active_ecommerce_flutter/screens/become_seller.dart';
 import 'package:active_ecommerce_flutter/screens/filter.dart';
 import 'package:active_ecommerce_flutter/screens/finance.dart';
 import 'package:active_ecommerce_flutter/screens/flash_deal_list.dart';
@@ -415,6 +416,36 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       hustlaCategories(screenHeight),
 
                       buildHomeCarouselSlider(context),
+
+                      Padding(
+                        padding: const EdgeInsets.only(left: 260.0, right: 10),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              // return DepositPage('Deposit Money');
+                              return BecomeSeller();
+                            }));
+                          },
+                          // ignore: sort_child_properties_last
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 8.0, right: 8.0),
+                            child: SmallText(
+                              'Become Seller',
+                              color: Colors.white,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.red,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(12), // <-- Radius
+                            ),
+                          ),
+                        ),
+                      ),
+
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: hustlerBlog(),

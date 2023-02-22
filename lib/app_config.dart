@@ -22,8 +22,7 @@ class AppConfig {
 
   static const DOMAIN_PATH = "192.168.1.28:8000"; //localhost
   //
-  // static const DOMAIN_PATH =
-  //     "hustlermarkets.com"; // directly inside the public folder
+  // static const DOMAIN_PATH = "hustlermarkets.com";
 
   //do not configure these below
   static const String API_ENDPATH = "api/v2";
