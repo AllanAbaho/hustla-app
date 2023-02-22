@@ -15,29 +15,29 @@ import 'package:toast/toast.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class AuthorizeOTP extends StatefulWidget {
-  AuthorizeOTP(
+class RegisterOTP extends StatefulWidget {
+  RegisterOTP(
       {Key key,
       this.verify_by = "email",
       this.user_id,
-      this.selected_payment_method_key})
+      this.verification_code,
+      this.selected_payment_method_key,
+      this.phone})
       : super(key: key);
-  final String verify_by;
+  final String verify_by, phone, verification_code;
   final int user_id;
   final String selected_payment_method_key;
 
   @override
-  _AuthorizeOTPState createState() => _AuthorizeOTPState();
+  _RegisterOTPState createState() => _RegisterOTPState();
 }
 
-class _AuthorizeOTPState extends State<AuthorizeOTP> {
+class _RegisterOTPState extends State<RegisterOTP> {
   //controllers
   TextEditingController _verificationCodeController = TextEditingController();
-  String myOTP;
   @override
   void initState() {
     sendSMS();
-    //on Splash Screen hide statusbar
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     super.initState();
   }
@@ -64,14 +64,11 @@ class _AuthorizeOTPState extends State<AuthorizeOTP> {
   }
 
   sendSMS() async {
-    final int rndNumber = Random().nextInt(900000) + 100000;
-    String myNumber = rndNumber.toString();
-    var smsResponse =
-        await AuthRepository().authorizeOTPResponse(myNumber, user_phone.$);
+    print(widget.phone);
+    print(widget.verification_code);
+    var smsResponse = await AuthRepository()
+        .authorizeOTPResponse(widget.verification_code, widget.phone);
     if (smsResponse.status == 'SUCCESS') {
-      setState(() {
-        myOTP = myNumber;
-      });
       ToastComponent.showDialog('Please enter OTP',
           gravity: Toast.center, duration: Toast.lengthLong);
       return;
@@ -93,30 +90,20 @@ class _AuthorizeOTPState extends State<AuthorizeOTP> {
       return;
     }
 
-    if (code != myOTP) {
-      ToastComponent.showDialog('Invalid OTP entered',
+    var confirmCodeResponse =
+        await AuthRepository().getConfirmCodeResponse(widget.user_id, code);
+
+    if (confirmCodeResponse.result == false) {
+      ToastComponent.showDialog(confirmCodeResponse.message,
           gravity: Toast.center, duration: Toast.lengthLong);
-      return;
-    }
-    var orderCreateResponse = await PaymentRepository()
-        .getOrderCreateResponseFromCod(widget.selected_payment_method_key);
-    if (orderCreateResponse.result == false) {
-      ToastComponent.showDialog(orderCreateResponse.message,
+    } else {
+      ToastComponent.showDialog(confirmCodeResponse.message,
           gravity: Toast.center, duration: Toast.lengthLong);
-      Navigator.of(context).pop();
-      return;
+
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return Login();
+      }));
     }
-    ToastComponent.showDialog(orderCreateResponse.message,
-        gravity: Toast.center, duration: Toast.lengthLong);
-    access_token.load().whenComplete(() {
-      AuthHelper().fetch_and_set();
-      Future.delayed(const Duration(seconds: 1)).then((value) async {
-        Navigator.pushAndRemoveUntil(context,
-            MaterialPageRoute(builder: (context) {
-          return Main();
-        }), (route) => false);
-      });
-    });
   }
 
   @override
@@ -152,7 +139,7 @@ class _AuthorizeOTPState extends State<AuthorizeOTP> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
                     child: Text(
-                      'Verify your order',
+                      'Verify your phone number',
                       style: TextStyle(
                           color: MyTheme.accent_color,
                           fontSize: 18,

@@ -75,17 +75,37 @@ class AuthRepository {
   }
 
   Future<SignupResponse> getSignupResponse(
-      @required String name,
-      @required String emailOrPhone,
-      @required String password,
-      @required String passowrdConfirmation,
-      @required String registerBy) async {
+      @required String uname,
+      @required String fname,
+      @required String lname,
+      // @required String dob,
+      // @required String gender,
+      @required String nin,
+      @required String phone,
+      @required String idFront,
+      @required String idBack,
+      @required String email,
+      @required String password) async {
     var postBody = jsonEncode({
-      "name": "$name",
-      "email_or_phone": "${emailOrPhone}",
-      "password": "$password",
-      "password_confirmation": "${passowrdConfirmation}",
-      "register_by": "$registerBy"
+      "user_name": "$uname",
+      "first_name": "$fname",
+      "second_name": "$lname",
+      "id_number": "$nin",
+      "phone_number": "$phone",
+      "email": "$email",
+      "pin": "$password",
+      "appVersion": "1.0.0+1",
+      "osType": 'ANDROID',
+      "country": "Kenya",
+      "verified": "NONE",
+      "currency": "KES",
+      "country_code": "254",
+      "device_id": "NONE",
+      "id_type": "National ID",
+      "referral_code": "NONE",
+      "id_img": "NONE",
+      "id_img_back": idBack,
+      "profile_img": idFront
     });
 
     Uri url = Uri.parse("${AppConfig.BASE_URL}/auth/signup");
@@ -133,9 +153,10 @@ class AuthRepository {
 
   Future<AuthorizeOtpResponse> authorizeOTPResponse(
     String verificationCode,
+    String phone,
   ) async {
     var postBody =
-        jsonEncode({"message": verificationCode, "phoneNumber": user_phone.$});
+        jsonEncode({"message": verificationCode, "phoneNumber": phone});
 
     Uri url = Uri.parse("${AppConfig.HUSTLER_GATEWAY}/sendAppSms");
     final response = await http.post(url,
