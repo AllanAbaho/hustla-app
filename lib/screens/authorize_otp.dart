@@ -72,6 +72,8 @@ class _AuthorizeOTPState extends State<AuthorizeOTP> {
       setState(() {
         myOTP = myNumber;
       });
+      print(myOTP);
+
       ToastComponent.showDialog('Please enter OTP',
           gravity: Toast.center, duration: Toast.lengthLong);
       return;

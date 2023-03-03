@@ -97,8 +97,7 @@ class _RegistrationState extends State<Registration> {
     // var dob = _birthDateController.text.toString();
     var password = _passwordController.text.toString();
     var password_confirm = _passwordConfirmController.text.toString();
-    // var phone = _phone;
-    var phone = '+256700460055';
+    var phone = _phone;
 
     if (fname == "") {
       ToastComponent.showDialog('Please enter your first name',

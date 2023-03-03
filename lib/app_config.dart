@@ -6,7 +6,7 @@ var this_year = DateTime.now().year.toString();
 
 class AppConfig {
   static String copyright_text = "Financial services without limitations";
-  static String app_name = "Hustla App"; //this shows in the splash screen
+  static String app_name = "Hustla"; //this shows in the splash screen
   static String purchase_code =
       "6f56de4a-0426-45e0-bf02-d0bb7caabeb3"; //enter your purchase code for the app from codecanyon
 
@@ -20,7 +20,7 @@ class AppConfig {
 
   //configure this
 
-  // static const DOMAIN_PATH = "192.168.1.28:8000"; //localhost
+  // static const DOMAIN_PATH = "192.168.1.25:8000"; //localhost
   //
   static const DOMAIN_PATH = "hustlermarkets.com";
 
