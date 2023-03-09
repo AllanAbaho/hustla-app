@@ -20,6 +20,7 @@ import 'package:active_ecommerce_flutter/screens/todays_deal_products.dart';
 import 'package:active_ecommerce_flutter/screens/top_selling_products.dart';
 import 'package:active_ecommerce_flutter/screens/category_products.dart';
 import 'package:active_ecommerce_flutter/screens/category_list.dart';
+import 'package:active_ecommerce_flutter/screens/top_up.dart';
 import 'package:active_ecommerce_flutter/screens/travel.dart';
 import 'package:active_ecommerce_flutter/ui_sections/drawer.dart';
 import 'package:flutter/cupertino.dart';
@@ -369,13 +370,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                     padding: const EdgeInsets.all(8.0),
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        return null;
-                                        // Navigator.push(context,
-                                        //     MaterialPageRoute(
-                                        //         builder: (context) {
-                                        //   // return DepositPage('Deposit Money');
-                                        //   return Home();
-                                        // }));
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          // return DepositPage('Deposit Money');
+                                          return TopUp();
+                                        }));
                                       },
                                       // ignore: sort_child_properties_last
                                       child: Padding(

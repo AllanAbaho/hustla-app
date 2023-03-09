@@ -3,6 +3,7 @@ import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
+import 'package:active_ecommerce_flutter/screens/join_sacco.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
@@ -135,7 +136,8 @@ class _SaccoState extends State<Sacco> {
         "links": {
           "products": "http://hustlermarkets.com/api/v2/products/category/9",
           "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/9"
-        }
+        },
+        "page": JoinSacco(),
       },
       {
         "id": 11,
@@ -208,19 +210,18 @@ class _SaccoState extends State<Sacco> {
     return Container(
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: InkWell(
-        // onTap: () {
-        //   Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) {
-        //         return CategoryProducts(
-        //           category_id: travelCategories[index]['id'],
-        //           category_name: travelCategories[index]['name'],
-        //         );
-        //       },
-        //     ),
-        //   );
-        // },
+        onTap: () {
+          if (travelCategories[index]['page'] != null) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return travelCategories[index]['page'];
+                },
+              ),
+            );
+          }
+        },
         child: Container(
           //padding: EdgeInsets.all(8),
           //color: Colors.amber,
@@ -266,81 +267,6 @@ class _SaccoState extends State<Sacco> {
           ),
         ),
       ),
-    );
-  }
-
-  Container buildBottomContainer() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-      ),
-
-      height: widget.is_base_category ? 0 : 80,
-      //color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Container(
-                width: (MediaQuery.of(context).size.width - 32),
-                height: 40,
-                child: FlatButton(
-                  minWidth: MediaQuery.of(context).size.width,
-                  //height: 50,
-                  color: MyTheme.accent_color,
-                  shape: RoundedRectangleBorder(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(8.0))),
-                  child: Text(
-                    AppLocalizations.of(context)
-                            .category_list_screen_all_products_of +
-                        " " +
-                        widget.parent_category_name,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return CategoryProducts(
-                        category_id: widget.parent_category_id,
-                        category_name: widget.parent_category_name,
-                      );
-                    }));
-                  },
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildShimmer() {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        mainAxisSpacing: 14,
-        crossAxisSpacing: 14,
-        childAspectRatio: 1,
-        crossAxisCount: 3,
-      ),
-      itemCount: 18,
-      padding: EdgeInsets.only(
-          left: 18, right: 18, bottom: widget.is_base_category ? 30 : 0),
-      scrollDirection: Axis.vertical,
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        return Container(
-          decoration: BoxDecorations.buildBoxDecoration_1(),
-          child: ShimmerHelper().buildBasicShimmer(),
-        );
-      },
     );
   }
 }

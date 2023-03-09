@@ -12,14 +12,13 @@ import 'package:active_ecommerce_flutter/screens/sslcommerz_screen.dart';
 import 'package:active_ecommerce_flutter/screens/flutterwave_screen.dart';
 import 'package:active_ecommerce_flutter/screens/paytm_screen.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:active_ecommerce_flutter/repositories/payment_repository.dart';
+import 'package:active_ecommerce_flutter/repositories/top_up_repository.dart';
 
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/custom/toast_component.dart';
 import 'package:toast/toast.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 
 class RechargeWallet extends StatefulWidget {
   double amount;
@@ -92,13 +91,19 @@ class _RechargeWalletState extends State<RechargeWallet> {
     print(widget.amount);
 
     if (_selected_payment_method == "") {
-      ToastComponent.showDialog(AppLocalizations.of(context).common_payment_choice_warning, gravity: Toast.center, duration: Toast.lengthLong);
+      ToastComponent.showDialog(
+          AppLocalizations.of(context).common_payment_choice_warning,
+          gravity: Toast.center,
+          duration: Toast.lengthLong);
       return;
     }
 
     if (_selected_payment_method == "stripe_payment") {
       if (widget.amount == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, gravity: Toast.center, duration: Toast.lengthLong);
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay,
+            gravity: Toast.center,
+            duration: Toast.lengthLong);
         return;
       }
 
@@ -111,7 +116,10 @@ class _RechargeWalletState extends State<RechargeWallet> {
       }));
     } else if (_selected_payment_method == "paypal_payment") {
       if (widget.amount == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, gravity: Toast.center, duration: Toast.lengthLong);
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay,
+            gravity: Toast.center,
+            duration: Toast.lengthLong);
         return;
       }
 
@@ -124,7 +132,10 @@ class _RechargeWalletState extends State<RechargeWallet> {
       }));
     } else if (_selected_payment_method == "razorpay") {
       if (widget.amount == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, gravity: Toast.center, duration: Toast.lengthLong);
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay,
+            gravity: Toast.center,
+            duration: Toast.lengthLong);
         return;
       }
 
@@ -137,7 +148,10 @@ class _RechargeWalletState extends State<RechargeWallet> {
       }));
     } else if (_selected_payment_method == "paystack") {
       if (widget.amount == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, gravity: Toast.center, duration: Toast.lengthLong);
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay,
+            gravity: Toast.center,
+            duration: Toast.lengthLong);
         return;
       }
 
@@ -150,7 +164,10 @@ class _RechargeWalletState extends State<RechargeWallet> {
       }));
     } else if (_selected_payment_method == "iyzico") {
       if (widget.amount == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, gravity: Toast.center, duration: Toast.lengthLong);
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay,
+            gravity: Toast.center,
+            duration: Toast.lengthLong);
         return;
       }
 
@@ -163,7 +180,10 @@ class _RechargeWalletState extends State<RechargeWallet> {
       }));
     } else if (_selected_payment_method == "bkash") {
       if (widget.amount == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, gravity: Toast.center, duration: Toast.lengthLong);
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay,
+            gravity: Toast.center,
+            duration: Toast.lengthLong);
         return;
       }
 
@@ -176,7 +196,10 @@ class _RechargeWalletState extends State<RechargeWallet> {
       }));
     } else if (_selected_payment_method == "nagad") {
       if (widget.amount == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, gravity: Toast.center, duration: Toast.lengthLong);
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay,
+            gravity: Toast.center,
+            duration: Toast.lengthLong);
         return;
       }
 
@@ -189,7 +212,10 @@ class _RechargeWalletState extends State<RechargeWallet> {
       }));
     } else if (_selected_payment_method == "sslcommerz_payment") {
       if (widget.amount == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, gravity: Toast.center, duration: Toast.lengthLong);
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay,
+            gravity: Toast.center,
+            duration: Toast.lengthLong);
         return;
       }
 
@@ -202,7 +228,10 @@ class _RechargeWalletState extends State<RechargeWallet> {
       }));
     } else if (_selected_payment_method == "flutterwave") {
       if (widget.amount == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, gravity: Toast.center, duration: Toast.lengthLong);
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay,
+            gravity: Toast.center,
+            duration: Toast.lengthLong);
         return;
       }
 
@@ -215,7 +244,10 @@ class _RechargeWalletState extends State<RechargeWallet> {
       }));
     } else if (_selected_payment_method == "paytm") {
       if (widget.amount == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, gravity: Toast.center, duration: Toast.lengthLong);
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay,
+            gravity: Toast.center,
+            duration: Toast.lengthLong);
         return;
       }
 
@@ -321,7 +353,7 @@ class _RechargeWalletState extends State<RechargeWallet> {
           height: 100,
           child: Center(
               child: Text(
-                AppLocalizations.of(context).common_no_payment_method_added,
+            AppLocalizations.of(context).common_no_payment_method_added,
             style: TextStyle(color: MyTheme.font_grey),
           )));
     }
@@ -436,7 +468,8 @@ class _RechargeWalletState extends State<RechargeWallet> {
                 borderRadius: BorderRadius.circular(0.0),
               ),
               child: Text(
-                AppLocalizations.of(context).recharge_wallet_screen_recharge_wallet,
+                AppLocalizations.of(context)
+                    .recharge_wallet_screen_recharge_wallet,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:active_ecommerce_flutter/custom/toast_component.dart';
 import 'package:toast/toast.dart';
 import 'dart:convert';
-import 'package:active_ecommerce_flutter/repositories/payment_repository.dart';
+import 'package:active_ecommerce_flutter/repositories/top_up_repository.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:active_ecommerce_flutter/screens/order_list.dart';
@@ -51,10 +51,11 @@ class _BkashScreenState extends State<BkashScreen> {
 
   createOrder() async {
     var orderCreateResponse = await PaymentRepository()
-        .getOrderCreateResponse( widget.payment_method_key);
+        .getOrderCreateResponse(widget.payment_method_key);
 
     if (orderCreateResponse.result == false) {
-      ToastComponent.showDialog(orderCreateResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
+      ToastComponent.showDialog(orderCreateResponse.message,
+          gravity: Toast.center, duration: Toast.lengthLong);
       Navigator.of(context).pop();
       return;
     }
@@ -71,14 +72,14 @@ class _BkashScreenState extends State<BkashScreen> {
         widget.payment_type, _combined_order_id, widget.amount);
 
     if (bkashUrlResponse.result == false) {
-      ToastComponent.showDialog(bkashUrlResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
+      ToastComponent.showDialog(bkashUrlResponse.message,
+          gravity: Toast.center, duration: Toast.lengthLong);
       Navigator.of(context).pop();
       return;
     }
 
     _initial_url = bkashUrlResponse.url;
     _initial_url_fetched = true;
-
 
     setState(() {});
 
@@ -113,12 +114,13 @@ class _BkashScreenState extends State<BkashScreen> {
       }
     });
   }
-  onPaymentSuccess(payment_details) async{
 
-    var bkashPaymentProcessResponse = await PaymentRepository().getBkashPaymentProcessResponse(widget.payment_type, widget.amount,_combined_order_id, payment_details);
+  onPaymentSuccess(payment_details) async {
+    var bkashPaymentProcessResponse = await PaymentRepository()
+        .getBkashPaymentProcessResponse(widget.payment_type, widget.amount,
+            _combined_order_id, payment_details);
 
-    if(bkashPaymentProcessResponse.result == false ){
-
+    if (bkashPaymentProcessResponse.result == false) {
       Toast.show(bkashPaymentProcessResponse.message,
           duration: Toast.lengthLong, gravity: Toast.center);
       Navigator.pop(context);
@@ -136,10 +138,7 @@ class _BkashScreenState extends State<BkashScreen> {
         return Wallet(from_recharge: true);
       }));
     }
-
-
   }
-  
 
   buildBody() {
     if (_order_init == false &&
@@ -153,7 +152,8 @@ class _BkashScreenState extends State<BkashScreen> {
     } else if (_initial_url_fetched == false) {
       return Container(
         child: Center(
-          child: Text(AppLocalizations.of(context).bkash_screen_fetching_bkash_url),
+          child: Text(
+              AppLocalizations.of(context).bkash_screen_fetching_bkash_url),
         ),
       );
     } else {
@@ -175,7 +175,8 @@ class _BkashScreenState extends State<BkashScreen> {
               if (page.contains("/bkash/api/success")) {
                 getData();
               } else if (page.contains("/bkash/api/fail")) {
-                ToastComponent.showDialog("Payment cancelled", gravity: Toast.center, duration: Toast.lengthLong);
+                ToastComponent.showDialog("Payment cancelled",
+                    gravity: Toast.center, duration: Toast.lengthLong);
                 Navigator.of(context).pop();
                 return;
               }
@@ -188,7 +189,7 @@ class _BkashScreenState extends State<BkashScreen> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-backgroundColor: Colors.white,
+      backgroundColor: Colors.white,
       centerTitle: true,
       leading: Builder(
         builder: (context) => IconButton(

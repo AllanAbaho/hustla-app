@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:active_ecommerce_flutter/custom/toast_component.dart';
 import 'package:toast/toast.dart';
 import 'dart:convert';
-import 'package:active_ecommerce_flutter/repositories/payment_repository.dart';
+import 'package:active_ecommerce_flutter/repositories/top_up_repository.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:active_ecommerce_flutter/screens/order_list.dart';
@@ -51,7 +51,8 @@ class _RazorpayScreenState extends State<RazorpayScreen> {
         .getOrderCreateResponse(widget.payment_method_key);
 
     if (orderCreateResponse.result == false) {
-      ToastComponent.showDialog(orderCreateResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
+      ToastComponent.showDialog(orderCreateResponse.message,
+          gravity: Toast.center, duration: Toast.lengthLong);
       Navigator.of(context).pop();
       return;
     }
@@ -175,7 +176,7 @@ class _RazorpayScreenState extends State<RazorpayScreen> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-backgroundColor: Colors.white,
+      backgroundColor: Colors.white,
       centerTitle: true,
       leading: Builder(
         builder: (context) => IconButton(

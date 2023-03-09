@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:active_ecommerce_flutter/custom/toast_component.dart';
 import 'package:toast/toast.dart';
 import 'dart:convert';
-import 'package:active_ecommerce_flutter/repositories/payment_repository.dart';
+import 'package:active_ecommerce_flutter/repositories/top_up_repository.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:active_ecommerce_flutter/screens/order_list.dart';
 import 'package:active_ecommerce_flutter/screens/wallet.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
-
 
 class FlutterwaveScreen extends StatefulWidget {
   double amount;
@@ -69,9 +68,9 @@ class _FlutterwaveScreenState extends State<FlutterwaveScreen> {
   }
 
   getSetInitialUrl() async {
-
-    var flutterwaveUrlResponse = await PaymentRepository().getFlutterwaveUrlResponse(
-        widget.payment_type, _combined_order_id, widget.amount);
+    var flutterwaveUrlResponse = await PaymentRepository()
+        .getFlutterwaveUrlResponse(
+            widget.payment_type, _combined_order_id, widget.amount);
 
     if (flutterwaveUrlResponse.result == false) {
       ToastComponent.showDialog(flutterwaveUrlResponse.message,
@@ -82,7 +81,6 @@ class _FlutterwaveScreenState extends State<FlutterwaveScreen> {
 
     _initial_url = flutterwaveUrlResponse.url;
     _initial_url_fetched = true;
-
 
     setState(() {});
 
@@ -176,7 +174,7 @@ class _FlutterwaveScreenState extends State<FlutterwaveScreen> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-backgroundColor: Colors.white,
+      backgroundColor: Colors.white,
       centerTitle: true,
       leading: Builder(
         builder: (context) => IconButton(

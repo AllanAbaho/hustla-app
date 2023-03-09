@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:active_ecommerce_flutter/custom/toast_component.dart';
 import 'package:toast/toast.dart';
 import 'dart:convert';
-import 'package:active_ecommerce_flutter/repositories/payment_repository.dart';
+import 'package:active_ecommerce_flutter/repositories/top_up_repository.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:active_ecommerce_flutter/screens/order_list.dart';
 import 'package:active_ecommerce_flutter/screens/wallet.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
-
 
 class PaypalScreen extends StatefulWidget {
   double amount;
@@ -56,7 +55,8 @@ class _PaypalScreenState extends State<PaypalScreen> {
         .getOrderCreateResponse(widget.payment_method_key);
 
     if (orderCreateResponse.result == false) {
-      ToastComponent.showDialog(orderCreateResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
+      ToastComponent.showDialog(orderCreateResponse.message,
+          gravity: Toast.center, duration: Toast.lengthLong);
       Navigator.of(context).pop();
       return;
     }
@@ -73,14 +73,14 @@ class _PaypalScreenState extends State<PaypalScreen> {
         widget.payment_type, _combined_order_id, widget.amount);
 
     if (paypalUrlResponse.result == false) {
-      ToastComponent.showDialog(paypalUrlResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
+      ToastComponent.showDialog(paypalUrlResponse.message,
+          gravity: Toast.center, duration: Toast.lengthLong);
       Navigator.of(context).pop();
       return;
     }
 
     _initial_url = paypalUrlResponse.url;
     _initial_url_fetched = true;
-
 
     setState(() {});
 
@@ -140,7 +140,8 @@ class _PaypalScreenState extends State<PaypalScreen> {
     } else if (_initial_url_fetched == false) {
       return Container(
         child: Center(
-          child: Text(AppLocalizations.of(context).paypal_screen_fetching_paypal_url),
+          child: Text(
+              AppLocalizations.of(context).paypal_screen_fetching_paypal_url),
         ),
       );
     } else {
@@ -162,7 +163,8 @@ class _PaypalScreenState extends State<PaypalScreen> {
               if (page.contains("/paypal/payment/done")) {
                 getData();
               } else if (page.contains("/paypal/payment/cancel")) {
-                ToastComponent.showDialog("Payment cancelled", gravity: Toast.center, duration: Toast.lengthLong);
+                ToastComponent.showDialog("Payment cancelled",
+                    gravity: Toast.center, duration: Toast.lengthLong);
                 Navigator.of(context).pop();
                 return;
               }
@@ -175,7 +177,7 @@ class _PaypalScreenState extends State<PaypalScreen> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-backgroundColor: Colors.white,
+      backgroundColor: Colors.white,
       centerTitle: true,
       leading: Builder(
         builder: (context) => IconButton(
@@ -184,7 +186,7 @@ backgroundColor: Colors.white,
         ),
       ),
       title: Text(
-          AppLocalizations.of(context).paypal_screen_pay_with_paypal,
+        AppLocalizations.of(context).paypal_screen_pay_with_paypal,
         style: TextStyle(fontSize: 16, color: MyTheme.accent_color),
       ),
       elevation: 0.0,

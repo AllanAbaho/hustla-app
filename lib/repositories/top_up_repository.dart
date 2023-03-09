@@ -1,5 +1,5 @@
 import 'package:active_ecommerce_flutter/app_config.dart';
-import 'package:active_ecommerce_flutter/data_model/pay_seller_response.dart';
+import 'package:active_ecommerce_flutter/data_model/top_up_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
@@ -119,34 +119,31 @@ class PaymentRepository {
     return orderCreateResponseFromJson(response.body);
   }
 
-  Future<PaySellerResponse> paySellerResponse(
-    toAccount,
-    fromAccount,
+  Future<TopUpResponse> topUpResponse(
     transactionAmount,
-    sellerName,
   ) async {
     String transactionId = DateTime.now().millisecondsSinceEpoch.toString();
     transactionId = transactionId + user_name.$;
 
     transactionAmount = transactionAmount.toString();
     var post_body = jsonEncode({
-      "toAccount": toAccount,
-      "fromAccount": fromAccount,
+      "toAccount": account_number.$,
+      "fromAccount": user_phone.$,
       "transactionAmount": transactionAmount,
       "transactionId": transactionId,
       "narration": "merchant payment",
-      "serviceName": "PAY SELLER",
+      "serviceName": "MOMO_TOPUP",
       "appVersion": '1.0.0+1',
       "checkoutMode": "HUSTLAZWALLET",
       "debitType": "HUSTLAZWALLET",
-      "toCurrency": 'KES',
-      "fromCurrency": 'KES',
+      "toCurrency": 'UGX',
+      "fromCurrency": 'UGX',
       "fromAmount": transactionAmount,
       "toAmount": transactionAmount,
       "senderName": user_name.$,
-      "receiverName": sellerName,
-      "walletId": fromAccount,
-      "phoneNumber": '256700460055',
+      "receiverName": user_name.$,
+      "walletId": account_number.$,
+      "phoneNumber": user_phone.$,
       "reversalReference": "",
       "osType": "ANDROID"
     });
@@ -161,7 +158,7 @@ class PaymentRepository {
         },
         body: post_body);
 
-    return paySellerResponseFromJson(response.body);
+    return topUpResponseFromJson(response.body);
   }
 
   Future<OrderCreateResponse> getOrderCreateResponseFromManualPayment(

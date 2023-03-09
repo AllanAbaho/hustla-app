@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:active_ecommerce_flutter/custom/toast_component.dart';
 import 'package:toast/toast.dart';
 import 'dart:convert';
-import 'package:active_ecommerce_flutter/repositories/payment_repository.dart';
+import 'package:active_ecommerce_flutter/repositories/top_up_repository.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:active_ecommerce_flutter/screens/order_list.dart';
@@ -54,7 +54,8 @@ class _PaytmScreenState extends State<PaytmScreen> {
         .getOrderCreateResponse(widget.payment_method_key);
 
     if (orderCreateResponse.result == false) {
-      ToastComponent.showDialog(orderCreateResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
+      ToastComponent.showDialog(orderCreateResponse.message,
+          gravity: Toast.center, duration: Toast.lengthLong);
       Navigator.of(context).pop();
       return;
     }
@@ -70,7 +71,9 @@ class _PaytmScreenState extends State<PaytmScreen> {
     //print(phoneEmailAvailabilityResponse.toString());
     if (phoneEmailAvailabilityResponse.phone_available == false) {
       ToastComponent.showDialog(
-          phoneEmailAvailabilityResponse.phone_available_message, gravity: Toast.center, duration: Toast.lengthLong);
+          phoneEmailAvailabilityResponse.phone_available_message,
+          gravity: Toast.center,
+          duration: Toast.lengthLong);
       Navigator.of(context).pop();
       return;
     }
