@@ -59,29 +59,17 @@ class _TopUpState extends State<TopUp> {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: app_language_rtl.$ ? TextDirection.rtl : TextDirection.ltr,
-      child: Stack(children: [
-        Container(
-          height: DeviceInfo(context).height / 9,
-          width: DeviceInfo(context).width,
-          color: MyTheme.accent_color,
-          alignment: Alignment.topRight,
-          child: Image.asset(
-            "assets/background_1.png",
-          ),
-        ),
-        Scaffold(
-            backgroundColor: Colors.transparent,
-            appBar: PreferredSize(
-                child: buildAppBar(context),
-                preferredSize: Size(
-                  DeviceInfo(context).width,
-                  80,
-                )),
-            body: buildBody()),
-      ]),
-    );
+    return Scaffold(
+        appBar: PreferredSize(
+            child: buildAppBar(context),
+            preferredSize: Size(
+              DeviceInfo(context).width,
+              60,
+            )),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: buildBody(),
+        ));
   }
 
   Widget creditForm() {
@@ -203,7 +191,7 @@ class _TopUpState extends State<TopUp> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: MyTheme.accent_color,
       //centerTitle: true,
       leading: widget.is_base_category
           ? Builder(

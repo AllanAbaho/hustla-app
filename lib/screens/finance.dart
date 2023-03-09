@@ -3,6 +3,7 @@ import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
+import 'package:active_ecommerce_flutter/screens/top_up.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
@@ -136,7 +137,8 @@ class _FinanceState extends State<Finance> {
         "links": {
           "products": "http://hustlermarkets.com/api/v2/products/category/11",
           "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
-        }
+        },
+        "page": TopUp(),
       },
       {
         "id": 16,
@@ -183,19 +185,18 @@ class _FinanceState extends State<Finance> {
     return Container(
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: InkWell(
-        // onTap: () {
-        //   Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) {
-        //         return CategoryProducts(
-        //           category_id: travelCategories[index]['id'],
-        //           category_name: travelCategories[index]['name'],
-        //         );
-        //       },
-        //     ),
-        //   );
-        // },
+        onTap: () {
+          if (travelCategories[index]['page'] != null) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return travelCategories[index]['page'];
+                },
+              ),
+            );
+          }
+        },
         child: Container(
           //padding: EdgeInsets.all(8),
           //color: Colors.amber,

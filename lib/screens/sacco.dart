@@ -1,5 +1,8 @@
 import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
+import 'package:active_ecommerce_flutter/custom/resources.dart';
+import 'package:active_ecommerce_flutter/custom/spacers.dart';
+import 'package:active_ecommerce_flutter/custom/text.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
@@ -8,6 +11,7 @@ import 'package:active_ecommerce_flutter/screens/repay_funds.dart';
 import 'package:active_ecommerce_flutter/screens/request_funds.dart';
 import 'package:active_ecommerce_flutter/screens/save_funds.dart';
 import 'package:active_ecommerce_flutter/screens/share_funds.dart';
+import 'package:active_ecommerce_flutter/screens/top_up.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
@@ -36,14 +40,13 @@ class Sacco extends StatefulWidget {
   final bool is_base_category;
   final bool is_top_category;
   final BottomAppbarIndex bottomAppbarIndex;
-
   @override
   _SaccoState createState() => _SaccoState();
 }
 
 class _SaccoState extends State<Sacco> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
+  final bool isMember = true;
   @override
   void initState() {
     // TODO: implement initState
@@ -71,12 +74,51 @@ class _SaccoState extends State<Sacco> {
       slivers: [
         SliverList(
             delegate: SliverChildListDelegate([
+          isMember ? buildAccountWidget() : Container(),
           buildCategoryList(),
           Container(
             height: widget.is_base_category ? 60 : 90,
           )
         ]))
       ],
+    );
+  }
+
+  Widget buildAccountWidget() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 70,
+        decoration: BoxDecoration(
+          color: AppColors.dashboardColor,
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          border: Border.all(color: MyTheme.light_grey, width: 1),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, left: 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                // ignore: prefer_const_literals_to_create_immutables
+                children: [
+                  MediumText(
+                    'ABC EMPOWERMENT SACCO LIMITED',
+                    color: Colors.white,
+                  ),
+                  VSpace.sm,
+                  MediumText(
+                    '${account_balance.$} (Ksh)',
+                    color: MyTheme.accent_color,
+                  ),
+                ],
+              ),
+            ),
+            // HSpace.lg,
+          ],
+        ),
+      ),
     );
   }
 
@@ -109,12 +151,12 @@ class _SaccoState extends State<Sacco> {
   }
 
   String getAppBarTitle() {
-    String name = 'Sacco Services';
+    String name = 'My Sacco';
 
     return name;
   }
 
-  getTravelCategories() {
+  List getTravelCategories() {
     var travelCategories = [
       {
         "id": 9,
@@ -192,6 +234,9 @@ class _SaccoState extends State<Sacco> {
 
   buildCategoryList() {
     var travelCategories = getTravelCategories();
+    if (isMember) {
+      travelCategories.removeAt(0);
+    }
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         mainAxisSpacing: 14,
