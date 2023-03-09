@@ -4,6 +4,10 @@ import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
 import 'package:active_ecommerce_flutter/screens/join_sacco.dart';
+import 'package:active_ecommerce_flutter/screens/repay_funds.dart';
+import 'package:active_ecommerce_flutter/screens/request_funds.dart';
+import 'package:active_ecommerce_flutter/screens/save_funds.dart';
+import 'package:active_ecommerce_flutter/screens/share_funds.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
@@ -48,29 +52,17 @@ class _SaccoState extends State<Sacco> {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: app_language_rtl.$ ? TextDirection.rtl : TextDirection.ltr,
-      child: Stack(children: [
-        Container(
-          height: DeviceInfo(context).height / 9,
-          width: DeviceInfo(context).width,
-          color: MyTheme.accent_color,
-          alignment: Alignment.topRight,
-          child: Image.asset(
-            "assets/background_1.png",
-          ),
-        ),
-        Scaffold(
-            backgroundColor: Colors.transparent,
-            appBar: PreferredSize(
-                child: buildAppBar(context),
-                preferredSize: Size(
-                  DeviceInfo(context).width,
-                  80,
-                )),
-            body: buildBody()),
-      ]),
-    );
+    return Scaffold(
+        appBar: PreferredSize(
+            child: buildAppBar(context),
+            preferredSize: Size(
+              DeviceInfo(context).width,
+              60,
+            )),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: buildBody(),
+        ));
   }
 
   Widget buildBody() {
@@ -90,8 +82,7 @@ class _SaccoState extends State<Sacco> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.transparent,
-      //centerTitle: true,
+      backgroundColor: MyTheme.accent_color,
       leading: widget.is_base_category
           ? Builder(
               builder: (context) => Padding(
@@ -150,7 +141,8 @@ class _SaccoState extends State<Sacco> {
         "links": {
           "products": "http://hustlermarkets.com/api/v2/products/category/11",
           "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
-        }
+        },
+        "page": ShareFunds(),
       },
       {
         "id": 16,
@@ -163,7 +155,8 @@ class _SaccoState extends State<Sacco> {
         "links": {
           "products": "http://hustlermarkets.com/api/v2/products/category/16",
           "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/16"
-        }
+        },
+        "page": RequestFunds(),
       },
       {
         "id": 17,
@@ -176,7 +169,22 @@ class _SaccoState extends State<Sacco> {
         "links": {
           "products": "http://hustlermarkets.com/api/v2/products/category/16",
           "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/16"
-        }
+        },
+        "page": RepayFunds(),
+      },
+      {
+        "id": 18,
+        "name": "Save Funds",
+        "banner":
+            "https://www.vacu.org/sites/default/files/styles/max_325x325/public/article-featured-image/2019-06/GettyImages-869577740.jpg?itok=J88hNHrF",
+        "icon":
+            "http://hustlermarkets.com/public/uploads/all/w65DPieTu3ZUq6rMPnzExVwx8ZVRp5LQA0sGwaCN.jpg",
+        "number_of_children": 0,
+        "links": {
+          "products": "http://hustlermarkets.com/api/v2/products/category/16",
+          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/16"
+        },
+        "page": SaveFunds(),
       },
     ];
     return travelCategories;
