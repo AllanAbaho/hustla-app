@@ -3,9 +3,9 @@ import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
-import 'package:active_ecommerce_flutter/screens/send_money.dart';
+import 'package:active_ecommerce_flutter/screens/to_mobile.dart';
+import 'package:active_ecommerce_flutter/screens/to_wallet.dart';
 import 'package:active_ecommerce_flutter/screens/top_up.dart';
-import 'package:active_ecommerce_flutter/screens/withraw.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
@@ -19,8 +19,8 @@ import 'package:active_ecommerce_flutter/app_config.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class Finance extends StatefulWidget {
-  Finance(
+class MobileMoney extends StatefulWidget {
+  MobileMoney(
       {Key key,
       this.parent_category_id = 0,
       this.parent_category_name = "",
@@ -36,10 +36,10 @@ class Finance extends StatefulWidget {
   final BottomAppbarIndex bottomAppbarIndex;
 
   @override
-  _FinanceState createState() => _FinanceState();
+  _MobileMoneyState createState() => _MobileMoneyState();
 }
 
-class _FinanceState extends State<Finance> {
+class _MobileMoneyState extends State<MobileMoney> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
@@ -108,7 +108,7 @@ class _FinanceState extends State<Finance> {
   }
 
   String getAppBarTitle() {
-    String name = 'Financial Services';
+    String name = 'Mobile Money';
 
     return name;
   }
@@ -117,9 +117,9 @@ class _FinanceState extends State<Finance> {
     var travelCategories = [
       {
         "id": 9,
-        "name": "Send Money",
+        "name": "Airtel",
         "banner":
-            "https://www.dignited.com/wp-content/uploads/2018/12/Mobile-Money-Transfer-And-Mobile-Money-Transfer-Service-1200x800-1024x683.jpg",
+            "http://flashugnews.com/wp-content/uploads/2022/07/Airtel-Money-Rates-in-Uganda-2022.jpeg",
         "icon":
             "http://hustlermarkets.com/public/uploads/all/3V1JdHwjCE6COPQmG6vlX6oTQ5YjGHPh5ad2MeF7.png",
         "number_of_children": 2,
@@ -127,13 +127,13 @@ class _FinanceState extends State<Finance> {
           "products": "http://hustlermarkets.com/api/v2/products/category/9",
           "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/9"
         },
-        "page": SendMoney(),
+        "page": ToMobile(),
       },
       {
         "id": 11,
-        "name": "Add Credit",
+        "name": "MTN",
         "banner":
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMkJEivNrYTNeSi-vKI0aXoaQViWclE9Ewgw&usqp=CAU",
+            "https://www.african-markets.com/images/cache/528da7f993cd2feb85212d9ac6c5a22f_w600_h350_cp.jpg",
         "icon":
             "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
         "number_of_children": 0,
@@ -141,13 +141,12 @@ class _FinanceState extends State<Finance> {
           "products": "http://hustlermarkets.com/api/v2/products/category/11",
           "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
         },
-        "page": TopUp(),
+        "page": ToMobile(),
       },
       {
         "id": 16,
-        "name": "Withdaw Money",
-        "banner":
-            "https://www.nerdwallet.com/assets/blog/wp-content/uploads/2015/05/atm-eats-deposit-contact-financial-institution-immediately-story.jpg",
+        "name": "Safaricom",
+        "banner": "https://ik.imagekit.io/tp/20220201-safaricom-kenya-logo.png",
         "icon":
             "http://hustlermarkets.com/public/uploads/all/w65DPieTu3ZUq6rMPnzExVwx8ZVRp5LQA0sGwaCN.jpg",
         "number_of_children": 0,
@@ -155,7 +154,7 @@ class _FinanceState extends State<Finance> {
           "products": "http://hustlermarkets.com/api/v2/products/category/16",
           "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/16"
         },
-        "page": Withdraw(),
+        "page": ToMobile(),
       },
     ];
     return travelCategories;
@@ -172,7 +171,7 @@ class _FinanceState extends State<Finance> {
       ),
       itemCount: travelCategories.length,
       padding: EdgeInsets.only(
-          left: 18, right: 18, bottom: widget.is_base_category ? 30 : 0),
+          left: 18, right: 18, bottom: widget.is_base_category ? 30 : 30),
       scrollDirection: Axis.vertical,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -246,81 +245,6 @@ class _FinanceState extends State<Finance> {
           ),
         ),
       ),
-    );
-  }
-
-  Container buildBottomContainer() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-      ),
-
-      height: widget.is_base_category ? 0 : 80,
-      //color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Container(
-                width: (MediaQuery.of(context).size.width - 32),
-                height: 40,
-                child: FlatButton(
-                  minWidth: MediaQuery.of(context).size.width,
-                  //height: 50,
-                  color: MyTheme.accent_color,
-                  shape: RoundedRectangleBorder(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(8.0))),
-                  child: Text(
-                    AppLocalizations.of(context)
-                            .category_list_screen_all_products_of +
-                        " " +
-                        widget.parent_category_name,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return CategoryProducts(
-                        category_id: widget.parent_category_id,
-                        category_name: widget.parent_category_name,
-                      );
-                    }));
-                  },
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildShimmer() {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        mainAxisSpacing: 14,
-        crossAxisSpacing: 14,
-        childAspectRatio: 1,
-        crossAxisCount: 3,
-      ),
-      itemCount: 18,
-      padding: EdgeInsets.only(
-          left: 18, right: 18, bottom: widget.is_base_category ? 30 : 0),
-      scrollDirection: Axis.vertical,
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        return Container(
-          decoration: BoxDecorations.buildBoxDecoration_1(),
-          child: ShimmerHelper().buildBasicShimmer(),
-        );
-      },
     );
   }
 }
