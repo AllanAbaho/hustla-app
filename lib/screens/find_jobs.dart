@@ -3,6 +3,7 @@ import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
+import 'package:active_ecommerce_flutter/screens/apply_job.dart';
 import 'package:active_ecommerce_flutter/screens/job_sectors.dart';
 import 'package:active_ecommerce_flutter/screens/post_job.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,8 +19,8 @@ import 'package:active_ecommerce_flutter/app_config.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class Jobs extends StatefulWidget {
-  Jobs(
+class FindJobs extends StatefulWidget {
+  FindJobs(
       {Key key,
       this.parent_category_id = 0,
       this.parent_category_name = "",
@@ -35,10 +36,10 @@ class Jobs extends StatefulWidget {
   final BottomAppbarIndex bottomAppbarIndex;
 
   @override
-  _JobsState createState() => _JobsState();
+  _FindJobsState createState() => _FindJobsState();
 }
 
-class _JobsState extends State<Jobs> {
+class _FindJobsState extends State<FindJobs> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
@@ -107,7 +108,7 @@ class _JobsState extends State<Jobs> {
   }
 
   String getAppBarTitle() {
-    String name = 'Job Services';
+    String name = 'Find Jobs';
 
     return name;
   }
@@ -115,32 +116,74 @@ class _JobsState extends State<Jobs> {
   getTravelCategories() {
     var travelCategories = [
       {
-        "id": 9,
-        "name": "Find A Job",
+        "id": 1,
+        "name": "Laravel Developer",
+        "company": "Pivot Payments",
+        "location": "Kampala, Uganda",
+        "contract": "Full Time",
+        "deadline": "24th April, 2023",
         "banner":
             "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/02/Where_To_Advertise_Your_Jobs_-_article_image.jpg",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/3V1JdHwjCE6COPQmG6vlX6oTQ5YjGHPh5ad2MeF7.png",
-        "number_of_children": 2,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/9",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/9"
-        },
-        "page": JobSectors()
       },
       {
-        "id": 11,
-        "name": "Post A Job",
+        "id": 2,
+        "name": "Human Resource Manager",
+        "company": "Pivot Payments",
+        "location": "Kampala, Uganda",
+        "contract": "Full Time",
+        "deadline": "24th April, 2023",
         "banner":
-            "https://thumbs.dreamstime.com/b/business-woman-presenting-hire-us-word-white-card-213809712.jpg",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
-        "number_of_children": 0,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/11",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
-        },
-        "page": JobSectors(is_finding_job: false)
+            "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/02/Where_To_Advertise_Your_Jobs_-_article_image.jpg",
+      },
+      {
+        "id": 3,
+        "name": "Sales Officer",
+        "company": "Pivot Payments",
+        "location": "Kampala, Uganda",
+        "contract": "Full Time",
+        "deadline": "24th April, 2023",
+        "banner":
+            "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/02/Where_To_Advertise_Your_Jobs_-_article_image.jpg",
+      },
+      {
+        "id": 4,
+        "name": "Monitoring & Evaluation Officer",
+        "company": "Pivot Payments",
+        "location": "Kampala, Uganda",
+        "contract": "Full Time",
+        "deadline": "24th April, 2023",
+        "banner":
+            "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/02/Where_To_Advertise_Your_Jobs_-_article_image.jpg",
+      },
+      {
+        "id": 5,
+        "name": "Laboratory Technician",
+        "company": "Pivot Payments",
+        "location": "Kampala, Uganda",
+        "contract": "Full Time",
+        "deadline": "24th April, 2023",
+        "banner":
+            "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/02/Where_To_Advertise_Your_Jobs_-_article_image.jpg",
+      },
+      {
+        "id": 6,
+        "name": "Marketing Officer",
+        "company": "Pivot Payments",
+        "location": "Kampala, Uganda",
+        "contract": "Full Time",
+        "deadline": "24th April, 2023",
+        "banner":
+            "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/02/Where_To_Advertise_Your_Jobs_-_article_image.jpg",
+      },
+      {
+        "id": 7,
+        "name": "Senior Software Engineer",
+        "company": "Pivot Payments",
+        "location": "Kampala, Uganda",
+        "contract": "Full Time",
+        "deadline": "24th April, 2023",
+        "banner":
+            "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/02/Where_To_Advertise_Your_Jobs_-_article_image.jpg",
       },
     ];
     return travelCategories;
@@ -152,12 +195,11 @@ class _JobsState extends State<Jobs> {
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         mainAxisSpacing: 14,
         crossAxisSpacing: 14,
-        childAspectRatio: 0.7,
-        crossAxisCount: 3,
+        childAspectRatio: 3.5,
+        crossAxisCount: 1,
       ),
       itemCount: travelCategories.length,
-      padding: EdgeInsets.only(
-          left: 18, right: 18, bottom: widget.is_base_category ? 30 : 0),
+      padding: EdgeInsets.only(left: 18, right: 18, bottom: 30),
       scrollDirection: Axis.vertical,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -168,65 +210,90 @@ class _JobsState extends State<Jobs> {
   }
 
   Widget buildCategoryItemCard(travelCategories, index) {
-    var itemWidth = ((DeviceInfo(context).width - 36) / 3);
+    var itemWidth = ((DeviceInfo(context).width - 36));
     print(itemWidth);
 
     return Container(
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: InkWell(
         onTap: () {
-          if (travelCategories[index]['page'] != null) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return travelCategories[index]['page'];
-                },
-              ),
-            );
-          }
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return ApplyJob(jobtitle: travelCategories[index]['name']);
+              },
+            ),
+          );
         },
         child: Container(
-          //padding: EdgeInsets.all(8),
-          //color: Colors.amber,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
             children: <Widget>[
-              Container(
-                constraints: BoxConstraints(maxHeight: itemWidth - 28),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(6),
-                      topLeft: Radius.circular(6)),
-                  child: FadeInImage.assetNetwork(
-                    placeholder: 'assets/placeholder.png',
-                    image: travelCategories[index]['banner'],
-                    fit: BoxFit.cover,
-                    height: itemWidth,
-                    width: DeviceInfo(context).width,
-                  ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(6),
+                          topLeft: Radius.circular(6)),
+                      child: FadeInImage.assetNetwork(
+                        placeholder: 'assets/placeholder.png',
+                        image: travelCategories[index]['banner'],
+                        width: itemWidth * 0.25,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              Container(
-                height: 60,
-                //color: Colors.amber,
-                alignment: Alignment.center,
-                width: DeviceInfo(context).width,
-                padding: const EdgeInsets.symmetric(horizontal: 14),
-                child: Text(
-                  travelCategories[index]['name'],
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  style: TextStyle(
-                      color: MyTheme.font_grey,
-                      fontSize: 10,
-                      height: 1.6,
-                      fontWeight: FontWeight.w600),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      travelCategories[index]['name'],
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: MyTheme.font_grey,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    Text(
+                      travelCategories[index]['company'],
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: MyTheme.font_grey,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      travelCategories[index]['location'],
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: MyTheme.font_grey,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w300),
+                    ),
+                    Text(
+                      travelCategories[index]['contract'],
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: MyTheme.font_grey,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w100),
+                    ),
+                    Text(
+                      travelCategories[index]['deadline'],
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: MyTheme.font_grey,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w100),
+                    ),
+                  ],
                 ),
               ),
-              Spacer()
             ],
           ),
         ),

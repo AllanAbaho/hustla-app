@@ -3,7 +3,8 @@ import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
-import 'package:active_ecommerce_flutter/screens/job_sectors.dart';
+import 'package:active_ecommerce_flutter/screens/find_jobs.dart';
+import 'package:active_ecommerce_flutter/screens/jobs.dart';
 import 'package:active_ecommerce_flutter/screens/post_job.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +19,14 @@ import 'package:active_ecommerce_flutter/app_config.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class Jobs extends StatefulWidget {
-  Jobs(
+class JobSectors extends StatefulWidget {
+  JobSectors(
       {Key key,
       this.parent_category_id = 0,
       this.parent_category_name = "",
       this.is_base_category = false,
       this.is_top_category = false,
+      this.is_finding_job = true,
       this.bottomAppbarIndex})
       : super(key: key);
 
@@ -32,13 +34,14 @@ class Jobs extends StatefulWidget {
   final String parent_category_name;
   final bool is_base_category;
   final bool is_top_category;
+  final bool is_finding_job;
   final BottomAppbarIndex bottomAppbarIndex;
 
   @override
-  _JobsState createState() => _JobsState();
+  _JobSectorsState createState() => _JobSectorsState();
 }
 
-class _JobsState extends State<Jobs> {
+class _JobSectorsState extends State<JobSectors> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
@@ -107,7 +110,7 @@ class _JobsState extends State<Jobs> {
   }
 
   String getAppBarTitle() {
-    String name = 'Job Services';
+    String name = 'Job Sectors';
 
     return name;
   }
@@ -116,23 +119,34 @@ class _JobsState extends State<Jobs> {
     var travelCategories = [
       {
         "id": 9,
-        "name": "Find A Job",
-        "banner":
-            "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/02/Where_To_Advertise_Your_Jobs_-_article_image.jpg",
+        "name": "Finance & Accounting",
+        "banner": "http://media.monsterindia.com/cmsimages/1562748131.jpg",
         "icon":
             "http://hustlermarkets.com/public/uploads/all/3V1JdHwjCE6COPQmG6vlX6oTQ5YjGHPh5ad2MeF7.png",
         "number_of_children": 2,
         "links": {
           "products": "http://hustlermarkets.com/api/v2/products/category/9",
           "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/9"
-        },
-        "page": JobSectors()
+        }
+      },
+      {
+        "id": 10,
+        "name": "Law & Compliance",
+        "banner":
+            "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/Paralegal_vs._Lawyer.jpeg.jpg",
+        "icon":
+            "https://cdn.ucberkeleybootcamp.com/wp-content/uploads/sites/106/2020/08/CDG_blog_post_image_01.jpg",
+        "number_of_children": 2,
+        "links": {
+          "products": "http://hustlermarkets.com/api/v2/products/category/9",
+          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/9"
+        }
       },
       {
         "id": 11,
-        "name": "Post A Job",
+        "name": "IT & Telecoms",
         "banner":
-            "https://thumbs.dreamstime.com/b/business-woman-presenting-hire-us-word-white-card-213809712.jpg",
+            "https://cdn.ucberkeleybootcamp.com/wp-content/uploads/sites/106/2020/08/CDG_blog_post_image_01.jpg",
         "icon":
             "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
         "number_of_children": 0,
@@ -140,7 +154,83 @@ class _JobsState extends State<Jobs> {
           "products": "http://hustlermarkets.com/api/v2/products/category/11",
           "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
         },
-        "page": JobSectors(is_finding_job: false)
+      },
+      {
+        "id": 12,
+        "name": "Hospitality & Hotels",
+        "banner": "https://www.unhcr.org/thumb1/4af8257c6.jpg",
+        "icon":
+            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
+        "number_of_children": 0,
+        "links": {
+          "products": "http://hustlermarkets.com/api/v2/products/category/11",
+          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
+        },
+      },
+      {
+        "id": 13,
+        "name": "Manufacturing & Warehousing",
+        "banner":
+            "https://thumbs.dreamstime.com/b/black-male-african-american-workers-wear-sound-proof-headphones-yellow-helmet-working-iron-cutting-machine-factory-213418200.jpg",
+        "icon":
+            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
+        "number_of_children": 0,
+        "links": {
+          "products": "http://hustlermarkets.com/api/v2/products/category/11",
+          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
+        },
+      },
+      {
+        "id": 14,
+        "name": "Health Care",
+        "banner":
+            "https://www.afro.who.int/sites/default/files/2017-08/WHO_DRC%2520005%5B1%5D.jpg",
+        "icon":
+            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
+        "number_of_children": 0,
+        "links": {
+          "products": "http://hustlermarkets.com/api/v2/products/category/11",
+          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
+        },
+      },
+      {
+        "id": 15,
+        "name": "Education",
+        "banner":
+            "https://a-better-africa.com/show/the-complete-teacher/blog-image/teachers.jpeg",
+        "icon":
+            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
+        "number_of_children": 0,
+        "links": {
+          "products": "http://hustlermarkets.com/api/v2/products/category/11",
+          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
+        },
+      },
+      {
+        "id": 16,
+        "name": "Engineering",
+        "banner":
+            "https://cceonlinenews.com/wp-content/uploads/2021/11/confidence-in-construction-industry.jpg",
+        "icon":
+            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
+        "number_of_children": 0,
+        "links": {
+          "products": "http://hustlermarkets.com/api/v2/products/category/11",
+          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
+        },
+      },
+      {
+        "id": 17,
+        "name": "Tourism & Travel",
+        "banner":
+            "https://www.morawayadventures.com/images/Tanzania/Tarangire_119A.jpg",
+        "icon":
+            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
+        "number_of_children": 0,
+        "links": {
+          "products": "http://hustlermarkets.com/api/v2/products/category/11",
+          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
+        },
       },
     ];
     return travelCategories;
@@ -157,7 +247,7 @@ class _JobsState extends State<Jobs> {
       ),
       itemCount: travelCategories.length,
       padding: EdgeInsets.only(
-          left: 18, right: 18, bottom: widget.is_base_category ? 30 : 0),
+          left: 18, right: 18, bottom: widget.is_base_category ? 30 : 30),
       scrollDirection: Axis.vertical,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -175,16 +265,14 @@ class _JobsState extends State<Jobs> {
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: InkWell(
         onTap: () {
-          if (travelCategories[index]['page'] != null) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return travelCategories[index]['page'];
-                },
-              ),
-            );
-          }
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return widget.is_finding_job ? FindJobs() : PostJob();
+              },
+            ),
+          );
         },
         child: Container(
           //padding: EdgeInsets.all(8),

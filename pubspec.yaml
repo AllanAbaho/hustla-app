@@ -85,6 +85,7 @@ dependencies:
   route_transitions: ^2.0.1
   firebase_core: ^1.20.0
   flutter_local_notifications: ^9.7.0
+  file_picker: ^4.6.1
 
 
 dev_dependencies:
