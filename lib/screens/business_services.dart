@@ -3,11 +3,8 @@ import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
-import 'package:active_ecommerce_flutter/screens/business_services.dart';
-import 'package:active_ecommerce_flutter/screens/driving_services.dart';
-import 'package:active_ecommerce_flutter/screens/immigration_services.dart';
-import 'package:active_ecommerce_flutter/screens/lands_services.dart';
-import 'package:active_ecommerce_flutter/screens/marriage_services.dart';
+import 'package:active_ecommerce_flutter/screens/job_sectors.dart';
+import 'package:active_ecommerce_flutter/screens/post_job.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
@@ -21,8 +18,8 @@ import 'package:active_ecommerce_flutter/app_config.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class Government extends StatefulWidget {
-  Government(
+class BusinessServices extends StatefulWidget {
+  BusinessServices(
       {Key key,
       this.parent_category_id = 0,
       this.parent_category_name = "",
@@ -38,10 +35,10 @@ class Government extends StatefulWidget {
   final BottomAppbarIndex bottomAppbarIndex;
 
   @override
-  _GovernmentState createState() => _GovernmentState();
+  _BusinessServicesState createState() => _BusinessServicesState();
 }
 
-class _GovernmentState extends State<Government> {
+class _BusinessServicesState extends State<BusinessServices> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
@@ -110,7 +107,7 @@ class _GovernmentState extends State<Government> {
   }
 
   String getAppBarTitle() {
-    String name = 'E-Government Services';
+    String name = 'Business Services';
 
     return name;
   }
@@ -118,10 +115,10 @@ class _GovernmentState extends State<Government> {
   getTravelCategories() {
     var travelCategories = [
       {
-        "id": 9,
-        "name": "Business Services",
+        "id": 1,
+        "name": "Register Business",
         "banner":
-            "https://i0.wp.com/ugtechmag.com/wp-content/uploads/2023/01/Untitled-design-6-1.png?fit=1200%2C675&ssl=1",
+            "https://www.registeryourbusiness.co.za/wp-content/uploads/2021/08/RYBLogoNew.png",
         "icon":
             "http://hustlermarkets.com/public/uploads/all/3V1JdHwjCE6COPQmG6vlX6oTQ5YjGHPh5ad2MeF7.png",
         "number_of_children": 2,
@@ -129,13 +126,12 @@ class _GovernmentState extends State<Government> {
           "products": "http://hustlermarkets.com/api/v2/products/category/9",
           "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/9"
         },
-        "page": BusinessServices()
       },
       {
-        "id": 11,
-        "name": "Lands Services",
+        "id": 2,
+        "name": "Search Business Name",
         "banner":
-            "https://mwc.legal/wp-content/uploads/2020/08/The-Land-Registration-Electronic-Transactions-Regulations-770x514.png",
+            "https://howtostartanllc.com/images/name-search-icons/llc-name-search-h.jpg",
         "icon":
             "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
         "number_of_children": 0,
@@ -143,49 +139,6 @@ class _GovernmentState extends State<Government> {
           "products": "http://hustlermarkets.com/api/v2/products/category/11",
           "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
         },
-        "page": LandsServices()
-      },
-      {
-        "id": 16,
-        "name": "Immigration Services",
-        "banner":
-            "https://www.dignited.com/wp-content/uploads/2017/08/Kenyan-e-Passport.jpg",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/w65DPieTu3ZUq6rMPnzExVwx8ZVRp5LQA0sGwaCN.jpg",
-        "number_of_children": 0,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/16",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/16"
-        },
-        "page": ImmigrationServices()
-      },
-      {
-        "id": 9,
-        "name": "Marriage Services",
-        "banner":
-            "https://domf5oio6qrcr.cloudfront.net/medialibrary/9030/iStock_72610687_MEDIUM.jpg",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/3V1JdHwjCE6COPQmG6vlX6oTQ5YjGHPh5ad2MeF7.png",
-        "number_of_children": 2,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/9",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/9"
-        },
-        "page": MarriageServices()
-      },
-      {
-        "id": 11,
-        "name": "Driving Services",
-        "banner":
-            "http://flashugnews.com/wp-content/uploads/2022/07/ugandan-driving-permit-1.jpeg",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
-        "number_of_children": 0,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/11",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
-        },
-        "page": DrivingServices()
       },
     ];
     return travelCategories;
@@ -201,8 +154,7 @@ class _GovernmentState extends State<Government> {
         crossAxisCount: 3,
       ),
       itemCount: travelCategories.length,
-      padding: EdgeInsets.only(
-          left: 18, right: 18, bottom: widget.is_base_category ? 30 : 0),
+      padding: EdgeInsets.only(left: 18, right: 18, bottom: 30),
       scrollDirection: Axis.vertical,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -220,7 +172,7 @@ class _GovernmentState extends State<Government> {
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: InkWell(
         onTap: () {
-          if (travelCategories[index]['page'] != null)
+          if (travelCategories[index]['page'] != null) {
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -229,6 +181,7 @@ class _GovernmentState extends State<Government> {
                 },
               ),
             );
+          }
         },
         child: Container(
           //padding: EdgeInsets.all(8),

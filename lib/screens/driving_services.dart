@@ -3,11 +3,8 @@ import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
-import 'package:active_ecommerce_flutter/screens/business_services.dart';
-import 'package:active_ecommerce_flutter/screens/driving_services.dart';
-import 'package:active_ecommerce_flutter/screens/immigration_services.dart';
-import 'package:active_ecommerce_flutter/screens/lands_services.dart';
-import 'package:active_ecommerce_flutter/screens/marriage_services.dart';
+import 'package:active_ecommerce_flutter/screens/job_sectors.dart';
+import 'package:active_ecommerce_flutter/screens/post_job.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
@@ -21,8 +18,8 @@ import 'package:active_ecommerce_flutter/app_config.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class Government extends StatefulWidget {
-  Government(
+class DrivingServices extends StatefulWidget {
+  DrivingServices(
       {Key key,
       this.parent_category_id = 0,
       this.parent_category_name = "",
@@ -38,10 +35,10 @@ class Government extends StatefulWidget {
   final BottomAppbarIndex bottomAppbarIndex;
 
   @override
-  _GovernmentState createState() => _GovernmentState();
+  _DrivingServicesState createState() => _DrivingServicesState();
 }
 
-class _GovernmentState extends State<Government> {
+class _DrivingServicesState extends State<DrivingServices> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
@@ -110,7 +107,7 @@ class _GovernmentState extends State<Government> {
   }
 
   String getAppBarTitle() {
-    String name = 'E-Government Services';
+    String name = 'Driving Services';
 
     return name;
   }
@@ -118,74 +115,95 @@ class _GovernmentState extends State<Government> {
   getTravelCategories() {
     var travelCategories = [
       {
-        "id": 9,
-        "name": "Business Services",
-        "banner":
-            "https://i0.wp.com/ugtechmag.com/wp-content/uploads/2023/01/Untitled-design-6-1.png?fit=1200%2C675&ssl=1",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/3V1JdHwjCE6COPQmG6vlX6oTQ5YjGHPh5ad2MeF7.png",
-        "number_of_children": 2,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/9",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/9"
-        },
-        "page": BusinessServices()
-      },
-      {
-        "id": 11,
-        "name": "Lands Services",
-        "banner":
-            "https://mwc.legal/wp-content/uploads/2020/08/The-Land-Registration-Electronic-Transactions-Regulations-770x514.png",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
-        "number_of_children": 0,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/11",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
-        },
-        "page": LandsServices()
-      },
-      {
-        "id": 16,
-        "name": "Immigration Services",
-        "banner":
-            "https://www.dignited.com/wp-content/uploads/2017/08/Kenyan-e-Passport.jpg",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/w65DPieTu3ZUq6rMPnzExVwx8ZVRp5LQA0sGwaCN.jpg",
-        "number_of_children": 0,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/16",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/16"
-        },
-        "page": ImmigrationServices()
-      },
-      {
-        "id": 9,
-        "name": "Marriage Services",
-        "banner":
-            "https://domf5oio6qrcr.cloudfront.net/medialibrary/9030/iStock_72610687_MEDIUM.jpg",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/3V1JdHwjCE6COPQmG6vlX6oTQ5YjGHPh5ad2MeF7.png",
-        "number_of_children": 2,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/9",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/9"
-        },
-        "page": MarriageServices()
-      },
-      {
-        "id": 11,
-        "name": "Driving Services",
+        "id": 1,
+        "name": "Provisional Driving License",
         "banner":
             "http://flashugnews.com/wp-content/uploads/2022/07/ugandan-driving-permit-1.jpeg",
         "icon":
+            "http://hustlermarkets.com/public/uploads/all/3V1JdHwjCE6COPQmG6vlX6oTQ5YjGHPh5ad2MeF7.png",
+        "number_of_children": 2,
+        "links": {
+          "products": "http://hustlermarkets.com/api/v2/products/category/9",
+          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/9"
+        },
+      },
+      {
+        "id": 2,
+        "name": "Driving Test Booking",
+        "banner":
+            "https://media-blog.zutobi.com/wp-content/uploads/sites/2/2021/11/26170241/Driving-test_01_Remember-the-basics.jpg?w=2560&auto=format&ixlib=next&fit=max",
+        "icon":
             "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
         "number_of_children": 0,
         "links": {
           "products": "http://hustlermarkets.com/api/v2/products/category/11",
           "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
         },
-        "page": DrivingServices()
+      },
+      {
+        "id": 3,
+        "name": "Interim Driving License",
+        "banner":
+            "https://live.staticflickr.com/8120/29216678934_08820448ec_b.jpg",
+        "icon":
+            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
+        "number_of_children": 0,
+        "links": {
+          "products": "http://hustlermarkets.com/api/v2/products/category/11",
+          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
+        },
+      },
+      {
+        "id": 4,
+        "name": "Driving Class Endorsement",
+        "banner":
+            "http://driving-tests.org/wp-content/uploads/2021/04/cdl-license-types.jpeg",
+        "icon":
+            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
+        "number_of_children": 0,
+        "links": {
+          "products": "http://hustlermarkets.com/api/v2/products/category/11",
+          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
+        },
+      },
+      {
+        "id": 5,
+        "name": "Driving License Renewal (1 Year)",
+        "banner":
+            "https://www.godigit.com/content/dam/godigit/directportal/en/contenthm/telangana-driving-licence.jpg",
+        "icon":
+            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
+        "number_of_children": 0,
+        "links": {
+          "products": "http://hustlermarkets.com/api/v2/products/category/11",
+          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
+        },
+      },
+      {
+        "id": 6,
+        "name": "Duplicate Driving License",
+        "banner":
+            "https://nairobiwire.com/wp-content/uploads/2022/04/How-To-Apply-for-a-Lost-Smart-Driving-License-in-Kenya.jpg",
+        "icon":
+            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
+        "number_of_children": 0,
+        "links": {
+          "products": "http://hustlermarkets.com/api/v2/products/category/11",
+          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
+        },
+      },
+      {
+        "id": 7,
+        "name": "Driving License Corrections",
+        "banner":
+            "https://www.godigit.com/content/dam/godigit/directportal/en/contenthm/how-to-change-name-on-driving-licence.jpg",
+        "icon":
+            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
+        "number_of_children": 0,
+        "links": {
+          "products": "http://hustlermarkets.com/api/v2/products/category/11",
+          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
+        },
       },
     ];
     return travelCategories;
@@ -201,8 +219,7 @@ class _GovernmentState extends State<Government> {
         crossAxisCount: 3,
       ),
       itemCount: travelCategories.length,
-      padding: EdgeInsets.only(
-          left: 18, right: 18, bottom: widget.is_base_category ? 30 : 0),
+      padding: EdgeInsets.only(left: 18, right: 18, bottom: 30),
       scrollDirection: Axis.vertical,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -220,7 +237,7 @@ class _GovernmentState extends State<Government> {
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: InkWell(
         onTap: () {
-          if (travelCategories[index]['page'] != null)
+          if (travelCategories[index]['page'] != null) {
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -229,6 +246,7 @@ class _GovernmentState extends State<Government> {
                 },
               ),
             );
+          }
         },
         child: Container(
           //padding: EdgeInsets.all(8),

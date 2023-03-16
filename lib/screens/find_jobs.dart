@@ -240,7 +240,7 @@ class _FindJobsState extends State<FindJobs> {
                       child: FadeInImage.assetNetwork(
                         placeholder: 'assets/placeholder.png',
                         image: travelCategories[index]['banner'],
-                        width: itemWidth * 0.25,
+                        width: itemWidth * 0.2,
                       ),
                     ),
                   ],
