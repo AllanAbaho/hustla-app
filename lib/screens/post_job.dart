@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
@@ -9,6 +10,7 @@ import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
 import 'package:active_ecommerce_flutter/repositories/add_shop_repository.dart';
 import 'package:active_ecommerce_flutter/repositories/auth_repository.dart';
+import 'package:active_ecommerce_flutter/repositories/job_repository.dart';
 import 'package:active_ecommerce_flutter/screens/home.dart';
 import 'package:active_ecommerce_flutter/screens/main.dart';
 import 'package:flutter/cupertino.dart';
@@ -34,7 +36,8 @@ class PostJob extends StatefulWidget {
       this.parent_category_name = "",
       this.is_base_category = false,
       this.is_top_category = false,
-      this.bottomAppbarIndex})
+      this.bottomAppbarIndex,
+      this.sector})
       : super(key: key);
 
   final int parent_category_id;
@@ -42,6 +45,7 @@ class PostJob extends StatefulWidget {
   final bool is_base_category;
   final bool is_top_category;
   final BottomAppbarIndex bottomAppbarIndex;
+  final String sector;
 
   @override
   _PostJobState createState() => _PostJobState();
@@ -50,10 +54,12 @@ class PostJob extends StatefulWidget {
 class _PostJobState extends State<PostJob> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   TextEditingController _roleController = TextEditingController();
-  TextEditingController _companyController = TextEditingController();
+  TextEditingController _salaryController = TextEditingController();
   TextEditingController _locationController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
   TextEditingController _deadlineController = TextEditingController();
+  TextEditingController _durationController = TextEditingController();
+  TextEditingController _typeController = TextEditingController();
   BuildContext loadingcontext;
 
   @override
@@ -85,32 +91,6 @@ class _PostJobState extends State<PostJob> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
-                child: Text(
-                  'Company',
-                  style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Container(
-                      height: 36,
-                      child: TextField(
-                        keyboardType: TextInputType.text,
-                        controller: _companyController,
-                        autofocus: false,
-                        decoration: InputDecorations.buildInputDecoration_1(
-                            hint_text: "Pivot Payments"),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
@@ -192,6 +172,84 @@ class _PostJobState extends State<PostJob> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
+                  'salary',
+                  style: TextStyle(
+                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Container(
+                      height: 36,
+                      child: TextField(
+                        keyboardType: TextInputType.text,
+                        controller: _salaryController,
+                        autofocus: false,
+                        decoration: InputDecorations.buildInputDecoration_1(
+                            hint_text: "1,000"),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 4.0),
+                child: Text(
+                  'Duration',
+                  style: TextStyle(
+                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Container(
+                      height: 36,
+                      child: TextField(
+                        keyboardType: TextInputType.text,
+                        controller: _durationController,
+                        autofocus: false,
+                        decoration: InputDecorations.buildInputDecoration_1(
+                            hint_text: "4 weeks"),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 4.0),
+                child: Text(
+                  'Type',
+                  style: TextStyle(
+                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Container(
+                      height: 36,
+                      child: TextField(
+                        keyboardType: TextInputType.text,
+                        controller: _typeController,
+                        autofocus: false,
+                        decoration: InputDecorations.buildInputDecoration_1(
+                            hint_text: "Part Time"),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 4.0),
+                child: Text(
                   'Description',
                   style: TextStyle(
                       color: MyTheme.accent_color, fontWeight: FontWeight.w600),
@@ -257,16 +315,14 @@ class _PostJobState extends State<PostJob> {
   }
 
   onSubmit() async {
-    var company = _companyController.text.toString();
+    var salary = _salaryController.text.toString();
     var role = _roleController.text.toString();
     var location = _locationController.text.toString();
     var deadline = _deadlineController.text.toString();
     var description = _descriptionController.text.toString();
-    if (company == "") {
-      ToastComponent.showDialog('Please enter the company name',
-          gravity: Toast.center, duration: Toast.lengthLong);
-      return;
-    } else if (role == "") {
+    var duration = _durationController.text.toString();
+    var type = _typeController.text.toString();
+    if (role == "") {
       ToastComponent.showDialog('Please enter the job title',
           gravity: Toast.center, duration: Toast.lengthLong);
       return;
@@ -278,33 +334,53 @@ class _PostJobState extends State<PostJob> {
       ToastComponent.showDialog('Please enter the application deadline',
           gravity: Toast.center, duration: Toast.lengthLong);
       return;
+    } else if (salary == "") {
+      ToastComponent.showDialog('Please enter the job salary',
+          gravity: Toast.center, duration: Toast.lengthLong);
+      return;
+    } else if (duration == "") {
+      ToastComponent.showDialog('Please enter the job duration',
+          gravity: Toast.center, duration: Toast.lengthLong);
+      return;
+    } else if (type == "") {
+      ToastComponent.showDialog('Please enter the job type',
+          gravity: Toast.center, duration: Toast.lengthLong);
+      return;
     } else if (description == "") {
       ToastComponent.showDialog('Please enter the job description',
           gravity: Toast.center, duration: Toast.lengthLong);
       return;
     }
-    // loading();
-    // var topUpResponse = await PaymentRepository().topUpResponse(
-    //   amount,
-    // );
 
-    // Navigator.of(loadingcontext).pop();
+    Map postData = {
+      "name": role,
+      "price": salary,
+      "duration": duration,
+      "location": location,
+      "deadline": deadline,
+      "type": type,
+      "description": description,
+      "category": widget.sector,
+      "created_by": user_id.$
+    };
+    var data = jsonEncode(postData);
+    loading();
+    var addJobResponse = await JobRepository().addJob(
+      data,
+    );
 
-    // if (topUpResponse.status != 'PENDING') {
-    //   ToastComponent.showDialog(topUpResponse.message,
-    //       gravity: Toast.center, duration: Toast.lengthLong);
-    // } else {
-    //   ToastComponent.showDialog(topUpResponse.message,
-    //       gravity: Toast.center, duration: Toast.lengthLong);
-    //   setState(() {
-    //     isProcessing = true;
-    //   });
-    // }
-    ToastComponent.showDialog('You have posted the job successfully',
-        gravity: Toast.center, duration: Toast.lengthLong);
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return Main();
-    }));
+    Navigator.of(loadingcontext).pop();
+
+    if (addJobResponse.status != true) {
+      ToastComponent.showDialog(addJobResponse.message,
+          gravity: Toast.center, duration: Toast.lengthLong);
+    } else {
+      ToastComponent.showDialog(addJobResponse.message,
+          gravity: Toast.center, duration: Toast.lengthLong);
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return Main();
+      }));
+    }
   }
 
   loading() {
@@ -355,7 +431,7 @@ class _PostJobState extends State<PostJob> {
   }
 
   String getAppBarTitle() {
-    String name = 'Post Job';
+    String name = 'Post Job: ${widget.sector}';
 
     return name;
   }

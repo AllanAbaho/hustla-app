@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
+import 'package:active_ecommerce_flutter/custom/spacers.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
+import 'package:active_ecommerce_flutter/data_model/job_response.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
 import 'package:active_ecommerce_flutter/repositories/job_repository.dart';
@@ -20,9 +24,10 @@ import 'package:shimmer/shimmer.dart';
 import 'package:active_ecommerce_flutter/app_config.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class FindJobs extends StatefulWidget {
-  FindJobs(
+class JobApplicants extends StatefulWidget {
+  JobApplicants(
       {Key key,
       this.parent_category_id = 0,
       this.parent_category_name = "",
@@ -30,7 +35,8 @@ class FindJobs extends StatefulWidget {
       this.is_top_category = false,
       this.bottomAppbarIndex,
       this.banner,
-      this.sector})
+      this.sector,
+      this.jobApplications})
       : super(key: key);
 
   final int parent_category_id;
@@ -40,12 +46,13 @@ class FindJobs extends StatefulWidget {
   final BottomAppbarIndex bottomAppbarIndex;
   final String banner;
   final String sector;
+  final List<JobApplication> jobApplications;
 
   @override
-  _FindJobsState createState() => _FindJobsState();
+  _JobApplicantsState createState() => _JobApplicantsState();
 }
 
-class _FindJobsState extends State<FindJobs> {
+class _JobApplicantsState extends State<JobApplicants> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
@@ -114,164 +121,173 @@ class _FindJobsState extends State<FindJobs> {
   }
 
   String getAppBarTitle() {
-    String name = 'Find Jobs: ${widget.sector}';
+    String name = '${widget.sector} Applications';
 
     return name;
   }
 
   buildCategoryList() {
-    var data = JobRepository().getJobs(widget.sector);
-    return FutureBuilder(
-        future: data,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return SingleChildScrollView(child: buildShimmer());
-          }
-          if (snapshot.hasError) {
-            return Container(
-              height: 10,
-            );
-          } else if (snapshot.hasData) {
-            //snapshot.hasData
-            var jobResponse = snapshot.data;
-            print(jobResponse.jobs);
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        mainAxisSpacing: 14,
+        crossAxisSpacing: 14,
+        childAspectRatio: 3,
+        crossAxisCount: 1,
+      ),
+      itemCount: widget.jobApplications.length,
+      padding: EdgeInsets.only(left: 18, right: 18, bottom: 30),
+      scrollDirection: Axis.vertical,
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        return buildCategoryItemCard(widget.jobApplications, index);
+      },
+    );
+  }
 
-            if (jobResponse.jobs.length < 1) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 18.0),
-                child: Center(
-                  child: Text(
-                    'No jobs found',
+  Widget buildCategoryItemCard(applications, index) {
+    var itemWidth = ((DeviceInfo(context).width - 36));
+
+    return Container(
+      decoration: BoxDecorations.buildBoxDecoration_1(),
+      child: Container(
+        child: Row(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(6),
+                        topLeft: Radius.circular(6)),
+                    child: FadeInImage.assetNetwork(
+                      placeholder: 'assets/placeholder.png',
+                      image: widget.banner,
+                      width: itemWidth * 0.2,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    applications[index].user.name,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         color: MyTheme.font_grey,
                         fontSize: 16,
                         fontWeight: FontWeight.w700),
                   ),
-                ),
-              );
-            } else {
-              return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  mainAxisSpacing: 14,
-                  crossAxisSpacing: 14,
-                  childAspectRatio: 3,
-                  crossAxisCount: 1,
-                ),
-                itemCount: jobResponse.jobs.length,
-                padding: EdgeInsets.only(left: 18, right: 18, bottom: 30),
-                scrollDirection: Axis.vertical,
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return buildCategoryItemCard(jobResponse, index);
-                },
-              );
-            }
-          } else {
-            return SingleChildScrollView(child: buildShimmer());
-          }
-        });
-  }
-
-  Widget buildCategoryItemCard(jobResponse, index) {
-    var itemWidth = ((DeviceInfo(context).width - 36));
-
-    return Container(
-      decoration: BoxDecorations.buildBoxDecoration_1(),
-      child: InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return JobDescription(
-                  job: jobResponse.jobs[index],
-                  banner: widget.banner,
-                );
-              },
-            ),
-          );
-        },
-        child: Container(
-          child: Row(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(6),
-                          topLeft: Radius.circular(6)),
-                      child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/placeholder.png',
-                        image: widget.banner,
-                        width: itemWidth * 0.2,
+                  Text(
+                    applications[index].user.email,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        color: MyTheme.font_grey,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  Text(
+                    applications[index].user.phone,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        color: MyTheme.font_grey,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w300),
+                  ),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          launch(
+                            'mailto:${applications[index].user.email}?subject=Job Interview&body=Hello ${applications[index].user.name},',
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.email,
+                              color: Colors.red,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                      HSpace.md,
+                      GestureDetector(
+                        onTap: () {
+                          launch("tel://${applications[index].user.phone}");
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.call,
+                              color: MyTheme.accent_color,
+                            ),
+                          ],
+                        ),
+                      ),
+                      HSpace.md,
+                      GestureDetector(
+                        onTap: () {
+                          launch(
+                            'sms:${applications[index].user.phone}?body=Hello ${applications[index].user.name},',
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.sms,
+                              color: Colors.blue,
+                            ),
+                          ],
+                        ),
+                      ),
+                      HSpace.md,
+                      GestureDetector(
+                        onTap: () {
+                          launch(
+                              "https://wa.me/${applications[index].user.phone}?text=Hello ${applications[index].user.name},");
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.whatsapp,
+                              color: Colors.green,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  VSpace.sm,
+                  Row(
+                    children: [
+                      Icon(Icons.file_copy),
+                      GestureDetector(
+                        onTap: () {
+                          // launch(applications[index].portfolio);
+                          launch(
+                              'https://www.africau.edu/images/default/sample.pdf');
+                        },
+                        child: Text(
+                          'View Resume',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: MyTheme.font_grey,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w100),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      jobResponse.jobs[index].name,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: MyTheme.font_grey,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    Text(
-                      jobResponse.jobs[index].duration,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: MyTheme.font_grey,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    Text(
-                      jobResponse.jobs[index].location,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: MyTheme.font_grey,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w300),
-                    ),
-                    Text(
-                      jobResponse.jobs[index].type,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: MyTheme.font_grey,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w100),
-                    ),
-                    Text(
-                      jobResponse.jobs[index].deadline,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: MyTheme.font_grey,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w100),
-                    ),
-                    Text(
-                      jobResponse.jobs[index].status,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: jobResponse.jobs[index].status == 'Open'
-                              ? Colors.green
-                              : Colors.red,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w300),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

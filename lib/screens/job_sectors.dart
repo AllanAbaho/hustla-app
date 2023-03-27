@@ -119,7 +119,7 @@ class _JobSectorsState extends State<JobSectors> {
     var travelCategories = [
       {
         "id": 9,
-        "name": "Finance & Accounting",
+        "name": "Finance / Accounting",
         "banner": "http://media.monsterindia.com/cmsimages/1562748131.jpg",
         "icon":
             "http://hustlermarkets.com/public/uploads/all/3V1JdHwjCE6COPQmG6vlX6oTQ5YjGHPh5ad2MeF7.png",
@@ -131,7 +131,7 @@ class _JobSectorsState extends State<JobSectors> {
       },
       {
         "id": 10,
-        "name": "Law & Compliance",
+        "name": "Law / Compliance",
         "banner":
             "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/Paralegal_vs._Lawyer.jpeg.jpg",
         "icon":
@@ -144,7 +144,7 @@ class _JobSectorsState extends State<JobSectors> {
       },
       {
         "id": 11,
-        "name": "IT & Telecoms",
+        "name": "IT / Telecoms",
         "banner":
             "https://cdn.ucberkeleybootcamp.com/wp-content/uploads/sites/106/2020/08/CDG_blog_post_image_01.jpg",
         "icon":
@@ -157,7 +157,7 @@ class _JobSectorsState extends State<JobSectors> {
       },
       {
         "id": 12,
-        "name": "Hospitality & Hotels",
+        "name": "Hospitality / Hotels",
         "banner": "https://www.unhcr.org/thumb1/4af8257c6.jpg",
         "icon":
             "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
@@ -169,7 +169,7 @@ class _JobSectorsState extends State<JobSectors> {
       },
       {
         "id": 13,
-        "name": "Manufacturing & Warehousing",
+        "name": "Manufacturing / Warehousing",
         "banner":
             "https://thumbs.dreamstime.com/b/black-male-african-american-workers-wear-sound-proof-headphones-yellow-helmet-working-iron-cutting-machine-factory-213418200.jpg",
         "icon":
@@ -221,7 +221,7 @@ class _JobSectorsState extends State<JobSectors> {
       },
       {
         "id": 17,
-        "name": "Tourism & Travel",
+        "name": "Tourism / Travel",
         "banner":
             "https://www.morawayadventures.com/images/Tanzania/Tarangire_119A.jpg",
         "icon":
@@ -269,7 +269,11 @@ class _JobSectorsState extends State<JobSectors> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return widget.is_finding_job ? FindJobs() : PostJob();
+                return widget.is_finding_job
+                    ? FindJobs(
+                        banner: travelCategories[index]['banner'],
+                        sector: travelCategories[index]['name'])
+                    : PostJob(sector: travelCategories[index]['name']);
               },
             ),
           );

@@ -30,6 +30,12 @@ main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  // SystemChrome.setSystemUIOverlayStyle(
+  //   const SystemUiOverlayStyle(
+  //     statusBarColor: Colors.black,
+  //   ),
+  // );
+
   runApp(
     SharedValue.wrapApp(
       MyApp(),

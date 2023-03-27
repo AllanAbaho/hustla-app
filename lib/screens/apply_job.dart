@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
@@ -5,10 +6,13 @@ import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
+import 'package:active_ecommerce_flutter/data_model/job_response.dart';
+import 'package:active_ecommerce_flutter/helpers/file_helper.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
 import 'package:active_ecommerce_flutter/repositories/add_shop_repository.dart';
 import 'package:active_ecommerce_flutter/repositories/auth_repository.dart';
+import 'package:active_ecommerce_flutter/repositories/job_repository.dart';
 import 'package:active_ecommerce_flutter/screens/home.dart';
 import 'package:active_ecommerce_flutter/screens/main.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,13 +39,13 @@ class ApplyJob extends StatefulWidget {
       this.parent_category_name = "",
       this.is_base_category = false,
       this.is_top_category = false,
-      this.jobtitle,
+      this.job,
       this.bottomAppbarIndex})
       : super(key: key);
 
   final int parent_category_id;
   final String parent_category_name;
-  final String jobtitle;
+  final Job job;
   final bool is_base_category;
   final bool is_top_category;
   final BottomAppbarIndex bottomAppbarIndex;
@@ -56,12 +60,12 @@ class _ApplyJobState extends State<ApplyJob> {
       TextEditingController(text: user_name.$);
   TextEditingController _emailController =
       TextEditingController(text: user_email.$);
-  TextEditingController _locationController = TextEditingController();
   TextEditingController _phoneController =
       TextEditingController(text: user_phone.$);
   TextEditingController _resumeController = TextEditingController();
   BuildContext loadingcontext;
   FilePickerResult result;
+  File _file;
 
   @override
   void initState() {
@@ -108,6 +112,7 @@ class _ApplyJobState extends State<ApplyJob> {
                     Container(
                       height: 36,
                       child: TextField(
+                        readOnly: true,
                         keyboardType: TextInputType.text,
                         controller: _nameController,
                         autofocus: false,
@@ -134,6 +139,7 @@ class _ApplyJobState extends State<ApplyJob> {
                     Container(
                       height: 36,
                       child: TextField(
+                        readOnly: true,
                         keyboardType: TextInputType.text,
                         controller: _emailController,
                         autofocus: false,
@@ -160,37 +166,12 @@ class _ApplyJobState extends State<ApplyJob> {
                     Container(
                       height: 36,
                       child: TextField(
+                        readOnly: true,
                         keyboardType: TextInputType.text,
                         controller: _phoneController,
                         autofocus: false,
                         decoration: InputDecorations.buildInputDecoration_1(
                             hint_text: "0700460044"),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
-                child: Text(
-                  'Current Address',
-                  style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Container(
-                      height: 36,
-                      child: TextField(
-                        keyboardType: TextInputType.text,
-                        controller: _locationController,
-                        autofocus: false,
-                        decoration: InputDecorations.buildInputDecoration_1(
-                            hint_text: "Kampala, Uganda"),
                       ),
                     ),
                   ],
@@ -208,16 +189,19 @@ class _ApplyJobState extends State<ApplyJob> {
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        child: TextField(
-                          keyboardType: TextInputType.text,
-                          controller: _resumeController,
-                          autofocus: false,
-                          decoration: InputDecorations.buildInputDecoration_1(
-                              hint_text: "No file selected"),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          child: TextField(
+                            readOnly: true,
+                            keyboardType: TextInputType.text,
+                            controller: _resumeController,
+                            autofocus: false,
+                            decoration: InputDecorations.buildInputDecoration_1(
+                                hint_text: "No file selected"),
+                          ),
                         ),
                       ),
                     ),
@@ -238,14 +222,16 @@ class _ApplyJobState extends State<ApplyJob> {
                                   fontWeight: FontWeight.w600),
                             ),
                             onPressed: () async {
-                              result = await FilePicker.platform.pickFiles();
+                              result = await FilePicker.platform.pickFiles(
+                                type: FileType.custom,
+                                allowedExtensions: ['pdf'],
+                              );
                               if (result != null) {
                                 setState(() {
                                   _resumeController.text =
                                       result.files.single.name;
+                                  _file = File(result.files.single.path);
                                 });
-                                // File file = File(result.files.single.path);
-                                // print(file);
                               } else {
                                 print("No file selected");
                               }
@@ -262,7 +248,6 @@ class _ApplyJobState extends State<ApplyJob> {
                   child: FlatButton(
                       minWidth: MediaQuery.of(context).size.width,
                       disabledColor: MyTheme.grey_153,
-                      //height: 50,
                       color: MyTheme.accent_color,
                       shape: RoundedRectangleBorder(
                           borderRadius:
@@ -296,54 +281,40 @@ class _ApplyJobState extends State<ApplyJob> {
   }
 
   onSubmit() async {
-    var email = _emailController.text.toString();
-    var name = _nameController.text.toString();
-    var location = _locationController.text.toString();
     var resume = _resumeController.text.toString();
-    var phone = _phoneController.text.toString();
-    if (name == "") {
-      ToastComponent.showDialog('Please enter your full name',
-          gravity: Toast.center, duration: Toast.lengthLong);
-      return;
-    } else if (email == "") {
-      ToastComponent.showDialog('Please enter your email address',
-          gravity: Toast.center, duration: Toast.lengthLong);
-      return;
-    } else if (phone == "") {
-      ToastComponent.showDialog('Please enter your phone number',
-          gravity: Toast.center, duration: Toast.lengthLong);
-      return;
-    } else if (location == "") {
-      ToastComponent.showDialog('Please enter your current address',
-          gravity: Toast.center, duration: Toast.lengthLong);
-      return;
-    } else if (resume == "") {
+    if (resume == "") {
       ToastComponent.showDialog('Please upload your resume',
           gravity: Toast.center, duration: Toast.lengthLong);
       return;
     }
-    // loading();
-    // var topUpResponse = await PaymentRepository().topUpResponse(
-    //   amount,
-    // );
+    String base64File = FileHelper.getBase64FormateFile(_file.path);
 
-    // Navigator.of(loadingcontext).pop();
+    Map postData = {
+      "job_id": widget.job.id,
+      "applicant_id": user_id.$,
+      "status": 'Review',
+      "portfolio": resume,
+      "created_by": user_id.$,
+      "file": base64File
+    };
+    var data = jsonEncode(postData);
+    loading();
+    var postJobApplicationResponse = await JobRepository().postJobApplication(
+      data,
+    );
 
-    // if (topUpResponse.status != 'PENDING') {
-    //   ToastComponent.showDialog(topUpResponse.message,
-    //       gravity: Toast.center, duration: Toast.lengthLong);
-    // } else {
-    //   ToastComponent.showDialog(topUpResponse.message,
-    //       gravity: Toast.center, duration: Toast.lengthLong);
-    //   setState(() {
-    //     isProcessing = true;
-    //   });
-    // }
-    ToastComponent.showDialog('Your application has been posted successfully',
-        gravity: Toast.center, duration: Toast.lengthLong);
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return Main();
-    }));
+    Navigator.of(loadingcontext).pop();
+
+    if (postJobApplicationResponse.status != true) {
+      ToastComponent.showDialog(postJobApplicationResponse.message,
+          gravity: Toast.center, duration: Toast.lengthLong);
+    } else {
+      ToastComponent.showDialog(postJobApplicationResponse.message,
+          gravity: Toast.center, duration: Toast.lengthLong);
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return Main();
+      }));
+    }
   }
 
   loading() {
@@ -394,7 +365,7 @@ class _ApplyJobState extends State<ApplyJob> {
   }
 
   String getAppBarTitle() {
-    String name = widget.jobtitle;
+    String name = widget.job.name;
 
     return name;
   }

@@ -40,6 +40,7 @@ import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/ui_elements/mini_product_card.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Home extends StatefulWidget {
   Home(
@@ -102,6 +103,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   bool _showAllLoadingContainer = false;
   int _cartCount = 0;
 
+  YoutubePlayerController _controller = YoutubePlayerController(
+    initialVideoId: YoutubePlayer.convertUrlToId(
+        "https://www.youtube.com/watch?v=EpMLAQbSYAw"),
+    flags: YoutubePlayerFlags(
+      autoPlay: false,
+    ),
+  );
+
   @override
   void initState() {
     // TODO: implement initState
@@ -119,6 +128,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         fetchAllProducts();
       }
     });
+  }
+
+  @override
+  void deactivate() {
+    // Pauses video while navigating to next page.
+    _controller.pause();
+    super.deactivate();
   }
 
   getCartCount() async {
@@ -414,41 +430,44 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         ),
                       ),
                       hustlaCategories(screenHeight),
-
-                      buildHomeCarouselSlider(context),
-
-                      Padding(
-                        padding: const EdgeInsets.only(left: 260.0, right: 10),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              // return DepositPage('Deposit Money');
-                              return BecomeSeller();
-                            }));
-                          },
-                          // ignore: sort_child_properties_last
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 8.0, right: 8.0),
-                            child: SmallText(
-                              'Become Seller',
-                              color: Colors.white,
-                            ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.red,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(12), // <-- Radius
-                            ),
-                          ),
-                        ),
-                      ),
-
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: hustlerBlog(),
+                      ),
+
+                      buildHomeCarouselSlider(context),
+
+                      Visibility(
+                        visible: false,
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.only(left: 260.0, right: 10),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                // return DepositPage('Deposit Money');
+                                return BecomeSeller();
+                              }));
+                            },
+                            // ignore: sort_child_properties_last
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 8.0, right: 8.0),
+                              child: SmallText(
+                                'Become Seller',
+                                color: Colors.white,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.red,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(12), // <-- Radius
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ]),
                   ),
@@ -897,6 +916,16 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           GestureDetector(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return BecomeSeller(
+                  is_base_category: true,
+                );
+              }));
+            },
+            child: iconText('assets/images/marketplace.png', 'My Shop'),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return Finance(
                   is_base_category: true,
                 );
@@ -979,46 +1008,35 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   Widget hustlerBlog() {
     return Container(
-      height: 200,
+      height: MediaQuery.of(context).size.height * 0.2,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          GestureDetector(
-            onTap: () {},
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-              child: Image.asset(
-                'assets/images/invest.jpeg',
-                // width: context.width * 0.8,
-                // height: 500,
-                fit: BoxFit.fill,
-              ),
+          Container(
+            width: MediaQuery.of(context).size.width * 0.7,
+            child: YoutubePlayer(
+              controller: _controller,
+              bottomActions: [],
             ),
           ),
           HSpace.md,
-          GestureDetector(
-            onTap: () {},
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-              child: Image.asset(
-                'assets/images/ruto_news.png',
-                // width: context.width * 0.8,
-                // height: 500,
-                fit: BoxFit.fill,
-              ),
+          ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+            child: Image.asset(
+              'assets/images/ruto_news.png',
+              // width: context.width * 0.8,
+              // height: 500,
+              fit: BoxFit.fill,
             ),
           ),
           HSpace.md,
-          GestureDetector(
-            onTap: () {},
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-              child: Image.asset(
-                'assets/images/save_money.png',
-                // width: context.width * 0.8,
-                // height: 500,
-                fit: BoxFit.fill,
-              ),
+          ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+            child: Image.asset(
+              'assets/images/save_money.png',
+              // width: context.width * 0.8,
+              // height: 500,
+              fit: BoxFit.fill,
             ),
           ),
         ],
@@ -1286,7 +1304,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   void dispose() {
     pirated_logo_controller?.dispose();
     _mainScrollController.dispose();
-
+    _controller.dispose();
     super.dispose();
   }
 }
