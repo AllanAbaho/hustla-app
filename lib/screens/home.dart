@@ -278,15 +278,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         appBar: AppBar(
           toolbarHeight: 100,
           backgroundColor: Colors.transparent,
-          elevation: 0.0,
-          flexibleSpace: ClipPath(
-            clipper: Customshape(),
-            child: Container(
-              color: AppColors.appBarColor,
-              child: Image.asset(
-                'assets/images/hustla_logo.png',
-                height: 130,
-              ),
+          flexibleSpace: Container(
+            color: AppColors.appBarColor,
+            child: Image.asset(
+              'assets/images/hustla_logo.png',
+              height: 130,
             ),
           ),
         ),
@@ -298,180 +294,185 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               backgroundColor: Colors.white,
               onRefresh: _onRefresh,
               displacement: 0,
-              child: CustomScrollView(
-                controller: _mainScrollController,
-                physics: const BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics()),
-                slivers: <Widget>[
-                  SliverList(
-                    delegate: SliverChildListDelegate([
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 48,
-                              height: 48,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                border:
-                                    Border.all(color: MyTheme.white, width: 1),
-                                //shape: BoxShape.rectangle,
-                              ),
-                              child: ClipRRect(
-                                  clipBehavior: Clip.hardEdge,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(100.0)),
-                                  child: FadeInImage.assetNetwork(
-                                    placeholder: 'assets/placeholder.png',
-                                    image: "${avatar_original.$}",
-                                    fit: BoxFit.fill,
-                                  )),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  MediumText(
-                                    user_name.$,
-                                  ),
-                                  SmallText(
-                                    account_number.$,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      // VSpace.sm,
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: 70,
-                          decoration: BoxDecoration(
-                            color: AppColors.brandColor,
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            border:
-                                Border.all(color: MyTheme.light_grey, width: 1),
-                          ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: CustomScrollView(
+                  controller: _mainScrollController,
+                  physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics()),
+                  slivers: <Widget>[
+                    SliverList(
+                      delegate: SliverChildListDelegate([
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              Container(
+                                width: 48,
+                                height: 48,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  border: Border.all(
+                                      color: MyTheme.white, width: 1),
+                                  //shape: BoxShape.rectangle,
+                                ),
+                                child: ClipRRect(
+                                    clipBehavior: Clip.hardEdge,
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(100.0)),
+                                    child: FadeInImage.assetNetwork(
+                                      placeholder: 'assets/placeholder.png',
+                                      image: "${avatar_original.$}",
+                                      fit: BoxFit.fill,
+                                    )),
+                              ),
                               Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 8.0, left: 20.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  // ignore: prefer_const_literals_to_create_immutables
                                   children: [
                                     MediumText(
-                                      'Available Balance',
-                                      color: Colors.white,
+                                      user_name.$,
                                     ),
-                                    VSpace.sm,
-                                    MediumText(
-                                      '${account_balance.$} (Ksh)',
-                                      color: Colors.black,
+                                    SmallText(
+                                      account_number.$,
                                     ),
                                   ],
                                 ),
                               ),
-                              // HSpace.lg,
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.push(context,
-                                            MaterialPageRoute(
-                                                builder: (context) {
-                                          // return DepositPage('Deposit Money');
-                                          return TopUp();
-                                        }));
-                                      },
-                                      // ignore: sort_child_properties_last
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 8.0, right: 8.0),
-                                        child: SmallText(
-                                          'Add Credit',
-                                          color: Colors.black,
-                                        ),
+                            ],
+                          ),
+                        ),
+                        // VSpace.sm,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4.0),
+                          child: Container(
+                            height: 70,
+                            decoration: BoxDecoration(
+                              color: AppColors.brandColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              border: Border.all(
+                                  color: MyTheme.light_grey, width: 1),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 8.0, left: 20.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    // ignore: prefer_const_literals_to_create_immutables
+                                    children: [
+                                      MediumText(
+                                        'Available Balance',
+                                        color: Colors.white,
                                       ),
-                                      style: ElevatedButton.styleFrom(
-                                        primary: Colors.yellow,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              12), // <-- Radius
+                                      VSpace.sm,
+                                      MediumText(
+                                        '${account_balance.$} (Ksh)',
+                                        color: Colors.black,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                // HSpace.lg,
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          bottom: 0.0, right: 8),
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            // return DepositPage('Deposit Money');
+                                            return TopUp();
+                                          }));
+                                        },
+                                        // ignore: sort_child_properties_last
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8.0, right: 8.0),
+                                          child: SmallText(
+                                            'Add Credit',
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Colors.yellow,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                8), // <-- Radius
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Row(
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              MediumText(
+                                'Hustla Categories',
                               ),
                             ],
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0, top: 15),
-                        child: Row(
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            MediumText(
-                              'Hustla Categories',
-                              size: 20,
-                            ),
-                          ],
+                        hustlaCategories(screenHeight),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: hustlerBlog(),
                         ),
-                      ),
-                      hustlaCategories(screenHeight),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: hustlerBlog(),
-                      ),
 
-                      buildHomeCarouselSlider(context),
+                        buildHomeCarouselSlider(context),
 
-                      Visibility(
-                        visible: false,
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.only(left: 260.0, right: 10),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                // return DepositPage('Deposit Money');
-                                return BecomeSeller();
-                              }));
-                            },
-                            // ignore: sort_child_properties_last
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 8.0, right: 8.0),
-                              child: SmallText(
-                                'Become Seller',
-                                color: Colors.white,
+                        Visibility(
+                          visible: false,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 260.0, right: 10),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  // return DepositPage('Deposit Money');
+                                  return BecomeSeller();
+                                }));
+                              },
+                              // ignore: sort_child_properties_last
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 8.0, right: 8.0),
+                                child: SmallText(
+                                  'Become Seller',
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.red,
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(12), // <-- Radius
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.red,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(12), // <-- Radius
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ]),
-                  ),
-                ],
+                      ]),
+                    ),
+                  ],
+                ),
               ),
             ),
             // Align(
@@ -909,7 +910,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   Widget hustlaCategories(double screenHeight) {
     return SizedBox(
-      height: 0.15 * screenHeight,
+      height: 0.11 * screenHeight,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
@@ -928,6 +929,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return Finance(
                   is_base_category: true,
+                  title: 'Financial Services',
                 );
               }));
             },
@@ -979,11 +981,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   }
 
   Widget iconText(String image, String title) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Container(
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0, right: 15.0),
+      child: Column(
+        children: [
+          Container(
             height: 50,
             decoration: BoxDecoration(
               color: AppColors.appBarColor,
@@ -998,11 +1000,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               ),
             ),
           ),
-        ),
-        SmallText(
-          title,
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: SmallText(
+              title,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -1014,14 +1019,17 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         children: [
           Container(
             width: MediaQuery.of(context).size.width * 0.7,
-            child: YoutubePlayer(
-              controller: _controller,
-              bottomActions: [],
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              child: YoutubePlayer(
+                controller: _controller,
+                bottomActions: [],
+              ),
             ),
           ),
           HSpace.md,
           ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(15)),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
             child: Image.asset(
               'assets/images/ruto_news.png',
               // width: context.width * 0.8,
@@ -1031,7 +1039,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           ),
           HSpace.md,
           ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(15)),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
             child: Image.asset(
               'assets/images/save_money.png',
               // width: context.width * 0.8,
@@ -1072,11 +1080,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           return Builder(
             builder: (BuildContext context) {
               return Padding(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.only(top: 8, right: 8),
                 child: Stack(
                   children: <Widget>[
                     Container(
-                        //color: Colors.amber,
                         width: double.infinity,
                         decoration: BoxDecorations.buildBoxDecoration_1(),
                         child: ClipRRect(

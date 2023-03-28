@@ -17,7 +17,7 @@ class SmallText extends StatelessWidget {
       text,
       style: TextStyles.h3.copyWith(
         color: color ?? MyTheme.light_grey,
-        fontSize: 14,
+        fontSize: size ?? 13,
         fontWeight: FontWeight.w300,
       ),
       textAlign: align,
@@ -41,7 +41,7 @@ class MediumText extends StatelessWidget {
       text,
       style: TextStyles.h3.copyWith(
         color: color ?? Colors.white,
-        fontSize: size ?? 15,
+        fontSize: size ?? 16,
         fontWeight: FontWeight.w400,
       ),
       textAlign: align,

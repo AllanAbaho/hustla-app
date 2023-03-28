@@ -1,6 +1,9 @@
 import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
+import 'package:active_ecommerce_flutter/custom/page_description.dart';
+import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
+import 'package:active_ecommerce_flutter/dummy_data/single_product.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
 import 'package:active_ecommerce_flutter/screens/send_money.dart';
@@ -26,11 +29,13 @@ class Finance extends StatefulWidget {
       this.parent_category_name = "",
       this.is_base_category = false,
       this.is_top_category = false,
-      this.bottomAppbarIndex})
+      this.bottomAppbarIndex,
+      this.title})
       : super(key: key);
 
   final int parent_category_id;
   final String parent_category_name;
+  final String title;
   final bool is_base_category;
   final bool is_top_category;
   final BottomAppbarIndex bottomAppbarIndex;
@@ -41,11 +46,12 @@ class Finance extends StatefulWidget {
 
 class _FinanceState extends State<Finance> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
+  List _categories = [];
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    getCategories();
   }
 
   @override
@@ -69,7 +75,8 @@ class _FinanceState extends State<Finance> {
       slivers: [
         SliverList(
             delegate: SliverChildListDelegate([
-          buildCategoryList(),
+          buildDescription(widget.title),
+          buildCategoryList(_categories),
           Container(
             height: widget.is_base_category ? 60 : 90,
           )
@@ -80,7 +87,7 @@ class _FinanceState extends State<Finance> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: MyTheme.accent_color,
+      backgroundColor: AppColors.dashboardColor,
       //centerTitle: true,
       leading: widget.is_base_category
           ? Builder(
@@ -98,7 +105,7 @@ class _FinanceState extends State<Finance> {
               ),
             ),
       title: Text(
-        getAppBarTitle(),
+        widget.title,
         style: TextStyle(
             fontSize: 16, color: MyTheme.white, fontWeight: FontWeight.bold),
       ),
@@ -107,68 +114,47 @@ class _FinanceState extends State<Finance> {
     );
   }
 
-  String getAppBarTitle() {
-    String name = 'Financial Services';
-
-    return name;
-  }
-
-  getTravelCategories() {
-    var travelCategories = [
+  getCategories() {
+    var _list = [
       {
-        "id": 9,
+        "id": 0,
         "name": "Send Money",
         "banner":
             "https://www.dignited.com/wp-content/uploads/2018/12/Mobile-Money-Transfer-And-Mobile-Money-Transfer-Service-1200x800-1024x683.jpg",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/3V1JdHwjCE6COPQmG6vlX6oTQ5YjGHPh5ad2MeF7.png",
-        "number_of_children": 2,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/9",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/9"
-        },
+        "description": "Send via mobile money, your wallet, or bank transfer.",
         "page": SendMoney(),
       },
       {
-        "id": 11,
+        "id": 1,
         "name": "Add Credit",
         "banner":
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMkJEivNrYTNeSi-vKI0aXoaQViWclE9Ewgw&usqp=CAU",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
-        "number_of_children": 0,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/11",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
-        },
+        "description": "Move money from your mobile money number to wallet.",
         "page": TopUp(),
       },
       {
-        "id": 16,
+        "id": 2,
         "name": "Withdaw Money",
         "banner":
             "https://www.nerdwallet.com/assets/blog/wp-content/uploads/2015/05/atm-eats-deposit-contact-financial-institution-immediately-story.jpg",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/w65DPieTu3ZUq6rMPnzExVwx8ZVRp5LQA0sGwaCN.jpg",
-        "number_of_children": 0,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/16",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/16"
-        },
+        "description":
+            "Convert your wallet funds to cash at the nearest agent point.",
         "page": Withdraw(),
       },
     ];
-    return travelCategories;
+    setState(() {
+      _categories = _list;
+    });
+    ;
   }
 
-  buildCategoryList() {
-    var travelCategories = getTravelCategories();
+  Widget buildCategoryList(List travelCategories) {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        mainAxisSpacing: 14,
-        crossAxisSpacing: 14,
-        childAspectRatio: 0.7,
-        crossAxisCount: 3,
+        mainAxisSpacing: 30,
+        crossAxisSpacing: 30,
+        childAspectRatio: 0.75,
+        crossAxisCount: 2,
       ),
       itemCount: travelCategories.length,
       padding: EdgeInsets.only(
@@ -184,117 +170,91 @@ class _FinanceState extends State<Finance> {
 
   Widget buildCategoryItemCard(travelCategories, index) {
     var itemWidth = ((DeviceInfo(context).width - 36) / 3);
-    print(itemWidth);
-
     return Container(
       decoration: BoxDecorations.buildBoxDecoration_1(),
-      child: InkWell(
-        onTap: () {
-          if (travelCategories[index]['page'] != null) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return travelCategories[index]['page'];
-                },
-              ),
-            );
-          }
-        },
-        child: Container(
-          //padding: EdgeInsets.all(8),
-          //color: Colors.amber,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                constraints: BoxConstraints(maxHeight: itemWidth - 28),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(6),
-                      topLeft: Radius.circular(6)),
-                  child: FadeInImage.assetNetwork(
-                    placeholder: 'assets/placeholder.png',
-                    image: travelCategories[index]['banner'],
-                    fit: BoxFit.cover,
-                    height: itemWidth,
-                    width: DeviceInfo(context).width,
-                  ),
-                ),
-              ),
-              Container(
-                height: 60,
-                //color: Colors.amber,
-                alignment: Alignment.center,
-                width: DeviceInfo(context).width,
-                padding: const EdgeInsets.symmetric(horizontal: 14),
-                child: Text(
-                  travelCategories[index]['name'],
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  style: TextStyle(
-                      color: MyTheme.font_grey,
-                      fontSize: 10,
-                      height: 1.6,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-              Spacer()
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Container buildBottomContainer() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-      ),
-
-      height: widget.is_base_category ? 0 : 80,
-      //color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
+      child: Container(
         child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Container(
-                width: (MediaQuery.of(context).size.width - 32),
-                height: 40,
-                child: FlatButton(
-                  minWidth: MediaQuery.of(context).size.width,
-                  //height: 50,
-                  color: MyTheme.accent_color,
-                  shape: RoundedRectangleBorder(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(8.0))),
-                  child: Text(
-                    AppLocalizations.of(context)
-                            .category_list_screen_all_products_of +
-                        " " +
-                        widget.parent_category_name,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return CategoryProducts(
-                        category_id: widget.parent_category_id,
-                        category_name: widget.parent_category_name,
-                      );
-                    }));
-                  },
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              constraints: BoxConstraints(maxHeight: itemWidth - 28),
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(6), topLeft: Radius.circular(6)),
+                child: FadeInImage.assetNetwork(
+                  placeholder: 'assets/placeholder.png',
+                  image: travelCategories[index]['banner'],
+                  fit: BoxFit.cover,
+                  height: itemWidth,
+                  width: DeviceInfo(context).width,
                 ),
               ),
-            )
+            ),
+            Container(
+              // alignment: Alignment.center,
+              width: DeviceInfo(context).width,
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 14, vertical: 8.0),
+              child: Text(
+                travelCategories[index]['name'],
+                // textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                style: TextStyle(
+                    color: AppColors.dashboardColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+            Container(
+              alignment: Alignment.center,
+              width: DeviceInfo(context).width,
+              padding: const EdgeInsets.symmetric(horizontal: 14.0),
+              child: Text(
+                travelCategories[index]['description'],
+                // textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                style: TextStyle(
+                    color: MyTheme.font_grey,
+                    fontSize: 10,
+                    height: 1.6,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 15),
+              child: Container(
+                height: 30,
+                child: FlatButton(
+                    minWidth: MediaQuery.of(context).size.width * 0.5,
+                    disabledColor: MyTheme.grey_153,
+                    color: AppColors.dashboardColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(6.0))),
+                    child: Text(
+                      'Know More',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    onPressed: () {
+                      if (travelCategories[index]['page'] != null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return travelCategories[index]['page'];
+                            },
+                          ),
+                        );
+                      }
+                    }),
+              ),
+            ),
+            Spacer()
           ],
         ),
       ),
