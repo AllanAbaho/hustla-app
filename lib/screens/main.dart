@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:active_ecommerce_flutter/custom/common_functions.dart';
+import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
 import 'package:active_ecommerce_flutter/presenter/cart_counter.dart';
@@ -126,8 +127,8 @@ class _MainState extends State<Main> {
                   type: BottomNavigationBarType.fixed,
                   onTap: onTapped,
                   currentIndex: _currentIndex,
-                  backgroundColor: Colors.white.withOpacity(0.95),
-                  unselectedItemColor: Color.fromRGBO(168, 175, 179, 1),
+                  backgroundColor: AppColors.appBarColor,
+                  unselectedItemColor: Colors.white,
                   selectedItemColor: MyTheme.accent_color,
                   selectedLabelStyle: TextStyle(
                       fontWeight: FontWeight.w700,
@@ -144,8 +145,8 @@ class _MainState extends State<Main> {
                           child: Image.asset(
                             "assets/home.png",
                             color: _currentIndex == 0
-                                ? Theme.of(context).accentColor
-                                : Color.fromRGBO(153, 153, 153, 1),
+                                ? MyTheme.accent_color
+                                : Colors.white,
                             height: 16,
                           ),
                         ),
@@ -157,8 +158,8 @@ class _MainState extends State<Main> {
                           child: Image.asset(
                             "assets/categories.png",
                             color: _currentIndex == 1
-                                ? Theme.of(context).accentColor
-                                : Color.fromRGBO(153, 153, 153, 1),
+                                ? MyTheme.accent_color
+                                : Colors.white,
                             height: 16,
                           ),
                         ),
@@ -174,8 +175,8 @@ class _MainState extends State<Main> {
                             child: Image.asset(
                               "assets/cart.png",
                               color: _currentIndex == 2
-                                  ? Theme.of(context).accentColor
-                                  : Color.fromRGBO(153, 153, 153, 1),
+                                  ? MyTheme.accent_color
+                                  : Colors.white,
                               height: 16,
                             ),
                             padding: EdgeInsets.all(4),
@@ -200,8 +201,8 @@ class _MainState extends State<Main> {
                         child: Image.asset(
                           "assets/profile.png",
                           color: _currentIndex == 3
-                              ? Theme.of(context).accentColor
-                              : Color.fromRGBO(153, 153, 153, 1),
+                              ? MyTheme.accent_color
+                              : Colors.white,
                           height: 16,
                         ),
                       ),

@@ -4,7 +4,8 @@
 //https://app.quicktype.io/
 import 'dart:convert';
 
-SliderResponse sliderResponseFromJson(String str) => SliderResponse.fromJson(json.decode(str));
+SliderResponse sliderResponseFromJson(String str) =>
+    SliderResponse.fromJson(json.decode(str));
 
 String sliderResponseToJson(SliderResponse data) => json.encode(data.toJson());
 
@@ -20,30 +21,34 @@ class SliderResponse {
   int status;
 
   factory SliderResponse.fromJson(Map<String, dynamic> json) => SliderResponse(
-    sliders: List<Slider>.from(json["data"].map((x) => Slider.fromJson(x))),
-    success: json["success"],
-    status: json["status"],
-  );
+        sliders: List<Slider>.from(json["data"].map((x) => Slider.fromJson(x))),
+        success: json["success"],
+        status: json["status"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "data": List<dynamic>.from(sliders.map((x) => x.toJson())),
-    "success": success,
-    "status": status,
-  };
+        "data": List<dynamic>.from(sliders.map((x) => x.toJson())),
+        "success": success,
+        "status": status,
+      };
 }
 
 class Slider {
   Slider({
     this.photo,
+    this.link,
   });
 
   String photo;
+  String link;
 
   factory Slider.fromJson(Map<String, dynamic> json) => Slider(
-    photo: json["photo"],
-  );
+        photo: json["photo"],
+        link: json["link"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "photo": photo,
-  };
+        "photo": photo,
+        "link": link,
+      };
 }

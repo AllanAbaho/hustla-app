@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:active_ecommerce_flutter/custom/custom_shape.dart';
 import 'package:active_ecommerce_flutter/custom/common_functions.dart';
+import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/custom/spacers.dart';
 import 'package:active_ecommerce_flutter/custom/text.dart';
@@ -22,6 +23,7 @@ import 'package:active_ecommerce_flutter/screens/category_products.dart';
 import 'package:active_ecommerce_flutter/screens/category_list.dart';
 import 'package:active_ecommerce_flutter/screens/top_up.dart';
 import 'package:active_ecommerce_flutter/screens/travel.dart';
+import 'package:active_ecommerce_flutter/screens/web_page.dart';
 import 'package:active_ecommerce_flutter/ui_sections/drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +42,7 @@ import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/ui_elements/mini_product_card.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Home extends StatefulWidget {
@@ -110,6 +113,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       autoPlay: false,
     ),
   );
+  YoutubePlayerController _controller2 = YoutubePlayerController(
+    initialVideoId: YoutubePlayer.convertUrlToId(
+        "https://www.youtube.com/watch?v=BajOpEY6Gko"),
+    flags: YoutubePlayerFlags(
+      autoPlay: false,
+    ),
+  );
 
   @override
   void initState() {
@@ -134,6 +144,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   void deactivate() {
     // Pauses video while navigating to next page.
     _controller.pause();
+    _controller2.pause();
     super.deactivate();
   }
 
@@ -153,10 +164,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   fetchCarouselImages() async {
     var carouselResponse = await SlidersRepository().getSliders();
     carouselResponse.sliders.forEach((slider) {
-      _carouselImageList.add(slider.photo);
+      _carouselImageList.add(slider);
     });
     _isCarouselInitial = false;
-    setState(() {});
   }
 
   fetchBannerOneImages() async {
@@ -252,26 +262,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     setState(() {});
   }
 
-  initPiratedAnimation() {
-    pirated_logo_controller = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 2000));
-    pirated_logo_animation = Tween(begin: 40.0, end: 60.0).animate(
-        CurvedAnimation(
-            curve: Curves.bounceOut, parent: pirated_logo_controller));
-
-    pirated_logo_controller.addStatusListener((AnimationStatus status) {
-      if (status == AnimationStatus.completed) {
-        pirated_logo_controller.repeat();
-      }
-    });
-
-    pirated_logo_controller.forward();
-  }
-
   @override
   Widget build(BuildContext context) {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
-    final double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: AppColors.dashboardColor,
         key: _scaffoldKey,
@@ -289,629 +282,236 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         //drawer: MainDrawer(),
         body: Stack(
           children: [
-            RefreshIndicator(
-              color: MyTheme.dark_font_grey,
-              backgroundColor: Colors.white,
-              onRefresh: _onRefresh,
-              displacement: 0,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: CustomScrollView(
-                  controller: _mainScrollController,
-                  physics: const BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  slivers: <Widget>[
-                    SliverList(
-                      delegate: SliverChildListDelegate([
+            // RefreshIndicator(
+            //   color: MyTheme.dark_font_grey,
+            //   backgroundColor: Colors.white,
+            //   onRefresh: _onRefresh,
+            //   displacement: 0,
+            //   child:
+            CustomScrollView(
+              controller: _mainScrollController,
+              // physics: const BouncingScrollPhysics(
+              //     parent: AlwaysScrollableScrollPhysics()),
+              slivers: <Widget>[
+                SliverList(
+                  delegate: SliverChildListDelegate([
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(width: 10),
+                        Container(
+                          width: 48,
+                          height: 48,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            border: Border.all(color: MyTheme.white, width: 1),
+                            //shape: BoxShape.rectangle,
+                          ),
+                          child: ClipRRect(
+                              clipBehavior: Clip.hardEdge,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(100.0)),
+                              child: FadeInImage.assetNetwork(
+                                placeholder: 'assets/placeholder.png',
+                                image: "${avatar_original.$}",
+                                fit: BoxFit.fill,
+                              )),
+                        ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Row(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                width: 48,
-                                height: 48,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  border: Border.all(
-                                      color: MyTheme.white, width: 1),
-                                  //shape: BoxShape.rectangle,
-                                ),
-                                child: ClipRRect(
-                                    clipBehavior: Clip.hardEdge,
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(100.0)),
-                                    child: FadeInImage.assetNetwork(
-                                      placeholder: 'assets/placeholder.png',
-                                      image: "${avatar_original.$}",
-                                      fit: BoxFit.fill,
-                                    )),
+                              MediumText(
+                                'Full Name',
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    MediumText(
-                                      user_name.$,
-                                    ),
-                                    SmallText(
-                                      account_number.$,
-                                    ),
-                                  ],
-                                ),
+                              SmallText(
+                                user_name.$,
                               ),
                             ],
                           ),
                         ),
-                        // VSpace.sm,
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4.0),
-                          child: Container(
-                            height: 70,
-                            decoration: BoxDecoration(
-                              color: AppColors.brandColor,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              border: Border.all(
-                                  color: MyTheme.light_grey, width: 1),
+                          padding: const EdgeInsets.only(left: 190.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              MediumText(
+                                'Wallet ID',
+                              ),
+                              SmallText(
+                                account_number.$,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    VSpace.sm,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 6.0, horizontal: 10),
+                      child: Container(
+                        height: 70,
+                        decoration: BoxDecoration(
+                          color: AppColors.brandColor,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.yellow.withOpacity(.2),
+                              blurRadius: 20,
+                              spreadRadius: 00.0,
+                              offset: Offset(
+                                  0.0, 10.0), // shadow direction: bottom right
+                            )
+                          ],
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          // border: Border.all(
+                          //     color: MyTheme.light_grey, width: 1),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 8.0, left: 20.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                // ignore: prefer_const_literals_to_create_immutables
+                                children: [
+                                  MediumText(
+                                    'Available Balance',
+                                    color: Colors.white,
+                                  ),
+                                  VSpace.sm,
+                                  MediumText(
+                                    '${account_balance.$} (Ksh)',
+                                    color: Colors.black,
+                                  ),
+                                ],
+                              ),
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            // HSpace.lg,
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                      top: 8.0, left: 20.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                      bottom: 10.0, right: 8),
+                                  child: SizedBox(
+                                    height: 30,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          // return DepositPage('Deposit Money');
+                                          return TopUp();
+                                        }));
+                                      },
+                                      // ignore: sort_child_properties_last
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 8.0, right: 8.0),
+                                        child: SmallText(
+                                          'Add Credit',
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.yellow,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              10), // <-- Radius
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 12, bottom: 8, left: 10),
+                      child: Row(
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          MediumText(
+                            'Hustla Categories',
+                          ),
+                        ],
+                      ),
+                    ),
+                    hustlaCategories(context),
+                    Container(
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(25),
+                            topRight: Radius.circular(25),
+                          ),
+                          child: Container(
+                            color: Colors.white,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 10, left: 10),
+                                  child: Row(
+                                    // ignore: prefer_const_literals_to_create_immutables
+                                    children: [
+                                      MediumText('Hustla News',
+                                          color: Colors.black),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 12.0, left: 10),
+                                  child: hustlerBlog(),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 15.0, left: 10),
+                                  child: Row(
                                     // ignore: prefer_const_literals_to_create_immutables
                                     children: [
                                       MediumText(
-                                        'Available Balance',
-                                        color: Colors.white,
-                                      ),
-                                      VSpace.sm,
-                                      MediumText(
-                                        '${account_balance.$} (Ksh)',
+                                        'Advertise with us',
                                         color: Colors.black,
                                       ),
                                     ],
                                   ),
                                 ),
-                                // HSpace.lg,
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          bottom: 0.0, right: 8),
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            // return DepositPage('Deposit Money');
-                                            return TopUp();
-                                          }));
-                                        },
-                                        // ignore: sort_child_properties_last
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 8.0, right: 8.0),
-                                          child: SmallText(
-                                            'Add Credit',
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Colors.yellow,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                8), // <-- Radius
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10.0, bottom: 80),
+                                  child: buildHomeCarouselSlider(context),
                                 ),
                               ],
                             ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8),
-                          child: Row(
-                            // ignore: prefer_const_literals_to_create_immutables
-                            children: [
-                              MediumText(
-                                'Hustla Categories',
-                              ),
-                            ],
-                          ),
-                        ),
-                        hustlaCategories(screenHeight),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: hustlerBlog(),
-                        ),
-
-                        buildHomeCarouselSlider(context),
-
-                        Visibility(
-                          visible: false,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 260.0, right: 10),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  // return DepositPage('Deposit Money');
-                                  return BecomeSeller();
-                                }));
-                              },
-                              // ignore: sort_child_properties_last
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 8.0, right: 8.0),
-                                child: SmallText(
-                                  'Become Seller',
-                                  color: Colors.white,
-                                ),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.red,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(12), // <-- Radius
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ]),
+                          )),
                     ),
-                  ],
+                  ]),
                 ),
-              ),
+              ],
             ),
-            // Align(
-            //     alignment: Alignment.center,
-            //     child: buildProductLoadingContainer())
+            // ),
           ],
         ));
   }
 
-  Widget buildHomeAllProducts(context) {
-    if (_isAllProductInitial && _allProductList.length == 0) {
-      return SingleChildScrollView(
-          child: ShimmerHelper().buildProductGridShimmer(
-              scontroller: _allProductScrollController));
-    } else if (_allProductList.length > 0) {
-      //snapshot.hasData
-
-      return GridView.builder(
-        // 2
-        //addAutomaticKeepAlives: true,
-        itemCount: _allProductList.length,
-        controller: _allProductScrollController,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
-            childAspectRatio: 0.618),
-        padding: EdgeInsets.all(16.0),
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          // 3
-          return ProductCard(
-            id: _allProductList[index].id,
-            image: _allProductList[index].thumbnail_image,
-            name: _allProductList[index].name,
-            main_price: _allProductList[index].main_price,
-            stroked_price: _allProductList[index].stroked_price,
-            has_discount: _allProductList[index].has_discount,
-            discount: _allProductList[index].discount,
-          );
-        },
-      );
-    } else if (_totalAllProductData == 0) {
-      return Center(
-          child: Text(
-              AppLocalizations.of(context).common_no_product_is_available));
-    } else {
-      return Container(); // should never be happening
-    }
-  }
-
-  Widget buildHomeAllProducts2(context) {
-    if (_isAllProductInitial && _allProductList.length == 0) {
-      return SingleChildScrollView(
-          child: ShimmerHelper().buildProductGridShimmer(
-              scontroller: _allProductScrollController));
-    } else if (_allProductList.length > 0) {
-      return MasonryGridView.count(
-          crossAxisCount: 2,
-          mainAxisSpacing: 14,
-          crossAxisSpacing: 14,
-          itemCount: _allProductList.length,
-          shrinkWrap: true,
-          padding: EdgeInsets.only(top: 20.0, bottom: 10, left: 18, right: 18),
-          physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return ProductCard(
-              id: _allProductList[index].id,
-              image: _allProductList[index].thumbnail_image,
-              name: _allProductList[index].name,
-              main_price: _allProductList[index].main_price,
-              stroked_price: _allProductList[index].stroked_price,
-              has_discount: _allProductList[index].has_discount,
-              discount: _allProductList[index].discount,
-            );
-          });
-    } else if (_totalAllProductData == 0) {
-      return Center(
-          child: Text(
-              AppLocalizations.of(context).common_no_product_is_available));
-    } else {
-      return Container(); // should never be happening
-    }
-  }
-
-  Widget buildHomeFeaturedCategories(context) {
-    if (_isCategoryInitial && _featuredCategoryList.length == 0) {
-      return ShimmerHelper().buildHorizontalGridShimmerWithAxisCount(
-          crossAxisSpacing: 14.0,
-          mainAxisSpacing: 14.0,
-          item_count: 10,
-          mainAxisExtent: 170.0,
-          controller: _featuredCategoryScrollController);
-    } else if (_featuredCategoryList.length > 0) {
-      //snapshot.hasData
-      return GridView.builder(
-          padding:
-              const EdgeInsets.only(left: 18, right: 18, top: 13, bottom: 20),
-          scrollDirection: Axis.horizontal,
-          controller: _featuredCategoryScrollController,
-          itemCount: _featuredCategoryList.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 3 / 2,
-              crossAxisSpacing: 14,
-              mainAxisSpacing: 14,
-              mainAxisExtent: 170.0),
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return CategoryProducts(
-                    category_id: _featuredCategoryList[index].id,
-                    category_name: _featuredCategoryList[index].name,
-                  );
-                }));
-              },
-              child: Container(
-                decoration: BoxDecorations.buildBoxDecoration_1(),
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.horizontal(
-                                left: Radius.circular(6), right: Radius.zero),
-                            child: FadeInImage.assetNetwork(
-                              placeholder: 'assets/placeholder.png',
-                              image: _featuredCategoryList[index].banner,
-                              fit: BoxFit.cover,
-                            ))),
-                    Flexible(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          _featuredCategoryList[index].name,
-                          textAlign: TextAlign.left,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                          softWrap: true,
-                          style:
-                              TextStyle(fontSize: 12, color: MyTheme.font_grey),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          });
-    } else if (!_isCategoryInitial && _featuredCategoryList.length == 0) {
-      return Container(
-          height: 100,
-          child: Center(
-              child: Text(
-            AppLocalizations.of(context).home_screen_no_category_found,
-            style: TextStyle(color: MyTheme.font_grey),
-          )));
-    } else {
-      // should not be happening
-      return Container(
-        height: 100,
-      );
-    }
-  }
-
-  Widget buildHomeFeatureProductHorizontalList() {
-    if (_isFeaturedProductInitial == true && _featuredProductList.length == 0) {
-      return Row(
-        children: [
-          Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ShimmerHelper().buildBasicShimmer(
-                  height: 120.0,
-                  width: (MediaQuery.of(context).size.width - 64) / 3)),
-          Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ShimmerHelper().buildBasicShimmer(
-                  height: 120.0,
-                  width: (MediaQuery.of(context).size.width - 64) / 3)),
-          Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ShimmerHelper().buildBasicShimmer(
-                  height: 120.0,
-                  width: (MediaQuery.of(context).size.width - 160) / 3)),
-        ],
-      );
-    } else if (_featuredProductList.length > 0) {
-      return SingleChildScrollView(
-        child: SizedBox(
-          height: 248,
-          child: NotificationListener<ScrollNotification>(
-            onNotification: (ScrollNotification scrollInfo) {
-              if (scrollInfo.metrics.pixels ==
-                  scrollInfo.metrics.maxScrollExtent) {
-                setState(() {
-                  _featuredProductPage++;
-                });
-                fetchFeaturedProducts();
-              }
-            },
-            child: ListView.separated(
-              padding: const EdgeInsets.all(18.0),
-              separatorBuilder: (context, index) => SizedBox(
-                width: 14,
-              ),
-              itemCount: _totalFeaturedProductData > _featuredProductList.length
-                  ? _featuredProductList.length + 1
-                  : _featuredProductList.length,
-              scrollDirection: Axis.horizontal,
-              //itemExtent: 135,
-
-              physics: const BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics()),
-              itemBuilder: (context, index) {
-                return (index == _featuredProductList.length)
-                    ? SpinKitFadingFour(
-                        itemBuilder: (BuildContext context, int index) {
-                          return DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                            ),
-                          );
-                        },
-                      )
-                    : MiniProductCard(
-                        id: _featuredProductList[index].id,
-                        image: _featuredProductList[index].thumbnail_image,
-                        name: _featuredProductList[index].name,
-                        main_price: _featuredProductList[index].main_price,
-                        stroked_price:
-                            _featuredProductList[index].stroked_price,
-                        has_discount: _featuredProductList[index].has_discount);
-              },
-            ),
-          ),
-        ),
-      );
-    } else {
-      return Container(
-          height: 100,
-          child: Center(
-              child: Text(
-            AppLocalizations.of(context)
-                .product_details_screen_no_related_product,
-            style: TextStyle(color: MyTheme.font_grey),
-          )));
-    }
-  }
-
-  Widget buildHomeMenuRow1(BuildContext context) {
-    return Row(
-      children: [
-        Flexible(
-          flex: 1,
-          fit: FlexFit.tight,
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return TodaysDealProducts();
-              }));
-            },
-            child: Container(
-              height: 90,
-              decoration: BoxDecorations.buildBoxDecoration_1(),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Container(
-                        height: 20,
-                        width: 20,
-                        child: Image.asset("assets/todays_deal.png")),
-                  ),
-                  Text(AppLocalizations.of(context).home_screen_todays_deal,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Color.fromRGBO(132, 132, 132, 1),
-                          fontWeight: FontWeight.w300)),
-                ],
-              ),
-            ),
-          ),
-        ),
-        SizedBox(width: 14.0),
-        Flexible(
-          flex: 1,
-          fit: FlexFit.tight,
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return FlashDealList();
-              }));
-            },
-            child: Container(
-              height: 90,
-              decoration: BoxDecorations.buildBoxDecoration_1(),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Container(
-                        height: 20,
-                        width: 20,
-                        child: Image.asset("assets/flash_deal.png")),
-                  ),
-                  Text(AppLocalizations.of(context).home_screen_flash_deal,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Color.fromRGBO(132, 132, 132, 1),
-                          fontWeight: FontWeight.w300)),
-                ],
-              ),
-            ),
-          ),
-        )
-      ],
-    );
-  }
-
-  Widget buildHomeMenuRow2(BuildContext context) {
-    return Row(
-      children: [
-        Flexible(
-          flex: 1,
-          fit: FlexFit.tight,
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return CategoryList(
-                  is_top_category: true,
-                );
-              }));
-            },
-            child: Container(
-              height: 90,
-              width: MediaQuery.of(context).size.width / 3 - 4,
-              decoration: BoxDecorations.buildBoxDecoration_1(),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Container(
-                        height: 20,
-                        width: 20,
-                        child: Image.asset("assets/top_categories.png")),
-                  ),
-                  Text(
-                    AppLocalizations.of(context).home_screen_top_categories,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color.fromRGBO(132, 132, 132, 1),
-                        fontWeight: FontWeight.w300),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          width: 14.0,
-        ),
-        Flexible(
-          flex: 1,
-          fit: FlexFit.tight,
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return Filter(
-                  selected_filter: "brands",
-                );
-              }));
-            },
-            child: Container(
-              height: 90,
-              width: MediaQuery.of(context).size.width / 3 - 4,
-              decoration: BoxDecorations.buildBoxDecoration_1(),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Container(
-                        height: 20,
-                        width: 20,
-                        child: Image.asset("assets/brands.png")),
-                  ),
-                  Text(AppLocalizations.of(context).home_screen_brands,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Color.fromRGBO(132, 132, 132, 1),
-                          fontWeight: FontWeight.w300)),
-                ],
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          width: 14.0,
-        ),
-        Flexible(
-          flex: 1,
-          fit: FlexFit.tight,
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return TopSellingProducts();
-              }));
-            },
-            child: Container(
-              height: 90,
-              width: MediaQuery.of(context).size.width / 3 - 4,
-              decoration: BoxDecorations.buildBoxDecoration_1(),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Container(
-                        height: 20,
-                        width: 20,
-                        child: Image.asset("assets/top_sellers.png")),
-                  ),
-                  Text(AppLocalizations.of(context).home_screen_top_sellers,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Color.fromRGBO(132, 132, 132, 1),
-                          fontWeight: FontWeight.w300)),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget hustlaCategories(double screenHeight) {
+  Widget hustlaCategories(BuildContext context) {
+    var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
     return SizedBox(
       height: 0.11 * screenHeight,
       child: ListView(
+        itemExtent: screenWidth / 6,
         scrollDirection: Axis.horizontal,
         children: [
           GestureDetector(
@@ -981,33 +581,30 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   }
 
   Widget iconText(String image, String title) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0, right: 15.0),
-      child: Column(
-        children: [
-          Container(
-            height: 50,
-            decoration: BoxDecoration(
-              color: AppColors.appBarColor,
-              borderRadius: BorderRadius.circular(100),
-              border: Border.all(color: AppColors.brandColor, width: 1),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Image.asset(
-                image,
-                height: 50,
-              ),
+    return Column(
+      children: [
+        Container(
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(100),
+            border: Border.all(color: AppColors.brandColor, width: 1),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Image.asset(
+              image,
+              height: 50,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: SmallText(
-              title,
-            ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: SmallText(
+            title,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -1022,7 +619,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(10)),
               child: YoutubePlayer(
-                controller: _controller,
+                controller: _controller2,
                 bottomActions: [],
               ),
             ),
@@ -1032,21 +629,21 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             borderRadius: BorderRadius.all(Radius.circular(10)),
             child: Image.asset(
               'assets/images/ruto_news.png',
-              // width: context.width * 0.8,
-              // height: 500,
               fit: BoxFit.fill,
             ),
           ),
           HSpace.md,
-          ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            child: Image.asset(
-              'assets/images/save_money.png',
-              // width: context.width * 0.8,
-              // height: 500,
-              fit: BoxFit.fill,
+          Container(
+            width: MediaQuery.of(context).size.width * 0.7,
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              child: YoutubePlayer(
+                controller: _controller,
+                bottomActions: [],
+              ),
             ),
           ),
+          HSpace.md,
         ],
       ),
     );
@@ -1085,36 +682,46 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   children: <Widget>[
                     Container(
                         width: double.infinity,
-                        decoration: BoxDecorations.buildBoxDecoration_1(),
                         child: ClipRRect(
-                            borderRadius: BorderRadius.all(Radius.circular(6)),
-                            child: FadeInImage.assetNetwork(
-                              placeholder: 'assets/placeholder_rectangle.png',
-                              image: i,
-                              height: 140,
-                              fit: BoxFit.cover,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            child: InkWell(
+                              onTap: () {
+                                if (i.link != null) {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    // return DepositPage('Deposit Money');
+                                    return WebPage(url: i.link);
+                                  }));
+                                }
+                              },
+                              child: FadeInImage.assetNetwork(
+                                placeholder: 'assets/placeholder_rectangle.png',
+                                image: i.photo,
+                                height: 140,
+                                fit: BoxFit.cover,
+                              ),
                             ))),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: _carouselImageList.map((url) {
-                          int index = _carouselImageList.indexOf(url);
-                          return Container(
-                            width: 7.0,
-                            height: 7.0,
-                            margin: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 4.0),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: _current_slider == index
-                                  ? MyTheme.white
-                                  : Color.fromRGBO(112, 112, 112, .3),
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
+                    // Align(
+                    //   alignment: Alignment.bottomCenter,
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     children: _carouselImageList.map((url) {
+                    //       int index = _carouselImageList.indexOf(url);
+                    //       return Container(
+                    //         width: 7.0,
+                    //         height: 7.0,
+                    //         margin: EdgeInsets.symmetric(
+                    //             vertical: 10.0, horizontal: 4.0),
+                    //         decoration: BoxDecoration(
+                    //           shape: BoxShape.circle,
+                    //           color: _current_slider == index
+                    //               ? MyTheme.white
+                    //               : Color.fromRGBO(112, 112, 112, .3),
+                    //         ),
+                    //       );
+                    //     }).toList(),
+                    //   ),
+                    // ),
                   ],
                 ),
               );
@@ -1135,6 +742,15 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       return Container(
         height: 100,
       );
+    }
+  }
+
+  _launchURL(String link) async {
+    final uri = Uri.parse(link);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $link';
     }
   }
 
