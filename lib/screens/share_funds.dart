@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:active_ecommerce_flutter/custom/app_bar.dart';
 import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
+import 'package:active_ecommerce_flutter/custom/page_description.dart';
 import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
@@ -28,20 +30,9 @@ import 'package:validators/validators.dart';
 import '../repositories/top_up_repository.dart';
 
 class ShareFunds extends StatefulWidget {
-  ShareFunds(
-      {Key key,
-      this.parent_category_id = 0,
-      this.parent_category_name = "",
-      this.is_base_category = false,
-      this.is_top_category = false,
-      this.bottomAppbarIndex})
-      : super(key: key);
+  ShareFunds({Key key, this.title}) : super(key: key);
 
-  final int parent_category_id;
-  final String parent_category_name;
-  final bool is_base_category;
-  final bool is_top_category;
-  final BottomAppbarIndex bottomAppbarIndex;
+  final String title;
 
   @override
   _ShareFundsState createState() => _ShareFundsState();
@@ -65,7 +56,7 @@ class _ShareFundsState extends State<ShareFunds> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-            child: buildAppBar(context),
+            child: buildAppBar(context, widget.title),
             preferredSize: Size(
               DeviceInfo(context).width,
               60,
@@ -87,13 +78,15 @@ class _ShareFundsState extends State<ShareFunds> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
-                  'Sacco',
+                  'Sacco Name',
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                      color: AppColors.appBarColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 25.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -102,7 +95,7 @@ class _ShareFundsState extends State<ShareFunds> {
                       child: TextField(
                         keyboardType: TextInputType.number,
                         controller: _saccoController,
-                        enabled: false,
+                        readOnly: true,
                         decoration: InputDecorations.buildInputDecoration_1(
                             hint_text: "ABC EMPOWERMENT SACCO LIMITED"),
                       ),
@@ -113,13 +106,15 @@ class _ShareFundsState extends State<ShareFunds> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
-                  'Amount',
+                  'Enter Amount',
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                      color: AppColors.appBarColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 25.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -141,11 +136,13 @@ class _ShareFundsState extends State<ShareFunds> {
                 child: Text(
                   'Sacco Account',
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                      color: AppColors.appBarColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 25.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -197,7 +194,13 @@ class _ShareFundsState extends State<ShareFunds> {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: creditForm(),
+        child: Column(
+          children: [
+            buildDescription(widget.title,
+                description: 'Please fill in the form below to share funds.'),
+            creditForm(),
+          ],
+        ),
       ),
     );
   }
@@ -256,40 +259,5 @@ class _ShareFundsState extends State<ShareFunds> {
             ],
           ));
         });
-  }
-
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: MyTheme.accent_color,
-      //centerTitle: true,
-      leading: widget.is_base_category
-          ? Builder(
-              builder: (context) => Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-                child: UsefulElements.backToMain(context,
-                    go_back: false, color: "white"),
-              ),
-            )
-          : Builder(
-              builder: (context) => IconButton(
-                icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.white),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ),
-      title: Text(
-        getAppBarTitle(),
-        style: TextStyle(
-            fontSize: 16, color: MyTheme.white, fontWeight: FontWeight.bold),
-      ),
-      elevation: 0.0,
-      titleSpacing: 0,
-    );
-  }
-
-  String getAppBarTitle() {
-    String name = 'Share Funds';
-
-    return name;
   }
 }

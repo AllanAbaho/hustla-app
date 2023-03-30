@@ -20,7 +20,7 @@ class AppConfig {
 
   //configure this
 
-  // static const DOMAIN_PATH = "192.168.1.25:8000"; //localhost
+  // static const DOMAIN_PATH = "192.168.1.6:8000"; //localhost
   static const DOMAIN_PATH = "hustlermarkets.com";
 
   //do not configure these below

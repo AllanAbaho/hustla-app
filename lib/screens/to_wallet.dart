@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:active_ecommerce_flutter/custom/app_bar.dart';
 import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
+import 'package:active_ecommerce_flutter/custom/page_description.dart';
 import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
@@ -28,20 +30,9 @@ import 'package:validators/validators.dart';
 import '../repositories/top_up_repository.dart';
 
 class ToWallet extends StatefulWidget {
-  ToWallet(
-      {Key key,
-      this.parent_category_id = 0,
-      this.parent_category_name = "",
-      this.is_base_category = false,
-      this.is_top_category = false,
-      this.bottomAppbarIndex})
-      : super(key: key);
+  ToWallet({Key key, this.title}) : super(key: key);
 
-  final int parent_category_id;
-  final String parent_category_name;
-  final bool is_base_category;
-  final bool is_top_category;
-  final BottomAppbarIndex bottomAppbarIndex;
+  final String title;
 
   @override
   _ToWalletState createState() => _ToWalletState();
@@ -63,7 +54,7 @@ class _ToWalletState extends State<ToWallet> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-            child: buildAppBar(context),
+            child: buildAppBar(context, widget.title),
             preferredSize: Size(
               DeviceInfo(context).width,
               60,
@@ -83,15 +74,18 @@ class _ToWalletState extends State<ToWallet> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
+                padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text(
                   'Amount',
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 25.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -111,9 +105,12 @@ class _ToWalletState extends State<ToWallet> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
-                  'Wallet Account',
+                  'Account',
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
                 ),
               ),
               Padding(
@@ -169,7 +166,12 @@ class _ToWalletState extends State<ToWallet> {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: creditForm(),
+        child: Column(
+          children: [
+            buildDescription(widget.title),
+            creditForm(),
+          ],
+        ),
       ),
     );
   }
@@ -228,40 +230,5 @@ class _ToWalletState extends State<ToWallet> {
             ],
           ));
         });
-  }
-
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: MyTheme.accent_color,
-      //centerTitle: true,
-      leading: widget.is_base_category
-          ? Builder(
-              builder: (context) => Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-                child: UsefulElements.backToMain(context,
-                    go_back: false, color: "white"),
-              ),
-            )
-          : Builder(
-              builder: (context) => IconButton(
-                icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.white),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ),
-      title: Text(
-        getAppBarTitle(),
-        style: TextStyle(
-            fontSize: 16, color: MyTheme.white, fontWeight: FontWeight.bold),
-      ),
-      elevation: 0.0,
-      titleSpacing: 0,
-    );
-  }
-
-  String getAppBarTitle() {
-    String name = 'To Wallet';
-
-    return name;
   }
 }

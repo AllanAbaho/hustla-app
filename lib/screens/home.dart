@@ -110,6 +110,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     initialVideoId: YoutubePlayer.convertUrlToId(
         "https://www.youtube.com/watch?v=EpMLAQbSYAw"),
     flags: YoutubePlayerFlags(
+      useHybridComposition: false,
       autoPlay: false,
     ),
   );
@@ -117,6 +118,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     initialVideoId: YoutubePlayer.convertUrlToId(
         "https://www.youtube.com/watch?v=BajOpEY6Gko"),
     flags: YoutubePlayerFlags(
+      useHybridComposition: false,
       autoPlay: false,
     ),
   );
@@ -295,61 +297,71 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               slivers: <Widget>[
                 SliverList(
                   delegate: SliverChildListDelegate([
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(width: 10),
-                        Container(
-                          width: 48,
-                          height: 48,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            border: Border.all(color: MyTheme.white, width: 1),
-                            //shape: BoxShape.rectangle,
-                          ),
-                          child: ClipRRect(
-                              clipBehavior: Clip.hardEdge,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(100.0)),
-                              child: FadeInImage.assetNetwork(
-                                placeholder: 'assets/placeholder.png',
-                                image: "${avatar_original.$}",
-                                fit: BoxFit.fill,
-                              )),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 15.0, left: 10, right: 10, bottom: 2),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
                             children: [
-                              MediumText(
-                                'Full Name',
-                              ),
-                              SmallText(
-                                user_name.$,
-                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 48,
+                                    height: 48,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(100),
+                                      border: Border.all(
+                                          color: MyTheme.white, width: 1),
+                                      //shape: BoxShape.rectangle,
+                                    ),
+                                    child: ClipRRect(
+                                        clipBehavior: Clip.hardEdge,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(100.0)),
+                                        child: FadeInImage.assetNetwork(
+                                          placeholder: 'assets/placeholder.png',
+                                          image: "${avatar_original.$}",
+                                          fit: BoxFit.fill,
+                                        )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        MediumText(
+                                          'Full Name',
+                                        ),
+                                        SmallText(
+                                          user_name.$,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )
                             ],
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 190.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              MediumText(
-                                'Wallet ID',
-                              ),
-                              SmallText(
-                                account_number.$,
-                              ),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.only(left: 190.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                MediumText(
+                                  'Wallet ID',
+                                ),
+                                SmallText(
+                                  account_number.$,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                    VSpace.sm,
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 6.0, horizontal: 10),
@@ -518,7 +530,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return BecomeSeller(
-                  is_base_category: true,
+                  title: 'Become Seller',
                 );
               }));
             },
@@ -528,7 +540,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return Finance(
-                  is_base_category: true,
                   title: 'Financial Services',
                 );
               }));
@@ -539,7 +550,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return Jobs(
-                  is_base_category: true,
+                  title: 'Job Services',
                 );
               }));
             },
@@ -549,7 +560,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return Government(
-                  is_base_category: true,
+                  title: 'Government Services',
                 );
               }));
             },
@@ -559,7 +570,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return Sacco(
-                  is_base_category: true,
+                  title: 'Sacco Services',
                 );
               }));
             },
@@ -569,7 +580,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return Travel(
-                  is_base_category: true,
+                  title: 'Travel Services',
                 );
               }));
             },

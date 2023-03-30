@@ -1,5 +1,7 @@
+import 'package:active_ecommerce_flutter/custom/app_bar.dart';
 import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
+import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
@@ -20,384 +22,268 @@ import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class JobSectors extends StatefulWidget {
-  JobSectors(
-      {Key key,
-      this.parent_category_id = 0,
-      this.parent_category_name = "",
-      this.is_base_category = false,
-      this.is_top_category = false,
-      this.is_finding_job = true,
-      this.bottomAppbarIndex})
-      : super(key: key);
+  JobSectors({Key key, this.title, this.is_finding_job}) : super(key: key);
 
-  final int parent_category_id;
-  final String parent_category_name;
-  final bool is_base_category;
-  final bool is_top_category;
+  final String title;
   final bool is_finding_job;
-  final BottomAppbarIndex bottomAppbarIndex;
 
   @override
   _JobSectorsState createState() => _JobSectorsState();
 }
 
 class _JobSectorsState extends State<JobSectors> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  List _categories = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    getCategories();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-            child: buildAppBar(context),
+            child: buildAppBar(context, widget.title),
             preferredSize: Size(
               DeviceInfo(context).width,
               60,
             )),
         body: Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: buildBody(),
-        ));
+            padding: const EdgeInsets.only(top: 8.0),
+            child: buildBody(context, widget.title, _categories)));
   }
 
-  Widget buildBody() {
+  Widget buildDescription(String title) {
+    return Column(
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+              color: AppColors.dashboardColor,
+              fontSize: 25,
+              height: 2,
+              fontWeight: FontWeight.bold),
+        ),
+        Padding(
+          padding:
+              const EdgeInsets.only(top: 20, left: 8.0, bottom: 50, right: 8.0),
+          child: Text(
+            'Choose our list of customised categories and avail the services in each.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: MyTheme.font_grey,
+                fontSize: 14,
+                height: 1.6,
+                fontWeight: FontWeight.w600),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildBody(BuildContext context, String title, List _categories) {
     return CustomScrollView(
       physics: AlwaysScrollableScrollPhysics(),
       slivers: [
         SliverList(
             delegate: SliverChildListDelegate([
-          buildCategoryList(),
+          buildDescription(title),
+          buildCategoryList(context, _categories),
           Container(
-            height: widget.is_base_category ? 60 : 90,
+            height: 60,
           )
         ]))
       ],
     );
   }
 
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: MyTheme.accent_color,
-      //centerTitle: true,
-      leading: widget.is_base_category
-          ? Builder(
-              builder: (context) => Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-                child: UsefulElements.backToMain(context,
-                    go_back: false, color: "white"),
-              ),
-            )
-          : Builder(
-              builder: (context) => IconButton(
-                icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.white),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ),
-      title: Text(
-        getAppBarTitle(),
-        style: TextStyle(
-            fontSize: 16, color: MyTheme.white, fontWeight: FontWeight.bold),
-      ),
-      elevation: 0.0,
-      titleSpacing: 0,
-    );
-  }
-
-  String getAppBarTitle() {
-    String name = 'Job Sectors';
-
-    return name;
-  }
-
-  getTravelCategories() {
-    var travelCategories = [
-      {
-        "id": 9,
-        "name": "Finance / Accounting",
-        "banner": "http://media.monsterindia.com/cmsimages/1562748131.jpg",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/3V1JdHwjCE6COPQmG6vlX6oTQ5YjGHPh5ad2MeF7.png",
-        "number_of_children": 2,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/9",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/9"
-        }
-      },
-      {
-        "id": 10,
-        "name": "Law / Compliance",
-        "banner":
-            "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/Paralegal_vs._Lawyer.jpeg.jpg",
-        "icon":
-            "https://cdn.ucberkeleybootcamp.com/wp-content/uploads/sites/106/2020/08/CDG_blog_post_image_01.jpg",
-        "number_of_children": 2,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/9",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/9"
-        }
-      },
-      {
-        "id": 11,
-        "name": "IT / Telecoms",
-        "banner":
-            "https://cdn.ucberkeleybootcamp.com/wp-content/uploads/sites/106/2020/08/CDG_blog_post_image_01.jpg",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
-        "number_of_children": 0,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/11",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
-        },
-      },
-      {
-        "id": 12,
-        "name": "Hospitality / Hotels",
-        "banner": "https://www.unhcr.org/thumb1/4af8257c6.jpg",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
-        "number_of_children": 0,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/11",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
-        },
-      },
-      {
-        "id": 13,
-        "name": "Manufacturing / Warehousing",
-        "banner":
-            "https://thumbs.dreamstime.com/b/black-male-african-american-workers-wear-sound-proof-headphones-yellow-helmet-working-iron-cutting-machine-factory-213418200.jpg",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
-        "number_of_children": 0,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/11",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
-        },
-      },
-      {
-        "id": 14,
-        "name": "Health Care",
-        "banner":
-            "https://www.afro.who.int/sites/default/files/2017-08/WHO_DRC%2520005%5B1%5D.jpg",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
-        "number_of_children": 0,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/11",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
-        },
-      },
-      {
-        "id": 15,
-        "name": "Education",
-        "banner":
-            "https://a-better-africa.com/show/the-complete-teacher/blog-image/teachers.jpeg",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
-        "number_of_children": 0,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/11",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
-        },
-      },
-      {
-        "id": 16,
-        "name": "Engineering",
-        "banner":
-            "https://cceonlinenews.com/wp-content/uploads/2021/11/confidence-in-construction-industry.jpg",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
-        "number_of_children": 0,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/11",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
-        },
-      },
-      {
-        "id": 17,
-        "name": "Tourism / Travel",
-        "banner":
-            "https://www.morawayadventures.com/images/Tanzania/Tarangire_119A.jpg",
-        "icon":
-            "http://hustlermarkets.com/public/uploads/all/BteYp028L2ZRXr5eg84NwSx8HOKKRysrjVFKsDnW.png",
-        "number_of_children": 0,
-        "links": {
-          "products": "http://hustlermarkets.com/api/v2/products/category/11",
-          "sub_categories": "http://hustlermarkets.com/api/v2/sub-categories/11"
-        },
-      },
-    ];
-    return travelCategories;
-  }
-
-  buildCategoryList() {
-    var travelCategories = getTravelCategories();
+  Widget buildCategoryList(BuildContext context, List travelCategories) {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        mainAxisSpacing: 14,
-        crossAxisSpacing: 14,
-        childAspectRatio: 0.7,
-        crossAxisCount: 3,
+        mainAxisSpacing: 18,
+        crossAxisSpacing: 18,
+        childAspectRatio: 0.75,
+        crossAxisCount: 2,
       ),
       itemCount: travelCategories.length,
-      padding: EdgeInsets.only(
-          left: 18, right: 18, bottom: widget.is_base_category ? 30 : 30),
+      padding: EdgeInsets.only(left: 18, right: 18, bottom: 30),
       scrollDirection: Axis.vertical,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        return buildCategoryItemCard(travelCategories, index);
+        return buildCategoryItemCard(context, travelCategories, index);
       },
     );
   }
 
-  Widget buildCategoryItemCard(travelCategories, index) {
+  Widget buildCategoryItemCard(
+      BuildContext context, List travelCategories, int index) {
     var itemWidth = ((DeviceInfo(context).width - 36) / 3);
-    print(itemWidth);
-
     return Container(
       decoration: BoxDecorations.buildBoxDecoration_1(),
-      child: InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return widget.is_finding_job
-                    ? FindJobs(
-                        banner: travelCategories[index]['banner'],
-                        sector: travelCategories[index]['name'])
-                    : PostJob(sector: travelCategories[index]['name']);
-              },
-            ),
-          );
-        },
-        child: Container(
-          //padding: EdgeInsets.all(8),
-          //color: Colors.amber,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                constraints: BoxConstraints(maxHeight: itemWidth - 28),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(6),
-                      topLeft: Radius.circular(6)),
-                  child: FadeInImage.assetNetwork(
-                    placeholder: 'assets/placeholder.png',
-                    image: travelCategories[index]['banner'],
-                    fit: BoxFit.cover,
-                    height: itemWidth,
-                    width: DeviceInfo(context).width,
-                  ),
-                ),
-              ),
-              Container(
-                height: 60,
-                //color: Colors.amber,
-                alignment: Alignment.center,
-                width: DeviceInfo(context).width,
-                padding: const EdgeInsets.symmetric(horizontal: 14),
-                child: Text(
-                  travelCategories[index]['name'],
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  style: TextStyle(
-                      color: MyTheme.font_grey,
-                      fontSize: 10,
-                      height: 1.6,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-              Spacer()
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Container buildBottomContainer() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-      ),
-
-      height: widget.is_base_category ? 0 : 80,
-      //color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
+      child: Container(
         child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Container(
-                width: (MediaQuery.of(context).size.width - 32),
-                height: 40,
-                child: FlatButton(
-                  minWidth: MediaQuery.of(context).size.width,
-                  //height: 50,
-                  color: MyTheme.accent_color,
-                  shape: RoundedRectangleBorder(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(8.0))),
-                  child: Text(
-                    AppLocalizations.of(context)
-                            .category_list_screen_all_products_of +
-                        " " +
-                        widget.parent_category_name,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return CategoryProducts(
-                        category_id: widget.parent_category_id,
-                        category_name: widget.parent_category_name,
-                      );
-                    }));
-                  },
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              constraints: BoxConstraints(maxHeight: itemWidth - 28),
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(6), topLeft: Radius.circular(6)),
+                child: FadeInImage.assetNetwork(
+                  placeholder: 'assets/placeholder.png',
+                  image: travelCategories[index]['banner'],
+                  fit: BoxFit.cover,
+                  height: itemWidth,
+                  width: DeviceInfo(context).width,
                 ),
               ),
-            )
+            ),
+            Container(
+              // alignment: Alignment.center,
+              width: DeviceInfo(context).width,
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 14, vertical: 8.0),
+              child: Text(
+                travelCategories[index]['name'],
+                // textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                style: TextStyle(
+                    color: AppColors.dashboardColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+            Container(
+              alignment: Alignment.center,
+              width: DeviceInfo(context).width,
+              padding: const EdgeInsets.symmetric(horizontal: 14.0),
+              child: Text(
+                travelCategories[index]['description'],
+                // textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                style: TextStyle(
+                    color: MyTheme.font_grey,
+                    fontSize: 10,
+                    height: 1.6,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 15),
+              child: Container(
+                height: 30,
+                child: FlatButton(
+                    minWidth: MediaQuery.of(context).size.width * 0.5,
+                    disabledColor: MyTheme.grey_153,
+                    color: AppColors.dashboardColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(6.0))),
+                    child: Text(
+                      'Know More',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            if (widget.is_finding_job) {
+                              return FindJobs(
+                                sector: travelCategories[index]['name'],
+                                banner: travelCategories[index]['banner'],
+                              );
+                            } else {
+                              return PostJob(
+                                  sector: travelCategories[index]['name']);
+                            }
+                          },
+                        ),
+                      );
+                    }),
+              ),
+            ),
+            Spacer()
           ],
         ),
       ),
     );
   }
 
-  Widget buildShimmer() {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        mainAxisSpacing: 14,
-        crossAxisSpacing: 14,
-        childAspectRatio: 1,
-        crossAxisCount: 3,
-      ),
-      itemCount: 18,
-      padding: EdgeInsets.only(
-          left: 18, right: 18, bottom: widget.is_base_category ? 30 : 0),
-      scrollDirection: Axis.vertical,
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        return Container(
-          decoration: BoxDecorations.buildBoxDecoration_1(),
-          child: ShimmerHelper().buildBasicShimmer(),
-        );
+  getCategories() {
+    var _list = [
+      {
+        "id": 9,
+        "name": "Finance",
+        "banner": "http://media.monsterindia.com/cmsimages/1562748131.jpg",
+        "description": "Send via mobile money, your wallet, or bank transfer.",
       },
-    );
+      {
+        "id": 10,
+        "name": "Law / Compliance",
+        "banner":
+            "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/Paralegal_vs._Lawyer.jpeg.jpg",
+        "description": "Send via mobile money, your wallet, or bank transfer.",
+      },
+      {
+        "id": 11,
+        "name": "IT / Telecoms",
+        "banner":
+            "https://cdn.ucberkeleybootcamp.com/wp-content/uploads/sites/106/2020/08/CDG_blog_post_image_01.jpg",
+        "description": "Send via mobile money, your wallet, or bank transfer.",
+      },
+      {
+        "id": 12,
+        "name": "Hospitality / Hotels",
+        "banner": "https://www.unhcr.org/thumb1/4af8257c6.jpg",
+        "description": "Send via mobile money, your wallet, or bank transfer.",
+      },
+      {
+        "id": 13,
+        "name": "Manufacturing",
+        "banner":
+            "https://thumbs.dreamstime.com/b/black-male-african-american-workers-wear-sound-proof-headphones-yellow-helmet-working-iron-cutting-machine-factory-213418200.jpg",
+        "description": "Send via mobile money, your wallet, or bank transfer.",
+      },
+      {
+        "id": 14,
+        "name": "Health Care",
+        "banner":
+            "https://www.afro.who.int/sites/default/files/2017-08/WHO_DRC%2520005%5B1%5D.jpg",
+        "description": "Send via mobile money, your wallet, or bank transfer.",
+      },
+      {
+        "id": 15,
+        "name": "Education",
+        "banner":
+            "https://a-better-africa.com/show/the-complete-teacher/blog-image/teachers.jpeg",
+        "description": "Send via mobile money, your wallet, or bank transfer.",
+      },
+      {
+        "id": 16,
+        "name": "Engineering",
+        "banner":
+            "https://cceonlinenews.com/wp-content/uploads/2021/11/confidence-in-construction-industry.jpg",
+        "description": "Send via mobile money, your wallet, or bank transfer.",
+      },
+      {
+        "id": 17,
+        "name": "Tourism / Travel",
+        "banner":
+            "https://www.morawayadventures.com/images/Tanzania/Tarangire_119A.jpg",
+        "description": "Send via mobile money, your wallet, or bank transfer.",
+      },
+    ];
+    setState(() {
+      _categories = _list;
+    });
   }
 }
