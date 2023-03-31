@@ -6,6 +6,7 @@ import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/page_description.dart';
 import 'package:active_ecommerce_flutter/custom/resources.dart';
+import 'package:active_ecommerce_flutter/custom/transaction_otp.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
@@ -219,28 +220,33 @@ class _ShareFundsState extends State<ShareFunds> {
           duration: Toast.lengthLong);
       return;
     }
-    // loading();
-    // var topUpResponse = await PaymentRepository().topUpResponse(
-    //   amount,
-    // );
+    var toAccount = account;
+    loading();
+    var transactionResponse = await PaymentRepository().transactionResponse(
+        account_number.$,
+        toAccount,
+        amount,
+        "CLIENT_TO_SACCO",
+        account_number.$,
+        user_phone.$,
+        user_name.$,
+        user_name.$);
+    Navigator.of(loadingcontext).pop();
 
-    // Navigator.of(loadingcontext).pop();
-
-    // if (topUpResponse.status != 'PENDING') {
-    //   ToastComponent.showDialog(topUpResponse.message,
-    //       gravity: Toast.center, duration: Toast.lengthLong);
-    // } else {
-    //   ToastComponent.showDialog(topUpResponse.message,
-    //       gravity: Toast.center, duration: Toast.lengthLong);
-    //   setState(() {
-    //     isProcessing = true;
-    //   });
-    // }
-    ToastComponent.showDialog('You have shared funds successfully',
-        gravity: Toast.center, duration: Toast.lengthLong);
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return Main();
-    }));
+    if (transactionResponse.status != 'RECEIVED') {
+      ToastComponent.showDialog(transactionResponse.message,
+          gravity: Toast.center, duration: Toast.lengthLong);
+    } else {
+      ToastComponent.showDialog(transactionResponse.message,
+          gravity: Toast.center, duration: Toast.lengthLong);
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return TransactionOTP(
+          title: 'Enter OTP',
+          transactionReference: transactionResponse.transactionId,
+          tranType: 'CLIENT_TO_SACCO',
+        );
+      }));
+    }
   }
 
   loading() {
