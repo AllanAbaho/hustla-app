@@ -1,45 +1,35 @@
+import 'dart:convert';
+
 import 'package:active_ecommerce_flutter/custom/app_bar.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/page_description.dart';
 import 'package:active_ecommerce_flutter/custom/resources.dart';
-import 'package:active_ecommerce_flutter/custom/transaction_otp.dart';
-import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
-import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
-import 'package:active_ecommerce_flutter/repositories/top_up_repository.dart';
-import 'package:active_ecommerce_flutter/screens/authorize_otp.dart';
-import 'package:active_ecommerce_flutter/screens/main.dart';
-import 'package:active_ecommerce_flutter/screens/top_up.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:active_ecommerce_flutter/custom/toast_component.dart';
+import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:active_ecommerce_flutter/repositories/top_up_repository.dart';
+import 'package:active_ecommerce_flutter/screens/main.dart';
+import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class SaveFunds extends StatefulWidget {
-  SaveFunds({Key key, this.title}) : super(key: key);
+class TransactionOTP extends StatefulWidget {
+  TransactionOTP(
+      {Key key, this.title, this.transactionReference, this.tranType})
+      : super(key: key);
 
   final String title;
+  final String transactionReference;
+  final String tranType;
 
   @override
-  _SaveFundsState createState() => _SaveFundsState();
+  _TransactionOTPState createState() => _TransactionOTPState();
 }
 
-class _SaveFundsState extends State<SaveFunds> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  TextEditingController _amountController = TextEditingController();
-  TextEditingController _otpController = TextEditingController();
-  TextEditingController _saccoController =
-      TextEditingController(text: 'ABC EMPOWERMENT SACCO LIMITED');
+class _TransactionOTPState extends State<TransactionOTP> {
+  final _otpController = TextEditingController();
   BuildContext loadingcontext;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +46,23 @@ class _SaveFundsState extends State<SaveFunds> {
         ));
   }
 
-  Widget creditForm() {
+  Widget buildBody() {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            buildDescription(widget.title,
+                description:
+                    'Please fill in the following form with the OTP you received'),
+            buildOTPForm(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildOTPForm() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -67,7 +73,7 @@ class _SaveFundsState extends State<SaveFunds> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
-                  'Sacco',
+                  'Enter OTP',
                   style: TextStyle(
                       color: AppColors.appBarColor,
                       fontWeight: FontWeight.w600,
@@ -83,38 +89,8 @@ class _SaveFundsState extends State<SaveFunds> {
                       height: 36,
                       child: TextField(
                         keyboardType: TextInputType.number,
-                        controller: _saccoController,
-                        readOnly: true,
-                        decoration: InputDecorations.buildInputDecoration_1(
-                            hint_text: "ABC EMPOWERMENT SACCO LIMITED"),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
-                child: Text(
-                  'Amount',
-                  style: TextStyle(
-                      color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 25.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Container(
-                      height: 36,
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        controller: _amountController,
-                        autofocus: false,
-                        decoration: InputDecorations.buildInputDecoration_1(
-                            hint_text: "1000"),
+                        controller: _otpController,
+                        decoration: InputDecorations.buildInputDecoration_1(),
                       ),
                     ),
                   ],
@@ -133,7 +109,7 @@ class _SaveFundsState extends State<SaveFunds> {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(6.0))),
                       child: Text(
-                        'Submit',
+                        'Enter OTP',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,
@@ -151,53 +127,38 @@ class _SaveFundsState extends State<SaveFunds> {
     );
   }
 
-  Widget buildBody() {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            buildDescription(widget.title,
-                description: 'Please fill in the following form to save funds'),
-            creditForm(),
-          ],
-        ),
-      ),
-    );
-  }
-
   onSubmit() async {
-    var amount = _amountController.text.toString();
-    var toAccount = '5344011';
-    if (amount == "") {
-      ToastComponent.showDialog('Please enter the amount',
+    var otp = _otpController.text.toString();
+    if (otp == "") {
+      ToastComponent.showDialog('Please enter the otp',
           gravity: Toast.center, duration: Toast.lengthLong);
       return;
     }
+    var tranReference = widget.transactionReference;
+    var tranType = widget.tranType;
+    var walletId = account_number.$;
+    Map rawData = {
+      "otp": otp,
+      "walletId": walletId,
+      "tranType": tranType,
+      "tranReference": tranReference,
+      "appVersion": "1.0.0+1",
+      "checkoutMode": "HUSTLAZWALLET",
+      "osType": "ANDROID"
+    };
+    var data = jsonEncode(rawData);
     loading();
-    var transactionResponse = await PaymentRepository().transactionResponse(
-        account_number.$,
-        toAccount,
-        amount,
-        "CLIENT_TO_SACCO",
-        account_number.$,
-        user_phone.$,
-        user_name.$,
-        user_name.$);
+    var topUpResponse = await PaymentRepository().transactionOTPResponse(data);
     Navigator.of(loadingcontext).pop();
 
-    if (transactionResponse.status != 'RECEIVED') {
-      ToastComponent.showDialog(transactionResponse.message,
+    if (topUpResponse.status != 'SUCCESS') {
+      ToastComponent.showDialog(topUpResponse.message,
           gravity: Toast.center, duration: Toast.lengthLong);
     } else {
-      ToastComponent.showDialog(transactionResponse.message,
+      ToastComponent.showDialog(topUpResponse.message,
           gravity: Toast.center, duration: Toast.lengthLong);
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return TransactionOTP(
-          title: 'Enter OTP',
-          transactionReference: transactionResponse.transactionId,
-          tranType: 'CLIENT_TO_SACCO',
-        );
+        return Main();
       }));
     }
   }

@@ -1,6 +1,7 @@
 import 'package:active_ecommerce_flutter/custom/app_bar.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/page_description.dart';
+import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/data_model/sacco_list_response.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
@@ -70,15 +71,15 @@ class _JoinSaccoState extends State<JoinSacco> {
                     child: Container(
                       decoration: BoxDecoration(
                           color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(6)),
                           border: Border.symmetric(
                               vertical: BorderSide(
-                                  color: MyTheme.accent_color, width: .5),
+                                  color: AppColors.appBarColor, width: 1),
                               horizontal: BorderSide(
-                                  color: MyTheme.accent_color, width: 1))),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                  color: AppColors.appBarColor, width: 1))),
+                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                       height: 50,
-                      width: MediaQuery.of(context).size.width * 0.9,
+                      width: MediaQuery.of(context).size.width,
                       child: FittedBox(
                         child: new DropdownButton<Sacco>(
                           icon: Padding(

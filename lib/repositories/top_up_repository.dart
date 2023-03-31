@@ -119,31 +119,37 @@ class PaymentRepository {
     return orderCreateResponseFromJson(response.body);
   }
 
-  Future<TopUpResponse> topUpResponse(
-    transactionAmount,
-  ) async {
+  Future<TransactionResponse> transactionResponse(
+      fromAccount,
+      toAccount,
+      transactionAmount,
+      serviceName,
+      walletId,
+      phoneNumber,
+      senderName,
+      receiverName) async {
     String transactionId = DateTime.now().millisecondsSinceEpoch.toString();
-    transactionId = transactionId + user_name.$;
+    transactionId = transactionId + senderName;
 
     transactionAmount = transactionAmount.toString();
     var post_body = jsonEncode({
-      "toAccount": account_number.$,
-      "fromAccount": user_phone.$,
+      "fromAccount": fromAccount,
+      "toAccount": toAccount,
       "transactionAmount": transactionAmount,
+      "serviceName": serviceName,
+      "walletId": walletId,
+      "phoneNumber": phoneNumber,
+      "fromAmount": transactionAmount,
+      "toAmount": transactionAmount,
+      "senderName": senderName,
+      "receiverName": user_name.$,
       "transactionId": transactionId,
       "narration": "merchant payment",
-      "serviceName": "MOMO_TOPUP",
       "appVersion": '1.0.0+1',
       "checkoutMode": "HUSTLAZWALLET",
       "debitType": "HUSTLAZWALLET",
-      "toCurrency": 'UGX',
-      "fromCurrency": 'UGX',
-      "fromAmount": transactionAmount,
-      "toAmount": transactionAmount,
-      "senderName": user_name.$,
-      "receiverName": user_name.$,
-      "walletId": account_number.$,
-      "phoneNumber": user_phone.$,
+      "toCurrency": 'KES',
+      "fromCurrency": 'KES',
       "reversalReference": "",
       "osType": "ANDROID"
     });
@@ -158,7 +164,23 @@ class PaymentRepository {
         },
         body: post_body);
 
-    return topUpResponseFromJson(response.body);
+    return transactionResponseFromJson(response.body);
+  }
+
+  Future<TransactionResponse> transactionOTPResponse(
+    data,
+  ) async {
+    Uri url = Uri.parse("${AppConfig.HUSTLER_GATEWAY}/authorizeWalletPayment");
+
+    final response = await http.post(url,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization":
+              'Basic ' + base64.encode(utf8.encode('admin:secret123')),
+        },
+        body: data);
+
+    return transactionResponseFromJson(response.body);
   }
 
   Future<OrderCreateResponse> getOrderCreateResponseFromManualPayment(

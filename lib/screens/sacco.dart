@@ -104,7 +104,9 @@ class _SaccoState extends State<Sacco> {
         "banner":
             "https://www.vacu.org/sites/default/files/styles/max_325x325/public/article-featured-image/2019-06/GettyImages-869577740.jpg?itok=J88hNHrF",
         "description": "Send via mobile money, your wallet, or bank transfer.",
-        "page": SaveFunds(),
+        "page": SaveFunds(
+          title: 'Save Funds',
+        ),
       },
     ];
     setState(() {

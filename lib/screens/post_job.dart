@@ -339,6 +339,7 @@ class _PostJobState extends State<PostJob> {
     var description = _descriptionController.text.toString();
     var duration = _durationController.text.toString();
     var type = _typeController.text.toString();
+    var status = 'Open';
     if (role == "") {
       ToastComponent.showDialog('Please enter the job title',
           gravity: Toast.center, duration: Toast.lengthLong);
@@ -378,6 +379,7 @@ class _PostJobState extends State<PostJob> {
       "type": type,
       "description": description,
       "category": widget.sector,
+      "status": status,
       "created_by": user_id.$
     };
     var data = jsonEncode(postData);

@@ -154,9 +154,15 @@ class _TopUpState extends State<TopUp> {
       return;
     }
     loading();
-    var topUpResponse = await PaymentRepository().topUpResponse(
-      amount,
-    );
+    var topUpResponse = await PaymentRepository().transactionResponse(
+        user_phone.$,
+        account_number.$,
+        amount,
+        "MOMO_TOPUP",
+        account_number.$,
+        user_phone.$,
+        user_name.$,
+        user_name.$);
     Navigator.of(loadingcontext).pop();
 
     if (topUpResponse.status != 'PENDING') {

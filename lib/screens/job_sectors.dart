@@ -102,9 +102,9 @@ class _JobSectorsState extends State<JobSectors> {
   Widget buildCategoryList(BuildContext context, List travelCategories) {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        mainAxisSpacing: 18,
-        crossAxisSpacing: 18,
-        childAspectRatio: 0.75,
+        mainAxisSpacing: 14,
+        crossAxisSpacing: 14,
+        childAspectRatio: 0.74,
         crossAxisCount: 2,
       ),
       itemCount: travelCategories.length,
