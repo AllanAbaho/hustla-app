@@ -30,9 +30,9 @@ class InputDecorations {
         hintStyle: TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: MyTheme.textfield_grey, width: 0.5),
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(6.0),
-              bottomRight: Radius.circular(6.0)),
+          borderRadius: BorderRadius.all(
+            Radius.circular(6.0),
+          ),
         ),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: MyTheme.accent_color, width: 0.5),

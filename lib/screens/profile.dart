@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/lang_text.dart';
+import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/helpers/auth_helper.dart';
 import 'package:active_ecommerce_flutter/screens/auction_products.dart';
 import 'package:active_ecommerce_flutter/screens/change_language.dart';
@@ -170,9 +171,9 @@ class _ProfileState extends State<Profile> {
       child: Stack(
         children: [
           Container(
-              height: DeviceInfo(context).height / 1.6,
+              height: DeviceInfo(context).height,
               width: DeviceInfo(context).width,
-              color: MyTheme.accent_color,
+              color: AppColors.appBarColor,
               alignment: Alignment.topRight,
               child: Image.asset(
                 "assets/background_1.png",
@@ -575,7 +576,7 @@ class _ProfileState extends State<Profile> {
           InkWell(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ProfileEdit();
+                return ProfileEdit(title: 'Edit Profile');
               })).then((value) {
                 onPopped(value);
               });

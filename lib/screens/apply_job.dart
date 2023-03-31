@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:active_ecommerce_flutter/custom/app_bar.dart';
 import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
+import 'package:active_ecommerce_flutter/custom/page_description.dart';
 import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/data_model/job_response.dart';
@@ -33,22 +35,10 @@ import '../repositories/top_up_repository.dart';
 import 'package:file_picker/file_picker.dart';
 
 class ApplyJob extends StatefulWidget {
-  ApplyJob(
-      {Key key,
-      this.parent_category_id = 0,
-      this.parent_category_name = "",
-      this.is_base_category = false,
-      this.is_top_category = false,
-      this.job,
-      this.bottomAppbarIndex})
-      : super(key: key);
+  ApplyJob({Key key, this.job, this.title}) : super(key: key);
 
-  final int parent_category_id;
-  final String parent_category_name;
   final Job job;
-  final bool is_base_category;
-  final bool is_top_category;
-  final BottomAppbarIndex bottomAppbarIndex;
+  final String title;
 
   @override
   _ApplyJobState createState() => _ApplyJobState();
@@ -77,7 +67,7 @@ class _ApplyJobState extends State<ApplyJob> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-            child: buildAppBar(context),
+            child: buildAppBar(context, widget.title),
             preferredSize: Size(
               DeviceInfo(context).width,
               60,
@@ -101,11 +91,13 @@ class _ApplyJobState extends State<ApplyJob> {
                 child: Text(
                   'Full Name',
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                      color: AppColors.appBarColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 25.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -128,11 +120,13 @@ class _ApplyJobState extends State<ApplyJob> {
                 child: Text(
                   'Email Address',
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                      color: AppColors.appBarColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 25.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -155,11 +149,13 @@ class _ApplyJobState extends State<ApplyJob> {
                 child: Text(
                   'Phone Number',
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                      color: AppColors.appBarColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 25.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -182,11 +178,13 @@ class _ApplyJobState extends State<ApplyJob> {
                 child: Text(
                   'Upload Resume',
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                      color: AppColors.appBarColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 25.0),
                 child: Row(
                   children: [
                     Expanded(
@@ -217,9 +215,10 @@ class _ApplyJobState extends State<ApplyJob> {
                             child: Text(
                               'Upload',
                               style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600),
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                             onPressed: () async {
                               result = await FilePicker.platform.pickFiles(
@@ -255,9 +254,10 @@ class _ApplyJobState extends State<ApplyJob> {
                       child: Text(
                         'Submit',
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600),
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       onPressed: () {
                         onSubmit();
@@ -275,7 +275,13 @@ class _ApplyJobState extends State<ApplyJob> {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: creditForm(),
+        child: Column(
+          children: [
+            buildDescription(widget.title,
+                description: 'Please fill in the form to apply for this Job'),
+            creditForm(),
+          ],
+        ),
       ),
     );
   }
@@ -333,40 +339,5 @@ class _ApplyJobState extends State<ApplyJob> {
             ],
           ));
         });
-  }
-
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: MyTheme.accent_color,
-      //centerTitle: true,
-      leading: widget.is_base_category
-          ? Builder(
-              builder: (context) => Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-                child: UsefulElements.backToMain(context,
-                    go_back: false, color: "white"),
-              ),
-            )
-          : Builder(
-              builder: (context) => IconButton(
-                icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.white),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ),
-      title: Text(
-        getAppBarTitle(),
-        style: TextStyle(
-            fontSize: 16, color: MyTheme.white, fontWeight: FontWeight.bold),
-      ),
-      elevation: 0.0,
-      titleSpacing: 0,
-    );
-  }
-
-  String getAppBarTitle() {
-    String name = widget.job.name;
-
-    return name;
   }
 }

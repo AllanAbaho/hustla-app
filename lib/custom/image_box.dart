@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -14,9 +15,10 @@ class ImageBox extends StatelessWidget {
       width: 100,
       decoration: BoxDecoration(
         border: Border.all(
-          color: MyTheme.accent_color,
+          color: AppColors.appBarColor,
           width: 1.8,
         ),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
         // borderRadius: Corners.lgBorder,
         image: img == null
             ? null
@@ -40,10 +42,10 @@ class ImageBox extends StatelessWidget {
                         decoration: BoxDecoration(
                           border: Border(
                             top: BorderSide(
-                              color: MyTheme.accent_color,
+                              color: AppColors.appBarColor,
                             ),
                             left: BorderSide(
-                              color: MyTheme.accent_color,
+                              color: AppColors.appBarColor,
                             ),
                           ),
                         ),
@@ -56,10 +58,10 @@ class ImageBox extends StatelessWidget {
                         decoration: BoxDecoration(
                           border: Border(
                             top: BorderSide(
-                              color: MyTheme.accent_color,
+                              color: AppColors.appBarColor,
                             ),
                             right: BorderSide(
-                              color: MyTheme.accent_color,
+                              color: AppColors.appBarColor,
                             ),
                           ),
                         ),
@@ -77,10 +79,10 @@ class ImageBox extends StatelessWidget {
                         decoration: BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
-                              color: MyTheme.accent_color,
+                              color: AppColors.appBarColor,
                             ),
                             left: BorderSide(
-                              color: MyTheme.accent_color,
+                              color: AppColors.appBarColor,
                             ),
                           ),
                         ),
@@ -93,10 +95,10 @@ class ImageBox extends StatelessWidget {
                         decoration: BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
-                              color: MyTheme.accent_color,
+                              color: AppColors.appBarColor,
                             ),
                             right: BorderSide(
-                              color: MyTheme.accent_color,
+                              color: AppColors.appBarColor,
                             ),
                           ),
                         ),

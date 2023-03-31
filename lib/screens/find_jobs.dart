@@ -1,5 +1,7 @@
+import 'package:active_ecommerce_flutter/custom/app_bar.dart';
 import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
+import 'package:active_ecommerce_flutter/custom/page_description.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/repositories/job_repository.dart';
 import 'package:active_ecommerce_flutter/screens/job_description.dart';
@@ -30,7 +32,7 @@ class _FindJobsState extends State<FindJobs> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-            child: buildAppBar(context),
+            child: buildAppBar(context, widget.sector + ' Jobs'),
             preferredSize: Size(
               DeviceInfo(context).width,
               60,
@@ -47,6 +49,8 @@ class _FindJobsState extends State<FindJobs> {
       slivers: [
         SliverList(
             delegate: SliverChildListDelegate([
+          buildDescription(widget.sector + ' Jobs',
+              description: 'Here is a list of jobs in ' + widget.sector),
           buildCategoryList(),
           Container(
             height: 90,
@@ -54,32 +58,6 @@ class _FindJobsState extends State<FindJobs> {
         ]))
       ],
     );
-  }
-
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: MyTheme.accent_color,
-      //centerTitle: true,
-      leading: Builder(
-        builder: (context) => IconButton(
-          icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.white),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
-      title: Text(
-        getAppBarTitle(),
-        style: TextStyle(
-            fontSize: 16, color: MyTheme.white, fontWeight: FontWeight.bold),
-      ),
-      elevation: 0.0,
-      titleSpacing: 0,
-    );
-  }
-
-  String getAppBarTitle() {
-    String name = 'Find Jobs: ${widget.sector}';
-
-    return name;
   }
 
   buildCategoryList() {

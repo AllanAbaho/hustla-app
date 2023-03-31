@@ -6,14 +6,14 @@ class BoxDecorations {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(radius),
       color: Colors.white,
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(.2),
-          blurRadius: 20,
-          spreadRadius: 0.0,
-          offset: Offset(0.0, 10.0), // shadow direction: bottom right
-        )
-      ],
+      // boxShadow: [
+      //   BoxShadow(
+      //     color: Colors.black.withOpacity(.2),
+      //     blurRadius: 20,
+      //     spreadRadius: 0.0,
+      //     offset: Offset(0.0, 10.0), // shadow direction: bottom right
+      //   )
+      // ],
     );
   }
 

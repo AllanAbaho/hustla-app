@@ -1,5 +1,6 @@
 import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
+import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +18,9 @@ class AuthScreen {
         body: Stack(
           children: [
             Container(
-              height: DeviceInfo(context).height / 3,
+              height: DeviceInfo(context).height,
               width: DeviceInfo(context).width,
-              color: MyTheme.accent_color,
+              color: AppColors.appBarColor,
               alignment: Alignment.topRight,
               child: Image.asset(
                 "assets/background_1.png",
@@ -34,7 +35,7 @@ class AuthScreen {
                   delegate: SliverChildListDelegate(
                     [
                       Padding(
-                        padding: const EdgeInsets.only(top: 48.0),
+                        padding: const EdgeInsets.only(top: 100.0),
                         child: Row(
                           children: [
                             Container(

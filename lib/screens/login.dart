@@ -1,4 +1,5 @@
 import 'package:active_ecommerce_flutter/app_config.dart';
+import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:active_ecommerce_flutter/other_config.dart';
 import 'package:active_ecommerce_flutter/social_config.dart';
@@ -299,12 +300,14 @@ class _LoginState extends State<Login> {
                 child: Text(
                   'Username',
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                      color: AppColors.appBarColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16),
                 ),
               ),
               if (_login_by == "email")
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: 25.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -314,7 +317,7 @@ class _LoginState extends State<Login> {
                           controller: _emailController,
                           autofocus: false,
                           decoration: InputDecorations.buildInputDecoration_1(
-                              hint_text: "johndoe"),
+                              hint_text: "mwangi"),
                         ),
                       ),
                       otp_addon_installed.$
@@ -328,7 +331,7 @@ class _LoginState extends State<Login> {
                                 AppLocalizations.of(context)
                                     .login_screen_or_login_with_phone,
                                 style: TextStyle(
-                                    color: MyTheme.accent_color,
+                                    color: AppColors.appBarColor,
                                     fontStyle: FontStyle.italic,
                                     decoration: TextDecoration.underline),
                               ),
@@ -339,7 +342,7 @@ class _LoginState extends State<Login> {
                 )
               else
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: 25.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -386,7 +389,7 @@ class _LoginState extends State<Login> {
                           AppLocalizations.of(context)
                               .login_screen_or_login_with_email,
                           style: TextStyle(
-                              color: MyTheme.accent_color,
+                              color: AppColors.appBarColor,
                               fontStyle: FontStyle.italic,
                               decoration: TextDecoration.underline),
                         ),
@@ -399,11 +402,13 @@ class _LoginState extends State<Login> {
                 child: Text(
                   AppLocalizations.of(context).login_screen_password,
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                      color: AppColors.appBarColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 25.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -417,7 +422,7 @@ class _LoginState extends State<Login> {
                         enableSuggestions: false,
                         autocorrect: false,
                         decoration: InputDecorations.buildInputDecoration_1(
-                            hint_text: "• • • • • • • •"),
+                            hint_text: "* * * * * * * * * * * *"),
                       ),
                     ),
                     GestureDetector(
@@ -458,9 +463,10 @@ class _LoginState extends State<Login> {
                     child: Text(
                       AppLocalizations.of(context).login_screen_log_in,
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600),
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     onPressed: () {
                       onPressedLogin();
@@ -489,9 +495,10 @@ class _LoginState extends State<Login> {
                   child: Text(
                     AppLocalizations.of(context).login_screen_sign_up,
                     style: TextStyle(
-                        color: MyTheme.accent_color,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600),
+                      color: MyTheme.accent_color,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   onPressed: () {
                     Navigator.push(context,

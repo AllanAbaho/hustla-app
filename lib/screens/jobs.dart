@@ -58,6 +58,7 @@ class _JobsState extends State<Jobs> {
             "https://static.euronews.com/articles/stories/07/31/35/36/1440x810_cmsv2_edcf296d-fa5a-5021-abc3-ee21e477cccb-7313536.jpg",
         "description": "Send via mobile money, your wallet, or bank transfer.",
         "page": PostedJobs(
+          title: 'Posted Jobs',
           banner:
               'https://www.betterteam.com/images/betterteam-free-job-posting-sites-5877x3918-20210222.jpg?crop=21:16,smart&width=420&dpr=2',
         )
@@ -69,6 +70,7 @@ class _JobsState extends State<Jobs> {
             "https://www.aces.edu/wp-content/uploads/2018/09/iStock-921020090.jpg",
         "description": "Send via mobile money, your wallet, or bank transfer.",
         "page": MyApplications(
+          title: 'Job Applications',
           banner:
               'https://www.betterteam.com/images/betterteam-free-job-posting-sites-5877x3918-20210222.jpg?crop=21:16,smart&width=420&dpr=2',
         )

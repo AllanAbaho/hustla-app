@@ -274,7 +274,7 @@ class _JobDescriptionState extends State<JobDescription> {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return ApplyJob(job: job);
+                            return ApplyJob(job: job, title: job.name);
                           },
                         ),
                       );

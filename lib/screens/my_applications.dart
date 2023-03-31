@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:active_ecommerce_flutter/custom/app_bar.dart';
 import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
+import 'package:active_ecommerce_flutter/custom/page_description.dart';
 import 'package:active_ecommerce_flutter/custom/spacers.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
@@ -27,24 +29,10 @@ import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyApplications extends StatefulWidget {
-  MyApplications(
-      {Key key,
-      this.parent_category_id = 0,
-      this.parent_category_name = "",
-      this.is_base_category = false,
-      this.is_top_category = false,
-      this.bottomAppbarIndex,
-      this.banner,
-      this.sector})
-      : super(key: key);
+  MyApplications({Key key, this.banner, this.title}) : super(key: key);
 
-  final int parent_category_id;
-  final String parent_category_name;
-  final bool is_base_category;
-  final bool is_top_category;
-  final BottomAppbarIndex bottomAppbarIndex;
   final String banner;
-  final String sector;
+  final String title;
 
   @override
   _MyApplicationsState createState() => _MyApplicationsState();
@@ -63,7 +51,7 @@ class _MyApplicationsState extends State<MyApplications> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-            child: buildAppBar(context),
+            child: buildAppBar(context, widget.title),
             preferredSize: Size(
               DeviceInfo(context).width,
               60,
@@ -80,48 +68,16 @@ class _MyApplicationsState extends State<MyApplications> {
       slivers: [
         SliverList(
             delegate: SliverChildListDelegate([
+          buildDescription(widget.title,
+              description:
+                  'This comprises of a list of the jobs you have applied for'),
           buildCategoryList(),
           Container(
-            height: widget.is_base_category ? 60 : 90,
+            height: 90,
           )
         ]))
       ],
     );
-  }
-
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: MyTheme.accent_color,
-      //centerTitle: true,
-      leading: widget.is_base_category
-          ? Builder(
-              builder: (context) => Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-                child: UsefulElements.backToMain(context,
-                    go_back: false, color: "white"),
-              ),
-            )
-          : Builder(
-              builder: (context) => IconButton(
-                icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.white),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ),
-      title: Text(
-        getAppBarTitle(),
-        style: TextStyle(
-            fontSize: 16, color: MyTheme.white, fontWeight: FontWeight.bold),
-      ),
-      elevation: 0.0,
-      titleSpacing: 0,
-    );
-  }
-
-  String getAppBarTitle() {
-    String name = 'My Applications';
-
-    return name;
   }
 
   buildCategoryList() {
@@ -269,58 +225,6 @@ class _MyApplicationsState extends State<MyApplications> {
     );
   }
 
-  Container buildBottomContainer() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-      ),
-
-      height: widget.is_base_category ? 0 : 80,
-      //color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Container(
-                width: (MediaQuery.of(context).size.width - 32),
-                height: 40,
-                child: FlatButton(
-                  minWidth: MediaQuery.of(context).size.width,
-                  //height: 50,
-                  color: MyTheme.accent_color,
-                  shape: RoundedRectangleBorder(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(8.0))),
-                  child: Text(
-                    AppLocalizations.of(context)
-                            .category_list_screen_all_products_of +
-                        " " +
-                        widget.parent_category_name,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return CategoryProducts(
-                        category_id: widget.parent_category_id,
-                        category_name: widget.parent_category_name,
-                      );
-                    }));
-                  },
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget buildShimmer() {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -330,8 +234,7 @@ class _MyApplicationsState extends State<MyApplications> {
         crossAxisCount: 3,
       ),
       itemCount: 18,
-      padding: EdgeInsets.only(
-          left: 18, right: 18, bottom: widget.is_base_category ? 30 : 0),
+      padding: EdgeInsets.only(left: 18, right: 18, bottom: 0),
       scrollDirection: Axis.vertical,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,

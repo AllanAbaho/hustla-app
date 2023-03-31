@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:active_ecommerce_flutter/app_config.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/image_box.dart';
+import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/helpers/file_helper.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
@@ -304,11 +305,13 @@ class _RegistrationState extends State<Registration> {
                 child: Text(
                   'First Name',
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                      color: AppColors.appBarColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 25),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -329,11 +332,13 @@ class _RegistrationState extends State<Registration> {
                 child: Text(
                   'Last Name',
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                      color: AppColors.appBarColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 25),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -354,11 +359,13 @@ class _RegistrationState extends State<Registration> {
                 child: Text(
                   'Email Address',
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                      color: AppColors.appBarColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 25),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -379,7 +386,9 @@ class _RegistrationState extends State<Registration> {
                 child: Text(
                   'Phone Number',
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                      color: AppColors.appBarColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16),
                 ),
               ),
               Padding(
@@ -391,7 +400,6 @@ class _RegistrationState extends State<Registration> {
                       height: 48,
                       child: CustomInternationalPhoneNumberInput(
                         onInputChanged: (PhoneNumber number) {
-                          print(number.phoneNumber);
                           setState(() {
                             _phone = number.phoneNumber;
                           });
@@ -404,7 +412,9 @@ class _RegistrationState extends State<Registration> {
                         // ),
                         ignoreBlank: false,
                         autoValidateMode: AutovalidateMode.disabled,
-                        selectorTextStyle: TextStyle(color: MyTheme.font_grey),
+                        selectorTextStyle: TextStyle(
+                          color: MyTheme.font_grey,
+                        ),
                         initialValue: phoneCode,
                         textFieldController: _phoneNumberController,
                         formatInput: true,
@@ -427,11 +437,11 @@ class _RegistrationState extends State<Registration> {
               //   child: Text(
               //     'Date Of Birth',
               //     style: TextStyle(
-              //         color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+              //         color: AppColors.appBarColor, fontWeight: FontWeight.w600,fontSize: 16),
               //   ),
               // ),
               // Padding(
-              //   padding: const EdgeInsets.only(bottom: 8.0),
+              //   padding: const EdgeInsets.only(bottom: 25),
               //   child: Column(
               //     crossAxisAlignment: CrossAxisAlignment.end,
               //     children: [
@@ -453,11 +463,11 @@ class _RegistrationState extends State<Registration> {
               //   child: Text(
               //     'Gender',
               //     style: TextStyle(
-              //         color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+              //         color: AppColors.appBarColor, fontWeight: FontWeight.w600,fontSize: 16),
               //   ),
               // ),
               // Padding(
-              //   padding: const EdgeInsets.only(bottom: 8.0),
+              //   padding: const EdgeInsets.only(bottom: 25),
               //   child: Container(
               //       height: 36,
               //       child: Row(
@@ -490,11 +500,13 @@ class _RegistrationState extends State<Registration> {
                 child: Text(
                   'National ID Number',
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                      color: AppColors.appBarColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 25),
                 child: Container(
                   height: 36,
                   child: TextField(
@@ -506,25 +518,24 @@ class _RegistrationState extends State<Registration> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 12.0),
+                padding: const EdgeInsets.only(bottom: 25.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 100.0),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 4.0),
-                            child: Text(
-                              'ID Front Picture',
-                              style: TextStyle(
-                                  color: MyTheme.accent_color,
-                                  fontWeight: FontWeight.w600),
-                            ),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 4.0),
+                          child: Text(
+                            'ID Front Picture',
+                            style: TextStyle(
+                                color: AppColors.appBarColor,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16),
                           ),
-                          buildImageSection(context, 'Front'),
-                        ],
-                      ),
+                        ),
+                        buildImageSection(context, 'Front'),
+                      ],
                     ),
                     Column(
                       children: [
@@ -533,8 +544,9 @@ class _RegistrationState extends State<Registration> {
                           child: Text(
                             'ID Back Picture',
                             style: TextStyle(
-                                color: MyTheme.accent_color,
-                                fontWeight: FontWeight.w600),
+                                color: AppColors.appBarColor,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16),
                           ),
                         ),
                         buildImageSection(context, 'Back'),
@@ -548,11 +560,13 @@ class _RegistrationState extends State<Registration> {
                 child: Text(
                   'Username',
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                      color: AppColors.appBarColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 25),
                 child: Container(
                   height: 36,
                   child: TextField(
@@ -568,11 +582,13 @@ class _RegistrationState extends State<Registration> {
                 child: Text(
                   'Password',
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                      color: AppColors.appBarColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 25),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -604,11 +620,13 @@ class _RegistrationState extends State<Registration> {
                   AppLocalizations.of(context)
                       .registration_screen_retype_password,
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                      color: AppColors.appBarColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 25),
                 child: Container(
                   height: 36,
                   child: TextField(
@@ -715,8 +733,8 @@ class _RegistrationState extends State<Registration> {
                           .registration_screen_register_sign_up,
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16),
                     ),
                     onPressed: _isAgree
                         ? () {
@@ -745,8 +763,8 @@ class _RegistrationState extends State<Registration> {
                         AppLocalizations.of(context).registration_screen_log_in,
                         style: TextStyle(
                             color: MyTheme.accent_color,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16),
                       ),
                       onTap: () {
                         Navigator.push(context,
