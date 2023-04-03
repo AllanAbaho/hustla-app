@@ -108,7 +108,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   YoutubePlayerController _controller = YoutubePlayerController(
     initialVideoId: YoutubePlayer.convertUrlToId(
-        "https://www.youtube.com/watch?v=EpMLAQbSYAw"),
+        "https://www.youtube.com/watch?v=MNk7vkPWRyA"),
     flags: YoutubePlayerFlags(
       useHybridComposition: false,
       autoPlay: false,
@@ -364,7 +364,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 6.0, horizontal: 10),
+                          vertical: 10.0, horizontal: 10),
                       child: Container(
                         height: 70,
                         decoration: BoxDecoration(
@@ -418,7 +418,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                         Navigator.push(context,
                                             MaterialPageRoute(
                                                 builder: (context) {
-                                          // return DepositPage('Deposit Money');
                                           return TopUp(title: 'Add Credit');
                                         }));
                                       },
@@ -448,65 +447,70 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsets.only(top: 12, bottom: 8, left: 10),
+                      padding: const EdgeInsets.only(
+                          top: 12, bottom: 8, left: 10, right: 10),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         // ignore: prefer_const_literals_to_create_immutables
                         children: [
                           MediumText(
                             'Hustla Categories',
                           ),
+                          SmallText('View More >>>')
                         ],
                       ),
                     ),
                     hustlaCategories(context),
-                    Container(
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(25),
-                            topRight: Radius.circular(25),
-                          ),
-                          child: Container(
-                            color: Colors.white,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 10, left: 10),
-                                  child: Row(
-                                    // ignore: prefer_const_literals_to_create_immutables
-                                    children: [
-                                      MediumText('Hustla News',
-                                          color: Colors.black),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 12.0, left: 10),
-                                  child: hustlerBlog(),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 15.0, left: 10),
-                                  child: Row(
-                                    // ignore: prefer_const_literals_to_create_immutables
-                                    children: [
-                                      MediumText(
-                                        'Advertise with us',
-                                        color: Colors.black,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 10.0, bottom: 80),
-                                  child: buildHomeCarouselSlider(context),
-                                ),
-                              ],
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Container(
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(25),
+                              topRight: Radius.circular(25),
                             ),
-                          )),
+                            child: Container(
+                              color: Colors.white,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 12, left: 10),
+                                    child: Row(
+                                      // ignore: prefer_const_literals_to_create_immutables
+                                      children: [
+                                        MediumText('Hustla News',
+                                            color: Colors.black),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 12.0, left: 10),
+                                    child: hustlerBlog(),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 15.0, left: 10),
+                                    child: Row(
+                                      // ignore: prefer_const_literals_to_create_immutables
+                                      children: [
+                                        MediumText(
+                                          'Advertise with us',
+                                          color: Colors.black,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10.0, bottom: 80),
+                                    child: buildHomeCarouselSlider(context),
+                                  ),
+                                ],
+                              ),
+                            )),
+                      ),
                     ),
                   ]),
                 ),
@@ -585,6 +589,16 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               }));
             },
             child: iconText('assets/images/cab.png', 'Travel'),
+          ),
+          GestureDetector(
+            onTap: () {
+              // Navigator.push(context, MaterialPageRoute(builder: (context) {
+              //   return Travel(
+              //     title: 'Bills',
+              //   );
+              // }));
+            },
+            child: iconText('assets/images/cab.png', 'Bills'),
           ),
         ],
       ),

@@ -1,5 +1,6 @@
 import 'package:active_ecommerce_flutter/app_config.dart';
 import 'package:active_ecommerce_flutter/data_model/top_up_response.dart';
+import 'package:active_ecommerce_flutter/screens/withraw.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
@@ -148,8 +149,8 @@ class PaymentRepository {
       "appVersion": '1.0.0+1',
       "checkoutMode": "HUSTLAZWALLET",
       "debitType": "HUSTLAZWALLET",
-      "toCurrency": 'KES',
-      "fromCurrency": 'KES',
+      "toCurrency": 'UGX',
+      "fromCurrency": 'UGX',
       "reversalReference": "",
       "osType": "ANDROID"
     });

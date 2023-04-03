@@ -155,7 +155,7 @@ class _TransactionOTPState extends State<TransactionOTP> {
       ToastComponent.showDialog(topUpResponse.message,
           gravity: Toast.center, duration: Toast.lengthLong);
     } else {
-      ToastComponent.showDialog(topUpResponse.message,
+      ToastComponent.showDialog('Transaction was processed successfully',
           gravity: Toast.center, duration: Toast.lengthLong);
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return Main();

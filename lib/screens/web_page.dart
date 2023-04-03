@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_flutter/custom/app_bar.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
@@ -22,7 +23,7 @@ class _WebPageState extends State<WebPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-            child: buildAppBar(context),
+            child: buildAppBar(context, 'Sponsored Advert'),
             preferredSize: Size(
               DeviceInfo(context).width,
               60,
@@ -56,39 +57,5 @@ class _WebPageState extends State<WebPage> {
         ),
       ],
     );
-  }
-
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: MyTheme.accent_color,
-      //centerTitle: true,
-      leading: widget.is_base_category
-          ? Builder(
-              builder: (context) => Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-                child: UsefulElements.backToMain(context,
-                    go_back: false, color: "white"),
-              ),
-            )
-          : Builder(
-              builder: (context) => IconButton(
-                icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.white),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ),
-      title: Text(
-        getAppBarTitle(),
-        style: TextStyle(
-            fontSize: 16, color: MyTheme.white, fontWeight: FontWeight.bold),
-      ),
-      elevation: 0.0,
-      titleSpacing: 0,
-    );
-  }
-
-  String getAppBarTitle() {
-    String name = 'Sponsored Advert';
-    return name;
   }
 }
