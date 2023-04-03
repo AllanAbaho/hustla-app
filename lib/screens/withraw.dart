@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:active_ecommerce_flutter/custom/app_bar.dart';
 import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
+import 'package:active_ecommerce_flutter/custom/page_description.dart';
 import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
@@ -28,20 +30,9 @@ import 'package:validators/validators.dart';
 import '../repositories/top_up_repository.dart';
 
 class Withdraw extends StatefulWidget {
-  Withdraw(
-      {Key key,
-      this.parent_category_id = 0,
-      this.parent_category_name = "",
-      this.is_base_category = false,
-      this.is_top_category = false,
-      this.bottomAppbarIndex})
-      : super(key: key);
+  Withdraw({Key key, this.title}) : super(key: key);
 
-  final int parent_category_id;
-  final String parent_category_name;
-  final bool is_base_category;
-  final bool is_top_category;
-  final BottomAppbarIndex bottomAppbarIndex;
+  final String title;
 
   @override
   _WithdrawState createState() => _WithdrawState();
@@ -50,8 +41,6 @@ class Withdraw extends StatefulWidget {
 class _WithdrawState extends State<Withdraw> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   TextEditingController _amountController = TextEditingController();
-  TextEditingController _accountController =
-      TextEditingController(text: account_number.$);
   BuildContext loadingcontext;
 
   @override
@@ -64,7 +53,7 @@ class _WithdrawState extends State<Withdraw> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-            child: buildAppBar(context),
+            child: buildAppBar(context, widget.title),
             preferredSize: Size(
               DeviceInfo(context).width,
               60,
@@ -86,35 +75,11 @@ class _WithdrawState extends State<Withdraw> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
-                  'Wallet',
-                  style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Container(
-                      height: 36,
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        controller: _accountController,
-                        enabled: false,
-                        decoration: InputDecorations.buildInputDecoration_1(
-                            hint_text: "ABC EMPOWERMENT SACCO LIMITED"),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
-                child: Text(
                   'Amount',
                   style: TextStyle(
-                      color: MyTheme.accent_color, fontWeight: FontWeight.w600),
+                      color: AppColors.appBarColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16),
                 ),
               ),
               Padding(
@@ -170,7 +135,14 @@ class _WithdrawState extends State<Withdraw> {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: creditForm(),
+        child: Column(
+          children: [
+            buildDescription(widget.title,
+                description:
+                    'Please enter an amount in the form below to withdraw your money'),
+            creditForm(),
+          ],
+        ),
       ),
     );
   }
@@ -222,40 +194,5 @@ class _WithdrawState extends State<Withdraw> {
             ],
           ));
         });
-  }
-
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: MyTheme.accent_color,
-      //centerTitle: true,
-      leading: widget.is_base_category
-          ? Builder(
-              builder: (context) => Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-                child: UsefulElements.backToMain(context,
-                    go_back: false, color: "white"),
-              ),
-            )
-          : Builder(
-              builder: (context) => IconButton(
-                icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.white),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ),
-      title: Text(
-        getAppBarTitle(),
-        style: TextStyle(
-            fontSize: 16, color: MyTheme.white, fontWeight: FontWeight.bold),
-      ),
-      elevation: 0.0,
-      titleSpacing: 0,
-    );
-  }
-
-  String getAppBarTitle() {
-    String name = 'Repay Funds';
-
-    return name;
   }
 }

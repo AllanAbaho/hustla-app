@@ -229,7 +229,8 @@ class _ToBankState extends State<ToBank> {
         child: Column(
           children: [
             buildDescription(widget.title,
-                description: 'Please in the following details in the form'),
+                description:
+                    'Please fill in in the following details in the form below to send money to that account'),
             creditForm(),
           ],
         ),

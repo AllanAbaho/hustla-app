@@ -46,7 +46,7 @@ class _SendMoneyState extends State<SendMoney> {
         "name": "Hustla Wallet",
         "banner":
             "https://img.freepik.com/free-vector/digital-wallet-abstract-concept-illustration_335657-3896.jpg?w=2000",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Select this option to send money to a wallet account",
         "page": ToWallet(title: 'To Wallet'),
       },
       {
@@ -54,7 +54,7 @@ class _SendMoneyState extends State<SendMoney> {
         "name": "Mobile Money",
         "banner":
             "https://www.dignited.com/wp-content/uploads/2018/12/Mobile-Money-Transfer-And-Mobile-Money-Transfer-Service-1200x800.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Select this option to send money to a phone number",
         "page": MobileMoney(title: 'Mobile Money'),
       },
       {
@@ -62,7 +62,7 @@ class _SendMoneyState extends State<SendMoney> {
         "name": "Bank Account",
         "banner":
             "https://payveda.com/kcfinder/upload/images/Image-1%281%29.png",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Select this option to send money to a bank account",
         "page": Banks(title: "Banks"),
       },
     ];

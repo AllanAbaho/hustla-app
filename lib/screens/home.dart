@@ -419,7 +419,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                             MaterialPageRoute(
                                                 builder: (context) {
                                           // return DepositPage('Deposit Money');
-                                          return TopUp();
+                                          return TopUp(title: 'Add Credit');
                                         }));
                                       },
                                       // ignore: sort_child_properties_last

@@ -168,7 +168,9 @@ class _ToWalletState extends State<ToWallet> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            buildDescription(widget.title),
+            buildDescription(widget.title,
+                description:
+                    'Please fill in the form to send money from your wallet account to another wallet account'),
             creditForm(),
           ],
         ),

@@ -47,7 +47,7 @@ class _MobileMoneyState extends State<MobileMoney> {
         "name": "Airtel",
         "banner":
             "http://flashugnews.com/wp-content/uploads/2022/07/Airtel-Money-Rates-in-Uganda-2022.jpeg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Select this option to send money to an Airtel number",
         "page": ToMobile(
           title: 'To Airtel',
         ),
@@ -57,7 +57,7 @@ class _MobileMoneyState extends State<MobileMoney> {
         "name": "MTN",
         "banner":
             "https://www.african-markets.com/images/cache/528da7f993cd2feb85212d9ac6c5a22f_w600_h350_cp.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Select this option to send money to an MTN number",
         "page": ToMobile(
           title: 'To MTN',
         ),
@@ -66,7 +66,7 @@ class _MobileMoneyState extends State<MobileMoney> {
         "id": 16,
         "name": "Safaricom",
         "banner": "https://ik.imagekit.io/tp/20220201-safaricom-kenya-logo.png",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Select this option to send money to a Safaricom number",
         "page": ToMobile(
           title: 'To Safaricom',
         ),

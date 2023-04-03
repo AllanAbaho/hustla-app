@@ -54,7 +54,7 @@ class _FinanceState extends State<Finance> {
         "banner":
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMkJEivNrYTNeSi-vKI0aXoaQViWclE9Ewgw&usqp=CAU",
         "description": "Move money from your mobile money number to wallet.",
-        "page": TopUp(),
+        "page": TopUp(title: 'Add Credit'),
       },
       {
         "id": 2,
@@ -63,7 +63,7 @@ class _FinanceState extends State<Finance> {
             "https://www.nerdwallet.com/assets/blog/wp-content/uploads/2015/05/atm-eats-deposit-contact-financial-institution-immediately-story.jpg",
         "description":
             "Convert your wallet funds to cash at the nearest agent point.",
-        "page": Withdraw(),
+        "page": Withdraw(title: 'Withdraw Money'),
       },
     ];
     setState(() {

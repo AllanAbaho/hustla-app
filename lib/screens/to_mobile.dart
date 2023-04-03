@@ -169,7 +169,8 @@ class _ToMobileState extends State<ToMobile> {
         child: Column(
           children: [
             buildDescription(widget.title,
-                description: 'Please fill in the form below.'),
+                description:
+                    'Please enter the amount and phone number that you want to send money to.'),
             creditForm(),
           ],
         ),

@@ -48,7 +48,8 @@ class _BanksState extends State<Banks> {
         "name": "KCB",
         "banner":
             "https://financialallianceforwomen.org/wp-content/uploads/2016/11/kcb-e1480436893425.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option if your recipient uses this bank",
         "page": ToBank(title: 'To KCB'),
       },
       {
@@ -56,7 +57,8 @@ class _BanksState extends State<Banks> {
         "name": "Equity Bank",
         "banner":
             "https://equitygroupholdings.com/ug/templates/equity/assets/img/equity-bank-logo.png",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option if your recipient uses this bank",
         "page": ToBank(title: 'To Equity Bank'),
       },
       {
@@ -64,7 +66,8 @@ class _BanksState extends State<Banks> {
         "name": "ABSA",
         "banner":
             "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/ABSA_Group_Limited_Logo.svg/1200px-ABSA_Group_Limited_Logo.svg.png",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option if your recipient uses this bank",
         "page": ToBank(title: 'To ABSA'),
       },
       {
@@ -72,21 +75,24 @@ class _BanksState extends State<Banks> {
         "name": "Standard Chartered Bank",
         "banner":
             "https://av.sc.com/corp-en/content/images/Lockup-MonoBlack-thumbnail-278x220.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option if your recipient uses this bank",
         "page": ToBank(title: 'To Standard Chartered Bank'),
       },
       {
         "id": 2,
         "name": "National Bank",
         "banner": "https://images.africanfinancials.com/ke-nbk-logo-min.png",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option if your recipient uses this bank",
         "page": ToBank(title: 'National Bank'),
       },
       {
         "id": 3,
         "name": "Diamond Trust Bank",
         "banner": "https://images.africanfinancials.com/ke-dtk-logo-min.png",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option if your recipient uses this bank",
         "page": ToBank(title: 'Diamond Trust Bank'),
       },
       {
@@ -94,7 +100,8 @@ class _BanksState extends State<Banks> {
         "name": "Stanbic Bank",
         "banner":
             "https://www.tenderyetu.com/wp-content/uploads/2022/01/STANBIC-BANK-KENYA-LIMITED-tender-2022.png",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option if your recipient uses this bank",
         "page": ToBank(title: 'Stanbic Bank'),
       },
       {
@@ -102,7 +109,8 @@ class _BanksState extends State<Banks> {
         "name": "Commercial Bank of Africa",
         "banner":
             "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/v1494424636/xgezxjd9ogjxwwrhozps.png",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option if your recipient uses this bank",
         "page": ToBank(title: 'Commercial Bank of Africa'),
       },
       {
@@ -110,7 +118,8 @@ class _BanksState extends State<Banks> {
         "name": "Bank of Africa",
         "banner":
             "https://fresherjobsuganda.com/wp-content/uploads/2022/02/Bank-of-Africa.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option if your recipient uses this bank",
         "page": ToBank(title: "Bank of Africa"),
       },
       {
@@ -118,7 +127,8 @@ class _BanksState extends State<Banks> {
         "name": "Prime Bank",
         "banner":
             "https://www.businesslist.co.ke/img/ke/j/1656409333-25-prime-bank-ltd-head-office.png",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option if your recipient uses this bank",
         "page": ToBank(title: "Prime Bank"),
       },
       {
@@ -126,7 +136,8 @@ class _BanksState extends State<Banks> {
         "name": "Trans National Bank",
         "banner":
             "http://covered.co.ke/blog/wp-content/uploads/2017/02/welcomeP.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option if your recipient uses this bank",
         "page": ToBank(title: "Trans National Bank"),
       },
       {
@@ -134,7 +145,8 @@ class _BanksState extends State<Banks> {
         "name": "I & M Bank",
         "banner":
             "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1465885047/jxgzemkhfpwn2f684fr5.png",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option if your recipient uses this bank",
         "page": ToBank(title: "I & M Bank"),
       },
     ];
