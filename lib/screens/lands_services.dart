@@ -43,21 +43,24 @@ class _LandsServicesState extends State<LandsServices> {
         "name": "Search For Property",
         "banner":
             "https://bimamtaani.co.ke/wp-content/uploads/2021/04/Land-Seach-Online.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Select this option to search for any property in Kenya.",
       },
       {
         "id": 2,
         "name": "Rent Clearance",
         "banner":
             "https://eregulations.invest.go.ke/media/clearance%20certificate.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Do you want a rent clearance certificate for your property?",
       },
       {
         "id": 3,
         "name": "Land Clearance",
         "banner":
             "https://urbankenyans.com/wp-content/uploads/2019/04/land.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Do you want a land clearance certificate for your property?",
       },
     ];
     setState(() {

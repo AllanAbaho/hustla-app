@@ -224,62 +224,71 @@ class _JobSectorsState extends State<JobSectors> {
         "id": 9,
         "name": "Finance",
         "banner": "http://media.monsterindia.com/cmsimages/1562748131.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option to know more about this sector.",
       },
       {
         "id": 10,
         "name": "Law / Compliance",
         "banner":
             "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/Paralegal_vs._Lawyer.jpeg.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option to know more about this sector.",
       },
       {
         "id": 11,
         "name": "IT / Telecoms",
         "banner":
             "https://cdn.ucberkeleybootcamp.com/wp-content/uploads/sites/106/2020/08/CDG_blog_post_image_01.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option to know more about this sector.",
       },
       {
         "id": 12,
         "name": "Hospitality / Hotels",
         "banner": "https://www.unhcr.org/thumb1/4af8257c6.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option to know more about this sector.",
       },
       {
         "id": 13,
         "name": "Manufacturing",
         "banner":
             "https://thumbs.dreamstime.com/b/black-male-african-american-workers-wear-sound-proof-headphones-yellow-helmet-working-iron-cutting-machine-factory-213418200.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option to know more about this sector.",
       },
       {
         "id": 14,
         "name": "Health Care",
         "banner":
             "https://www.afro.who.int/sites/default/files/2017-08/WHO_DRC%2520005%5B1%5D.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option to know more about this sector.",
       },
       {
         "id": 15,
         "name": "Education",
         "banner":
             "https://a-better-africa.com/show/the-complete-teacher/blog-image/teachers.jpeg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option to know more about this sector.",
       },
       {
         "id": 16,
         "name": "Engineering",
         "banner":
             "https://cceonlinenews.com/wp-content/uploads/2021/11/confidence-in-construction-industry.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option to know more about this sector.",
       },
       {
         "id": 17,
         "name": "Tourism / Travel",
         "banner":
             "https://www.morawayadventures.com/images/Tanzania/Tarangire_119A.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Please select this option to know more about this sector.",
       },
     ];
     setState(() {

@@ -58,21 +58,24 @@ class _TravelState extends State<Travel> {
         "name": "Buy Air Ticket",
         "banner":
             "https://www.aa.com/content/images/homepage/mobile-hero/en_US/Airplane-2.png",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Select this option to book an Air ticket faster and cheaper.",
       },
       {
         "id": 1,
         "name": "Request Cab Ride",
         "banner":
             "https://media-cdn.tripadvisor.com/media/photo-s/1b/49/15/50/caption.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Select this option to book get affordable rides quickly.",
       },
       {
         "id": 2,
         "name": "Book Hotel Room",
         "banner":
             "https://www.gannett-cdn.com/-mm-/05b227ad5b8ad4e9dcb53af4f31d7fbdb7fa901b/c=0-64-2119-1259/local/-/media/USATODAY/USATODAY/2014/08/13/1407953244000-177513283.jpg?width=660&height=373&fit=crop&format=pjpg&auto=webp",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Select this option to book a hotel in any area in Kenya.",
       },
     ];
     setState(() {

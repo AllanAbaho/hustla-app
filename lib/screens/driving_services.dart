@@ -43,49 +43,50 @@ class _DrivingServicesState extends State<DrivingServices> {
         "name": "Provisional Driving License",
         "banner":
             "http://flashugnews.com/wp-content/uploads/2022/07/ugandan-driving-permit-1.jpeg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Select this option to get a provisional driving license.",
       },
       {
         "id": 2,
         "name": "Driving Test Booking",
         "banner":
             "https://media-blog.zutobi.com/wp-content/uploads/sites/2/2021/11/26170241/Driving-test_01_Remember-the-basics.jpg?w=2560&auto=format&ixlib=next&fit=max",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Please select this option to book a driving test.",
       },
       {
         "id": 3,
         "name": "Interim Driving License",
         "banner":
             "https://live.staticflickr.com/8120/29216678934_08820448ec_b.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Select this option to get an interim driving license.",
       },
       {
         "id": 4,
         "name": "Driving Class Endorsement",
         "banner":
             "http://driving-tests.org/wp-content/uploads/2021/04/cdl-license-types.jpeg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Select this option to get a driving class endorsement.",
       },
       {
         "id": 5,
         "name": "Driving License Renewal (1 Year)",
         "banner":
             "https://www.godigit.com/content/dam/godigit/directportal/en/contenthm/telangana-driving-licence.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Select this option to renew your driving license.",
       },
       {
         "id": 6,
         "name": "Duplicate Driving License",
         "banner":
             "https://nairobiwire.com/wp-content/uploads/2022/04/How-To-Apply-for-a-Lost-Smart-Driving-License-in-Kenya.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Select this option to duplicate your driving license.",
       },
       {
         "id": 7,
         "name": "Driving License Corrections",
         "banner":
             "https://www.godigit.com/content/dam/godigit/directportal/en/contenthm/how-to-change-name-on-driving-licence.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Select this option to correct your driving license.",
       },
     ];
     setState(() {

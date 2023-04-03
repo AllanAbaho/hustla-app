@@ -63,7 +63,7 @@ class _GovernmentState extends State<Government> {
         "name": "Business Services",
         "banner":
             "https://i0.wp.com/ugtechmag.com/wp-content/uploads/2023/01/Untitled-design-6-1.png?fit=1200%2C675&ssl=1",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Select this to search for a business or register one.",
         "page": BusinessServices(
           title: 'Business Services',
         )
@@ -73,7 +73,8 @@ class _GovernmentState extends State<Government> {
         "name": "Lands Services",
         "banner":
             "https://mwc.legal/wp-content/uploads/2020/08/The-Land-Registration-Electronic-Transactions-Regulations-770x514.png",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Select this to search for a property or clear land / rent.",
         "page": LandsServices(
           title: 'Lands Services',
         )
@@ -83,7 +84,7 @@ class _GovernmentState extends State<Government> {
         "name": "Immigration",
         "banner":
             "https://www.dignited.com/wp-content/uploads/2017/08/Kenyan-e-Passport.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Apply for a passport or visa for you or your child.",
         "page": ImmigrationServices(title: 'Immigration Services')
       },
       {
@@ -91,7 +92,8 @@ class _GovernmentState extends State<Government> {
         "name": "Marriage Services",
         "banner":
             "https://domf5oio6qrcr.cloudfront.net/medialibrary/9030/iStock_72610687_MEDIUM.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Apply for a marriage certificate and other related documents.",
         "page": MarriageServices(title: 'Marriage Services')
       },
       {
@@ -99,7 +101,8 @@ class _GovernmentState extends State<Government> {
         "name": "Driving Services",
         "banner":
             "http://flashugnews.com/wp-content/uploads/2022/07/ugandan-driving-permit-1.jpeg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Apply for a driving license and other related documents.",
         "page": DrivingServices(
           title: 'Driving Services',
         )

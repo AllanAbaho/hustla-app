@@ -60,14 +60,14 @@ class _BusinessServicesState extends State<BusinessServices> {
         "name": "Register Business",
         "banner":
             "https://www.registeryourbusiness.co.za/wp-content/uploads/2021/08/RYBLogoNew.png",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Select this option to register your business.",
       },
       {
         "id": 2,
         "name": "Search Business",
         "banner":
             "https://howtostartanllc.com/images/name-search-icons/llc-name-search-h.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Select this option to find any business in Kenya.",
       },
     ];
     setState(() {

@@ -67,7 +67,7 @@ class _SaccoState extends State<Sacco> {
         "name": "Join Sacco",
         "banner":
             "https://www.turlock.k12.ca.us/cms/lib/CA50000453/Centricity/Domain/1539/register.png",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Select this option to join one of our Saccos.",
         "page": JoinSacco(
           title: 'Join Sacco',
         ),
@@ -77,7 +77,8 @@ class _SaccoState extends State<Sacco> {
         "name": "Share Funds",
         "banner":
             "https://st2.depositphotos.com/4232343/7654/i/950/depositphotos_76547573-stock-photo-successful-young-businessmen-is-sharing.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Select this option to share funds to another Sacco member.",
         "page": ShareFunds(
           title: 'Share Funds',
         ),
@@ -87,7 +88,7 @@ class _SaccoState extends State<Sacco> {
         "name": "Request Funds",
         "banner":
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBBi0koyHLCdXaB_pn08b_wMQV0V5FCJ9axQ&usqp=CAU",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Select this option to request funds from your Sacco.",
         "page": RequestFunds(title: 'Request Funds'),
       },
       {
@@ -95,7 +96,7 @@ class _SaccoState extends State<Sacco> {
         "name": "Repay Funds",
         "banner":
             "https://www.infinitietech.com/assets/images/blog/online-mobile-payments.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Select this option to repay funds to your Sacco.",
         "page": RepayFunds(title: 'Repay Funds'),
       },
       {
@@ -103,7 +104,8 @@ class _SaccoState extends State<Sacco> {
         "name": "Save Funds",
         "banner":
             "https://www.vacu.org/sites/default/files/styles/max_325x325/public/article-featured-image/2019-06/GettyImages-869577740.jpg?itok=J88hNHrF",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description":
+            "Select this option to save funds to your Sacco account.",
         "page": SaveFunds(
           title: 'Save Funds',
         ),

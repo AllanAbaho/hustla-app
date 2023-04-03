@@ -34,7 +34,7 @@ class _JobsState extends State<Jobs> {
         "name": "Find A Job",
         "banner":
             "https://hrdailyadvisor.blr.com/app/uploads/sites/3/2016/03/BM_JobPosting-1.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Are you currently looking for work?",
         "page": JobSectors(
           title: 'Job Sectors',
           is_finding_job: true,
@@ -45,7 +45,7 @@ class _JobsState extends State<Jobs> {
         "name": "Post A Job",
         "banner":
             "https://thumbs.dreamstime.com/b/business-woman-presenting-hire-us-word-white-card-213809712.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Post a job for free with us and access premium talent.",
         "page": JobSectors(
           is_finding_job: false,
           title: 'Job Sectors',
@@ -56,7 +56,7 @@ class _JobsState extends State<Jobs> {
         "name": "My Posted Jobs",
         "banner":
             "https://static.euronews.com/articles/stories/07/31/35/36/1440x810_cmsv2_edcf296d-fa5a-5021-abc3-ee21e477cccb-7313536.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Checkout a list of jobs posted by you.",
         "page": PostedJobs(
           title: 'Posted Jobs',
           banner:
@@ -68,7 +68,7 @@ class _JobsState extends State<Jobs> {
         "name": "My Applications",
         "banner":
             "https://www.aces.edu/wp-content/uploads/2018/09/iStock-921020090.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Find out more about the jobs you have applied to.",
         "page": MyApplications(
           title: 'Job Applications',
           banner:

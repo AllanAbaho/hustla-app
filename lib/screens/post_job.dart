@@ -323,7 +323,7 @@ class _PostJobState extends State<PostJob> {
           children: [
             buildDescription(widget.sector,
                 description:
-                    'Please fill in the following details in the form below.'),
+                    'Please fill in the following details in the form below to post a job in the ${widget.sector} sector.'),
             creditForm(),
           ],
         ),

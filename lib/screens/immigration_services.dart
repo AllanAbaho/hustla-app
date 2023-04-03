@@ -43,21 +43,21 @@ class _ImmigrationServicesState extends State<ImmigrationServices> {
         "name": "Passport for Adult",
         "banner":
             "https://techweez.com/wp-content/uploads/2015/11/Passport.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Apply for your passport here if you are an adult.",
       },
       {
         "id": 2,
         "name": "Children Passport",
         "banner":
             "https://www.kenyabuzz.com/lifestyle/wp-content/uploads/2017/10/IMG_4027-233x175.jpg",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Apply for a passport for your child here.",
       },
       {
         "id": 3,
         "name": "Apply for Visa",
         "banner":
             "https://netstorage-tuko.akamaized.net/images/0fgjhs16ekveb9474o.jpg?imwidth=900",
-        "description": "Send via mobile money, your wallet, or bank transfer.",
+        "description": "Start your Visa application process here.",
       },
     ];
     setState(() {
