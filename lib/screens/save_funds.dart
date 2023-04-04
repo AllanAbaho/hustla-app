@@ -168,7 +168,11 @@ class _SaveFundsState extends State<SaveFunds> {
 
   onSubmit() async {
     var amount = _amountController.text.toString();
-    var toAccount = '5344011';
+    var toAccount = 'G';
+    var serviceName = "SAVE_FUNDS";
+    String transactionId = DateTime.now().millisecondsSinceEpoch.toString();
+    transactionId = transactionId + user_name.$;
+
     if (amount == "") {
       ToastComponent.showDialog('Please enter the amount',
           gravity: Toast.center, duration: Toast.lengthLong);
@@ -179,11 +183,12 @@ class _SaveFundsState extends State<SaveFunds> {
         account_number.$,
         toAccount,
         amount,
-        "CLIENT_TO_SACCO",
+        serviceName,
         account_number.$,
         user_phone.$,
         user_name.$,
-        user_name.$);
+        user_name.$,
+        transactionId);
     Navigator.of(loadingcontext).pop();
 
     if (transactionResponse.status != 'RECEIVED') {
@@ -196,7 +201,7 @@ class _SaveFundsState extends State<SaveFunds> {
         return TransactionOTP(
           title: 'Enter OTP',
           transactionReference: transactionResponse.transactionId,
-          tranType: 'CLIENT_TO_SACCO',
+          tranType: serviceName,
         );
       }));
     }

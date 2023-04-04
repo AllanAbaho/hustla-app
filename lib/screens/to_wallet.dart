@@ -183,6 +183,9 @@ class _ToWalletState extends State<ToWallet> {
     var amount = _amountController.text.toString();
     var account = _accountController.text.toString();
     var serviceName = 'WALLET_TO_WALLET';
+    String transactionId = DateTime.now().millisecondsSinceEpoch.toString();
+    transactionId = transactionId + user_name.$;
+
     if (amount == "") {
       ToastComponent.showDialog('Please enter the amount',
           gravity: Toast.center, duration: Toast.lengthLong);
@@ -204,7 +207,8 @@ class _ToWalletState extends State<ToWallet> {
         account_number.$,
         user_phone.$,
         user_name.$,
-        user_name.$);
+        user_name.$,
+        transactionId);
     Navigator.of(loadingcontext).pop();
 
     if (transactionResponse.status != 'RECEIVED') {

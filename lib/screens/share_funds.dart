@@ -209,7 +209,10 @@ class _ShareFundsState extends State<ShareFunds> {
   onSubmit() async {
     var amount = _amountController.text.toString();
     var account = _accountController.text.toString();
-    var serviceName = 'CLIENT_TO_SACCO';
+    var serviceName = 'SHARE_FUNDS';
+    String transactionId = DateTime.now().millisecondsSinceEpoch.toString();
+    transactionId = transactionId + user_name.$;
+
     if (amount == "") {
       ToastComponent.showDialog('Please enter the amount',
           gravity: Toast.center, duration: Toast.lengthLong);
@@ -231,7 +234,8 @@ class _ShareFundsState extends State<ShareFunds> {
         account_number.$,
         user_phone.$,
         user_name.$,
-        user_name.$);
+        user_name.$,
+        transactionId);
     Navigator.of(loadingcontext).pop();
 
     if (transactionResponse.status != 'RECEIVED') {

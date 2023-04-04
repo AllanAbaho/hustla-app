@@ -46,13 +46,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Home extends StatefulWidget {
-  Home(
-      {Key key,
-      this.title,
-      this.show_back_button = false,
-      go_back = true,
-      this.counter})
-      : super(key: key);
+  Home({Key key, this.title, this.counter}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -65,8 +59,6 @@ class Home extends StatefulWidget {
   final CartCounter counter;
 
   final String title;
-  bool show_back_button;
-  bool go_back;
 
   @override
   _HomeState createState() => _HomeState();
@@ -270,17 +262,17 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     return Scaffold(
         backgroundColor: AppColors.dashboardColor,
         key: _scaffoldKey,
-        appBar: AppBar(
-          toolbarHeight: 100,
-          backgroundColor: Colors.transparent,
-          flexibleSpace: Container(
-            color: AppColors.appBarColor,
-            child: Image.asset(
-              'assets/images/hustla_logo.png',
-              height: 130,
-            ),
-          ),
-        ),
+        // appBar: AppBar(
+        //   toolbarHeight: 100,
+        //   backgroundColor: Colors.transparent,
+        //   flexibleSpace: Container(
+        //     color: AppColors.appBarColor,
+        //     child: Image.asset(
+        //       'assets/images/hustla_logo.png',
+        //       height: 130,
+        //     ),
+        //   ),
+        // ),
         //drawer: MainDrawer(),
         body: Stack(
           children: [
@@ -297,6 +289,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               slivers: <Widget>[
                 SliverList(
                   delegate: SliverChildListDelegate([
+                    Container(
+                      color: AppColors.appBarColor,
+                      child: Image.asset(
+                        'assets/images/hustla_logo.png',
+                        height: 130,
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(
                           top: 15.0, left: 10, right: 10, bottom: 2),
@@ -345,19 +344,16 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               )
                             ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 190.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                MediumText(
-                                  'Wallet ID',
-                                ),
-                                SmallText(
-                                  account_number.$,
-                                ),
-                              ],
-                            ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              MediumText(
+                                'Wallet ID',
+                              ),
+                              SmallText(
+                                account_number.$,
+                              ),
+                            ],
                           ),
                         ],
                       ),

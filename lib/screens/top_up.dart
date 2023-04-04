@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:active_ecommerce_flutter/custom/app_bar.dart';
 import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
@@ -134,16 +136,14 @@ class _TopUpState extends State<TopUp> {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: isProcessing
-            ? Processing()
-            : Column(
-                children: [
-                  buildDescription(widget.title,
-                      description:
-                          'Please enter an amount in the form below to add credit to your wallet'),
-                  creditForm(),
-                ],
-              ),
+        child: Column(
+          children: [
+            buildDescription(widget.title,
+                description:
+                    'Please enter an amount in the form below to add credit to your wallet'),
+            creditForm(),
+          ],
+        ),
       ),
     );
   }
@@ -151,12 +151,16 @@ class _TopUpState extends State<TopUp> {
   onSubmit() async {
     var amount = _amountController.text.toString();
     var serviceName = 'MOMO_TOPUP';
+    String transactionId = DateTime.now().millisecondsSinceEpoch.toString();
+    transactionId = transactionId + user_name.$;
+
     if (amount == "") {
       ToastComponent.showDialog('Please enter the amount',
           gravity: Toast.center, duration: Toast.lengthLong);
       return;
     }
-    loading();
+    loading('Please wait...');
+
     var topUpResponse = await PaymentRepository().transactionResponse(
         user_phone.$,
         account_number.$,
@@ -165,134 +169,59 @@ class _TopUpState extends State<TopUp> {
         account_number.$,
         user_phone.$,
         user_name.$,
-        user_name.$);
-    Navigator.of(loadingcontext).pop();
+        user_name.$,
+        transactionId);
 
     if (topUpResponse.status != 'PENDING') {
+      Navigator.of(loadingcontext).pop();
       ToastComponent.showDialog(topUpResponse.message,
           gravity: Toast.center, duration: Toast.lengthLong);
     } else {
-      ToastComponent.showDialog(topUpResponse.message,
-          gravity: Toast.center, duration: Toast.lengthLong);
-      setState(() {
-        isProcessing = true;
+      return new Future.delayed(const Duration(seconds: 10), () {
+        _checkStatus(transactionId);
       });
     }
   }
 
-  loading() {
+  _checkStatus(String transactionId) async {
+    var statusResponse =
+        await PaymentRepository().transactionStatusResponse(transactionId);
+    if (statusResponse.finalStatus == 'SUCCESS') {
+      Navigator.of(loadingcontext).pop();
+      ToastComponent.showDialog(statusResponse.message,
+          gravity: Toast.center, duration: Toast.lengthLong);
+
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return Main(go_back: false);
+      }));
+    } else if (statusResponse.finalStatus == 'PROCESSING' ||
+        statusResponse.finalStatus == 'PENDING') {
+      return new Future.delayed(const Duration(seconds: 10), () {
+        _checkStatus(transactionId);
+      });
+    } else {
+      Navigator.of(loadingcontext).pop();
+      ToastComponent.showDialog(statusResponse.message,
+          gravity: Toast.center, duration: Toast.lengthLong);
+    }
+  }
+
+  loading(String loadingText) {
     showDialog(
         context: context,
+        barrierDismissible: false,
         builder: (context) {
           loadingcontext = context;
           return AlertDialog(
               content: Row(
             children: [
-              CircularProgressIndicator(),
+              CircularProgressIndicator(color: MyTheme.accent_color),
               SizedBox(
                 width: 10,
               ),
-              Text("${AppLocalizations.of(context).loading_text}"),
+              Text(loadingText),
             ],
           ));
         });
-  }
-}
-
-class Processing extends StatelessWidget {
-  final VoidCallback callback;
-  final bool showStatement;
-  Processing({
-    this.callback,
-    this.showStatement = true,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 180,
-            ),
-            Container(
-              height: 120,
-              width: 120,
-              padding: EdgeInsets.all(32),
-              decoration: BoxDecoration(
-                color: Color(0xFFFFF7E1),
-                shape: BoxShape.circle,
-              ),
-              child: Image.asset(
-                'assets/images/processing.png',
-                color: MyTheme.dark_font_grey,
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              "Transaction is being processed",
-              style: TextStyle(
-                  color: MyTheme.accent_color,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 15),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Success extends StatelessWidget {
-  final VoidCallback callback;
-  final bool showStatement;
-  Success({
-    this.callback,
-    this.showStatement = true,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 180,
-            ),
-            Container(
-              height: 120,
-              width: 120,
-              padding: EdgeInsets.all(32),
-              decoration: BoxDecoration(
-                color: Color(0xFFFFF7E1),
-                shape: BoxShape.circle,
-              ),
-              child: Image.asset(
-                'assets/images/success.png',
-                color: MyTheme.dark_font_grey,
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              "Transaction completed successfully",
-              style: TextStyle(
-                  color: MyTheme.accent_color,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 15),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

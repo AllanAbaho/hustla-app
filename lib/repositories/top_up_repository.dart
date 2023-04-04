@@ -128,10 +128,8 @@ class PaymentRepository {
       walletId,
       phoneNumber,
       senderName,
-      receiverName) async {
-    String transactionId = DateTime.now().millisecondsSinceEpoch.toString();
-    transactionId = transactionId + senderName;
-
+      receiverName,
+      transactionId) async {
     transactionAmount = transactionAmount.toString();
     var post_body = jsonEncode({
       "fromAccount": fromAccount,
@@ -164,6 +162,22 @@ class PaymentRepository {
               'Basic ' + base64.encode(utf8.encode('admin:secret123')),
         },
         body: post_body);
+
+    return transactionResponseFromJson(response.body);
+  }
+
+  Future<TransactionResponse> transactionStatusResponse(transactionId) async {
+    Uri url = Uri.parse(
+        "${AppConfig.HUSTLER_GATEWAY}/getTransactionStatus/" + transactionId);
+
+    final response = await http.get(
+      url,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization":
+            'Basic ' + base64.encode(utf8.encode('admin:secret123')),
+      },
+    );
 
     return transactionResponseFromJson(response.body);
   }
