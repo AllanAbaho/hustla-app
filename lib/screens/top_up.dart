@@ -150,6 +150,7 @@ class _TopUpState extends State<TopUp> {
 
   onSubmit() async {
     var amount = _amountController.text.toString();
+    var serviceName = 'MOMO_TOPUP';
     if (amount == "") {
       ToastComponent.showDialog('Please enter the amount',
           gravity: Toast.center, duration: Toast.lengthLong);
@@ -160,7 +161,7 @@ class _TopUpState extends State<TopUp> {
         user_phone.$,
         account_number.$,
         amount,
-        "MOMO_TOPUP",
+        serviceName,
         account_number.$,
         user_phone.$,
         user_name.$,

@@ -209,6 +209,7 @@ class _ShareFundsState extends State<ShareFunds> {
   onSubmit() async {
     var amount = _amountController.text.toString();
     var account = _accountController.text.toString();
+    var serviceName = 'CLIENT_TO_SACCO';
     if (amount == "") {
       ToastComponent.showDialog('Please enter the amount',
           gravity: Toast.center, duration: Toast.lengthLong);
@@ -226,7 +227,7 @@ class _ShareFundsState extends State<ShareFunds> {
         account_number.$,
         toAccount,
         amount,
-        "CLIENT_TO_SACCO",
+        serviceName,
         account_number.$,
         user_phone.$,
         user_name.$,
@@ -243,7 +244,7 @@ class _ShareFundsState extends State<ShareFunds> {
         return TransactionOTP(
           title: 'Enter OTP',
           transactionReference: transactionResponse.transactionId,
-          tranType: 'CLIENT_TO_SACCO',
+          tranType: serviceName,
         );
       }));
     }
