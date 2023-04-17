@@ -1060,7 +1060,7 @@ class _CheckoutState extends State<Checkout> {
                         .recharge_wallet_screen_recharge_wallet
                     : widget.manual_payment_from_order_details
                         ? AppLocalizations.of(context)
-                            .common_proceed_in_all_caps
+                            .common_Proceed_in_all_caps
                         : AppLocalizations.of(context)
                             .checkout_screen_place_my_order,
                 style: TextStyle(

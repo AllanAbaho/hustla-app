@@ -56,15 +56,15 @@ class _FinanceState extends State<Finance> {
         "description": "Move money from your mobile money number to wallet.",
         "page": TopUp(title: 'Add Credit'),
       },
-      {
-        "id": 2,
-        "name": "Withdaw Money",
-        "banner":
-            "https://www.nerdwallet.com/assets/blog/wp-content/uploads/2015/05/atm-eats-deposit-contact-financial-institution-immediately-story.jpg",
-        "description":
-            "Convert your wallet funds to cash at the nearest agent point.",
-        "page": Withdraw(title: 'Withdraw Money'),
-      },
+      // {
+      //   "id": 2,
+      //   "name": "Withdaw Money",
+      //   "banner":
+      //       "https://www.nerdwallet.com/assets/blog/wp-content/uploads/2015/05/atm-eats-deposit-contact-financial-institution-immediately-story.jpg",
+      //   "description":
+      //       "Convert your wallet funds to cash at the nearest agent point.",
+      //   "page": Withdraw(title: 'Withdraw Money'),
+      // },
     ];
     setState(() {
       _categories = _list;

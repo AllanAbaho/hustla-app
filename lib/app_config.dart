@@ -30,4 +30,8 @@ class AppConfig {
   static const String BASE_URL = "${RAW_BASE_URL}/${API_ENDPATH}";
   static const String HUSTLER_GATEWAY =
       'http://3.28.82.227:9010/api/huslazgateway';
+  static const String AIRLINE_API = 'https://api.aerocrs.com/v5';
+  static const String auth_id = 'CCF22C4E-DFF6-4961-949C-EE7C7E3291B3';
+  static const String auth_password = 'rsQZ4LLdk0';
+  static const String content_type = 'application/json';
 }

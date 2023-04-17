@@ -20,7 +20,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:active_ecommerce_flutter/custom/common_functions.dart';
 
 class Cart extends StatefulWidget {
-  Cart({Key key, this.has_bottomnav,this.from_navigation = false, this.counter}) : super(key: key);
+  Cart(
+      {Key key, this.has_bottomnav, this.from_navigation = false, this.counter})
+      : super(key: key);
   final bool has_bottomnav;
   final bool from_navigation;
   final CartCounter counter;
@@ -53,15 +55,13 @@ class _CartState extends State<Cart> {
     }
   }
 
-
   @override
   void dispose() {
     super.dispose();
     _mainScrollController.dispose();
   }
 
-
-  getCartCount()async {
+  getCartCount() async {
     var res = await CartRepository().getCartCount();
     widget.counter.controller.sink.add(res.count);
   }
@@ -201,7 +201,7 @@ class _CartState extends State<Cart> {
   }
 
   onPressProceedToShipping() {
-    process(mode: "proceed_to_shipping");
+    process(mode: "Proceed_to_shipping");
   }
 
   process({mode}) async {
@@ -245,7 +245,7 @@ class _CartState extends State<Cart> {
       if (mode == "update") {
         reset();
         fetchData();
-      } else if (mode == "proceed_to_shipping") {
+      } else if (mode == "Proceed_to_shipping") {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return SelectAddress();
         })).then((value) {
@@ -330,7 +330,7 @@ class _CartState extends State<Cart> {
       height: widget.has_bottomnav ? 200 : 120,
       //color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0,vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 4),
         child: Column(
           children: [
             Container(
@@ -345,8 +345,10 @@ class _CartState extends State<Cart> {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Text(
                       AppLocalizations.of(context).cart_screen_total_amount,
-                      style:
-                          TextStyle(color: MyTheme.dark_font_grey, fontSize: 13,fontWeight: FontWeight.w700),
+                      style: TextStyle(
+                          color: MyTheme.dark_font_grey,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700),
                     ),
                   ),
                   Spacer(),
@@ -460,7 +462,7 @@ class _CartState extends State<Cart> {
                             )),
                       child: Text(
                         AppLocalizations.of(context)
-                            .cart_screen_proceed_to_shipping,
+                            .cart_screen_Proceed_to_shipping,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 13,
@@ -484,8 +486,9 @@ class _CartState extends State<Cart> {
     return AppBar(
       backgroundColor: Colors.white,
       leading: Builder(
-        builder: (context) =>
-            widget.from_navigation ? UsefulElements.backToMain(context, go_back: false) : UsefulElements.backButton(context),
+        builder: (context) => widget.from_navigation
+            ? UsefulElements.backToMain(context, go_back: false)
+            : UsefulElements.backButton(context),
       ),
       title: Text(
         AppLocalizations.of(context).cart_screen_shopping_cart,
@@ -587,7 +590,7 @@ class _CartState extends State<Cart> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
-                width: DeviceInfo(context).width/4,
+                width: DeviceInfo(context).width / 4,
                 height: 120,
                 child: ClipRRect(
                     borderRadius: BorderRadius.horizontal(
@@ -601,7 +604,7 @@ class _CartState extends State<Cart> {
                     ))),
             Container(
               //color: Colors.red,
-              width: DeviceInfo(context).width/3,
+              width: DeviceInfo(context).width / 3,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.0),
                 child: Column(

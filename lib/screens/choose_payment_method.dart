@@ -1,8 +1,10 @@
 import 'package:active_ecommerce_flutter/custom/app_bar.dart';
 import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
+import 'package:active_ecommerce_flutter/custom/enter_pin.dart';
 import 'package:active_ecommerce_flutter/custom/page_description.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
+import 'package:active_ecommerce_flutter/data_model/confirm_booking_response.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
 import 'package:active_ecommerce_flutter/screens/book_flight.dart';
@@ -19,16 +21,19 @@ import 'package:active_ecommerce_flutter/app_config.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class Travel extends StatefulWidget {
-  Travel({Key key, this.title}) : super(key: key);
+class ChoosePaymentMethod extends StatefulWidget {
+  ChoosePaymentMethod({Key key, this.title, this.bookingid, this.passengers})
+      : super(key: key);
 
   final String title;
+  final int bookingid;
+  final List<Passenger> passengers;
 
   @override
-  _TravelState createState() => _TravelState();
+  _ChoosePaymentMethodState createState() => _ChoosePaymentMethodState();
 }
 
-class _TravelState extends State<Travel> {
+class _ChoosePaymentMethodState extends State<ChoosePaymentMethod> {
   List _categories = [];
 
   @override
@@ -56,28 +61,28 @@ class _TravelState extends State<Travel> {
     var _list = [
       {
         "id": 0,
-        "name": "Book Flight",
+        "name": "Hustla Wallet",
         "banner":
-            "https://www.aa.com/content/images/homepage/mobile-hero/en_US/Airplane-2.png",
-        "description":
-            "Select this option to book an Air ticket faster and cheaper.",
-        "page": BookFlight(title: 'Book Flight')
+            "https://img.freepik.com/free-vector/digital-wallet-abstract-concept-illustration_335657-3896.jpg?w=2000",
+        "description": "Select this option to pay using your wallet",
+        "page": EnterPin(
+            title: 'Enter Password',
+            bookingid: widget.bookingid,
+            passengers: widget.passengers)
       },
       {
         "id": 1,
-        "name": "Request Cab Ride",
+        "name": "Credit Card",
         "banner":
             "https://media-cdn.tripadvisor.com/media/photo-s/1b/49/15/50/caption.jpg",
-        "description":
-            "Select this option to book get affordable rides quickly.",
+        "description": "Select this option to pay using credit card",
       },
       {
         "id": 2,
-        "name": "Book Hotel Room",
+        "name": "Mobile Money",
         "banner":
             "https://www.gannett-cdn.com/-mm-/05b227ad5b8ad4e9dcb53af4f31d7fbdb7fa901b/c=0-64-2119-1259/local/-/media/USATODAY/USATODAY/2014/08/13/1407953244000-177513283.jpg?width=660&height=373&fit=crop&format=pjpg&auto=webp",
-        "description":
-            "Select this option to book a hotel in any area in Kenya.",
+        "description": "Select this option to pay using mobile money",
       },
     ];
     setState(() {

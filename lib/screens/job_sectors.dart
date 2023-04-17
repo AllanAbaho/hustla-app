@@ -185,7 +185,7 @@ class _JobSectorsState extends State<JobSectors> {
                         borderRadius:
                             const BorderRadius.all(Radius.circular(6.0))),
                     child: Text(
-                      'Know More',
+                      'Proceed',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 12,
@@ -225,7 +225,7 @@ class _JobSectorsState extends State<JobSectors> {
         "name": "Finance",
         "banner": "http://media.monsterindia.com/cmsimages/1562748131.jpg",
         "description":
-            "Please select this option to know more about this sector.",
+            "Please select this option to Proceed about this sector.",
       },
       {
         "id": 10,
@@ -233,7 +233,7 @@ class _JobSectorsState extends State<JobSectors> {
         "banner":
             "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/10/Paralegal_vs._Lawyer.jpeg.jpg",
         "description":
-            "Please select this option to know more about this sector.",
+            "Please select this option to Proceed about this sector.",
       },
       {
         "id": 11,
@@ -241,14 +241,14 @@ class _JobSectorsState extends State<JobSectors> {
         "banner":
             "https://cdn.ucberkeleybootcamp.com/wp-content/uploads/sites/106/2020/08/CDG_blog_post_image_01.jpg",
         "description":
-            "Please select this option to know more about this sector.",
+            "Please select this option to Proceed about this sector.",
       },
       {
         "id": 12,
         "name": "Hospitality / Hotels",
         "banner": "https://www.unhcr.org/thumb1/4af8257c6.jpg",
         "description":
-            "Please select this option to know more about this sector.",
+            "Please select this option to Proceed about this sector.",
       },
       {
         "id": 13,
@@ -256,7 +256,7 @@ class _JobSectorsState extends State<JobSectors> {
         "banner":
             "https://thumbs.dreamstime.com/b/black-male-african-american-workers-wear-sound-proof-headphones-yellow-helmet-working-iron-cutting-machine-factory-213418200.jpg",
         "description":
-            "Please select this option to know more about this sector.",
+            "Please select this option to Proceed about this sector.",
       },
       {
         "id": 14,
@@ -264,7 +264,7 @@ class _JobSectorsState extends State<JobSectors> {
         "banner":
             "https://www.afro.who.int/sites/default/files/2017-08/WHO_DRC%2520005%5B1%5D.jpg",
         "description":
-            "Please select this option to know more about this sector.",
+            "Please select this option to Proceed about this sector.",
       },
       {
         "id": 15,
@@ -272,7 +272,7 @@ class _JobSectorsState extends State<JobSectors> {
         "banner":
             "https://a-better-africa.com/show/the-complete-teacher/blog-image/teachers.jpeg",
         "description":
-            "Please select this option to know more about this sector.",
+            "Please select this option to Proceed about this sector.",
       },
       {
         "id": 16,
@@ -280,7 +280,7 @@ class _JobSectorsState extends State<JobSectors> {
         "banner":
             "https://cceonlinenews.com/wp-content/uploads/2021/11/confidence-in-construction-industry.jpg",
         "description":
-            "Please select this option to know more about this sector.",
+            "Please select this option to Proceed about this sector.",
       },
       {
         "id": 17,
@@ -288,7 +288,7 @@ class _JobSectorsState extends State<JobSectors> {
         "banner":
             "https://www.morawayadventures.com/images/Tanzania/Tarangire_119A.jpg",
         "description":
-            "Please select this option to know more about this sector.",
+            "Please select this option to Proceed about this sector.",
       },
     ];
     setState(() {

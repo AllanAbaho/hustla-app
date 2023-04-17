@@ -276,243 +276,244 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         //drawer: MainDrawer(),
         body: Stack(
           children: [
-            // RefreshIndicator(
-            //   color: MyTheme.dark_font_grey,
-            //   backgroundColor: Colors.white,
-            //   onRefresh: _onRefresh,
-            //   displacement: 0,
-            //   child:
-            CustomScrollView(
-              controller: _mainScrollController,
-              // physics: const BouncingScrollPhysics(
-              //     parent: AlwaysScrollableScrollPhysics()),
-              slivers: <Widget>[
-                SliverList(
-                  delegate: SliverChildListDelegate([
-                    Container(
-                      color: AppColors.appBarColor,
-                      child: Image.asset(
-                        'assets/images/hustla_logo.png',
-                        height: 130,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 15.0, left: 10, right: 10, bottom: 2),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 48,
-                                    height: 48,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(100),
-                                      border: Border.all(
-                                          color: MyTheme.white, width: 1),
-                                      //shape: BoxShape.rectangle,
-                                    ),
-                                    child: ClipRRect(
-                                        clipBehavior: Clip.hardEdge,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(100.0)),
-                                        child: FadeInImage.assetNetwork(
-                                          placeholder: 'assets/placeholder.png',
-                                          image: "${avatar_original.$}",
-                                          fit: BoxFit.fill,
-                                        )),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        MediumText(
-                                          'Full Name',
-                                        ),
-                                        SmallText(
-                                          user_name.$,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              MediumText(
-                                'Wallet ID',
-                              ),
-                              SmallText(
-                                account_number.$,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 10),
-                      child: Container(
-                        height: 70,
-                        decoration: BoxDecoration(
-                          color: AppColors.brandColor,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.yellow.withOpacity(.2),
-                              blurRadius: 20,
-                              spreadRadius: 00.0,
-                              offset: Offset(
-                                  0.0, 10.0), // shadow direction: bottom right
-                            )
-                          ],
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          // border: Border.all(
-                          //     color: MyTheme.light_grey, width: 1),
+            RefreshIndicator(
+              color: MyTheme.dark_font_grey,
+              backgroundColor: Colors.white,
+              onRefresh: _onRefresh,
+              displacement: 0,
+              child: CustomScrollView(
+                controller: _mainScrollController,
+                physics: const BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics()),
+                slivers: <Widget>[
+                  SliverList(
+                    delegate: SliverChildListDelegate([
+                      Container(
+                        color: AppColors.appBarColor,
+                        child: Image.asset(
+                          'assets/images/hustla_logo.png',
+                          height: 130,
                         ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 15.0, left: 10, right: 10, bottom: 2),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 8.0, left: 20.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                // ignore: prefer_const_literals_to_create_immutables
-                                children: [
-                                  MediumText(
-                                    'Available Balance',
-                                    color: Colors.white,
-                                  ),
-                                  VSpace.sm,
-                                  MediumText(
-                                    '${account_balance.$} (Ksh)',
-                                    color: Colors.black,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            // HSpace.lg,
                             Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      bottom: 10.0, right: 8),
-                                  child: SizedBox(
-                                    height: 30,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.push(context,
-                                            MaterialPageRoute(
-                                                builder: (context) {
-                                          return TopUp(title: 'Add Credit');
-                                        }));
-                                      },
-                                      // ignore: sort_child_properties_last
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 8.0, right: 8.0),
-                                        child: SmallText(
-                                          'Add Credit',
-                                          color: Colors.black,
-                                        ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: 48,
+                                      height: 48,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        border: Border.all(
+                                            color: MyTheme.white, width: 1),
+                                        //shape: BoxShape.rectangle,
                                       ),
-                                      style: ElevatedButton.styleFrom(
-                                        primary: Colors.yellow,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              10), // <-- Radius
-                                        ),
+                                      child: ClipRRect(
+                                          clipBehavior: Clip.hardEdge,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100.0)),
+                                          child: FadeInImage.assetNetwork(
+                                            placeholder:
+                                                'assets/placeholder.png',
+                                            image: "${avatar_original.$}",
+                                            fit: BoxFit.fill,
+                                          )),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          MediumText(
+                                            'Full Name',
+                                          ),
+                                          SmallText(
+                                            user_name.$,
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  ),
+                                  ],
+                                )
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                MediumText(
+                                  'Wallet ID',
+                                ),
+                                SmallText(
+                                  account_number.$,
                                 ),
                               ],
                             ),
                           ],
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 12, bottom: 8, left: 10, right: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          MediumText(
-                            'Hustla Categories',
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 10),
+                        child: Container(
+                          height: 70,
+                          decoration: BoxDecoration(
+                            color: AppColors.brandColor,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.yellow.withOpacity(.2),
+                                blurRadius: 20,
+                                spreadRadius: 00.0,
+                                offset: Offset(0.0,
+                                    10.0), // shadow direction: bottom right
+                              )
+                            ],
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            // border: Border.all(
+                            //     color: MyTheme.light_grey, width: 1),
                           ),
-                          SmallText('View More >>>')
-                        ],
-                      ),
-                    ),
-                    hustlaCategories(context),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Container(
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(25),
-                              topRight: Radius.circular(25),
-                            ),
-                            child: Container(
-                              color: Colors.white,
-                              child: Column(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 8.0, left: 20.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  children: [
+                                    MediumText(
+                                      'Available Balance',
+                                      color: Colors.white,
+                                    ),
+                                    VSpace.sm,
+                                    MediumText(
+                                      '${account_balance.$} (Ksh)',
+                                      color: Colors.black,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              // HSpace.lg,
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 12, left: 10),
-                                    child: Row(
-                                      // ignore: prefer_const_literals_to_create_immutables
-                                      children: [
-                                        MediumText('Hustla News',
-                                            color: Colors.black),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 12.0, left: 10),
-                                    child: hustlerBlog(),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 15.0, left: 10),
-                                    child: Row(
-                                      // ignore: prefer_const_literals_to_create_immutables
-                                      children: [
-                                        MediumText(
-                                          'Advertise with us',
-                                          color: Colors.black,
+                                        bottom: 10.0, right: 8),
+                                    child: SizedBox(
+                                      height: 30,
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return TopUp(title: 'Add Credit');
+                                          }));
+                                        },
+                                        // ignore: sort_child_properties_last
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8.0, right: 8.0),
+                                          child: SmallText(
+                                            'Add Credit',
+                                            color: Colors.black,
+                                          ),
                                         ),
-                                      ],
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Colors.yellow,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                10), // <-- Radius
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 10.0, bottom: 80),
-                                    child: buildHomeCarouselSlider(context),
                                   ),
                                 ],
                               ),
-                            )),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                  ]),
-                ),
-              ],
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 12, bottom: 8, left: 10, right: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          // ignore: prefer_const_literals_to_create_immutables
+                          children: [
+                            MediumText(
+                              'Hustla Categories',
+                            ),
+                            SmallText('View More >>>')
+                          ],
+                        ),
+                      ),
+                      hustlaCategories(context),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Container(
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(25),
+                                topRight: Radius.circular(25),
+                              ),
+                              child: Container(
+                                color: Colors.white,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 12, left: 10),
+                                      child: Row(
+                                        // ignore: prefer_const_literals_to_create_immutables
+                                        children: [
+                                          MediumText('Hustla News',
+                                              color: Colors.black),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 12.0, left: 10),
+                                      child: hustlerBlog(),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 15.0, left: 10),
+                                      child: Row(
+                                        // ignore: prefer_const_literals_to_create_immutables
+                                        children: [
+                                          MediumText(
+                                            'Advertise with us',
+                                            color: Colors.black,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10.0, bottom: 80),
+                                      child: buildHomeCarouselSlider(context),
+                                    ),
+                                  ],
+                                ),
+                              )),
+                        ),
+                      ),
+                    ]),
+                  ),
+                ],
+              ),
             ),
-            // ),
           ],
         ));
   }

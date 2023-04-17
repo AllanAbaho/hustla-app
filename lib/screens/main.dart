@@ -199,15 +199,14 @@ class _MainState extends State<Main> {
                       icon: Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: Image.asset(
-                          "assets/profile.png",
+                          "assets/qrcode.png",
                           color: _currentIndex == 3
                               ? MyTheme.accent_color
                               : Colors.white,
-                          height: 16,
+                          height: 20,
                         ),
                       ),
-                      label: AppLocalizations.of(context)
-                          .main_screen_bottom_navigation_profile,
+                      label: 'Code',
                     ),
                   ],
                 ),

@@ -135,7 +135,7 @@ Widget buildCategoryItemCard(
                       borderRadius:
                           const BorderRadius.all(Radius.circular(6.0))),
                   child: Text(
-                    'Know More',
+                    'Proceed',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 12,

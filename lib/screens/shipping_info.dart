@@ -888,7 +888,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
               ),
               child: Text(
                 AppLocalizations.of(context)
-                    .shipping_info_screen_btn_proceed_to_checkout,
+                    .shipping_info_screen_btn_Proceed_to_checkout,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,

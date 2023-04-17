@@ -31,6 +31,7 @@ import 'package:active_ecommerce_flutter/custom/toast_component.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class Profile extends StatefulWidget {
   Profile({Key key, this.show_back_button = false}) : super(key: key);
@@ -225,22 +226,19 @@ class _ProfileState extends State<Profile> {
                 slivers: [
                   SliverList(
                     delegate: SliverChildListDelegate([
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                        child: buildCountersRow(),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                        child: buildHorizontalSettings(),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                        child: buildSettingAndAddonsVerticalMenu(),
-                      ),
                       // Padding(
                       //   padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                      //   child: buildSettingAndAddonsHorizontalMenu(),
+                      //   child: buildCountersRow(),
                       // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                      //   child: buildHorizontalSettings(),
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                      //   child: buildSettingAndAddonsVerticalMenu(),
+                      // ),
+                      buildQRCode(),
                       // Padding(
                       //   padding: const EdgeInsets.symmetric(horizontal: 18.0),
                       //   child: buildBottomVerticalCardList(),
@@ -849,9 +847,34 @@ class _ProfileState extends State<Profile> {
     );
   }
 
+  Widget buildQRCode() {
+    return Column(
+      children: [
+        SizedBox(
+          height: 150,
+        ),
+        Center(
+          child: QrImage(
+            data: account_number.$,
+            size: 200.0,
+            foregroundColor: Colors.white,
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          'Scan your profile QR Code to easily make payments for services.',
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.white, fontSize: 12),
+        ),
+      ],
+    );
+  }
+
   Widget buildSettingAndAddonsVerticalMenu() {
     return Container(
-      margin: EdgeInsets.only(bottom: 120, top: 14),
+      margin: EdgeInsets.only(bottom: 20, top: 14),
       padding: EdgeInsets.symmetric(horizontal: 22, vertical: 20),
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Column(
