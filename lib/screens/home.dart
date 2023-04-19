@@ -97,6 +97,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   int _allProductPage = 1;
   bool _showAllLoadingContainer = false;
   int _cartCount = 0;
+  bool _showPassword = false;
 
   YoutubePlayerController _controller = YoutubePlayerController(
     initialVideoId: YoutubePlayer.convertUrlToId(
@@ -297,7 +298,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            top: 15.0, left: 10, right: 10, bottom: 2),
+                            top: 10.0, left: 10, right: 10, bottom: 2),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -394,9 +395,42 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                       color: Colors.white,
                                     ),
                                     VSpace.sm,
-                                    MediumText(
-                                      '${account_balance.$} (Ksh)',
-                                      color: Colors.black,
+                                    Row(
+                                      children: [
+                                        Visibility(
+                                          visible: !_showPassword,
+                                          child: Text(
+                                            '****** (Ksh)',
+                                            style: TextStyle(
+                                                color: AppColors.appBarColor,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 16),
+                                          ),
+                                        ),
+                                        Visibility(
+                                          visible: _showPassword,
+                                          child: Text(
+                                            '${account_balance.$} (Ksh)',
+                                            style: TextStyle(
+                                                color: AppColors.appBarColor,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 16),
+                                          ),
+                                        ),
+                                        HSpace.sm,
+                                        InkWell(
+                                          onTap: () {
+                                            _showPassword = !_showPassword;
+                                            setState(() {});
+                                          },
+                                          child: Icon(
+                                            _showPassword
+                                                ? Icons.visibility_outlined
+                                                : Icons.visibility_off_outlined,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),

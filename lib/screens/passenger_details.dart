@@ -49,7 +49,6 @@ class _PassengerDetailsState extends State<PassengerDetails> {
   TextEditingController _paxnationailtyController = TextEditingController();
   TextEditingController _paxdoctypeController = TextEditingController();
   TextEditingController _paxdocnumberController = TextEditingController();
-  TextEditingController _paxdocissuerController = TextEditingController();
   TextEditingController _paxdocexpiryController = TextEditingController();
   TextEditingController _paxbirthdateController = TextEditingController();
   TextEditingController _paxphoneController = TextEditingController();
@@ -60,6 +59,10 @@ class _PassengerDetailsState extends State<PassengerDetails> {
   List<Map<String, String>> _docTypes = [
     {'code': 'PP', 'name': 'Passport'},
     {'code': 'ID', 'name': 'National ID'},
+  ];
+  List<Map<String, String>> _nations = [
+    {'code': 'KE', 'name': 'Kenyan'},
+    {'code': 'UG', 'name': 'Ugandan'},
   ];
 
   List<Passenger> _passengerList = [];
@@ -73,7 +76,6 @@ class _PassengerDetailsState extends State<PassengerDetails> {
     // TODO: implement initState
     super.initState();
     _paxnationailtyController.text = 'KE';
-    _paxdocissuerController.text = 'KE';
 
     _numberOfPassengers = int.parse(widget.adults) +
         int.parse(widget.children) +
@@ -383,25 +385,22 @@ class _PassengerDetailsState extends State<PassengerDetails> {
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 25.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Container(
-                      height: 36,
-                      child: TextField(
-                        keyboardType: TextInputType.text,
-                        controller: _paxnationailtyController,
-                        readOnly: true,
-                        decoration: InputDecorations.buildInputDecoration_1(),
-                      ),
-                    ),
-                  ],
+                child: DropdownSearch<Map<String, String>>(
+                  items: _nations,
+                  itemAsString: (item) {
+                    _paxnationailtyController.text = item['code'];
+                    return item['name'];
+                  },
+                  onChanged: (item) {
+                    _paxnationailtyController.text = item['code'];
+                  },
+                  selectedItem: _nations[0],
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
-                  'Document Type',
+                  'Identification Type',
                   style: TextStyle(
                       color: AppColors.appBarColor,
                       fontWeight: FontWeight.w600,
@@ -425,7 +424,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
-                  'Document Number',
+                  'Identification Number',
                   style: TextStyle(
                       color: AppColors.appBarColor,
                       fontWeight: FontWeight.w600,
@@ -453,34 +452,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
-                  'Document Issuer',
-                  style: TextStyle(
-                      color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 25.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Container(
-                      height: 36,
-                      child: TextField(
-                        keyboardType: TextInputType.text,
-                        controller: _paxdocissuerController,
-                        readOnly: true,
-                        decoration: InputDecorations.buildInputDecoration_1(),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
-                child: Text(
-                  'Document Expiry',
+                  'Identification Expiry Date',
                   style: TextStyle(
                       color: AppColors.appBarColor,
                       fontWeight: FontWeight.w600,
@@ -581,7 +553,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
       paxnationailty: _paxnationailtyController.text,
       paxdoctype: _paxdoctypeController.text,
       paxdocnumber: _paxdocnumberController.text,
-      paxdocissuer: _paxdocissuerController.text,
+      paxdocissuer: _paxnationailtyController.text,
       paxdocexpiry: _paxdocexpiryController.text,
       paxbirthdate: _paxbirthdateController.text,
       paxphone: _paxphoneController.text,

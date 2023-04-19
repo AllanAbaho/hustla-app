@@ -206,7 +206,7 @@ class _MainState extends State<Main> {
                           height: 20,
                         ),
                       ),
-                      label: 'Code',
+                      label: 'Qrcode',
                     ),
                   ],
                 ),

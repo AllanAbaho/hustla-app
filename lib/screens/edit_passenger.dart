@@ -31,7 +31,6 @@ class _EditPassengerState extends State<EditPassenger> {
   TextEditingController _paxnationailtyController = TextEditingController();
   TextEditingController _paxdoctypeController = TextEditingController();
   TextEditingController _paxdocnumberController = TextEditingController();
-  TextEditingController _paxdocissuerController = TextEditingController();
   TextEditingController _paxdocexpiryController = TextEditingController();
   TextEditingController _paxbirthdateController = TextEditingController();
   TextEditingController _paxphoneController = TextEditingController();
@@ -42,6 +41,10 @@ class _EditPassengerState extends State<EditPassenger> {
   List<Map<String, String>> _docTypes = [
     {'code': 'PP', 'name': 'Passport'},
     {'code': 'ID', 'name': 'National ID'},
+  ];
+  List<Map<String, String>> _nations = [
+    {'code': 'KE', 'name': 'Kenyan'},
+    {'code': 'UG', 'name': 'Ugandan'},
   ];
 
   DateTime selectedDate = DateTime.now();
@@ -58,7 +61,6 @@ class _EditPassengerState extends State<EditPassenger> {
         widget.passengers[widget.index].paxnationailty;
     _paxdoctypeController.text = widget.passengers[widget.index].paxdoctype;
     _paxdocnumberController.text = widget.passengers[widget.index].paxdocnumber;
-    _paxdocissuerController.text = widget.passengers[widget.index].paxdocissuer;
     _paxdocexpiryController.text = widget.passengers[widget.index].paxdocexpiry;
     _paxbirthdateController.text = widget.passengers[widget.index].paxbirthdate;
     _paxphoneController.text = widget.passengers[widget.index].paxphone;
@@ -368,25 +370,24 @@ class _EditPassengerState extends State<EditPassenger> {
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 25.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Container(
-                      height: 36,
-                      child: TextField(
-                        keyboardType: TextInputType.text,
-                        controller: _paxnationailtyController,
-                        readOnly: true,
-                        decoration: InputDecorations.buildInputDecoration_1(),
-                      ),
-                    ),
-                  ],
+                child: DropdownSearch<Map<String, String>>(
+                  items: _nations,
+                  itemAsString: (item) {
+                    _paxnationailtyController.text = item['code'];
+                    return item['name'];
+                  },
+                  onChanged: (item) {
+                    _paxnationailtyController.text = item['code'];
+                  },
+                  selectedItem: _docTypes.firstWhere((e) =>
+                      e['code'] ==
+                      widget.passengers[widget.index].paxnationailty),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
-                  'Document Type',
+                  'Identification Type',
                   style: TextStyle(
                       color: AppColors.appBarColor,
                       fontWeight: FontWeight.w600,
@@ -411,7 +412,7 @@ class _EditPassengerState extends State<EditPassenger> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
-                  'Document Number',
+                  'Identification Number',
                   style: TextStyle(
                       color: AppColors.appBarColor,
                       fontWeight: FontWeight.w600,
@@ -439,34 +440,7 @@ class _EditPassengerState extends State<EditPassenger> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
-                  'Document Issuer',
-                  style: TextStyle(
-                      color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 25.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Container(
-                      height: 36,
-                      child: TextField(
-                        keyboardType: TextInputType.text,
-                        controller: _paxdocissuerController,
-                        readOnly: true,
-                        decoration: InputDecorations.buildInputDecoration_1(),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
-                child: Text(
-                  'Document Expiry',
+                  'Identification Expiry Date',
                   style: TextStyle(
                       color: AppColors.appBarColor,
                       fontWeight: FontWeight.w600,
@@ -550,11 +524,11 @@ class _EditPassengerState extends State<EditPassenger> {
           gravity: Toast.center, duration: Toast.lengthLong);
       return;
     } else if (_paxdocnumberController.text.isEmpty) {
-      ToastComponent.showDialog('Please enter your document number',
+      ToastComponent.showDialog('Please enter your identification number',
           gravity: Toast.center, duration: Toast.lengthLong);
       return;
     } else if (_paxdocexpiryController.text.isEmpty) {
-      ToastComponent.showDialog('Please enter your document expiry date',
+      ToastComponent.showDialog('Please enter your identification expiry date',
           gravity: Toast.center, duration: Toast.lengthLong);
       return;
     }
@@ -567,7 +541,7 @@ class _EditPassengerState extends State<EditPassenger> {
       paxnationailty: _paxnationailtyController.text,
       paxdoctype: _paxdoctypeController.text,
       paxdocnumber: _paxdocnumberController.text,
-      paxdocissuer: _paxdocissuerController.text,
+      paxdocissuer: _paxnationailtyController.text,
       paxdocexpiry: _paxdocexpiryController.text,
       paxbirthdate: _paxbirthdateController.text,
       paxphone: _paxphoneController.text,
