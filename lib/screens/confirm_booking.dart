@@ -15,6 +15,7 @@ import 'package:active_ecommerce_flutter/repositories/top_up_repository.dart';
 import 'package:active_ecommerce_flutter/screens/choose_payment_method.dart';
 import 'package:active_ecommerce_flutter/screens/edit_passenger.dart';
 import 'package:active_ecommerce_flutter/screens/main.dart';
+import 'package:active_ecommerce_flutter/screens/make_airline_payment.dart';
 import 'package:active_ecommerce_flutter/screens/ticket_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
@@ -139,13 +140,32 @@ class _ConfirmBookingState extends State<ConfirmBooking> {
   }
 
   onSubmit() async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return ChoosePaymentMethod(
-        title: 'Choose Payment Method',
-        bookingid: widget.bookingid,
-        passengers: widget.passengers,
-      );
-    }));
+    var data = {
+      "aerocrs": {
+        "parms": {
+          "bookingid": widget.bookingid,
+          "agentconfirmation": "apiconnector",
+          "confirmationemail": "test@test.com",
+          "passenger": widget.passengers
+        }
+      }
+    };
+    var postData = jsonEncode(data);
+    loading('Please wait...');
+
+    var bookingResponse = await AirlineRepository().confirmBooking(postData);
+    Navigator.of(loadingContext).pop();
+    if (bookingResponse.success == false) {
+      ToastComponent.showDialog(bookingResponse.errorMessage,
+          gravity: Toast.center, duration: Toast.lengthLong);
+    } else {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return MakeAirlinePayment(
+          title: 'Make Payment',
+          bookingid: widget.bookingid,
+        );
+      }));
+    }
   }
 
   loading(String text) {

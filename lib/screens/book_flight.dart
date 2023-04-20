@@ -574,7 +574,9 @@ class _BookFlightState extends State<BookFlight> {
                   children: child,
                   infants: infant,
                   cabinClass: _selectedCabinClass,
-                  tripType: _selectedTripType);
+                  tripType: _selectedTripType,
+                  departureDate: start,
+                  returnDate: end);
             },
           ),
         );

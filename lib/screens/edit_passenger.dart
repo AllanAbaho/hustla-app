@@ -65,6 +65,7 @@ class _EditPassengerState extends State<EditPassenger> {
     _paxbirthdateController.text = widget.passengers[widget.index].paxbirthdate;
     _paxphoneController.text = widget.passengers[widget.index].paxphone;
     _paxemailController.text = widget.passengers[widget.index].paxemail;
+    print(widget.passengers[widget.index].paxnationailty);
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -379,7 +380,7 @@ class _EditPassengerState extends State<EditPassenger> {
                   onChanged: (item) {
                     _paxnationailtyController.text = item['code'];
                   },
-                  selectedItem: _docTypes.firstWhere((e) =>
+                  selectedItem: _nations.firstWhere((e) =>
                       e['code'] ==
                       widget.passengers[widget.index].paxnationailty),
                 ),

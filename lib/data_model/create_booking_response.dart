@@ -11,19 +11,23 @@ String createBookingResponseToJson(CreateBookingResponse data) =>
     json.encode(data.toJson());
 
 class CreateBookingResponse {
-  CreateBookingResponse({
-    this.booking,
-    this.success,
-  });
+  CreateBookingResponse({this.booking, this.success, this.errors});
 
   Booking booking;
   bool success;
+  List<String> errors;
 
   factory CreateBookingResponse.fromJson(Map<String, dynamic> json) =>
       CreateBookingResponse(
-        booking: Booking.fromJson((json['aerocrs']["booking"])),
-        success: json['aerocrs']["success"],
-      );
+          booking: json.containsKey('aerocrs')
+              ? Booking.fromJson((json['aerocrs']["booking"]))
+              : null,
+          success: json.containsKey('aerocrs')
+              ? json['aerocrs']["success"]
+              : json['success'],
+          errors: json.containsKey('details')
+              ? List<String>.from((json["details"]["detail"]))
+              : []);
 
   Map<String, dynamic> toJson() => {
         "booking": booking,

@@ -24,7 +24,6 @@ import 'package:toast/toast.dart';
 class PassengerDetails extends StatefulWidget {
   PassengerDetails(
       {Key key,
-      this.flight,
       this.adults,
       this.children,
       this.infants,
@@ -32,7 +31,6 @@ class PassengerDetails extends StatefulWidget {
       this.booking})
       : super(key: key);
 
-  final Flight flight;
   final String adults, children, infants;
   final CabinClass cabinClass;
   final Booking booking;
@@ -156,7 +154,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
           children: [
             buildDescription('Passenger Information',
                 description:
-                    'Please enter the following details below to confirm booking your flight with ${widget.flight.airlineName}'),
+                    'Please enter the following details below to confirm booking your flight'),
             buildForm(),
           ],
         ),
