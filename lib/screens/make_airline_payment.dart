@@ -4,6 +4,7 @@ import 'package:active_ecommerce_flutter/custom/app_bar.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/page_description.dart';
+import 'package:active_ecommerce_flutter/custom/process_completed.dart';
 import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/custom/toast_component.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
@@ -13,6 +14,7 @@ import 'package:active_ecommerce_flutter/screens/main.dart';
 import 'package:active_ecommerce_flutter/screens/travel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:toast/toast.dart';
 
 class MakeAirlinePayment extends StatefulWidget {
@@ -31,7 +33,9 @@ class _MakeAirlinePaymentState extends State<MakeAirlinePayment> {
   TextEditingController _creditcardexpiryController = TextEditingController();
   TextEditingController _creditcardcvvController = TextEditingController();
   BuildContext loadingContext;
-  DateTime selectedDate = DateTime.now();
+  DateTime _initialDate = DateTime.now();
+  DateTime _lastDate =
+      Jiffy().add(years: 5).dateTime; // 6 months from DateTime.now()
 
   @override
   void initState() {
@@ -42,11 +46,9 @@ class _MakeAirlinePaymentState extends State<MakeAirlinePayment> {
   Future<void> _selectExpiryDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
-      initialDate: selectedDate,
-      firstDate: selectedDate,
-      lastDate: DateTime.now().add(
-        Duration(days: 365),
-      ),
+      initialDate: _initialDate,
+      firstDate: _initialDate,
+      lastDate: _lastDate,
       builder: (BuildContext context, Widget child) {
         return Theme(
           data: ThemeData.light().copyWith(
@@ -56,7 +58,7 @@ class _MakeAirlinePaymentState extends State<MakeAirlinePayment> {
         );
       },
     );
-    if (picked != null && picked != selectedDate) {
+    if (picked != null && picked != _initialDate) {
       String formattedDate = DateFormat('MM/yy').format(picked);
       setState(() {
         _creditcardexpiryController.text = formattedDate;
@@ -262,7 +264,7 @@ class _MakeAirlinePaymentState extends State<MakeAirlinePayment> {
         "parms": {
           "bookingid": widget.bookingid,
           "creditcardpayer": _creditcardpayerController.text,
-          "creditcardnumber": _creditcardnumberController.text,
+          "creditcardnumber": '5100000000000016',
           "creditcardexpiry":
               _creditcardexpiryController.text.replaceAll('/', ''),
           "creditcardcvv": _creditcardcvvController.text
@@ -290,8 +292,14 @@ class _MakeAirlinePaymentState extends State<MakeAirlinePayment> {
         return;
       }
     } else {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return Main();
+      ToastComponent.showDialog(paymentResponse.paymentstatusexplanation,
+          gravity: Toast.center, duration: Toast.lengthLong);
+
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return ProcessCompleted(
+          description:
+              'Congratulations, Your payment was received successfully',
+        );
       }));
     }
   }

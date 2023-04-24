@@ -1,6 +1,7 @@
 import 'package:active_ecommerce_flutter/custom/app_bar.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/page_description.dart';
+import 'package:active_ecommerce_flutter/custom/process_completed.dart';
 import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/data_model/sacco_list_response.dart';
@@ -155,8 +156,10 @@ class _JoinSaccoState extends State<JoinSacco> {
     } else {
       ToastComponent.showDialog(joinSaccoResponse.message,
           gravity: Toast.center, duration: Toast.lengthLong);
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return Main();
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return ProcessCompleted(
+          description: 'Congratulations, you joined sacco successfully!',
+        );
       }));
     }
   }

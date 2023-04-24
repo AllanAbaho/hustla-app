@@ -4,6 +4,7 @@ import 'package:active_ecommerce_flutter/custom/app_bar.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/page_description.dart';
+import 'package:active_ecommerce_flutter/custom/process_completed.dart';
 import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/custom/toast_component.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
@@ -157,8 +158,11 @@ class _TransactionOTPState extends State<TransactionOTP> {
     } else {
       ToastComponent.showDialog('Transaction was processed successfully',
           gravity: Toast.center, duration: Toast.lengthLong);
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return Main();
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return ProcessCompleted(
+          description:
+              'Congratulations, your transaction was processed successfully!',
+        );
       }));
     }
   }

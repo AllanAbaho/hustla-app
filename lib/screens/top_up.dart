@@ -5,6 +5,7 @@ import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/page_description.dart';
+import 'package:active_ecommerce_flutter/custom/process_completed.dart';
 import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
@@ -191,8 +192,11 @@ class _TopUpState extends State<TopUp> {
       ToastComponent.showDialog(statusResponse.message,
           gravity: Toast.center, duration: Toast.lengthLong);
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return Main(go_back: false);
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return ProcessCompleted(
+          description:
+              'Congratulations, your transaction was processed successfully!',
+        );
       }));
     } else if (statusResponse.finalStatus == 'PROCESSING' ||
         statusResponse.finalStatus == 'PENDING') {

@@ -2,6 +2,7 @@ import 'package:active_ecommerce_flutter/custom/app_bar.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/page_description.dart';
+import 'package:active_ecommerce_flutter/custom/process_completed.dart';
 import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/screens/main.dart';
 import 'package:flutter/material.dart';
@@ -321,8 +322,11 @@ class _RequestFundsState extends State<RequestFunds> {
         'Your application has been submitted successfully',
         gravity: Toast.center,
         duration: Toast.lengthLong);
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return Main();
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+      return ProcessCompleted(
+        description:
+            'Congratulations, Your application has been submitted successfully',
+      );
     }));
   }
 

@@ -6,6 +6,7 @@ import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/device_info.dart';
 import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/page_description.dart';
+import 'package:active_ecommerce_flutter/custom/process_completed.dart';
 import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
@@ -396,8 +397,10 @@ class _PostJobState extends State<PostJob> {
     } else {
       ToastComponent.showDialog(addJobResponse.message,
           gravity: Toast.center, duration: Toast.lengthLong);
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return Main();
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return ProcessCompleted(
+          description: 'Congratulations, your job was posted successfully!',
+        );
       }));
     }
   }

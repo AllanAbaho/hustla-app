@@ -19,6 +19,7 @@ import 'package:active_ecommerce_flutter/screens/make_airline_payment.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:toast/toast.dart';
 
 class PassengerDetails extends StatefulWidget {
@@ -43,7 +44,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
   TextEditingController _paxtitleController = TextEditingController();
   TextEditingController _firstnameController = TextEditingController();
   TextEditingController _lastnameController = TextEditingController();
-  TextEditingController _paxageController = TextEditingController();
+  TextEditingController _paxageController = TextEditingController(text: '0');
   TextEditingController _paxnationailtyController = TextEditingController();
   TextEditingController _paxdoctypeController = TextEditingController();
   TextEditingController _paxdocnumberController = TextEditingController();
@@ -65,7 +66,14 @@ class _PassengerDetailsState extends State<PassengerDetails> {
 
   List<Passenger> _passengerList = [];
 
-  DateTime selectedDate = DateTime.now();
+  DateTime _firstBirthDate =
+      Jiffy().subtract(years: 100).dateTime; // 6 months from DateTime.now()
+
+  DateTime _lastBirthDate = DateTime.now(); // 6 months from DateTime.now()
+
+  DateTime _firstExpiryDate = DateTime.now();
+  DateTime _lastExpiryDate =
+      Jiffy().add(years: 5).dateTime; // 6 months from DateTime.now()
 
   int _numberOfPassengers;
 
@@ -83,11 +91,9 @@ class _PassengerDetailsState extends State<PassengerDetails> {
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
-      initialDate: selectedDate,
-      firstDate: selectedDate,
-      lastDate: DateTime.now().add(
-        Duration(days: 365),
-      ),
+      initialDate: _lastBirthDate,
+      firstDate: _firstBirthDate,
+      lastDate: _lastBirthDate,
       builder: (BuildContext context, Widget child) {
         return Theme(
           data: ThemeData.light().copyWith(
@@ -97,11 +103,13 @@ class _PassengerDetailsState extends State<PassengerDetails> {
         );
       },
     );
-    if (picked != null && picked != selectedDate) {
+    if (picked != null && picked != _lastBirthDate) {
       String formattedDate = DateFormat('yyyy/MM/dd').format(picked);
 
       setState(() {
         _paxbirthdateController.text = formattedDate;
+        _paxageController.text =
+            (_lastBirthDate.difference(picked).inDays / 365).toStringAsFixed(0);
       });
     }
   }
@@ -109,11 +117,9 @@ class _PassengerDetailsState extends State<PassengerDetails> {
   Future<void> _selectExpiryDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
-      initialDate: selectedDate,
-      firstDate: selectedDate,
-      lastDate: DateTime.now().add(
-        Duration(days: 365),
-      ),
+      initialDate: _firstExpiryDate,
+      firstDate: _firstExpiryDate,
+      lastDate: _lastExpiryDate,
       builder: (BuildContext context, Widget child) {
         return Theme(
           data: ThemeData.light().copyWith(
@@ -123,7 +129,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
         );
       },
     );
-    if (picked != null && picked != selectedDate) {
+    if (picked != null && picked != _firstExpiryDate) {
       String formattedDate = DateFormat('yyyy/MM/dd').format(picked);
 
       setState(() {
@@ -363,6 +369,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                       height: 36,
                       child: TextField(
                         keyboardType: TextInputType.number,
+                        readOnly: true,
                         controller: _paxageController,
                         decoration: InputDecorations.buildInputDecoration_1(
                             hint_text: '18'),
