@@ -32,7 +32,7 @@ class _SaveFundsState extends State<SaveFunds> {
   TextEditingController _amountController = TextEditingController();
   TextEditingController _otpController = TextEditingController();
   TextEditingController _saccoController =
-      TextEditingController(text: 'ABC EMPOWERMENT SACCO LIMITED');
+      TextEditingController(text: sacco_name.$);
   BuildContext loadingcontext;
 
   @override
@@ -70,7 +70,7 @@ class _SaveFundsState extends State<SaveFunds> {
                   'Sacco',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -98,7 +98,7 @@ class _SaveFundsState extends State<SaveFunds> {
                   'Amount',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -137,7 +137,7 @@ class _SaveFundsState extends State<SaveFunds> {
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w300),
                       ),
                       onPressed: () {
                         onSubmit();

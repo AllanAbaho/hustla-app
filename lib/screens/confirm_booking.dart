@@ -35,6 +35,7 @@ class ConfirmBooking extends StatefulWidget {
 
 class _ConfirmBookingState extends State<ConfirmBooking> {
   BuildContext loadingContext;
+  TextEditingController _confirmationEmailController = TextEditingController();
 
   @override
   void initState() {
@@ -63,10 +64,41 @@ class _ConfirmBookingState extends State<ConfirmBooking> {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             buildDescription(widget.title,
                 description: 'Please confirm the following passenger details'),
             buildList(),
+            Padding(
+              padding: const EdgeInsets.only(top: 20, bottom: 4.0),
+              child: Text(
+                'Confirmation Email',
+                style: TextStyle(
+                    color: AppColors.appBarColor,
+                    fontWeight: FontWeight.w100,
+                    fontSize: 16),
+              ),
+            ),
+            Container(
+              height: 36,
+              child: TextField(
+                keyboardType: TextInputType.text,
+                controller: _confirmationEmailController,
+                autofocus: false,
+                decoration: InputDecorations.buildInputDecoration_1(
+                    hint_text: user_email.$),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: Text(
+                'This email will receive the E-ticket(s)',
+                style: TextStyle(
+                    color: AppColors.appBarColor,
+                    fontWeight: FontWeight.w100,
+                    fontSize: 10),
+              ),
+            ),
             buildButton(),
           ],
         ),
@@ -145,7 +177,7 @@ class _ConfirmBookingState extends State<ConfirmBooking> {
         "parms": {
           "bookingid": widget.bookingid,
           "agentconfirmation": "apiconnector",
-          "confirmationemail": "test@test.com",
+          "confirmationemail": _confirmationEmailController.text.trim(),
           "passenger": widget.passengers
         }
       }

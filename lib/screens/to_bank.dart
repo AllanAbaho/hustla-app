@@ -81,7 +81,7 @@ class _ToBankState extends State<ToBank> {
                   'Account Number',
                   style: TextStyle(
                     color: Colors.black,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w300,
                     fontSize: 16,
                   ),
                 ),
@@ -110,7 +110,7 @@ class _ToBankState extends State<ToBank> {
                   'Account Name',
                   style: TextStyle(
                     color: Colors.black,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w300,
                     fontSize: 16,
                   ),
                 ),
@@ -139,7 +139,7 @@ class _ToBankState extends State<ToBank> {
                   'Amount',
                   style: TextStyle(
                     color: Colors.black,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w300,
                     fontSize: 16,
                   ),
                 ),
@@ -168,7 +168,7 @@ class _ToBankState extends State<ToBank> {
                   'Reason',
                   style: TextStyle(
                     color: Colors.black,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w300,
                     fontSize: 16,
                   ),
                 ),
@@ -208,7 +208,7 @@ class _ToBankState extends State<ToBank> {
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w300),
                       ),
                       onPressed: () {
                         onSubmit();

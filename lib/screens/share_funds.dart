@@ -44,7 +44,7 @@ class _ShareFundsState extends State<ShareFunds> {
   TextEditingController _amountController = TextEditingController();
   TextEditingController _accountController = TextEditingController();
   TextEditingController _saccoController =
-      TextEditingController(text: 'ABC EMPOWERMENT SACCO LIMITED');
+      TextEditingController(text: sacco_name.$);
   BuildContext loadingcontext;
 
   @override
@@ -82,7 +82,7 @@ class _ShareFundsState extends State<ShareFunds> {
                   'Sacco Name',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -110,7 +110,7 @@ class _ShareFundsState extends State<ShareFunds> {
                   'Enter Amount',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -138,7 +138,7 @@ class _ShareFundsState extends State<ShareFunds> {
                   'Sacco Account',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -177,7 +177,7 @@ class _ShareFundsState extends State<ShareFunds> {
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w300),
                       ),
                       onPressed: () {
                         onSubmit();

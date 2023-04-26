@@ -301,7 +301,7 @@ class _LoginState extends State<Login> {
                   'Username',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -403,7 +403,7 @@ class _LoginState extends State<Login> {
                   AppLocalizations.of(context).login_screen_password,
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),

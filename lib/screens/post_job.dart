@@ -87,7 +87,7 @@ class _PostJobState extends State<PostJob> {
                   'Role',
                   style: TextStyle(
                     color: AppColors.appBarColor,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w300,
                     fontSize: 16,
                   ),
                 ),
@@ -116,7 +116,7 @@ class _PostJobState extends State<PostJob> {
                   'Location',
                   style: TextStyle(
                     color: AppColors.appBarColor,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w300,
                     fontSize: 16,
                   ),
                 ),
@@ -145,7 +145,7 @@ class _PostJobState extends State<PostJob> {
                   'Deadline',
                   style: TextStyle(
                     color: AppColors.appBarColor,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w300,
                     fontSize: 16,
                   ),
                 ),
@@ -174,7 +174,7 @@ class _PostJobState extends State<PostJob> {
                   'Salary',
                   style: TextStyle(
                     color: AppColors.appBarColor,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w300,
                     fontSize: 16,
                   ),
                 ),
@@ -203,7 +203,7 @@ class _PostJobState extends State<PostJob> {
                   'Duration',
                   style: TextStyle(
                     color: AppColors.appBarColor,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w300,
                     fontSize: 16,
                   ),
                 ),
@@ -232,7 +232,7 @@ class _PostJobState extends State<PostJob> {
                   'Type',
                   style: TextStyle(
                     color: AppColors.appBarColor,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w300,
                     fontSize: 16,
                   ),
                 ),
@@ -261,7 +261,7 @@ class _PostJobState extends State<PostJob> {
                   'Description',
                   style: TextStyle(
                     color: AppColors.appBarColor,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w300,
                     fontSize: 16,
                   ),
                 ),
@@ -302,7 +302,7 @@ class _PostJobState extends State<PostJob> {
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w300),
                       ),
                       onPressed: () {
                         onSubmit();

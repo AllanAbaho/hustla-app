@@ -73,7 +73,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
                       'Shop Name',
                       style: TextStyle(
                           color: AppColors.appBarColor,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w300,
                           fontSize: 16),
                     ),
                   ),
@@ -100,7 +100,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
                       'Shop Email Address',
                       style: TextStyle(
                           color: AppColors.appBarColor,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w300,
                           fontSize: 16),
                     ),
                   ),
@@ -127,7 +127,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
                       'Shop Address',
                       style: TextStyle(
                           color: AppColors.appBarColor,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w300,
                           fontSize: 16),
                     ),
                   ),
@@ -149,7 +149,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
                       'Password',
                       style: TextStyle(
                           color: AppColors.appBarColor,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w300,
                           fontSize: 16),
                     ),
                   ),
@@ -187,7 +187,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
                           .registration_screen_retype_password,
                       style: TextStyle(
                           color: AppColors.appBarColor,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w300,
                           fontSize: 16),
                     ),
                   ),

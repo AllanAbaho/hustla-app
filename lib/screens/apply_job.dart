@@ -93,7 +93,7 @@ class _ApplyJobState extends State<ApplyJob> {
                   'Full Name',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -122,7 +122,7 @@ class _ApplyJobState extends State<ApplyJob> {
                   'Email Address',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -151,7 +151,7 @@ class _ApplyJobState extends State<ApplyJob> {
                   'Phone Number',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -180,7 +180,7 @@ class _ApplyJobState extends State<ApplyJob> {
                   'Upload Resume',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -218,7 +218,7 @@ class _ApplyJobState extends State<ApplyJob> {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w300,
                               ),
                             ),
                             onPressed: () async {
@@ -257,7 +257,7 @@ class _ApplyJobState extends State<ApplyJob> {
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w300,
                         ),
                       ),
                       onPressed: () {

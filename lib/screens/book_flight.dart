@@ -167,7 +167,7 @@ class _BookFlightState extends State<BookFlight> {
                   'Trip Type',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -193,7 +193,7 @@ class _BookFlightState extends State<BookFlight> {
                   'Departing From',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -217,7 +217,7 @@ class _BookFlightState extends State<BookFlight> {
                   'Destination',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -241,7 +241,7 @@ class _BookFlightState extends State<BookFlight> {
                   'Departure Date',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -275,7 +275,7 @@ class _BookFlightState extends State<BookFlight> {
                         'Return Date',
                         style: TextStyle(
                             color: AppColors.appBarColor,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w300,
                             fontSize: 16),
                       ),
                     ),
@@ -308,7 +308,7 @@ class _BookFlightState extends State<BookFlight> {
                   'Number of Adults',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -358,7 +358,7 @@ class _BookFlightState extends State<BookFlight> {
                   'Number of Children',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -415,7 +415,7 @@ class _BookFlightState extends State<BookFlight> {
                   'Number of Infants',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -472,7 +472,7 @@ class _BookFlightState extends State<BookFlight> {
                   'Class',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -507,7 +507,7 @@ class _BookFlightState extends State<BookFlight> {
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w300),
                       ),
                       onPressed: () {
                         onSubmit();

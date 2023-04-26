@@ -129,9 +129,13 @@ class PaymentRepository {
       phoneNumber,
       senderName,
       receiverName,
-      transactionId) async {
+      transactionId,
+      {repaymentPeriod,
+      fundPurpose,
+      nextOfKinName,
+      nextOfKinContact}) async {
     transactionAmount = transactionAmount.toString();
-    var post_body = jsonEncode({
+    var postBody = jsonEncode({
       "fromAccount": fromAccount,
       "toAccount": toAccount,
       "transactionAmount": transactionAmount,
@@ -150,18 +154,22 @@ class PaymentRepository {
       "toCurrency": 'UGX',
       "fromCurrency": 'UGX',
       "reversalReference": "",
-      "osType": "ANDROID"
+      "osType": "ANDROID",
+      "repaymentPeriod": repaymentPeriod ?? '',
+      "fundPurpose": fundPurpose ?? '',
+      "nextOfKinName": nextOfKinName ?? '',
+      "nextOfKinContact": nextOfKinContact ?? ''
     });
 
     Uri url = Uri.parse("${AppConfig.HUSTLER_GATEWAY}/processWalletPayment");
-
+    print(postBody);
     final response = await http.post(url,
         headers: {
           "Content-Type": "application/json",
           "Authorization":
               'Basic ' + base64.encode(utf8.encode('admin:secret123')),
         },
-        body: post_body);
+        body: postBody);
 
     return transactionResponseFromJson(response.body);
   }

@@ -80,7 +80,7 @@ class _TopUpState extends State<TopUp> {
                   'Amount',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),

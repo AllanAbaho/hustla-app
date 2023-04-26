@@ -306,7 +306,7 @@ class _RegistrationState extends State<Registration> {
                   'First Name',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -333,7 +333,7 @@ class _RegistrationState extends State<Registration> {
                   'Last Name',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -360,7 +360,7 @@ class _RegistrationState extends State<Registration> {
                   'Email Address',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -387,7 +387,7 @@ class _RegistrationState extends State<Registration> {
                   'Phone Number',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -437,7 +437,7 @@ class _RegistrationState extends State<Registration> {
               //   child: Text(
               //     'Date Of Birth',
               //     style: TextStyle(
-              //         color: AppColors.appBarColor, fontWeight: FontWeight.w600,fontSize: 16),
+              //         color: AppColors.appBarColor, fontWeight: FontWeight.w300,fontSize: 16),
               //   ),
               // ),
               // Padding(
@@ -463,7 +463,7 @@ class _RegistrationState extends State<Registration> {
               //   child: Text(
               //     'Gender',
               //     style: TextStyle(
-              //         color: AppColors.appBarColor, fontWeight: FontWeight.w600,fontSize: 16),
+              //         color: AppColors.appBarColor, fontWeight: FontWeight.w300,fontSize: 16),
               //   ),
               // ),
               // Padding(
@@ -501,7 +501,7 @@ class _RegistrationState extends State<Registration> {
                   'National ID Number',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -530,7 +530,7 @@ class _RegistrationState extends State<Registration> {
                             'ID Front Picture',
                             style: TextStyle(
                                 color: AppColors.appBarColor,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w300,
                                 fontSize: 16),
                           ),
                         ),
@@ -545,7 +545,7 @@ class _RegistrationState extends State<Registration> {
                             'ID Back Picture',
                             style: TextStyle(
                                 color: AppColors.appBarColor,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w300,
                                 fontSize: 16),
                           ),
                         ),
@@ -561,7 +561,7 @@ class _RegistrationState extends State<Registration> {
                   'Username',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -583,7 +583,7 @@ class _RegistrationState extends State<Registration> {
                   'Password',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -621,7 +621,7 @@ class _RegistrationState extends State<Registration> {
                       .registration_screen_retype_password,
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -733,7 +733,7 @@ class _RegistrationState extends State<Registration> {
                           .registration_screen_register_sign_up,
                       style: TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w300,
                           fontSize: 16),
                     ),
                     onPressed: _isAgree
@@ -763,7 +763,7 @@ class _RegistrationState extends State<Registration> {
                         AppLocalizations.of(context).registration_screen_log_in,
                         style: TextStyle(
                             color: MyTheme.accent_color,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w300,
                             fontSize: 16),
                       ),
                       onTap: () {

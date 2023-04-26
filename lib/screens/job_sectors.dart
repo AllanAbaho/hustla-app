@@ -64,7 +64,7 @@ class _JobSectorsState extends State<JobSectors> {
               color: AppColors.dashboardColor,
               fontSize: 25,
               height: 2,
-              fontWeight: FontWeight.bold),
+              fontWeight: FontWeight.w300),
         ),
         Padding(
           padding:
@@ -76,7 +76,7 @@ class _JobSectorsState extends State<JobSectors> {
                 color: MyTheme.font_grey,
                 fontSize: 14,
                 height: 1.6,
-                fontWeight: FontWeight.w600),
+                fontWeight: FontWeight.w300),
           ),
         ),
       ],
@@ -154,7 +154,7 @@ class _JobSectorsState extends State<JobSectors> {
                 style: TextStyle(
                     color: AppColors.dashboardColor,
                     fontSize: 16,
-                    fontWeight: FontWeight.w600),
+                    fontWeight: FontWeight.w300),
               ),
             ),
             Container(
@@ -170,7 +170,7 @@ class _JobSectorsState extends State<JobSectors> {
                     color: MyTheme.font_grey,
                     fontSize: 10,
                     height: 1.6,
-                    fontWeight: FontWeight.w600),
+                    fontWeight: FontWeight.w300),
               ),
             ),
             Padding(
@@ -189,7 +189,7 @@ class _JobSectorsState extends State<JobSectors> {
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 12,
-                          fontWeight: FontWeight.w600),
+                          fontWeight: FontWeight.w300),
                     ),
                     onPressed: () {
                       Navigator.push(

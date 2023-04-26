@@ -22,6 +22,10 @@ class AuthHelper {
       account_number.save();
       account_balance.$ = loginResponse.user.account_balance;
       account_balance.save();
+      sacco_name.$ = loginResponse.user.sacco_name;
+      sacco_name.save();
+      sacco_balance.$ = loginResponse.user.sacco_balance;
+      sacco_balance.save();
     }
   }
 
@@ -44,6 +48,10 @@ class AuthHelper {
     account_number.save();
     account_balance.$ = "";
     account_balance.save();
+    sacco_name.$ = "";
+    sacco_name.save();
+    sacco_balance.$ = "";
+    sacco_balance.save();
   }
 
   fetch_and_set() async {
@@ -66,6 +74,10 @@ class AuthHelper {
       account_number.save();
       account_balance.$ = userByTokenResponse.account_balance;
       account_balance.save();
+      sacco_name.$ = userByTokenResponse.sacco_name;
+      sacco_name.save();
+      sacco_balance.$ = userByTokenResponse.sacco_balance;
+      sacco_balance.save();
     } else {
       is_logged_in.$ = false;
       is_logged_in.save();
@@ -83,6 +95,10 @@ class AuthHelper {
       account_number.save();
       account_balance.$ = "";
       account_balance.save();
+      sacco_name.$ = "";
+      sacco_name.save();
+      sacco_balance.$ = "";
+      sacco_balance.save();
     }
   }
 }

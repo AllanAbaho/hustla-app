@@ -7,6 +7,7 @@ import 'package:active_ecommerce_flutter/custom/page_description.dart';
 import 'package:active_ecommerce_flutter/custom/process_completed.dart';
 import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
+import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_flutter/screens/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class _RepayFundsState extends State<RepayFunds> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   TextEditingController _amountController = TextEditingController();
   TextEditingController _saccoController =
-      TextEditingController(text: 'ABC EMPOWERMENT SACCO LIMITED');
+      TextEditingController(text: sacco_name.$);
   BuildContext loadingcontext;
 
   @override
@@ -66,7 +67,8 @@ class _RepayFundsState extends State<RepayFunds> {
                   'Sacco',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600),
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16),
                 ),
               ),
               Padding(
@@ -93,7 +95,8 @@ class _RepayFundsState extends State<RepayFunds> {
                   'Amount',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600),
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16),
                 ),
               ),
               Padding(

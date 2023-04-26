@@ -57,7 +57,91 @@ class _SaccoState extends State<Sacco> {
             )),
         body: Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: buildBody(context, widget.title, _categories)));
+            child: buildBody(context, widget.title, _categories,
+                extraWidget:
+                    sacco_name.$.isNotEmpty ? balanceWidget() : null)));
+  }
+
+  Widget balanceWidget() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 30.0, left: 10, right: 10),
+      child: Container(
+        height: 70,
+        decoration: BoxDecoration(
+          color: AppColors.brandColor,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.yellow.withOpacity(.2),
+              blurRadius: 20,
+              spreadRadius: 00.0,
+              offset: Offset(0.0, 10.0), // shadow direction: bottom right
+            )
+          ],
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          // border: Border.all(
+          //     color: MyTheme.light_grey, width: 1),
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(6.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    sacco_name.$,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w300),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(6.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '${sacco_balance.$} (Ksh)',
+                    style: TextStyle(
+                        color: AppColors.appBarColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16),
+                  ),
+                  SizedBox(
+                    height: 30,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return SaveFunds(title: 'Save Funds');
+                        }));
+                      },
+                      // ignore: sort_child_properties_last
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: SmallText(
+                          'Save Funds',
+                          color: Colors.black,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.yellow,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10), // <-- Radius
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   getCategories() {
@@ -99,17 +183,17 @@ class _SaccoState extends State<Sacco> {
         "description": "Select this option to repay funds to your Sacco.",
         "page": RepayFunds(title: 'Repay Funds'),
       },
-      {
-        "id": 18,
-        "name": "Save Funds",
-        "banner":
-            "https://www.vacu.org/sites/default/files/styles/max_325x325/public/article-featured-image/2019-06/GettyImages-869577740.jpg?itok=J88hNHrF",
-        "description":
-            "Select this option to save funds to your Sacco account.",
-        "page": SaveFunds(
-          title: 'Save Funds',
-        ),
-      },
+      // {
+      //   "id": 18,
+      //   "name": "Save Funds",
+      //   "banner":
+      //       "https://www.vacu.org/sites/default/files/styles/max_325x325/public/article-featured-image/2019-06/GettyImages-869577740.jpg?itok=J88hNHrF",
+      //   "description":
+      //       "Select this option to save funds to your Sacco account.",
+      //   "page": SaveFunds(
+      //     title: 'Save Funds',
+      //   ),
+      // },
     ];
     setState(() {
       _categories = _list;

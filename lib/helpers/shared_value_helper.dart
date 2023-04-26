@@ -29,6 +29,14 @@ final SharedValue<String> account_balance = SharedValue(
   value: "", // initial value
   key: "account_balance", // disk storage key for shared_preferences
 );
+final SharedValue<String> sacco_name = SharedValue(
+  value: "", // initial value
+  key: "sacco_name", // disk storage key for shared_preferences
+);
+final SharedValue<String> sacco_balance = SharedValue(
+  value: "", // initial value
+  key: "sacco_balance", // disk storage key for shared_preferences
+);
 
 final SharedValue<String> user_name = SharedValue(
   value: "", // initial value

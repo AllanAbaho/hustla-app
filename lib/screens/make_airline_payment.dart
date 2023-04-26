@@ -107,7 +107,7 @@ class _MakeAirlinePaymentState extends State<MakeAirlinePayment> {
             'Credit Card Payer',
             style: TextStyle(
                 color: AppColors.appBarColor,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w300,
                 fontSize: 16),
           ),
         ),
@@ -135,7 +135,7 @@ class _MakeAirlinePaymentState extends State<MakeAirlinePayment> {
             'Credit Card Number',
             style: TextStyle(
                 color: AppColors.appBarColor,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w300,
                 fontSize: 16),
           ),
         ),
@@ -163,7 +163,7 @@ class _MakeAirlinePaymentState extends State<MakeAirlinePayment> {
             'Credit Card Expiry',
             style: TextStyle(
                 color: AppColors.appBarColor,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w300,
                 fontSize: 16),
           ),
         ),
@@ -192,7 +192,7 @@ class _MakeAirlinePaymentState extends State<MakeAirlinePayment> {
             'Credit Card CVV',
             style: TextStyle(
                 color: AppColors.appBarColor,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w300,
                 fontSize: 16),
           ),
         ),

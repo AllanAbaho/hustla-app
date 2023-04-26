@@ -80,7 +80,7 @@ class _ToWalletState extends State<ToWallet> {
                   'Amount',
                   style: TextStyle(
                     color: Colors.black,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w300,
                     fontSize: 16,
                   ),
                 ),
@@ -109,7 +109,7 @@ class _ToWalletState extends State<ToWallet> {
                   'Account',
                   style: TextStyle(
                     color: Colors.black,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w300,
                     fontSize: 16,
                   ),
                 ),
@@ -149,7 +149,7 @@ class _ToWalletState extends State<ToWallet> {
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w300),
                       ),
                       onPressed: () {
                         onSubmit();

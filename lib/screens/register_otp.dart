@@ -143,7 +143,7 @@ class _RegisterOTPState extends State<RegisterOTP> {
                       style: TextStyle(
                           color: MyTheme.accent_color,
                           fontSize: 18,
-                          fontWeight: FontWeight.w600),
+                          fontWeight: FontWeight.w300),
                     ),
                   ),
                   Padding(
@@ -202,7 +202,7 @@ class _RegisterOTPState extends State<RegisterOTP> {
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 14,
-                                    fontWeight: FontWeight.w600),
+                                    fontWeight: FontWeight.w300),
                               ),
                               onPressed: () {
                                 onPressConfirm();

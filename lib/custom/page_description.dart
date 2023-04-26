@@ -18,11 +18,11 @@ Widget buildDescription(String title,
             color: AppColors.dashboardColor,
             fontSize: 25,
             height: 2,
-            fontWeight: FontWeight.bold),
+            fontWeight: FontWeight.w300),
       ),
       Padding(
         padding:
-            const EdgeInsets.only(top: 20, left: 8.0, bottom: 50, right: 8.0),
+            const EdgeInsets.only(top: 20, left: 8.0, bottom: 20, right: 8.0),
         child: Text(
           description,
           textAlign: TextAlign.center,
@@ -30,20 +30,22 @@ Widget buildDescription(String title,
               color: MyTheme.font_grey,
               fontSize: 14,
               height: 1.6,
-              fontWeight: FontWeight.w600),
+              fontWeight: FontWeight.w300),
         ),
       ),
     ],
   );
 }
 
-Widget buildBody(BuildContext context, String title, List _categories) {
+Widget buildBody(BuildContext context, String title, List _categories,
+    {extraWidget}) {
   return CustomScrollView(
     physics: AlwaysScrollableScrollPhysics(),
     slivers: [
       SliverList(
           delegate: SliverChildListDelegate([
         buildDescription(title),
+        extraWidget ?? Container(),
         buildCategoryList(context, _categories),
       ]))
     ],
@@ -104,7 +106,7 @@ Widget buildCategoryItemCard(
               style: TextStyle(
                   color: AppColors.dashboardColor,
                   fontSize: 16,
-                  fontWeight: FontWeight.w600),
+                  fontWeight: FontWeight.w300),
             ),
           ),
           Container(
@@ -120,7 +122,7 @@ Widget buildCategoryItemCard(
                   color: MyTheme.font_grey,
                   fontSize: 10,
                   height: 1.6,
-                  fontWeight: FontWeight.w600),
+                  fontWeight: FontWeight.w300),
             ),
           ),
           Padding(
@@ -139,7 +141,7 @@ Widget buildCategoryItemCard(
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 12,
-                        fontWeight: FontWeight.w600),
+                        fontWeight: FontWeight.w300),
                   ),
                   onPressed: () {
                     if (travelCategories[index]['page'] != null) {

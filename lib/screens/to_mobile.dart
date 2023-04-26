@@ -79,7 +79,7 @@ class _ToMobileState extends State<ToMobile> {
                   'Amount',
                   style: TextStyle(
                     color: Colors.black,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w300,
                     fontSize: 16,
                   ),
                 ),
@@ -108,7 +108,7 @@ class _ToMobileState extends State<ToMobile> {
                   'Phone Number',
                   style: TextStyle(
                     color: Colors.black,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w300,
                     fontSize: 16,
                   ),
                 ),
@@ -148,7 +148,7 @@ class _ToMobileState extends State<ToMobile> {
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w300),
                       ),
                       onPressed: () {
                         onSubmit();

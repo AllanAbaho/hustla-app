@@ -111,7 +111,7 @@ class _FlightOptionsState extends State<FlightOptions> {
             style: TextStyle(
                 color: AppColors.dashboardColor,
                 fontSize: 15,
-                fontWeight: FontWeight.w600),
+                fontWeight: FontWeight.w300),
           ),
           SizedBox(width: MediaQuery.of(context).size.width * 0.14),
           Visibility(
@@ -131,7 +131,7 @@ class _FlightOptionsState extends State<FlightOptions> {
               style: TextStyle(
                   color: AppColors.dashboardColor,
                   fontSize: 15,
-                  fontWeight: FontWeight.w600),
+                  fontWeight: FontWeight.w300),
             ),
           ),
         ],
@@ -250,7 +250,7 @@ class _FlightOptionsState extends State<FlightOptions> {
                     style: TextStyle(
                         color: AppColors.dashboardColor,
                         fontSize: 16,
-                        fontWeight: FontWeight.w600),
+                        fontWeight: FontWeight.w300),
                   ),
                   SizedBox(height: 5),
                   Text(
@@ -465,7 +465,7 @@ class _FlightOptionsState extends State<FlightOptions> {
                             style: TextStyle(
                                 color: AppColors.dashboardColor,
                                 fontSize: 16,
-                                fontWeight: FontWeight.w600),
+                                fontWeight: FontWeight.w300),
                           ),
                           Text(
                             '${outBound.fromcode}  ->  ${outBound.tocode}  ',
@@ -513,7 +513,7 @@ class _FlightOptionsState extends State<FlightOptions> {
                               style: TextStyle(
                                   color: AppColors.dashboardColor,
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w600),
+                                  fontWeight: FontWeight.w300),
                             ),
                             Text(
                               '${inBound.fromcode}  ->  ${inBound.tocode}  ',

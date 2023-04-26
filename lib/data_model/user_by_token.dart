@@ -21,6 +21,8 @@ class UserByTokenResponse {
     this.phone,
     this.account_number,
     this.account_balance,
+    this.sacco_name,
+    this.sacco_balance,
   });
 
   bool result;
@@ -32,6 +34,8 @@ class UserByTokenResponse {
   String phone;
   String account_number;
   String account_balance;
+  String sacco_name;
+  String sacco_balance;
 
   factory UserByTokenResponse.fromJson(Map<String, dynamic> json) =>
       UserByTokenResponse(
@@ -47,6 +51,9 @@ class UserByTokenResponse {
             json["account_number"] == null ? null : json["account_number"],
         account_balance:
             json["account_balance"] == null ? null : json["account_balance"],
+        sacco_name: json["sacco_name"] == null ? null : json["sacco_name"],
+        sacco_balance:
+            json["sacco_balance"] == null ? null : json["sacco_balance"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -59,5 +66,7 @@ class UserByTokenResponse {
         "phone": phone == null ? null : phone,
         "account_number": account_number == null ? null : account_number,
         "account_balance": account_balance == null ? null : account_balance,
+        "sacco_name": sacco_name == null ? null : sacco_name,
+        "sacco_balance": sacco_balance == null ? null : sacco_balance,
       };
 }

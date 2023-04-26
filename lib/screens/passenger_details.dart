@@ -183,7 +183,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                     'Enter Passenger ${_passengerList.length + 1}  Details',
                     style: TextStyle(
                         color: AppColors.appBarColor,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w300,
                         fontSize: 20),
                   ),
                 ),
@@ -194,7 +194,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                   'Title',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -218,7 +218,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                   'First Name',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -245,7 +245,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                   'Last Name',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -272,7 +272,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                   'Birth Date',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -302,7 +302,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                   'Phone Number',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -329,7 +329,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                   'Email Address',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -356,7 +356,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                   'Age',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -384,7 +384,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                   'Nationality',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -408,7 +408,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                   'Identification Type',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -432,7 +432,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                   'Identification Number',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -460,7 +460,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                   'Identification Expiry Date',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -501,7 +501,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w300),
                       ),
                       onPressed: () {
                         _onClickNext();

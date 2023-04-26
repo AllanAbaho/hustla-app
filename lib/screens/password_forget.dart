@@ -109,7 +109,7 @@ class _PasswordForgetState extends State<PasswordForget> {
                           .password_forget_screen_phone,
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -222,7 +222,7 @@ class _PasswordForgetState extends State<PasswordForget> {
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 13,
-                          fontWeight: FontWeight.w600),
+                          fontWeight: FontWeight.w300),
                     ),
                     onPressed: () {
                       onPressSendCode();

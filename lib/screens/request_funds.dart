@@ -4,6 +4,8 @@ import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/page_description.dart';
 import 'package:active_ecommerce_flutter/custom/process_completed.dart';
 import 'package:active_ecommerce_flutter/custom/resources.dart';
+import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:active_ecommerce_flutter/repositories/top_up_repository.dart';
 import 'package:active_ecommerce_flutter/screens/main.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
@@ -28,7 +30,7 @@ class _RequestFundsState extends State<RequestFunds> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _contactController = TextEditingController();
   TextEditingController _saccoController =
-      TextEditingController(text: 'ABC EMPOWERMENT SACCO LIMITED');
+      TextEditingController(text: sacco_name.$);
   BuildContext loadingcontext;
 
   @override
@@ -66,7 +68,7 @@ class _RequestFundsState extends State<RequestFunds> {
                   'Sacco',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -94,7 +96,7 @@ class _RequestFundsState extends State<RequestFunds> {
                   'Amount',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -122,7 +124,7 @@ class _RequestFundsState extends State<RequestFunds> {
                   'Repayment period (months)',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -150,7 +152,7 @@ class _RequestFundsState extends State<RequestFunds> {
                   'Purpose of funds',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -178,7 +180,7 @@ class _RequestFundsState extends State<RequestFunds> {
                   'Next of kin name',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -206,7 +208,7 @@ class _RequestFundsState extends State<RequestFunds> {
                   'Next of kin contact',
                   style: TextStyle(
                       color: AppColors.appBarColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w300,
                       fontSize: 16),
                 ),
               ),
@@ -245,7 +247,7 @@ class _RequestFundsState extends State<RequestFunds> {
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w300),
                       ),
                       onPressed: () {
                         onSubmit();
@@ -280,6 +282,10 @@ class _RequestFundsState extends State<RequestFunds> {
     var purpose = _purposeController.text.toString();
     var name = _nameController.text.toString();
     var contact = _contactController.text.toString();
+    var serviceName = 'REQUEST_FOR_FUNDS';
+    String transactionId = DateTime.now().millisecondsSinceEpoch.toString();
+    transactionId = transactionId + user_name.$;
+
     if (amount == "") {
       ToastComponent.showDialog('Please enter the amount',
           gravity: Toast.center, duration: Toast.lengthLong);
@@ -301,23 +307,32 @@ class _RequestFundsState extends State<RequestFunds> {
           gravity: Toast.center, duration: Toast.lengthLong);
       return;
     }
-    // loading();
-    // var topUpResponse = await PaymentRepository().topUpResponse(
-    //   amount,
-    // );
+    loading();
+    var topUpResponse = await PaymentRepository().transactionResponse(
+      account_number.$,
+      account_number.$,
+      amount,
+      serviceName,
+      account_number.$,
+      user_phone.$,
+      user_name.$,
+      user_name.$,
+      transactionId,
+      repaymentPeriod: period,
+      fundPurpose: purpose,
+      nextOfKinName: name,
+      nextOfKinContact: contact,
+    );
 
-    // Navigator.of(loadingcontext).pop();
+    Navigator.of(loadingcontext).pop();
 
-    // if (topUpResponse.status != 'PENDING') {
-    //   ToastComponent.showDialog(topUpResponse.message,
-    //       gravity: Toast.center, duration: Toast.lengthLong);
-    // } else {
-    //   ToastComponent.showDialog(topUpResponse.message,
-    //       gravity: Toast.center, duration: Toast.lengthLong);
-    //   setState(() {
-    //     isProcessing = true;
-    //   });
-    // }
+    if (topUpResponse.status != 'SUCCESS') {
+      ToastComponent.showDialog(topUpResponse.message,
+          gravity: Toast.center, duration: Toast.lengthLong);
+    } else {
+      ToastComponent.showDialog(topUpResponse.message,
+          gravity: Toast.center, duration: Toast.lengthLong);
+    }
     ToastComponent.showDialog(
         'Your application has been submitted successfully',
         gravity: Toast.center,

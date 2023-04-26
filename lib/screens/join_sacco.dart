@@ -4,10 +4,12 @@ import 'package:active_ecommerce_flutter/custom/page_description.dart';
 import 'package:active_ecommerce_flutter/custom/process_completed.dart';
 import 'package:active_ecommerce_flutter/custom/resources.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
+import 'package:active_ecommerce_flutter/data_model/destination_response.dart';
 import 'package:active_ecommerce_flutter/data_model/sacco_list_response.dart';
 import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
 import 'package:active_ecommerce_flutter/repositories/sacco_repository.dart';
 import 'package:active_ecommerce_flutter/screens/main.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
@@ -26,11 +28,9 @@ class JoinSacco extends StatefulWidget {
 }
 
 class _JoinSaccoState extends State<JoinSacco> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   BuildContext loadingcontext;
   List<Sacco> _saccoList = [];
   Sacco _selectedSacco;
-  List<DropdownMenuItem<Sacco>> _dropdownSaccoListItems;
 
   @override
   void initState() {
@@ -50,7 +50,12 @@ class _JoinSaccoState extends State<JoinSacco> {
             )),
         body: Padding(
           padding: const EdgeInsets.only(top: 8.0),
-          child: buildBody(),
+          child: _saccoList.isEmpty
+              ? Center(
+                  child: CircularProgressIndicator(
+                  color: MyTheme.accent_color,
+                ))
+              : buildBody(),
         ));
   }
 
@@ -68,47 +73,28 @@ class _JoinSaccoState extends State<JoinSacco> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                          border: Border.symmetric(
-                              vertical: BorderSide(
-                                  color: AppColors.appBarColor, width: 1),
-                              horizontal: BorderSide(
-                                  color: AppColors.appBarColor, width: 1))),
-                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                      height: 50,
-                      width: MediaQuery.of(context).size.width,
-                      child: FittedBox(
-                        child: new DropdownButton<Sacco>(
-                          icon: Padding(
-                            padding: app_language_rtl.$
-                                ? const EdgeInsets.only(right: 18.0)
-                                : const EdgeInsets.only(left: 18.0),
-                            child:
-                                Icon(Icons.expand_more, color: Colors.black54),
-                          ),
-                          hint: Text(
-                            'Select Sacco',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 13,
-                            ),
-                          ),
-                          style: TextStyle(color: Colors.black, fontSize: 13),
-                          iconSize: 13,
-                          underline: SizedBox(),
-                          value: _selectedSacco,
-                          items: _dropdownSaccoListItems,
-                          onChanged: (Sacco selectedSacco) {
-                            setState(() {
-                              _selectedSacco = selectedSacco;
-                            });
-                          },
-                        ),
-                      ),
+                    padding: const EdgeInsets.only(bottom: 4.0),
+                    child: Text(
+                      'Select Sacco',
+                      style: TextStyle(
+                          color: AppColors.appBarColor,
+                          fontWeight: FontWeight.w300,
+                          fontSize: 16),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 25.0),
+                    child: DropdownSearch<Sacco>(
+                      items: _saccoList,
+                      itemAsString: (item) {
+                        return item.name;
+                      },
+                      onChanged: (item) {
+                        setState(() {
+                          _selectedSacco = item;
+                        });
+                      },
+                      selectedItem: _saccoList[0],
                     ),
                   ),
                   Padding(
@@ -164,26 +150,6 @@ class _JoinSaccoState extends State<JoinSacco> {
     }
   }
 
-  List<DropdownMenuItem<Sacco>> buildDropdownSaccoListItems(List saccoList) {
-    List<DropdownMenuItem<Sacco>> items = List();
-    for (Sacco saccoItem in saccoList) {
-      items.add(
-        DropdownMenuItem(
-          value: saccoItem,
-          child: Text(saccoItem.name),
-        ),
-      );
-    }
-    return items;
-  }
-
-  setDropDownValues() {
-    setState(() {
-      _dropdownSaccoListItems = buildDropdownSaccoListItems(_saccoList);
-      _selectedSacco = _dropdownSaccoListItems[0].value;
-    });
-  }
-
   loading() {
     showDialog(
         context: context,
@@ -206,7 +172,8 @@ class _JoinSaccoState extends State<JoinSacco> {
 
   getSaccos() async {
     var res = await SaccoRepository().getSaccoList();
-    _saccoList.addAll(res.members);
-    setDropDownValues();
+    setState(() {
+      _saccoList = res.members;
+    });
   }
 }

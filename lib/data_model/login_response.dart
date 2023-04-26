@@ -59,6 +59,8 @@ class User {
     this.phone,
     this.account_number,
     this.account_balance,
+    this.sacco_name,
+    this.sacco_balance,
   });
 
   int id;
@@ -70,6 +72,8 @@ class User {
   String phone;
   String account_number;
   String account_balance;
+  String sacco_name;
+  String sacco_balance;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
@@ -81,6 +85,8 @@ class User {
         phone: json["phone"],
         account_number: json["account_number"],
         account_balance: json["account_balance"],
+        sacco_name: json["sacco_name"],
+        sacco_balance: json["sacco_balance"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -93,5 +99,7 @@ class User {
         "phone": phone,
         "account_number": account_number,
         "account_balance": account_balance,
+        "sacco_name": sacco_name,
+        "sacco_balance": sacco_balance,
       };
 }
