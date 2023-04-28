@@ -58,8 +58,7 @@ class _SaccoState extends State<Sacco> {
         body: Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: buildBody(context, widget.title, _categories,
-                extraWidget:
-                    sacco_name.$.isNotEmpty ? balanceWidget() : null)));
+                extraWidget: sacco_name.$ != null ? balanceWidget() : null)));
   }
 
   Widget balanceWidget() {
@@ -198,6 +197,5 @@ class _SaccoState extends State<Sacco> {
     setState(() {
       _categories = _list;
     });
-    ;
   }
 }

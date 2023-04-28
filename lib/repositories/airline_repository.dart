@@ -32,19 +32,6 @@ class AirlineRepository {
     return createBookingResponseFromJson(response.body);
   }
 
-  Future<ConfirmBookingResponse> confirmBooking(postData) async {
-    Uri url = Uri.parse("${AppConfig.AIRLINE_API}/confirmBooking");
-    final response = await http.post(url,
-        headers: {
-          "auth_id": AppConfig.auth_id,
-          "auth_password": AppConfig.auth_password,
-          "Content-Type": AppConfig.content_type,
-        },
-        body: postData);
-
-    return confirmBookingResponseFromJson(response.body);
-  }
-
   Future<TicketBookingResponse> ticketBooking(postData) async {
     Uri url = Uri.parse("${AppConfig.AIRLINE_API}/ticketBooking");
     final response = await http.post(url,
@@ -56,6 +43,19 @@ class AirlineRepository {
         body: postData);
 
     return ticketBookingResponseFromJson(response.body);
+  }
+
+  Future<ConfirmBookingResponse> confirmBooking(postData) async {
+    Uri url = Uri.parse("${AppConfig.AIRLINE_API}/confirmBooking");
+    final response = await http.post(url,
+        headers: {
+          "auth_id": AppConfig.auth_id,
+          "auth_password": AppConfig.auth_password,
+          "Content-Type": AppConfig.content_type,
+        },
+        body: postData);
+
+    return confirmBookingResponseFromJson(response.body);
   }
 
   Future<MakeAirlinePaymentResponse> makeAirlinePayment(postData) async {

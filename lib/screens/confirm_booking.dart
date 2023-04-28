@@ -16,7 +16,6 @@ import 'package:active_ecommerce_flutter/screens/choose_payment_method.dart';
 import 'package:active_ecommerce_flutter/screens/edit_passenger.dart';
 import 'package:active_ecommerce_flutter/screens/main.dart';
 import 'package:active_ecommerce_flutter/screens/make_airline_payment.dart';
-import 'package:active_ecommerce_flutter/screens/ticket_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

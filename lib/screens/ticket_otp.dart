@@ -148,7 +148,7 @@ class _TicketOTPState extends State<TicketOTP> {
           return;
         });
       } else {
-        ToastComponent.showDialog(ticketResponse.status,
+        ToastComponent.showDialog(ticketResponse.success.toString(),
             gravity: Toast.center, duration: Toast.lengthLong);
         return;
       }

@@ -292,15 +292,36 @@ class _MakeAirlinePaymentState extends State<MakeAirlinePayment> {
         return;
       }
     } else {
-      ToastComponent.showDialog(paymentResponse.paymentstatusexplanation,
-          gravity: Toast.center, duration: Toast.lengthLong);
+      Map rawData = {
+        "aerocrs": {
+          "parms": {"bookingid": widget.bookingid}
+        }
+      };
+      var data = jsonEncode(rawData);
+      loading('Getting Ticket...');
+      var ticketResponse = await AirlineRepository().ticketBooking(data);
+      Navigator.of(loadingContext).pop();
 
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-        return ProcessCompleted(
-          description:
-              'Congratulations, Your payment was received successfully',
-        );
-      }));
+      if (ticketResponse.success == false) {
+        ticketResponse.errors.forEach((error) {
+          ToastComponent.showDialog(error,
+              gravity: Toast.center, duration: Toast.lengthLong);
+          return;
+        });
+      } else {
+        ToastComponent.showDialog(
+            'Congratulations, Your payment was received successfully',
+            gravity: Toast.center,
+            duration: Toast.lengthLong);
+
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) {
+          return ProcessCompleted(
+            description:
+                'Congratulations, Your payment was received successfully. Please check the confirmation email to download your E-ticket(s)',
+          );
+        }));
+      }
     }
   }
 
