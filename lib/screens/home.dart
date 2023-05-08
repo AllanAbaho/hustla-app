@@ -259,7 +259,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final double statusBarHeight = MediaQuery.of(context).padding.top;
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: AppColors.dashboardColor,
         key: _scaffoldKey,
@@ -275,88 +276,98 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         //   ),
         // ),
         //drawer: MainDrawer(),
-        body: Stack(
+        body: Column(
           children: [
-            RefreshIndicator(
-              color: MyTheme.dark_font_grey,
-              backgroundColor: Colors.white,
-              onRefresh: _onRefresh,
-              displacement: 0,
-              child: CustomScrollView(
-                controller: _mainScrollController,
-                physics: const BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics()),
-                slivers: <Widget>[
-                  SliverList(
-                    delegate: SliverChildListDelegate([
-                      formerBanner(),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 12, bottom: 8, left: 10, right: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            MediumText(
-                              'Hustla Categories',
-                            ),
-                            SmallText('View More >>>')
-                          ],
-                        ),
-                      ),
-                      hustlaCategories(context),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: Container(
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(25),
-                                topRight: Radius.circular(25),
+            hustlaLogo(),
+            Container(
+              height: screenHeight,
+              child: Stack(
+                children: [
+                  RefreshIndicator(
+                    color: MyTheme.dark_font_grey,
+                    backgroundColor: Colors.white,
+                    onRefresh: _onRefresh,
+                    displacement: 0,
+                    child: CustomScrollView(
+                      controller: _mainScrollController,
+                      physics: const BouncingScrollPhysics(
+                          parent: AlwaysScrollableScrollPhysics()),
+                      slivers: <Widget>[
+                        SliverList(
+                          delegate: SliverChildListDelegate([
+                            formerBanner(),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 12, bottom: 8, left: 10, right: 10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                // ignore: prefer_const_literals_to_create_immutables
+                                children: [
+                                  MediumText(
+                                    'Hustla Categories',
+                                  ),
+                                  SmallText('View More >>>')
+                                ],
                               ),
+                            ),
+                            hustlaCategories(context),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
                               child: Container(
-                                color: Colors.white,
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 12, left: 10),
-                                      child: Row(
-                                        // ignore: prefer_const_literals_to_create_immutables
-                                        children: [
-                                          MediumText('Hustla News',
-                                              color: Colors.black),
-                                        ],
-                                      ),
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(25),
+                                      topRight: Radius.circular(25),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 12.0, left: 10),
-                                      child: hustlerBlog(),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 15.0, left: 10),
-                                      child: Row(
-                                        // ignore: prefer_const_literals_to_create_immutables
+                                    child: Container(
+                                      color: Colors.white,
+                                      child: Column(
                                         children: [
-                                          MediumText(
-                                            'Advertise with us',
-                                            color: Colors.black,
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 12, left: 10),
+                                            child: Row(
+                                              // ignore: prefer_const_literals_to_create_immutables
+                                              children: [
+                                                MediumText('Hustla News',
+                                                    color: Colors.black),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 12.0, left: 10),
+                                            child: hustlerBlog(),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 15.0, left: 10),
+                                            child: Row(
+                                              // ignore: prefer_const_literals_to_create_immutables
+                                              children: [
+                                                MediumText(
+                                                  'Advertise with us',
+                                                  color: Colors.black,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10.0, bottom: 20),
+                                            child: buildHomeCarouselSlider(
+                                                context),
                                           ),
                                         ],
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10.0, bottom: 80),
-                                      child: buildHomeCarouselSlider(context),
-                                    ),
-                                  ],
-                                ),
-                              )),
+                                    )),
+                              ),
+                            ),
+                          ]),
                         ),
-                      ),
-                    ]),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -378,16 +389,19 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     );
   }
 
+  Widget hustlaLogo() {
+    return Container(
+      color: AppColors.appBarColor,
+      child: Image.asset(
+        'assets/images/hustla_logo.png',
+        height: MediaQuery.of(context).size.height * 0.18,
+      ),
+    );
+  }
+
   Widget formerBanner() {
     return Container(
       child: Column(children: [
-        Container(
-          color: AppColors.appBarColor,
-          child: Image.asset(
-            'assets/images/hustla_logo.png',
-            height: 130,
-          ),
-        ),
         Padding(
           padding:
               const EdgeInsets.only(top: 10.0, left: 10, right: 10, bottom: 2),
@@ -811,184 +825,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         height: 100,
       );
     }
-  }
-
-  _launchURL(String link) async {
-    final uri = Uri.parse(link);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    } else {
-      throw 'Could not launch $link';
-    }
-  }
-
-  Widget buildHomeBannerOne(context) {
-    if (_isBannerOneInitial && _bannerOneImageList.length == 0) {
-      return Padding(
-          padding:
-              const EdgeInsets.only(left: 18.0, right: 18, top: 10, bottom: 20),
-          child: ShimmerHelper().buildBasicShimmer(height: 120));
-    } else if (_bannerOneImageList.length > 0) {
-      return Padding(
-        padding: app_language_rtl.$
-            ? const EdgeInsets.only(right: 9.0)
-            : const EdgeInsets.only(left: 9.0),
-        child: CarouselSlider(
-          options: CarouselOptions(
-              aspectRatio: 270 / 120,
-              viewportFraction: .75,
-              initialPage: 0,
-              padEnds: false,
-              enableInfiniteScroll: false,
-              reverse: false,
-              autoPlay: true,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  _current_slider = index;
-                });
-              }),
-          items: _bannerOneImageList.map((i) {
-            return Builder(
-              builder: (BuildContext context) {
-                return Padding(
-                  padding: const EdgeInsets.only(
-                      left: 9.0, right: 9, top: 20.0, bottom: 20),
-                  child: Container(
-                      //color: Colors.amber,
-                      width: double.infinity,
-                      decoration: BoxDecorations.buildBoxDecoration_1(),
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                          child: FadeInImage.assetNetwork(
-                            placeholder: 'assets/placeholder_rectangle.png',
-                            image: i,
-                            fit: BoxFit.cover,
-                          ))),
-                );
-              },
-            );
-          }).toList(),
-        ),
-      );
-    } else if (!_isBannerOneInitial && _bannerOneImageList.length == 0) {
-      return Container(
-          height: 100,
-          child: Center(
-              child: Text(
-            AppLocalizations.of(context).home_screen_no_carousel_image_found,
-            style: TextStyle(color: MyTheme.font_grey),
-          )));
-    } else {
-      // should not be happening
-      return Container(
-        height: 100,
-      );
-    }
-  }
-
-  Widget buildHomeBannerTwo(context) {
-    if (_isBannerTwoInitial && _bannerTwoImageList.length == 0) {
-      return Padding(
-          padding:
-              const EdgeInsets.only(left: 18.0, right: 18, top: 10, bottom: 10),
-          child: ShimmerHelper().buildBasicShimmer(height: 120));
-    } else if (_bannerTwoImageList.length > 0) {
-      return Padding(
-        padding: app_language_rtl.$
-            ? const EdgeInsets.only(right: 9.0)
-            : const EdgeInsets.only(left: 9.0),
-        child: CarouselSlider(
-          options: CarouselOptions(
-              aspectRatio: 270 / 120,
-              viewportFraction: 0.7,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: Duration(seconds: 5),
-              autoPlayAnimationDuration: Duration(milliseconds: 1000),
-              autoPlayCurve: Curves.easeInExpo,
-              enlargeCenterPage: false,
-              scrollDirection: Axis.horizontal,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  _current_slider = index;
-                });
-              }),
-          items: _bannerTwoImageList.map((i) {
-            return Builder(
-              builder: (BuildContext context) {
-                return Padding(
-                  padding: const EdgeInsets.only(
-                      left: 9.0, right: 9, top: 20.0, bottom: 10),
-                  child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecorations.buildBoxDecoration_1(),
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                          child: FadeInImage.assetNetwork(
-                            placeholder: 'assets/placeholder_rectangle.png',
-                            image: i,
-                            fit: BoxFit.fill,
-                          ))),
-                );
-              },
-            );
-          }).toList(),
-        ),
-      );
-    } else if (!_isCarouselInitial && _carouselImageList.length == 0) {
-      return Container(
-          height: 100,
-          child: Center(
-              child: Text(
-            AppLocalizations.of(context).home_screen_no_carousel_image_found,
-            style: TextStyle(color: MyTheme.font_grey),
-          )));
-    } else {
-      // should not be happening
-      return Container(
-        height: 100,
-      );
-    }
-  }
-
-  buildHomeSearchBox(BuildContext context) {
-    return Container(
-      height: 36,
-      decoration: BoxDecorations.buildBoxDecoration_1(),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              AppLocalizations.of(context).home_screen_search,
-              style: TextStyle(fontSize: 13.0, color: MyTheme.textfield_grey),
-            ),
-            Image.asset(
-              'assets/search.png',
-              height: 16,
-              //color: MyTheme.dark_grey,
-              color: MyTheme.dark_grey,
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Container buildProductLoadingContainer() {
-    return Container(
-      height: _showAllLoadingContainer ? 36 : 0,
-      width: double.infinity,
-      color: Colors.white,
-      child: Center(
-        child: Text(_totalAllProductData == _allProductList.length
-            ? AppLocalizations.of(context).common_no_more_products
-            : AppLocalizations.of(context).common_loading_more_products),
-      ),
-    );
   }
 
   @override
