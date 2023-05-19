@@ -4,7 +4,7 @@
 //https://app.quicktype.io/
 import 'dart:convert';
 
-import 'package:active_ecommerce_flutter/data_model/confirm_booking_response.dart';
+import 'package:hustla/data_model/confirm_booking_response.dart';
 
 TicketBookingResponse ticketBookingResponseFromJson(String str) =>
     TicketBookingResponse.fromJson(json.decode(str));

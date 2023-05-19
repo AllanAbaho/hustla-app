@@ -1,7 +1,8 @@
-import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:hustla/my_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/screens/product_details.dart';
-import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
+import 'package:hustla/screens/product_details.dart';
+import 'package:hustla/custom/box_decorations.dart';
+
 class MiniProductCard extends StatefulWidget {
   int id;
   String image;
@@ -10,7 +11,14 @@ class MiniProductCard extends StatefulWidget {
   String stroked_price;
   bool has_discount;
 
-  MiniProductCard({Key key, this.id, this.image, this.name, this.main_price,this.stroked_price,this.has_discount})
+  MiniProductCard(
+      {Key key,
+      this.id,
+      this.image,
+      this.name,
+      this.main_price,
+      this.stroked_price,
+      this.has_discount})
       : super(key: key);
 
   @override
@@ -41,7 +49,7 @@ class _MiniProductCardState extends State<MiniProductCard> {
                             top: Radius.circular(6), bottom: Radius.zero),
                         child: FadeInImage.assetNetwork(
                           placeholder: 'assets/placeholder.png',
-                          image:  widget.image,
+                          image: widget.image,
                           fit: BoxFit.cover,
                         ))),
               ),
@@ -58,18 +66,20 @@ class _MiniProductCardState extends State<MiniProductCard> {
                       fontWeight: FontWeight.w400),
                 ),
               ),
-              widget.has_discount ? Padding(
-                padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-                child: Text(
-                  widget.stroked_price,
-                  maxLines: 1,
-                  style: TextStyle(
-                      decoration:TextDecoration.lineThrough,
-                      color: MyTheme.medium_grey,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600),
-                ),
-              ):Container(),
+              widget.has_discount
+                  ? Padding(
+                      padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                      child: Text(
+                        widget.stroked_price,
+                        maxLines: 1,
+                        style: TextStyle(
+                            decoration: TextDecoration.lineThrough,
+                            color: MyTheme.medium_grey,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    )
+                  : Container(),
               Padding(
                 padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
                 child: Text(
@@ -81,7 +91,6 @@ class _MiniProductCardState extends State<MiniProductCard> {
                       fontWeight: FontWeight.w700),
                 ),
               ),
-
             ]),
       ),
     );

@@ -1,8 +1,8 @@
-import 'package:active_ecommerce_flutter/app_config.dart';
+import 'package:hustla/app_config.dart';
 import 'package:http/http.dart' as http;
-import 'package:active_ecommerce_flutter/data_model/wallet_balance_response.dart';
-import 'package:active_ecommerce_flutter/data_model/wallet_recharge_response.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:hustla/data_model/wallet_balance_response.dart';
+import 'package:hustla/data_model/wallet_recharge_response.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
 
 class WalletRepository {
   Future<WalletBalanceResponse> getBalance() async {
@@ -21,8 +21,7 @@ class WalletRepository {
   }
 
   Future<WalletRechargeResponse> getRechargeList({int page = 1}) async {
-    Uri url = Uri.parse(
-        "${AppConfig.BASE_URL}/wallet/history?page=${page}");
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/wallet/history?page=${page}");
 
     final response = await http.get(
       url,

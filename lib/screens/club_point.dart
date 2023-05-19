@@ -1,18 +1,17 @@
-import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
-import 'package:active_ecommerce_flutter/custom/device_info.dart';
-import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
+import 'package:hustla/custom/box_decorations.dart';
+import 'package:hustla/custom/device_info.dart';
+import 'package:hustla/custom/useful_elements.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
-import 'package:active_ecommerce_flutter/app_config.dart';
-import 'package:active_ecommerce_flutter/repositories/clubpoint_repository.dart';
-import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
-import 'package:active_ecommerce_flutter/custom/toast_component.dart';
-import 'package:active_ecommerce_flutter/screens/wallet.dart';
+import 'package:hustla/my_theme.dart';
+import 'package:hustla/app_config.dart';
+import 'package:hustla/repositories/clubpoint_repository.dart';
+import 'package:hustla/helpers/shimmer_helper.dart';
+import 'package:hustla/custom/toast_component.dart';
+import 'package:hustla/screens/wallet.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
-
+import 'package:hustla/helpers/shared_value_helper.dart';
 
 class Clubpoint extends StatefulWidget {
   @override
@@ -28,7 +27,6 @@ class _ClubpointState extends State<Clubpoint> {
   int _page = 1;
   int _totalData = 0;
   bool _showLoadingContainer = false;
-
 
   @override
   void initState() {
@@ -77,45 +75,40 @@ class _ClubpointState extends State<Clubpoint> {
     fetchData();
   }
 
-  onPressConvert(item_id,_convertedSnackbar) async{
-
+  onPressConvert(item_id, _convertedSnackbar) async {
     var clubpointToWalletResponse =
-    await ClubpointRepository().getClubpointToWalletResponse(
-      item_id
-    );
+        await ClubpointRepository().getClubpointToWalletResponse(item_id);
 
     if (clubpointToWalletResponse.result == false) {
-      ToastComponent.showDialog(clubpointToWalletResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
+      ToastComponent.showDialog(clubpointToWalletResponse.message,
+          gravity: Toast.center, duration: Toast.lengthLong);
     } else {
       /*ToastComponent.showDialog(clubpointToWalletResponse.message, gravity: Toast.center, duration: Toast.lengthLong);*/
       Scaffold.of(context).showSnackBar(_convertedSnackbar);
 
       _converted_ids.add(item_id);
-      setState(() {
-
-      });
+      setState(() {});
     }
-
-
   }
 
   onPopped(value) async {
-     reset();
-     fetchData();
+    reset();
+    fetchData();
   }
 
   @override
   Widget build(BuildContext context) {
-
     SnackBar _convertedSnackbar = SnackBar(
       content: Text(
-        AppLocalizations.of(context).club_point_screen_snackbar_points_converted,
+        AppLocalizations.of(context)
+            .club_point_screen_snackbar_points_converted,
         style: TextStyle(color: MyTheme.font_grey),
       ),
       backgroundColor: MyTheme.soft_accent_color,
       duration: const Duration(seconds: 3),
       action: SnackBarAction(
-        label: AppLocalizations.of(context).club_point_screen_snackbar_show_wallet,
+        label:
+            AppLocalizations.of(context).club_point_screen_snackbar_show_wallet,
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return Wallet();
@@ -157,7 +150,8 @@ class _ClubpointState extends State<Clubpoint> {
               ),
             ),
             Align(
-                alignment: Alignment.bottomCenter, child: buildLoadingContainer())
+                alignment: Alignment.bottomCenter,
+                child: buildLoadingContainer())
           ],
         ),
       ),
@@ -179,7 +173,7 @@ class _ClubpointState extends State<Clubpoint> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-backgroundColor: Colors.white,
+      backgroundColor: Colors.white,
       centerTitle: false,
       leading: Builder(
         builder: (context) => IconButton(
@@ -189,7 +183,10 @@ backgroundColor: Colors.white,
       ),
       title: Text(
         AppLocalizations.of(context).club_point_screen_earned_points,
-        style: TextStyle(fontSize: 16, color: MyTheme.dark_font_grey,fontWeight: FontWeight.bold),
+        style: TextStyle(
+            fontSize: 16,
+            color: MyTheme.dark_font_grey,
+            fontWeight: FontWeight.bold),
       ),
       elevation: 0.0,
       titleSpacing: 0,
@@ -204,8 +201,10 @@ backgroundColor: Colors.white,
     } else if (_list.length > 0) {
       return SingleChildScrollView(
         child: ListView.separated(
-          separatorBuilder: (context,index){
-            return SizedBox(height:14 ,);
+          separatorBuilder: (context, index) {
+            return SizedBox(
+              height: 14,
+            );
           },
           itemCount: _list.length,
           scrollDirection: Axis.vertical,
@@ -213,18 +212,19 @@ backgroundColor: Colors.white,
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            return buildItemCard(index,_convertedSnackbar);
+            return buildItemCard(index, _convertedSnackbar);
           },
         ),
       );
     } else if (_totalData == 0) {
-      return Center(child: Text(AppLocalizations.of(context).common_no_data_available));
+      return Center(
+          child: Text(AppLocalizations.of(context).common_no_data_available));
     } else {
       return Container(); // should never be happening
     }
   }
 
- Widget buildItemCard(index,_convertedSnackbar) {
+  Widget buildItemCard(index, _convertedSnackbar) {
     return Container(
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Padding(
@@ -233,38 +233,42 @@ backgroundColor: Colors.white,
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-
             Container(
-                width: DeviceInfo(context).width/2.5,
+                width: DeviceInfo(context).width / 2.5,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      _list[index].orderCode??"",
+                      _list[index].orderCode ?? "",
                       style: TextStyle(
-                        color: MyTheme.dark_font_grey,
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold
-                      ),
+                          color: MyTheme.dark_font_grey,
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 10,
                     ),
-
                     Row(
                       children: [
                         Text(
-                          AppLocalizations.of(context).club_point_screen_converted_question+" - ",
+                          AppLocalizations.of(context)
+                                  .club_point_screen_converted_question +
+                              " - ",
                           style: TextStyle(
                             fontSize: 12,
-                            color:  MyTheme.dark_font_grey,
+                            color: MyTheme.dark_font_grey,
                           ),
                         ),
                         Text(
-                           (_list[index].convert_status == 1 || _converted_ids.contains(_list[index].id) ? "Yes" : "No"),
+                          (_list[index].convert_status == 1 ||
+                                  _converted_ids.contains(_list[index].id)
+                              ? "Yes"
+                              : "No"),
                           style: TextStyle(
                             fontSize: 12,
-                            color: _list[index].convert_status == 1? Colors.green: Colors.blue,
+                            color: _list[index].convert_status == 1
+                                ? Colors.green
+                                : Colors.blue,
                           ),
                         ),
                       ],
@@ -275,10 +279,10 @@ backgroundColor: Colors.white,
                     Row(
                       children: [
                         Text(
-                          AppLocalizations.of(context).common_date+" : ",
+                          AppLocalizations.of(context).common_date + " : ",
                           style: TextStyle(
                             fontSize: 12,
-                            color:  MyTheme.dark_font_grey,
+                            color: MyTheme.dark_font_grey,
                           ),
                         ),
                         Text(
@@ -293,11 +297,10 @@ backgroundColor: Colors.white,
                   ],
                 )),
             Container(
-              //color: Colors.red,
-                width: DeviceInfo(context).width/2.5,
+                //color: Colors.red,
+                width: DeviceInfo(context).width / 2.5,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
-
                   children: [
                     Text(
                       _list[index].points.toString(),
@@ -309,30 +312,34 @@ backgroundColor: Colors.white,
                     SizedBox(
                       height: 10,
                     ),
-                    _list[index].convert_status == 1 || _converted_ids.contains(_list[index].id)
-        //false
+                    _list[index].convert_status == 1 ||
+                            _converted_ids.contains(_list[index].id)
+                        //false
                         ? Text(
-                      AppLocalizations.of(context).club_point_screen_done,
-                      style: TextStyle(
-                        color: MyTheme.grey_153,
-                        fontSize: 12,fontWeight: FontWeight.bold
-                      ),
-                    ):SizedBox(
-                      height: 24,
-                      width: 80,
-
-                      child: FlatButton(
-                        padding: EdgeInsets.zero,
-                        color: MyTheme.accent_color,
-                        child: Text(
-                          AppLocalizations.of(context).club_point_screen_convert,
-                          style: TextStyle(color: Colors.white,fontSize: 10),
-                        ),
-                        onPressed: () {
-                          onPressConvert(_list[index].id,_convertedSnackbar);
-                        },
-                      ),
-                    ),
+                            AppLocalizations.of(context).club_point_screen_done,
+                            style: TextStyle(
+                                color: MyTheme.grey_153,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                          )
+                        : SizedBox(
+                            height: 24,
+                            width: 80,
+                            child: FlatButton(
+                              padding: EdgeInsets.zero,
+                              color: MyTheme.accent_color,
+                              child: Text(
+                                AppLocalizations.of(context)
+                                    .club_point_screen_convert,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 10),
+                              ),
+                              onPressed: () {
+                                onPressConvert(
+                                    _list[index].id, _convertedSnackbar);
+                              },
+                            ),
+                          ),
                   ],
                 )),
             /*Spacer(),
@@ -378,7 +385,7 @@ backgroundColor: Colors.white,
       ),
     );
 
-      /*Card(
+    /*Card(
       shape: RoundedRectangleBorder(
         side: new BorderSide(color: MyTheme.light_grey, width: 1.0),
         borderRadius: BorderRadius.circular(8.0),

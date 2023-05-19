@@ -1,33 +1,33 @@
 import 'dart:async';
 
-import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
-import 'package:active_ecommerce_flutter/custom/device_info.dart';
-import 'package:active_ecommerce_flutter/custom/lang_text.dart';
-import 'package:active_ecommerce_flutter/custom/resources.dart';
-import 'package:active_ecommerce_flutter/helpers/auth_helper.dart';
-import 'package:active_ecommerce_flutter/screens/auction_products.dart';
-import 'package:active_ecommerce_flutter/screens/change_language.dart';
-import 'package:active_ecommerce_flutter/screens/digital_products.dart';
-import 'package:active_ecommerce_flutter/screens/filter.dart';
-import 'package:active_ecommerce_flutter/screens/login.dart';
-import 'package:active_ecommerce_flutter/screens/main.dart';
-import 'package:active_ecommerce_flutter/screens/messenger_list.dart';
-import 'package:active_ecommerce_flutter/screens/whole_sale_products.dart';
-import 'package:active_ecommerce_flutter/screens/wishlist.dart';
+import 'package:hustla/custom/box_decorations.dart';
+import 'package:hustla/custom/device_info.dart';
+import 'package:hustla/custom/lang_text.dart';
+import 'package:hustla/custom/resources.dart';
+import 'package:hustla/helpers/auth_helper.dart';
+import 'package:hustla/screens/auction_products.dart';
+import 'package:hustla/screens/change_language.dart';
+import 'package:hustla/screens/digital_products.dart';
+import 'package:hustla/screens/filter.dart';
+import 'package:hustla/screens/login.dart';
+import 'package:hustla/screens/main.dart';
+import 'package:hustla/screens/messenger_list.dart';
+import 'package:hustla/screens/whole_sale_products.dart';
+import 'package:hustla/screens/wishlist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
-import 'package:active_ecommerce_flutter/ui_sections/drawer.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
-import 'package:active_ecommerce_flutter/app_config.dart';
-import 'package:active_ecommerce_flutter/screens/wallet.dart';
-import 'package:active_ecommerce_flutter/screens/profile_edit.dart';
-import 'package:active_ecommerce_flutter/screens/address.dart';
-import 'package:active_ecommerce_flutter/screens/order_list.dart';
-import 'package:active_ecommerce_flutter/screens/club_point.dart';
-import 'package:active_ecommerce_flutter/screens/refund_request.dart';
-import 'package:active_ecommerce_flutter/repositories/profile_repository.dart';
-import 'package:active_ecommerce_flutter/custom/toast_component.dart';
+import 'package:hustla/my_theme.dart';
+import 'package:hustla/ui_sections/drawer.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
+import 'package:hustla/app_config.dart';
+import 'package:hustla/screens/wallet.dart';
+import 'package:hustla/screens/profile_edit.dart';
+import 'package:hustla/screens/address.dart';
+import 'package:hustla/screens/order_list.dart';
+import 'package:hustla/screens/club_point.dart';
+import 'package:hustla/screens/refund_request.dart';
+import 'package:hustla/repositories/profile_repository.dart';
+import 'package:hustla/custom/toast_component.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -226,23 +226,23 @@ class _ProfileState extends State<Profile> {
                 slivers: [
                   SliverList(
                     delegate: SliverChildListDelegate([
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                      //   child: buildCountersRow(),
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                      //   child: buildHorizontalSettings(),
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                      //   child: buildSettingAndAddonsVerticalMenu(),
-                      // ),
-                      buildQRCode(),
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                      //   child: buildBottomVerticalCardList(),
-                      // ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                        child: buildCountersRow(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                        child: buildHorizontalSettings(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                        child: buildSettingAndAddonsVerticalMenu(),
+                      ),
+                      // buildQRCode(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                        child: buildBottomVerticalCardList(),
+                      ),
                     ]),
                   )
                 ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:hustla/my_theme.dart';
 
 class BoxDecorations {
   static BoxDecoration buildBoxDecoration_1({double radius = 6.0}) {

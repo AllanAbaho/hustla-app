@@ -1,7 +1,7 @@
-import 'package:active_ecommerce_flutter/custom/app_bar.dart';
-import 'package:active_ecommerce_flutter/custom/device_info.dart';
-import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:hustla/custom/app_bar.dart';
+import 'package:hustla/custom/device_info.dart';
+import 'package:hustla/custom/useful_elements.dart';
+import 'package:hustla/my_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';

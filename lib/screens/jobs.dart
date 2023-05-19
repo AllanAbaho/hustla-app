@@ -1,9 +1,9 @@
-import 'package:active_ecommerce_flutter/custom/app_bar.dart';
-import 'package:active_ecommerce_flutter/custom/device_info.dart';
-import 'package:active_ecommerce_flutter/custom/page_description.dart';
-import 'package:active_ecommerce_flutter/screens/my_applications.dart';
-import 'package:active_ecommerce_flutter/screens/posted_jobs.dart';
-import 'package:active_ecommerce_flutter/screens/job_sectors.dart';
+import 'package:hustla/custom/app_bar.dart';
+import 'package:hustla/custom/device_info.dart';
+import 'package:hustla/custom/page_description.dart';
+import 'package:hustla/screens/my_applications.dart';
+import 'package:hustla/screens/posted_jobs.dart';
+import 'package:hustla/screens/job_sectors.dart';
 import 'package:flutter/material.dart';
 
 class Jobs extends StatefulWidget {

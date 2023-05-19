@@ -1,4 +1,4 @@
-package com.example.active_ecommerce_flutter
+package com.example.hustla
 
 import io.flutter.embedding.android.FlutterActivity
 

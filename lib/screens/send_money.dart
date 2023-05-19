@@ -1,9 +1,9 @@
-import 'package:active_ecommerce_flutter/custom/app_bar.dart';
-import 'package:active_ecommerce_flutter/custom/device_info.dart';
-import 'package:active_ecommerce_flutter/custom/page_description.dart';
-import 'package:active_ecommerce_flutter/screens/banks.dart';
-import 'package:active_ecommerce_flutter/screens/mobile_money.dart';
-import 'package:active_ecommerce_flutter/screens/to_wallet.dart';
+import 'package:hustla/custom/app_bar.dart';
+import 'package:hustla/custom/device_info.dart';
+import 'package:hustla/custom/page_description.dart';
+import 'package:hustla/screens/banks.dart';
+import 'package:hustla/screens/mobile_money.dart';
+import 'package:hustla/screens/to_wallet.dart';
 import 'package:flutter/material.dart';
 
 class SendMoney extends StatefulWidget {

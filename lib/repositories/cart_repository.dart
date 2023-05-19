@@ -1,14 +1,14 @@
-import 'package:active_ecommerce_flutter/app_config.dart';
-import 'package:active_ecommerce_flutter/data_model/cart_count_response.dart';
+import 'package:hustla/app_config.dart';
+import 'package:hustla/data_model/cart_count_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
-import 'package:active_ecommerce_flutter/data_model/cart_response.dart';
-import 'package:active_ecommerce_flutter/data_model/cart_delete_response.dart';
-import 'package:active_ecommerce_flutter/data_model/cart_process_response.dart';
-import 'package:active_ecommerce_flutter/data_model/cart_add_response.dart';
-import 'package:active_ecommerce_flutter/data_model/cart_summary_response.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:hustla/data_model/cart_response.dart';
+import 'package:hustla/data_model/cart_delete_response.dart';
+import 'package:hustla/data_model/cart_process_response.dart';
+import 'package:hustla/data_model/cart_add_response.dart';
+import 'package:hustla/data_model/cart_summary_response.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
 
 class CartRepository {
   Future<List<CartResponse>> getCartResponseList(
@@ -27,7 +27,7 @@ class CartRepository {
     return cartResponseFromJson(response.body);
   }
 
-    Future<CartCountResponse> getCartCount() async {
+  Future<CartCountResponse> getCartCount() async {
     Uri url = Uri.parse("${AppConfig.BASE_URL}/cart-count");
     final response = await http.get(
       url,
@@ -39,8 +39,6 @@ class CartRepository {
     );
     return cartCountResponseFromJson(response.body);
   }
-
-
 
   Future<CartDeleteResponse> getCartDeleteResponse(
     @required int cart_id,

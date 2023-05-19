@@ -1,22 +1,22 @@
 import 'dart:convert';
 
-import 'package:active_ecommerce_flutter/custom/app_bar.dart';
-import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
-import 'package:active_ecommerce_flutter/custom/device_info.dart';
-import 'package:active_ecommerce_flutter/custom/lang_text.dart';
-import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
+import 'package:hustla/custom/app_bar.dart';
+import 'package:hustla/custom/box_decorations.dart';
+import 'package:hustla/custom/device_info.dart';
+import 'package:hustla/custom/lang_text.dart';
+import 'package:hustla/custom/useful_elements.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
-import 'package:active_ecommerce_flutter/app_config.dart';
-import 'package:active_ecommerce_flutter/custom/toast_component.dart';
+import 'package:hustla/my_theme.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
+import 'package:hustla/app_config.dart';
+import 'package:hustla/custom/toast_component.dart';
 import 'package:toast/toast.dart';
-import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
-import 'package:active_ecommerce_flutter/repositories/profile_repository.dart';
+import 'package:hustla/custom/input_decorations.dart';
+import 'package:hustla/repositories/profile_repository.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:active_ecommerce_flutter/helpers/file_helper.dart';
+import 'package:hustla/helpers/file_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileEdit extends StatefulWidget {

@@ -1,19 +1,19 @@
-import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
-import 'package:active_ecommerce_flutter/custom/lang_text.dart';
+import 'package:hustla/custom/box_decorations.dart';
+import 'package:hustla/custom/lang_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:hustla/my_theme.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
-import 'package:active_ecommerce_flutter/repositories/address_repository.dart';
-import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
-import 'package:active_ecommerce_flutter/data_model/city_response.dart';
-import 'package:active_ecommerce_flutter/data_model/state_response.dart';
-import 'package:active_ecommerce_flutter/data_model/country_response.dart';
-import 'package:active_ecommerce_flutter/custom/toast_component.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
+import 'package:hustla/repositories/address_repository.dart';
+import 'package:hustla/helpers/shimmer_helper.dart';
+import 'package:hustla/data_model/city_response.dart';
+import 'package:hustla/data_model/state_response.dart';
+import 'package:hustla/data_model/country_response.dart';
+import 'package:hustla/custom/toast_component.dart';
 import 'package:toast/toast.dart';
-import 'package:active_ecommerce_flutter/other_config.dart';
-import 'package:active_ecommerce_flutter/screens/map_location.dart';
+import 'package:hustla/other_config.dart';
+import 'package:hustla/screens/map_location.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
@@ -536,7 +536,6 @@ class _AddressState extends State<Address> {
                   ),
                 ),
                 Container(
-
                   padding: const EdgeInsets.symmetric(horizontal: 18.0),
                   child: buildAddressList(),
                 ),
@@ -584,7 +583,10 @@ class _AddressState extends State<Address> {
                             autofocus: false,
                             maxLines: null,
                             keyboardType: TextInputType.multiline,
-                            decoration: buildAddressInputDecoration(context,AppLocalizations.of(context).address_screen_enter_address),
+                            decoration: buildAddressInputDecoration(
+                                context,
+                                AppLocalizations.of(context)
+                                    .address_screen_enter_address),
                           ),
                         ),
                       ),
@@ -647,8 +649,10 @@ class _AddressState extends State<Address> {
                               onSubmitted: (txt) {
                                 // keep this blank
                               },
-                              decoration: buildAddressInputDecoration(context,  AppLocalizations.of(context)
-                                  .address_screen_enter_country),
+                              decoration: buildAddressInputDecoration(
+                                  context,
+                                  AppLocalizations.of(context)
+                                      .address_screen_enter_country),
                             ),
                           ),
                         ),
@@ -721,8 +725,10 @@ class _AddressState extends State<Address> {
                                 // setState(() {});
                                 // _onSearchSubmit();
                               },
-                              decoration: buildAddressInputDecoration(context, AppLocalizations.of(context)
-                                  .address_screen_enter_state),
+                              decoration: buildAddressInputDecoration(
+                                  context,
+                                  AppLocalizations.of(context)
+                                      .address_screen_enter_state),
                             ),
                           ),
                         ),
@@ -792,8 +798,10 @@ class _AddressState extends State<Address> {
                               onSubmitted: (txt) {
                                 // keep blank
                               },
-                              decoration: buildAddressInputDecoration(context, AppLocalizations.of(context)
-                                  .address_screen_enter_city),
+                              decoration: buildAddressInputDecoration(
+                                  context,
+                                  AppLocalizations.of(context)
+                                      .address_screen_enter_city),
                             ),
                           ),
                         ),
@@ -813,8 +821,10 @@ class _AddressState extends State<Address> {
                           child: TextField(
                             controller: _postalCodeController,
                             autofocus: false,
-                            decoration: buildAddressInputDecoration(context, AppLocalizations.of(context)
-                                .address_screen_enter_postal_code),
+                            decoration: buildAddressInputDecoration(
+                                context,
+                                AppLocalizations.of(context)
+                                    .address_screen_enter_postal_code),
                           ),
                         ),
                       ),
@@ -832,8 +842,10 @@ class _AddressState extends State<Address> {
                           child: TextField(
                             controller: _phoneController,
                             autofocus: false,
-                            decoration: buildAddressInputDecoration(context, AppLocalizations.of(context)
-                                .address_screen_enter_phone),
+                            decoration: buildAddressInputDecoration(
+                                context,
+                                AppLocalizations.of(context)
+                                    .address_screen_enter_phone),
                           ),
                         ),
                       )
@@ -883,9 +895,9 @@ class _AddressState extends State<Address> {
                         child: Text(
                           LangText(context).local.common_add_ucfirst,
                           style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                         onPressed: () {
@@ -901,9 +913,9 @@ class _AddressState extends State<Address> {
         });
   }
 
-  InputDecoration buildAddressInputDecoration(BuildContext context,hintText) {
+  InputDecoration buildAddressInputDecoration(BuildContext context, hintText) {
     return InputDecoration(
-      filled: true,
+        filled: true,
         fillColor: MyTheme.light_grey,
         hintText: hintText,
         hintStyle: TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
@@ -955,8 +967,10 @@ class _AddressState extends State<Address> {
                             autofocus: false,
                             maxLines: null,
                             keyboardType: TextInputType.multiline,
-                            decoration: buildAddressInputDecoration(context, AppLocalizations.of(context)
-                                .address_screen_enter_address),
+                            decoration: buildAddressInputDecoration(
+                                context,
+                                AppLocalizations.of(context)
+                                    .address_screen_enter_address),
                           ),
                         ),
                       ),
@@ -1021,8 +1035,10 @@ class _AddressState extends State<Address> {
                               onSubmitted: (txt) {
                                 // keep this blank
                               },
-                              decoration:buildAddressInputDecoration(context, AppLocalizations.of(context)
-                                  .address_screen_enter_country),
+                              decoration: buildAddressInputDecoration(
+                                  context,
+                                  AppLocalizations.of(context)
+                                      .address_screen_enter_country),
                             ),
                           ),
                         ),
@@ -1100,8 +1116,10 @@ class _AddressState extends State<Address> {
                                 // setState(() {});
                                 // _onSearchSubmit();
                               },
-                              decoration:buildAddressInputDecoration(context, AppLocalizations.of(context)
-                                  .address_screen_enter_state),
+                              decoration: buildAddressInputDecoration(
+                                  context,
+                                  AppLocalizations.of(context)
+                                      .address_screen_enter_state),
                             ),
                           ),
                         ),
@@ -1176,8 +1194,10 @@ class _AddressState extends State<Address> {
                               onSubmitted: (txt) {
                                 // keep blank
                               },
-                              decoration: buildAddressInputDecoration(context,  AppLocalizations.of(context)
-                                  .address_screen_enter_city),
+                              decoration: buildAddressInputDecoration(
+                                  context,
+                                  AppLocalizations.of(context)
+                                      .address_screen_enter_city),
                             ),
                           ),
                         ),
@@ -1198,8 +1218,10 @@ class _AddressState extends State<Address> {
                             controller:
                                 _postalCodeControllerListForUpdate[index],
                             autofocus: false,
-                            decoration:buildAddressInputDecoration(context, AppLocalizations.of(context)
-                                .address_screen_enter_postal_code),
+                            decoration: buildAddressInputDecoration(
+                                context,
+                                AppLocalizations.of(context)
+                                    .address_screen_enter_postal_code),
                           ),
                         ),
                       ),
@@ -1217,8 +1239,10 @@ class _AddressState extends State<Address> {
                           child: TextField(
                             controller: _phoneControllerListForUpdate[index],
                             autofocus: false,
-                            decoration: buildAddressInputDecoration(context, AppLocalizations.of(context)
-                                .address_screen_enter_phone),
+                            decoration: buildAddressInputDecoration(
+                                context,
+                                AppLocalizations.of(context)
+                                    .address_screen_enter_phone),
                           ),
                         ),
                       )
@@ -1244,9 +1268,7 @@ class _AddressState extends State<Address> {
                           AppLocalizations.of(context)
                               .common_close_in_all_capital,
                           style: TextStyle(
-                            color: MyTheme.accent_color,
-                            fontSize: 13
-                          ),
+                              color: MyTheme.accent_color, fontSize: 13),
                         ),
                         onPressed: () {
                           Navigator.of(context, rootNavigator: true).pop();
@@ -1263,8 +1285,8 @@ class _AddressState extends State<Address> {
                         height: 40,
                         color: MyTheme.accent_color,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6.0),
-                            ),
+                          borderRadius: BorderRadius.circular(6.0),
+                        ),
                         child: Text(
                           AppLocalizations.of(context)
                               .common_update_in_all_capital,
@@ -1302,7 +1324,10 @@ class _AddressState extends State<Address> {
         children: [
           Text(
             AppLocalizations.of(context).address_screen_addresses_of_user,
-            style: TextStyle(fontSize: 16, color: MyTheme.dark_font_grey,fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: 16,
+                color: MyTheme.dark_font_grey,
+                fontWeight: FontWeight.bold),
           ),
           Text(
             "* ${AppLocalizations.of(context).address_screen_addresses_to_make_default}",

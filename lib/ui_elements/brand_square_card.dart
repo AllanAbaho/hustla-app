@@ -1,13 +1,14 @@
-import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:hustla/my_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/screens/brand_products.dart';
-import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
+import 'package:hustla/screens/brand_products.dart';
+import 'package:hustla/custom/box_decorations.dart';
+
 class BrandSquareCard extends StatefulWidget {
   int id;
   String image;
   String name;
 
-  BrandSquareCard({Key key, this.id,this.image, this.name}) : super(key: key);
+  BrandSquareCard({Key key, this.id, this.image, this.name}) : super(key: key);
 
   @override
   _BrandSquareCardState createState() => _BrandSquareCardState();
@@ -17,9 +18,12 @@ class _BrandSquareCardState extends State<BrandSquareCard> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
+      onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return BrandProducts(id: widget.id,brand_name: widget.name,);
+          return BrandProducts(
+            id: widget.id,
+            brand_name: widget.name,
+          );
         }));
       },
       child: Container(
@@ -36,7 +40,7 @@ class _BrandSquareCardState extends State<BrandSquareCard> {
                           top: Radius.circular(16), bottom: Radius.zero),
                       child: FadeInImage.assetNetwork(
                         placeholder: 'assets/placeholder.png',
-                        image:  widget.image,
+                        image: widget.image,
                         fit: BoxFit.scaleDown,
                       ))),
               Container(

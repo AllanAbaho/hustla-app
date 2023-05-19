@@ -1,23 +1,23 @@
-import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
-import 'package:active_ecommerce_flutter/custom/common_functions.dart';
-import 'package:active_ecommerce_flutter/custom/device_info.dart';
-import 'package:active_ecommerce_flutter/custom/text_styles.dart';
-import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
-import 'package:active_ecommerce_flutter/presenter/cart_counter.dart';
-import 'package:active_ecommerce_flutter/screens/select_address.dart';
-import 'package:active_ecommerce_flutter/screens/shipping_info.dart';
+import 'package:hustla/custom/box_decorations.dart';
+import 'package:hustla/custom/common_functions.dart';
+import 'package:hustla/custom/device_info.dart';
+import 'package:hustla/custom/text_styles.dart';
+import 'package:hustla/custom/useful_elements.dart';
+import 'package:hustla/presenter/cart_counter.dart';
+import 'package:hustla/screens/select_address.dart';
+import 'package:hustla/screens/shipping_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
-import 'package:active_ecommerce_flutter/ui_sections/drawer.dart';
+import 'package:hustla/my_theme.dart';
+import 'package:hustla/ui_sections/drawer.dart';
 import 'package:flutter/widgets.dart';
-import 'package:active_ecommerce_flutter/repositories/cart_repository.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
-import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
-import 'package:active_ecommerce_flutter/custom/toast_component.dart';
+import 'package:hustla/repositories/cart_repository.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
+import 'package:hustla/helpers/shimmer_helper.dart';
+import 'package:hustla/custom/toast_component.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:active_ecommerce_flutter/custom/common_functions.dart';
+import 'package:hustla/custom/common_functions.dart';
 
 class Cart extends StatefulWidget {
   Cart(

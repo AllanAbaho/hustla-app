@@ -1,22 +1,22 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:active_ecommerce_flutter/custom/common_functions.dart';
-import 'package:active_ecommerce_flutter/custom/resources.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
-import 'package:active_ecommerce_flutter/presenter/bottom_appbar_index.dart';
-import 'package:active_ecommerce_flutter/presenter/cart_counter.dart';
-import 'package:active_ecommerce_flutter/repositories/cart_repository.dart';
-import 'package:active_ecommerce_flutter/screens/cart.dart';
-import 'package:active_ecommerce_flutter/screens/category_list.dart';
-import 'package:active_ecommerce_flutter/screens/home.dart';
-import 'package:active_ecommerce_flutter/screens/login.dart';
-import 'package:active_ecommerce_flutter/screens/profile.dart';
+import 'package:hustla/custom/common_functions.dart';
+import 'package:hustla/custom/resources.dart';
+import 'package:hustla/my_theme.dart';
+import 'package:hustla/presenter/bottom_appbar_index.dart';
+import 'package:hustla/presenter/cart_counter.dart';
+import 'package:hustla/repositories/cart_repository.dart';
+import 'package:hustla/screens/cart.dart';
+import 'package:hustla/screens/category_list.dart';
+import 'package:hustla/screens/home.dart';
+import 'package:hustla/screens/login.dart';
+import 'package:hustla/screens/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter/services.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:badges/badges.dart';
 import 'package:route_transitions/route_transitions.dart';
@@ -199,14 +199,14 @@ class _MainState extends State<Main> {
                       icon: Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: Image.asset(
-                          "assets/qrcode.png",
+                          "assets/profile.png",
                           color: _currentIndex == 3
                               ? MyTheme.accent_color
                               : Colors.white,
                           height: 20,
                         ),
                       ),
-                      label: 'QR Code',
+                      label: 'Profile',
                     ),
                   ],
                 ),

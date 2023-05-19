@@ -1,6 +1,6 @@
-import 'package:active_ecommerce_flutter/custom/resources.dart';
+import 'package:hustla/custom/resources.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:hustla/my_theme.dart';
 
 class InputDecorations {
   static InputDecoration buildInputDecoration_1({hint_text = "", suffix}) {

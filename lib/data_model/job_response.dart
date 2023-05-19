@@ -4,7 +4,7 @@
 //https://app.quicktype.io/
 import 'dart:convert';
 
-import 'package:active_ecommerce_flutter/data_model/login_response.dart';
+import 'package:hustla/data_model/login_response.dart';
 
 JobResponse jobResponseFromJson(String str) =>
     JobResponse.fromJson(json.decode(str));

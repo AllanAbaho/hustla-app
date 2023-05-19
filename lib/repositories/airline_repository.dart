@@ -1,10 +1,10 @@
-import 'package:active_ecommerce_flutter/app_config.dart';
-import 'package:active_ecommerce_flutter/data_model/confirm_booking_response.dart';
-import 'package:active_ecommerce_flutter/data_model/create_booking_response.dart';
-import 'package:active_ecommerce_flutter/data_model/destination_response.dart';
-import 'package:active_ecommerce_flutter/data_model/flights_response.dart';
-import 'package:active_ecommerce_flutter/data_model/make_airline_payment_response.dart';
-import 'package:active_ecommerce_flutter/data_model/ticket_booking_response.dart';
+import 'package:hustla/app_config.dart';
+import 'package:hustla/data_model/confirm_booking_response.dart';
+import 'package:hustla/data_model/create_booking_response.dart';
+import 'package:hustla/data_model/destination_response.dart';
+import 'package:hustla/data_model/flights_response.dart';
+import 'package:hustla/data_model/make_airline_payment_response.dart';
+import 'package:hustla/data_model/ticket_booking_response.dart';
 import 'package:http/http.dart' as http;
 
 class AirlineRepository {

@@ -1,16 +1,15 @@
-import 'package:active_ecommerce_flutter/app_config.dart';
+import 'package:hustla/app_config.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
 import 'package:flutter/foundation.dart';
-import 'package:active_ecommerce_flutter/data_model/clubpoint_response.dart';
-import 'package:active_ecommerce_flutter/data_model/clubpoint_to_wallet_response.dart';
+import 'package:hustla/data_model/clubpoint_response.dart';
+import 'package:hustla/data_model/clubpoint_to_wallet_response.dart';
 
 class ClubpointRepository {
   Future<ClubpointResponse> getClubPointListResponse(
       {@required page = 1}) async {
-    Uri url = Uri.parse(
-        "${AppConfig.BASE_URL}/clubpoint/get-list?page=$page");
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/clubpoint/get-list?page=$page");
     print("url(${url.toString()}) access token (Bearer ${access_token.$})");
     final response = await http.get(
       url,

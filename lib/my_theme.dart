@@ -1,4 +1,4 @@
-import 'package:active_ecommerce_flutter/custom/resources.dart';
+import 'package:hustla/custom/resources.dart';
 import 'package:flutter/material.dart';
 
 class MyTheme {

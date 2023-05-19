@@ -1,18 +1,18 @@
-import 'package:active_ecommerce_flutter/app_config.dart';
+import 'package:hustla/app_config.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:active_ecommerce_flutter/data_model/conversation_response.dart';
-import 'package:active_ecommerce_flutter/data_model/message_response.dart';
-import 'package:active_ecommerce_flutter/data_model/conversation_create_response.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:hustla/data_model/conversation_response.dart';
+import 'package:hustla/data_model/message_response.dart';
+import 'package:hustla/data_model/conversation_create_response.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
 import 'package:flutter/foundation.dart';
 
 class ChatRepository {
   Future<ConversationResponse> getConversationResponse(
       {@required page = 1}) async {
-    Uri url = Uri.parse(
-        "${AppConfig.BASE_URL}/chat/conversations?page=${page}");
+    Uri url =
+        Uri.parse("${AppConfig.BASE_URL}/chat/conversations?page=${page}");
     final response = await http.get(
       url,
       headers: {

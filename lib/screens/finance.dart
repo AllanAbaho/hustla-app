@@ -1,9 +1,9 @@
-import 'package:active_ecommerce_flutter/custom/app_bar.dart';
-import 'package:active_ecommerce_flutter/custom/device_info.dart';
-import 'package:active_ecommerce_flutter/custom/page_description.dart';
-import 'package:active_ecommerce_flutter/screens/send_money.dart';
-import 'package:active_ecommerce_flutter/screens/top_up.dart';
-import 'package:active_ecommerce_flutter/screens/withraw.dart';
+import 'package:hustla/custom/app_bar.dart';
+import 'package:hustla/custom/device_info.dart';
+import 'package:hustla/custom/page_description.dart';
+import 'package:hustla/screens/send_money.dart';
+import 'package:hustla/screens/top_up.dart';
+import 'package:hustla/screens/withraw.dart';
 import 'package:flutter/material.dart';
 
 class Finance extends StatefulWidget {

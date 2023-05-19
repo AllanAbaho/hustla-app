@@ -1,5 +1,5 @@
-import 'package:active_ecommerce_flutter/custom/styles.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:hustla/custom/styles.dart';
+import 'package:hustla/my_theme.dart';
 import 'package:flutter/material.dart';
 
 class SmallText extends StatelessWidget {

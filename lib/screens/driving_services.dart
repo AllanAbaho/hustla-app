@@ -1,6 +1,6 @@
-import 'package:active_ecommerce_flutter/custom/app_bar.dart';
-import 'package:active_ecommerce_flutter/custom/device_info.dart';
-import 'package:active_ecommerce_flutter/custom/page_description.dart';
+import 'package:hustla/custom/app_bar.dart';
+import 'package:hustla/custom/device_info.dart';
+import 'package:hustla/custom/page_description.dart';
 import 'package:flutter/material.dart';
 
 class DrivingServices extends StatefulWidget {

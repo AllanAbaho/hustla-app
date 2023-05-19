@@ -1,18 +1,18 @@
 import 'dart:io';
 
-import 'package:active_ecommerce_flutter/custom/app_bar.dart';
-import 'package:active_ecommerce_flutter/custom/device_info.dart';
-import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
-import 'package:active_ecommerce_flutter/custom/page_description.dart';
-import 'package:active_ecommerce_flutter/custom/process_completed.dart';
-import 'package:active_ecommerce_flutter/custom/resources.dart';
-import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
-import 'package:active_ecommerce_flutter/screens/main.dart';
+import 'package:hustla/custom/app_bar.dart';
+import 'package:hustla/custom/device_info.dart';
+import 'package:hustla/custom/input_decorations.dart';
+import 'package:hustla/custom/page_description.dart';
+import 'package:hustla/custom/process_completed.dart';
+import 'package:hustla/custom/resources.dart';
+import 'package:hustla/custom/useful_elements.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
+import 'package:hustla/screens/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
-import 'package:active_ecommerce_flutter/custom/toast_component.dart';
+import 'package:hustla/my_theme.dart';
+import 'package:hustla/custom/toast_component.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

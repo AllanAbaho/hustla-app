@@ -1,14 +1,14 @@
-import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
-import 'package:active_ecommerce_flutter/custom/device_info.dart';
-import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
-import 'package:active_ecommerce_flutter/data_model/category_response.dart';
-import 'package:active_ecommerce_flutter/repositories/category_repository.dart';
+import 'package:hustla/custom/box_decorations.dart';
+import 'package:hustla/custom/device_info.dart';
+import 'package:hustla/custom/useful_elements.dart';
+import 'package:hustla/data_model/category_response.dart';
+import 'package:hustla/repositories/category_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
-import 'package:active_ecommerce_flutter/ui_elements/product_card.dart';
-import 'package:active_ecommerce_flutter/repositories/product_repository.dart';
-import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
+import 'package:hustla/my_theme.dart';
+import 'package:hustla/ui_elements/product_card.dart';
+import 'package:hustla/repositories/product_repository.dart';
+import 'package:hustla/helpers/shimmer_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -36,14 +36,12 @@ class _CategoryProductsState extends State<CategoryProducts> {
   bool _showLoadingContainer = false;
   bool _showSearchBar = false;
 
-
-
-  getSubCategory()async{
-   var res=await CategoryRepository().getCategories(parent_id: widget.category_id);
-   _subCategoryList.addAll(res.categories);
-   setState((){});
+  getSubCategory() async {
+    var res =
+        await CategoryRepository().getCategories(parent_id: widget.category_id);
+    _subCategoryList.addAll(res.categories);
+    setState(() {});
   }
-
 
   @override
   void initState() {
@@ -84,7 +82,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
     setState(() {});
   }
 
-  fetchAllDate(){
+  fetchAllDate() {
     fetchData();
     getSubCategory();
   }
@@ -135,7 +133,9 @@ class _CategoryProductsState extends State<CategoryProducts> {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      toolbarHeight:_subCategoryList.isEmpty? DeviceInfo(context).height / 10:DeviceInfo(context).height / 6.5,
+      toolbarHeight: _subCategoryList.isEmpty
+          ? DeviceInfo(context).height / 10
+          : DeviceInfo(context).height / 6.5,
       flexibleSpace: Container(
         height: DeviceInfo(context).height / 4,
         width: DeviceInfo(context).width,
@@ -148,13 +148,11 @@ class _CategoryProductsState extends State<CategoryProducts> {
       bottom: PreferredSize(
           child: AnimatedContainer(
             //color: MyTheme.textfield_grey,
-            height: _subCategoryList.isEmpty ?0:60,
+            height: _subCategoryList.isEmpty ? 0 : 60,
             duration: Duration(milliseconds: 500),
-            child: !_isInitial?buildSubCategory():buildSubCategory(),
-
+            child: !_isInitial ? buildSubCategory() : buildSubCategory(),
           ),
-         preferredSize: Size.fromHeight(0.0)
-      ),
+          preferredSize: Size.fromHeight(0.0)),
       /*leading: Builder(
         builder: (context) => IconButton(
           icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.dark_grey),
@@ -181,43 +179,53 @@ class _CategoryProductsState extends State<CategoryProducts> {
   }
 
   Widget buildAppBarTitle(BuildContext context) {
-
     return AnimatedCrossFade(
         firstChild: buildAppBarTitleOption(context),
         secondChild: buildAppBarSearchOption(context),
         firstCurve: Curves.fastOutSlowIn,
         secondCurve: Curves.fastOutSlowIn,
-        crossFadeState: _showSearchBar?CrossFadeState.showSecond:CrossFadeState.showFirst,
+        crossFadeState: _showSearchBar
+            ? CrossFadeState.showSecond
+            : CrossFadeState.showFirst,
         duration: Duration(milliseconds: 500));
-
   }
 
   Container buildAppBarTitleOption(BuildContext context) {
     return Container(
-    padding: EdgeInsets.symmetric(horizontal: 18),
-    child: Row(
-      children: [
-        Container(
-          width: 20,
-          child: UsefulElements.backButton(context,color: "white"),
-        ),
-        Container(
-          padding: EdgeInsets.only(left: 10),
-          width: DeviceInfo(context).width/2,
-            child: Text(widget.category_name,maxLines: 1,overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),),
-        Spacer(),
-        SizedBox(
-          width: 20,
-          child: IconButton(onPressed: (){
-            _showSearchBar=true;
-            setState((){});
-          },
-              padding: EdgeInsets.zero,
-              icon: Icon(Icons.search,size: 25,)),
-        ),
-      ],
-    ),
-  );
+      padding: EdgeInsets.symmetric(horizontal: 18),
+      child: Row(
+        children: [
+          Container(
+            width: 20,
+            child: UsefulElements.backButton(context, color: "white"),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 10),
+            width: DeviceInfo(context).width / 2,
+            child: Text(
+              widget.category_name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Spacer(),
+          SizedBox(
+            width: 20,
+            child: IconButton(
+                onPressed: () {
+                  _showSearchBar = true;
+                  setState(() {});
+                },
+                padding: EdgeInsets.zero,
+                icon: Icon(
+                  Icons.search,
+                  size: 25,
+                )),
+          ),
+        ],
+      ),
+    );
   }
 
   Container buildAppBarSearchOption(BuildContext context) {
@@ -240,30 +248,28 @@ class _CategoryProductsState extends State<CategoryProducts> {
         },
         autofocus: false,
         decoration: InputDecoration(
-
           suffixIcon: IconButton(
             onPressed: () {
-              _showSearchBar=false;
+              _showSearchBar = false;
               setState(() {});
             },
-            icon: Icon(Icons.clear, color: MyTheme.grey_153,),
+            icon: Icon(
+              Icons.clear,
+              color: MyTheme.grey_153,
+            ),
           ),
           filled: true,
           fillColor: MyTheme.white.withOpacity(0.6),
           hintText:
-          "${AppLocalizations
-              .of(context)
-              .category_products_screen_search_products_from} : " +
-              widget.category_name,
+              "${AppLocalizations.of(context).category_products_screen_search_products_from} : " +
+                  widget.category_name,
           hintStyle: TextStyle(fontSize: 14.0, color: MyTheme.font_grey),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
-              borderRadius: BorderRadius.circular(6)
-          ),
+              borderRadius: BorderRadius.circular(6)),
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
-              borderRadius: BorderRadius.circular(6)
-          ),
+              borderRadius: BorderRadius.circular(6)),
           contentPadding: EdgeInsets.all(8.0),
         ),
       ),
@@ -272,39 +278,46 @@ class _CategoryProductsState extends State<CategoryProducts> {
 
   ListView buildSubCategory() {
     return ListView.separated(
-      padding: EdgeInsets.only(left: 18,right: 18,bottom: 10),
-      scrollDirection: Axis.horizontal,
-        itemBuilder: (context,index){
-            return InkWell(
-              onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return CategoryProducts(
-                        category_id:
-                        _subCategoryList[index].id,
-                        category_name:
-                        _subCategoryList[index].name,
-                      );
-                    },
-                  ),
-                );
-              },
-              child: Container(
-                height:_subCategoryList.isEmpty ?0:46,
-                width:_subCategoryList.isEmpty ?0: 96,
-
-                alignment: Alignment.center,
-                padding: EdgeInsets.symmetric(horizontal: 12),
-                decoration: BoxDecorations.buildBoxDecoration_1(),
-                child: Text(_subCategoryList[index].name,
-                  style: TextStyle(fontSize: 10,fontWeight:FontWeight.bold,color: MyTheme.font_grey),textAlign: TextAlign.center,),
+        padding: EdgeInsets.only(left: 18, right: 18, bottom: 10),
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return CategoryProducts(
+                      category_id: _subCategoryList[index].id,
+                      category_name: _subCategoryList[index].name,
+                    );
+                  },
+                ),
+              );
+            },
+            child: Container(
+              height: _subCategoryList.isEmpty ? 0 : 46,
+              width: _subCategoryList.isEmpty ? 0 : 96,
+              alignment: Alignment.center,
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              decoration: BoxDecorations.buildBoxDecoration_1(),
+              child: Text(
+                _subCategoryList[index].name,
+                style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: MyTheme.font_grey),
+                textAlign: TextAlign.center,
               ),
-            );
-          }, separatorBuilder: (context,index){
-            return SizedBox(width: 10,);
-          }, itemCount: _subCategoryList.length);
+            ),
+          );
+        },
+        separatorBuilder: (context, index) {
+          return SizedBox(
+            width: 10,
+          );
+        },
+        itemCount: _subCategoryList.length);
   }
 
   buildProductList() {

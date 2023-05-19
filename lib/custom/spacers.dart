@@ -1,4 +1,4 @@
-import 'package:active_ecommerce_flutter/custom/styles.dart';
+import 'package:hustla/custom/styles.dart';
 import 'package:flutter/cupertino.dart';
 
 class Space extends StatelessWidget {

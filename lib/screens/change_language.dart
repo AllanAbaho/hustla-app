@@ -1,18 +1,18 @@
-import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
-import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
+import 'package:hustla/custom/box_decorations.dart';
+import 'package:hustla/custom/useful_elements.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:hustla/my_theme.dart';
 
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:active_ecommerce_flutter/repositories/language_repository.dart';
-import 'package:active_ecommerce_flutter/repositories/coupon_repository.dart';
-import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
-import 'package:active_ecommerce_flutter/custom/toast_component.dart';
+import 'package:hustla/repositories/language_repository.dart';
+import 'package:hustla/repositories/coupon_repository.dart';
+import 'package:hustla/helpers/shimmer_helper.dart';
+import 'package:hustla/custom/toast_component.dart';
 import 'package:toast/toast.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
-import 'package:active_ecommerce_flutter/screens/main.dart';
-import 'package:active_ecommerce_flutter/providers/locale_provider.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
+import 'package:hustla/screens/main.dart';
+import 'package:hustla/providers/locale_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -164,7 +164,10 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
       ),
       title: Text(
         "${AppLocalizations.of(context).change_language_change_language} (${app_language.$}) - (${app_mobile_language.$})",
-        style: TextStyle(fontSize: 16, color: MyTheme.dark_font_grey,fontWeight: FontWeight.bold),
+        style: TextStyle(
+            fontSize: 16,
+            color: MyTheme.dark_font_grey,
+            fontWeight: FontWeight.bold),
       ),
       elevation: 0.0,
       titleSpacing: 0,

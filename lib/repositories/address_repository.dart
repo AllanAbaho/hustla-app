@@ -1,25 +1,24 @@
-import 'package:active_ecommerce_flutter/app_config.dart';
+import 'package:hustla/app_config.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:active_ecommerce_flutter/data_model/address_response.dart';
-import 'package:active_ecommerce_flutter/data_model/address_add_response.dart';
-import 'package:active_ecommerce_flutter/data_model/address_update_response.dart';
-import 'package:active_ecommerce_flutter/data_model/address_update_location_response.dart';
-import 'package:active_ecommerce_flutter/data_model/address_delete_response.dart';
-import 'package:active_ecommerce_flutter/data_model/address_make_default_response.dart';
-import 'package:active_ecommerce_flutter/data_model/address_update_in_cart_response.dart';
-import 'package:active_ecommerce_flutter/data_model/city_response.dart';
-import 'package:active_ecommerce_flutter/data_model/state_response.dart';
-import 'package:active_ecommerce_flutter/data_model/country_response.dart';
-import 'package:active_ecommerce_flutter/data_model/shipping_cost_response.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:hustla/data_model/address_response.dart';
+import 'package:hustla/data_model/address_add_response.dart';
+import 'package:hustla/data_model/address_update_response.dart';
+import 'package:hustla/data_model/address_update_location_response.dart';
+import 'package:hustla/data_model/address_delete_response.dart';
+import 'package:hustla/data_model/address_make_default_response.dart';
+import 'package:hustla/data_model/address_update_in_cart_response.dart';
+import 'package:hustla/data_model/city_response.dart';
+import 'package:hustla/data_model/state_response.dart';
+import 'package:hustla/data_model/country_response.dart';
+import 'package:hustla/data_model/shipping_cost_response.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
 import 'package:flutter/foundation.dart';
 
 class AddressRepository {
   Future<AddressResponse> getAddressList() async {
-    Uri url =
-        Uri.parse("${AppConfig.BASE_URL}/user/shipping/address");
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/user/shipping/address");
     final response = await http.get(
       url,
       headers: {
@@ -34,8 +33,7 @@ class AddressRepository {
   }
 
   Future<AddressResponse> getHomeDeliveryAddress() async {
-    Uri url =
-        Uri.parse("${AppConfig.BASE_URL}/get-home-delivery-address");
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/get-home-delivery-address");
     final response = await http.get(
       url,
       headers: {
@@ -192,14 +190,10 @@ class AddressRepository {
   }
 
   Future<ShippingCostResponse> getShippingCostResponse(
-      {
-       shipping_type =""}) async {
-    var post_body = jsonEncode({
-      "seller_list": shipping_type
-    });
+      {shipping_type = ""}) async {
+    var post_body = jsonEncode({"seller_list": shipping_type});
 
     print(post_body.toString());
-
 
     Uri url = Uri.parse("${AppConfig.BASE_URL}/shipping_cost");
     print(url.toString());
@@ -234,14 +228,12 @@ class AddressRepository {
     return addressUpdateInCartResponseFromJson(response.body);
   }
 
-
   Future<AddressUpdateInCartResponse> getShippingTypeUpdateInCartResponse(
-      { @required int shipping_id, shipping_type = "home_delivery"}) async {
+      {@required int shipping_id, shipping_type = "home_delivery"}) async {
     var post_body = jsonEncode({
       "shipping_id": "${shipping_id}",
       "shipping_type": "$shipping_type",
     });
-
 
     Uri url = Uri.parse("${AppConfig.BASE_URL}/update-shipping-type-in-cart");
 
@@ -258,6 +250,4 @@ class AddressRepository {
 
     return addressUpdateInCartResponseFromJson(response.body);
   }
-
-
 }

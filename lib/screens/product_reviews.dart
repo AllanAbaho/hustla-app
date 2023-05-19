@@ -1,19 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:hustla/my_theme.dart';
 import 'dart:ui';
 import 'package:flutter/painting.dart';
 import 'dart:async';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:active_ecommerce_flutter/custom/toast_component.dart';
+import 'package:hustla/custom/toast_component.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter/services.dart';
 import 'package:expandable/expandable.dart';
-import 'package:active_ecommerce_flutter/repositories/review_repositories.dart';
-import 'package:active_ecommerce_flutter/app_config.dart';
-import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:hustla/repositories/review_repositories.dart';
+import 'package:hustla/app_config.dart';
+import 'package:hustla/helpers/shimmer_helper.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductReviews extends StatefulWidget {
@@ -90,7 +90,8 @@ class _ProductReviewsState extends State<ProductReviews> {
 
   onTapReviewSubmit(context) async {
     if (is_logged_in.$ == false) {
-      ToastComponent.showDialog("You need to login to give a review", gravity: Toast.center, duration: Toast.lengthLong);
+      ToastComponent.showDialog("You need to login to give a review",
+          gravity: Toast.center, duration: Toast.lengthLong);
       return;
     }
 
@@ -116,11 +117,13 @@ class _ProductReviewsState extends State<ProductReviews> {
         .getReviewSubmitResponse(widget.id, _my_rating.toInt(), myReviewText);
 
     if (reviewSubmitResponse.result == false) {
-      ToastComponent.showDialog(reviewSubmitResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
+      ToastComponent.showDialog(reviewSubmitResponse.message,
+          gravity: Toast.center, duration: Toast.lengthLong);
       return;
     }
 
-    ToastComponent.showDialog(reviewSubmitResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
+    ToastComponent.showDialog(reviewSubmitResponse.message,
+        gravity: Toast.center, duration: Toast.lengthLong);
 
     reset();
     fetchData();
@@ -269,7 +272,7 @@ class _ProductReviewsState extends State<ProductReviews> {
                 borderRadius: BorderRadius.circular(35),
                 child: FadeInImage.assetNetwork(
                   placeholder: 'assets/placeholder.png',
-                  image:  _reviewList[index].avatar,
+                  image: _reviewList[index].avatar,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -367,7 +370,9 @@ class _ProductReviewsState extends State<ProductReviews> {
                         var controller = ExpandableController.of(context);
                         return FlatButton(
                           child: Text(
-                            !controller.expanded ? AppLocalizations.of(context).common_view_more : AppLocalizations.of(context).common_show_less,
+                            !controller.expanded
+                                ? AppLocalizations.of(context).common_view_more
+                                : AppLocalizations.of(context).common_show_less,
                             style: TextStyle(
                                 color: MyTheme.font_grey, fontSize: 11),
                           ),
@@ -392,8 +397,10 @@ class _ProductReviewsState extends State<ProductReviews> {
       color: Colors.white,
       child: Center(
         child: Text(_totalData == _reviewList.length
-            ? AppLocalizations.of(context).product_reviews_screen_no_more_reviews
-            : AppLocalizations.of(context).product_reviews_screen_loading_more_reviews),
+            ? AppLocalizations.of(context)
+                .product_reviews_screen_no_more_reviews
+            : AppLocalizations.of(context)
+                .product_reviews_screen_loading_more_reviews),
       ),
     );
   }
@@ -438,7 +445,8 @@ class _ProductReviewsState extends State<ProductReviews> {
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: Color.fromRGBO(251, 251, 251, 1),
-                    hintText: AppLocalizations.of(context).product_reviews_screen_type_your_review_here,
+                    hintText: AppLocalizations.of(context)
+                        .product_reviews_screen_type_your_review_here,
                     hintStyle: TextStyle(
                         fontSize: 14.0, color: MyTheme.textfield_grey),
                     enabledBorder: OutlineInputBorder(

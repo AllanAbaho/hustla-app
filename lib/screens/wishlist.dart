@@ -1,18 +1,17 @@
-import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
-import 'package:active_ecommerce_flutter/ui_elements/product_card.dart';
+import 'package:hustla/custom/useful_elements.dart';
+import 'package:hustla/ui_elements/product_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
-import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
-import 'package:active_ecommerce_flutter/app_config.dart';
-import 'package:active_ecommerce_flutter/repositories/wishlist_repository.dart';
-import 'package:active_ecommerce_flutter/screens/product_details.dart';
-import 'package:active_ecommerce_flutter/custom/toast_component.dart';
+import 'package:hustla/my_theme.dart';
+import 'package:hustla/helpers/shimmer_helper.dart';
+import 'package:hustla/app_config.dart';
+import 'package:hustla/repositories/wishlist_repository.dart';
+import 'package:hustla/screens/product_details.dart';
+import 'package:hustla/custom/toast_component.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:toast/toast.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 
 class Wishlist extends StatefulWidget {
   @override
@@ -68,7 +67,8 @@ class _WishlistState extends State<Wishlist> {
         await WishListRepository().delete(wishlist_id: wishlist_id);
 
     if (wishlistDeleteResponse.result == true) {
-      ToastComponent.showDialog(wishlistDeleteResponse.message, gravity: Toast.top, duration: Toast.lengthShort);
+      ToastComponent.showDialog(wishlistDeleteResponse.message,
+          gravity: Toast.top, duration: Toast.lengthShort);
     }
   }
 
@@ -110,7 +110,10 @@ class _WishlistState extends State<Wishlist> {
       ),
       title: Text(
         AppLocalizations.of(context).wishlist_screen_my_wishlist,
-        style: TextStyle(fontSize: 16, color: MyTheme.dark_font_grey,fontWeight: FontWeight.bold),
+        style: TextStyle(
+            fontSize: 16,
+            color: MyTheme.dark_font_grey,
+            fontWeight: FontWeight.bold),
       ),
       elevation: 0.0,
       titleSpacing: 0,
@@ -123,7 +126,7 @@ class _WishlistState extends State<Wishlist> {
           height: 100,
           child: Center(
               child: Text(
-                AppLocalizations.of(context).wishlist_screen_login_warning,
+            AppLocalizations.of(context).wishlist_screen_login_warning,
             style: TextStyle(color: MyTheme.font_grey),
           )));
     } else if (_wishlistInit == true && _wishlistItems.length == 0) {
@@ -132,29 +135,28 @@ class _WishlistState extends State<Wishlist> {
       );
     } else if (_wishlistItems.length > 0) {
       return SingleChildScrollView(
-        child:  MasonryGridView.count(
+        child: MasonryGridView.count(
           crossAxisCount: 2,
           mainAxisSpacing: 14,
           crossAxisSpacing: 14,
           itemCount: _wishlistItems.length,
           shrinkWrap: true,
-          padding:
-          EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+          padding: EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             // 3
             return ProductCard(
-                id: _wishlistItems[index].product.id,
-                image: _wishlistItems[index].product.thumbnail_image,
-                name: _wishlistItems[index].product.name,
-                main_price: _wishlistItems[index].product.base_price,
-                stroked_price:"0",
-                has_discount: false,
+              id: _wishlistItems[index].product.id,
+              image: _wishlistItems[index].product.thumbnail_image,
+              name: _wishlistItems[index].product.name,
+              main_price: _wishlistItems[index].product.base_price,
+              stroked_price: "0",
+              has_discount: false,
             );
           },
         ),
 
-       /*
+        /*
         ListView.builder(
           itemCount: _wishlistItems.length,
           scrollDirection: Axis.vertical,
@@ -172,7 +174,8 @@ class _WishlistState extends State<Wishlist> {
       return Container(
           height: 100,
           child: Center(
-              child: Text(AppLocalizations.of(context).common_no_item_is_available,
+              child: Text(
+                  AppLocalizations.of(context).common_no_item_is_available,
                   style: TextStyle(color: MyTheme.font_grey))));
     }
   }

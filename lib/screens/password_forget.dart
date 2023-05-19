@@ -1,16 +1,16 @@
-import 'package:active_ecommerce_flutter/custom/resources.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
-import 'package:active_ecommerce_flutter/ui_elements/auth_ui.dart';
+import 'package:hustla/custom/resources.dart';
+import 'package:hustla/my_theme.dart';
+import 'package:hustla/ui_elements/auth_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
-import 'package:active_ecommerce_flutter/custom/intl_phone_input.dart';
+import 'package:hustla/custom/input_decorations.dart';
+import 'package:hustla/custom/intl_phone_input.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:active_ecommerce_flutter/screens/password_otp.dart';
-import 'package:active_ecommerce_flutter/custom/toast_component.dart';
+import 'package:hustla/screens/password_otp.dart';
+import 'package:hustla/custom/toast_component.dart';
 import 'package:toast/toast.dart';
-import 'package:active_ecommerce_flutter/repositories/auth_repository.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:hustla/repositories/auth_repository.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PasswordForget extends StatefulWidget {

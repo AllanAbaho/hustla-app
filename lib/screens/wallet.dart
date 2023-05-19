@@ -1,21 +1,21 @@
-import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
-import 'package:active_ecommerce_flutter/custom/device_info.dart';
-import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
-import 'package:active_ecommerce_flutter/screens/checkout.dart';
+import 'package:hustla/custom/box_decorations.dart';
+import 'package:hustla/custom/device_info.dart';
+import 'package:hustla/custom/useful_elements.dart';
+import 'package:hustla/screens/checkout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:hustla/my_theme.dart';
 import 'dart:ui';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
-import 'package:active_ecommerce_flutter/helpers/reg_ex_inpur_formatter.dart';
-import 'package:active_ecommerce_flutter/repositories/wallet_repository.dart';
-import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
-import 'package:active_ecommerce_flutter/custom/toast_component.dart';
+import 'package:hustla/helpers/reg_ex_inpur_formatter.dart';
+import 'package:hustla/repositories/wallet_repository.dart';
+import 'package:hustla/helpers/shimmer_helper.dart';
+import 'package:hustla/custom/toast_component.dart';
 import 'package:toast/toast.dart';
-import 'package:active_ecommerce_flutter/screens/recharge_wallet.dart';
-import 'package:active_ecommerce_flutter/screens/main.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:hustla/screens/recharge_wallet.dart';
+import 'package:hustla/screens/main.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Wallet extends StatefulWidget {

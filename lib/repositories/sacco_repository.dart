@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:active_ecommerce_flutter/app_config.dart';
-import 'package:active_ecommerce_flutter/data_model/join_sacco_response.dart';
-import 'package:active_ecommerce_flutter/data_model/sacco_list_response.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:hustla/app_config.dart';
+import 'package:hustla/data_model/join_sacco_response.dart';
+import 'package:hustla/data_model/sacco_list_response.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
 import 'package:http/http.dart' as http;
 
 class SaccoRepository {

@@ -1,13 +1,13 @@
-import 'package:active_ecommerce_flutter/custom/app_bar.dart';
-import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
-import 'package:active_ecommerce_flutter/custom/device_info.dart';
-import 'package:active_ecommerce_flutter/custom/page_description.dart';
-import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
-import 'package:active_ecommerce_flutter/repositories/job_repository.dart';
-import 'package:active_ecommerce_flutter/screens/job_description.dart';
+import 'package:hustla/custom/app_bar.dart';
+import 'package:hustla/custom/box_decorations.dart';
+import 'package:hustla/custom/device_info.dart';
+import 'package:hustla/custom/page_description.dart';
+import 'package:hustla/helpers/shimmer_helper.dart';
+import 'package:hustla/repositories/job_repository.dart';
+import 'package:hustla/screens/job_description.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:hustla/my_theme.dart';
 
 class FindJobs extends StatefulWidget {
   FindJobs({Key key, this.banner, this.sector}) : super(key: key);

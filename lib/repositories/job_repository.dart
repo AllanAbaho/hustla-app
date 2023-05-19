@@ -1,11 +1,11 @@
-import 'package:active_ecommerce_flutter/app_config.dart';
-import 'package:active_ecommerce_flutter/data_model/add_job_response.dart';
-import 'package:active_ecommerce_flutter/data_model/job_response.dart';
-import 'package:active_ecommerce_flutter/data_model/post_job_application_response.dart';
-import 'package:active_ecommerce_flutter/screens/posted_jobs.dart';
+import 'package:hustla/app_config.dart';
+import 'package:hustla/data_model/add_job_response.dart';
+import 'package:hustla/data_model/job_response.dart';
+import 'package:hustla/data_model/post_job_application_response.dart';
+import 'package:hustla/screens/posted_jobs.dart';
 import 'package:http/http.dart' as http;
-import 'package:active_ecommerce_flutter/data_model/category_response.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:hustla/data_model/category_response.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
 
 class JobRepository {
   Future<JobResponse> getJobs(String sector) async {

@@ -1,16 +1,16 @@
-import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
-import 'package:active_ecommerce_flutter/custom/device_info.dart';
-import 'package:active_ecommerce_flutter/custom/lang_text.dart';
-import 'package:active_ecommerce_flutter/custom/toast_component.dart';
-import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
+import 'package:hustla/custom/box_decorations.dart';
+import 'package:hustla/custom/device_info.dart';
+import 'package:hustla/custom/lang_text.dart';
+import 'package:hustla/custom/toast_component.dart';
+import 'package:hustla/custom/useful_elements.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
-import 'package:active_ecommerce_flutter/ui_elements/product_card.dart';
-import 'package:active_ecommerce_flutter/repositories/product_repository.dart';
-import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
-import 'package:active_ecommerce_flutter/helpers/string_helper.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:hustla/my_theme.dart';
+import 'package:hustla/ui_elements/product_card.dart';
+import 'package:hustla/repositories/product_repository.dart';
+import 'package:hustla/helpers/shimmer_helper.dart';
+import 'package:hustla/helpers/string_helper.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
 import 'package:flutter_countdown_timer/index.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -213,13 +213,13 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                     itemBuilder: (context, index) {
                       // 3
                       return ProductCard(
-                          id: _searchList[index].id,
-                          image: _searchList[index].thumbnail_image,
-                          name: _searchList[index].name,
-                          main_price: _searchList[index].main_price,
-                          stroked_price: _searchList[index].stroked_price,
-                          has_discount: _searchList[index].has_discount,
-                          discount: _searchList[index].discount,
+                        id: _searchList[index].id,
+                        image: _searchList[index].thumbnail_image,
+                        name: _searchList[index].name,
+                        main_price: _searchList[index].main_price,
+                        stroked_price: _searchList[index].stroked_price,
+                        has_discount: _searchList[index].has_discount,
+                        discount: _searchList[index].discount,
                       );
                     },
                   ),
@@ -232,11 +232,10 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                 children: [
                   headerShimmer(),
                   ShimmerHelper()
-                  .buildProductGridShimmer(scontroller: _scrollController),
+                      .buildProductGridShimmer(scontroller: _scrollController),
                 ],
               ),
             );
-
           }
         });
   }

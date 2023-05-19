@@ -1,45 +1,45 @@
 import 'dart:developer';
 
-import 'package:active_ecommerce_flutter/custom/custom_shape.dart';
-import 'package:active_ecommerce_flutter/custom/common_functions.dart';
-import 'package:active_ecommerce_flutter/custom/device_info.dart';
-import 'package:active_ecommerce_flutter/custom/resources.dart';
-import 'package:active_ecommerce_flutter/custom/spacers.dart';
-import 'package:active_ecommerce_flutter/custom/text.dart';
-import 'package:active_ecommerce_flutter/helpers/auth_helper.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
-import 'package:active_ecommerce_flutter/presenter/cart_counter.dart';
-import 'package:active_ecommerce_flutter/repositories/cart_repository.dart';
-import 'package:active_ecommerce_flutter/screens/become_seller.dart';
-import 'package:active_ecommerce_flutter/screens/filter.dart';
-import 'package:active_ecommerce_flutter/screens/finance.dart';
-import 'package:active_ecommerce_flutter/screens/flash_deal_list.dart';
-import 'package:active_ecommerce_flutter/screens/government.dart';
-import 'package:active_ecommerce_flutter/screens/jobs.dart';
-import 'package:active_ecommerce_flutter/screens/sacco.dart';
-import 'package:active_ecommerce_flutter/screens/todays_deal_products.dart';
-import 'package:active_ecommerce_flutter/screens/top_selling_products.dart';
-import 'package:active_ecommerce_flutter/screens/category_products.dart';
-import 'package:active_ecommerce_flutter/screens/category_list.dart';
-import 'package:active_ecommerce_flutter/screens/top_up.dart';
-import 'package:active_ecommerce_flutter/screens/travel.dart';
-import 'package:active_ecommerce_flutter/screens/web_page.dart';
-import 'package:active_ecommerce_flutter/ui_sections/drawer.dart';
+import 'package:hustla/custom/custom_shape.dart';
+import 'package:hustla/custom/common_functions.dart';
+import 'package:hustla/custom/device_info.dart';
+import 'package:hustla/custom/resources.dart';
+import 'package:hustla/custom/spacers.dart';
+import 'package:hustla/custom/text.dart';
+import 'package:hustla/helpers/auth_helper.dart';
+import 'package:hustla/my_theme.dart';
+import 'package:hustla/presenter/cart_counter.dart';
+import 'package:hustla/repositories/cart_repository.dart';
+import 'package:hustla/screens/become_seller.dart';
+import 'package:hustla/screens/filter.dart';
+import 'package:hustla/screens/finance.dart';
+import 'package:hustla/screens/flash_deal_list.dart';
+import 'package:hustla/screens/government.dart';
+import 'package:hustla/screens/jobs.dart';
+import 'package:hustla/screens/sacco.dart';
+import 'package:hustla/screens/todays_deal_products.dart';
+import 'package:hustla/screens/top_selling_products.dart';
+import 'package:hustla/screens/category_products.dart';
+import 'package:hustla/screens/category_list.dart';
+import 'package:hustla/screens/top_up.dart';
+import 'package:hustla/screens/travel.dart';
+import 'package:hustla/screens/web_page.dart';
+import 'package:hustla/ui_sections/drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:active_ecommerce_flutter/repositories/sliders_repository.dart';
-import 'package:active_ecommerce_flutter/repositories/category_repository.dart';
-import 'package:active_ecommerce_flutter/repositories/product_repository.dart';
-import 'package:active_ecommerce_flutter/app_config.dart';
+import 'package:hustla/repositories/sliders_repository.dart';
+import 'package:hustla/repositories/category_repository.dart';
+import 'package:hustla/repositories/product_repository.dart';
+import 'package:hustla/app_config.dart';
 
-import 'package:active_ecommerce_flutter/ui_elements/product_card.dart';
-import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:hustla/ui_elements/product_card.dart';
+import 'package:hustla/helpers/shimmer_helper.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
-import 'package:active_ecommerce_flutter/ui_elements/mini_product_card.dart';
+import 'package:hustla/custom/box_decorations.dart';
+import 'package:hustla/ui_elements/mini_product_card.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -278,7 +278,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         //drawer: MainDrawer(),
         body: Column(
           children: [
-            hustlaLogo(),
+            formerBanner(),
             Container(
               height: screenHeight,
               child: Stack(
@@ -287,7 +287,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     color: MyTheme.dark_font_grey,
                     backgroundColor: Colors.white,
                     onRefresh: _onRefresh,
-                    displacement: 0,
                     child: CustomScrollView(
                       controller: _mainScrollController,
                       physics: const BouncingScrollPhysics(
@@ -295,17 +294,19 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       slivers: <Widget>[
                         SliverList(
                           delegate: SliverChildListDelegate([
-                            formerBanner(),
+                            // formerBanner(),
                             Padding(
                               padding: const EdgeInsets.only(
-                                  top: 12, bottom: 8, left: 10, right: 10),
+                                  top: 0, bottom: 8, left: 10, right: 10),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 // ignore: prefer_const_literals_to_create_immutables
                                 children: [
-                                  MediumText(
+                                  Text(
                                     'Hustla Categories',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 18),
                                   ),
                                   SmallText('View More >>>')
                                 ],
@@ -355,7 +356,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                                left: 10.0, bottom: 20),
+                                                left: 10.0, bottom: 80),
                                             child: buildHomeCarouselSlider(
                                                 context),
                                           ),
@@ -402,80 +403,81 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Widget formerBanner() {
     return Container(
       child: Column(children: [
+        // Padding(
+        //   padding:
+        //       const EdgeInsets.only(top: 40.0, left: 10, right: 10, bottom: 2),
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //     children: [
+        //       Column(
+        //         children: [
+        //           Row(
+        //             children: [
+        //               Container(
+        //                 width: 48,
+        //                 height: 48,
+        //                 decoration: BoxDecoration(
+        //                   borderRadius: BorderRadius.circular(100),
+        //                   border: Border.all(color: MyTheme.white, width: 1),
+        //                   //shape: BoxShape.rectangle,
+        //                 ),
+        //                 child: ClipRRect(
+        //                     clipBehavior: Clip.hardEdge,
+        //                     borderRadius:
+        //                         BorderRadius.all(Radius.circular(100.0)),
+        //                     child: FadeInImage.assetNetwork(
+        //                       placeholder: 'assets/placeholder.png',
+        //                       image: "${avatar_original.$}",
+        //                       fit: BoxFit.fill,
+        //                     )),
+        //               ),
+        //               Padding(
+        //                 padding: const EdgeInsets.all(8.0),
+        //                 child: Column(
+        //                   crossAxisAlignment: CrossAxisAlignment.start,
+        //                   children: [
+        //                     MediumText(
+        //                       'Full Name',
+        //                     ),
+        //                     SmallText(
+        //                       user_name.$,
+        //                     ),
+        //                   ],
+        //                 ),
+        //               ),
+        //             ],
+        //           )
+        //         ],
+        //       ),
+        //       Column(
+        //         crossAxisAlignment: CrossAxisAlignment.end,
+        //         children: [
+        //           MediumText(
+        //             'Wallet ID',
+        //           ),
+        //           SmallText(
+        //             account_number.$,
+        //           ),
+        //         ],
+        //       ),
+        //     ],
+        //   ),
+        // ),
         Padding(
           padding:
-              const EdgeInsets.only(top: 10.0, left: 10, right: 10, bottom: 2),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 48,
-                        height: 48,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          border: Border.all(color: MyTheme.white, width: 1),
-                          //shape: BoxShape.rectangle,
-                        ),
-                        child: ClipRRect(
-                            clipBehavior: Clip.hardEdge,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(100.0)),
-                            child: FadeInImage.assetNetwork(
-                              placeholder: 'assets/placeholder.png',
-                              image: "${avatar_original.$}",
-                              fit: BoxFit.fill,
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            MediumText(
-                              'Full Name',
-                            ),
-                            SmallText(
-                              user_name.$,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  MediumText(
-                    'Wallet ID',
-                  ),
-                  SmallText(
-                    account_number.$,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
+              const EdgeInsets.only(top: 40.0, bottom: 30, left: 10, right: 10),
           child: Container(
-            height: 70,
+            height: MediaQuery.of(context).size.height * 0.25,
             decoration: BoxDecoration(
               color: AppColors.brandColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.yellow.withOpacity(.2),
-                  blurRadius: 20,
-                  spreadRadius: 00.0,
-                  offset: Offset(0.0, 10.0), // shadow direction: bottom right
-                )
-              ],
+              // boxShadow: [
+              //   BoxShadow(
+              //     color: Colors.yellow.withOpacity(.2),
+              //     blurRadius: 20,
+              //     spreadRadius: 00.0,
+              //     offset: Offset(0.0, 10.0), // shadow direction: bottom right
+              //   )
+              // ],
               borderRadius: BorderRadius.all(Radius.circular(10)),
               // border: Border.all(
               //     color: MyTheme.light_grey, width: 1),
@@ -484,14 +486,53 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 8.0, left: 20.0),
+                  padding: const EdgeInsets.only(top: 12.0, left: 20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      MediumText(
-                        'Available Balance',
-                        color: Colors.white,
+                      // Row(
+                      //   children: [
+                      //     Container(
+                      //       width: 48,
+                      //       height: 48,
+                      //       decoration: BoxDecoration(
+                      //         borderRadius: BorderRadius.circular(100),
+                      //         border:
+                      //             Border.all(color: MyTheme.white, width: 1),
+                      //         //shape: BoxShape.rectangle,
+                      //       ),
+                      //       child: ClipRRect(
+                      //           clipBehavior: Clip.hardEdge,
+                      //           borderRadius:
+                      //               BorderRadius.all(Radius.circular(100.0)),
+                      //           child: FadeInImage.assetNetwork(
+                      //             placeholder: 'assets/placeholder.png',
+                      //             image: "${avatar_original.$}",
+                      //             fit: BoxFit.fill,
+                      //           )),
+                      //     ),
+                      //     Padding(
+                      //       padding: const EdgeInsets.all(8.0),
+                      //       child: Column(
+                      //         crossAxisAlignment: CrossAxisAlignment.start,
+                      //         children: [
+                      //           MediumText(
+                      //             'Full Name',
+                      //           ),
+                      //           SmallText(
+                      //             user_name.$,
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      VSpace.md,
+                      Text(
+                        'AVAILABLE BALANCE',
+                        style: TextStyle(
+                            color: AppColors.dashboardColor, fontSize: 15),
                       ),
                       VSpace.sm,
                       Row(
@@ -501,9 +542,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             child: Text(
                               '****** (Ksh)',
                               style: TextStyle(
-                                  color: AppColors.appBarColor,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16),
+                                  color: AppColors.dashboardColor,
+                                  fontSize: 15),
                             ),
                           ),
                           Visibility(
@@ -511,9 +551,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             child: Text(
                               '${account_balance.$} (Ksh)',
                               style: TextStyle(
-                                  color: AppColors.appBarColor,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16),
+                                  color: AppColors.dashboardColor,
+                                  fontSize: 15),
                             ),
                           ),
                           HSpace.sm,
@@ -526,49 +565,93 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               _showPassword
                                   ? Icons.visibility_outlined
                                   : Icons.visibility_off_outlined,
-                              color: Colors.black,
+                              color: AppColors.dashboardColor,
                             ),
                           ),
+                        ],
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Padding(
+                          //   padding: const EdgeInsets.only(
+                          //       bottom: 10.0, right: 4, top: 10),
+                          //   child: SizedBox(
+                          //     height: 30,
+                          //     child: ElevatedButton(
+                          //       onPressed: () {
+                          //         Navigator.push(context,
+                          //             MaterialPageRoute(builder: (context) {
+                          //           return TopUp(title: 'Add Credit');
+                          //         }));
+                          //       },
+                          //       // ignore: sort_child_properties_last
+                          //       child: Padding(
+                          //         padding: const EdgeInsets.only(
+                          //             left: 8.0, right: 8.0),
+                          //         child: SmallText(
+                          //           'Add Credit',
+                          //           color: Colors.black,
+                          //         ),
+                          //       ),
+                          //       style: ElevatedButton.styleFrom(
+                          //         primary: Colors.yellow,
+                          //         shape: RoundedRectangleBorder(
+                          //           borderRadius:
+                          //               BorderRadius.circular(10), // <-- Radius
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 13.0),
+                            child: Image.asset(
+                              'assets/chip.png',
+                              height: MediaQuery.of(context).size.height * 0.05,
+                              // color: AppColors.dashboardColor,
+                            ),
+                          ),
+
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  account_number.$,
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15),
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  'XXXX XXXX',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4.0),
+                            child: Text(
+                              user_name.$.toUpperCase(),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ],
                   ),
                 ),
                 // HSpace.lg,
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0, right: 8),
-                      child: SizedBox(
-                        height: 30,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return TopUp(title: 'Add Credit');
-                            }));
-                          },
-                          // ignore: sort_child_properties_last
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 8.0, right: 8.0),
-                            child: SmallText(
-                              'Add Credit',
-                              color: Colors.black,
-                            ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.yellow,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(10), // <-- Radius
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                Image.asset(
+                  'assets/qrcode.png',
+                  height: MediaQuery.of(context).size.height * 0.23,
+                  color: AppColors.dashboardColor,
                 ),
               ],
             ),

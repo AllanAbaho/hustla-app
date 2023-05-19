@@ -1,17 +1,16 @@
-import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
-import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
-import 'package:active_ecommerce_flutter/screens/order_details.dart';
-import 'package:active_ecommerce_flutter/screens/main.dart';
+import 'package:hustla/custom/box_decorations.dart';
+import 'package:hustla/custom/useful_elements.dart';
+import 'package:hustla/screens/order_details.dart';
+import 'package:hustla/screens/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:hustla/my_theme.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:active_ecommerce_flutter/repositories/order_repository.dart';
+import 'package:hustla/repositories/order_repository.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:one_context/one_context.dart';
-
 
 class PaymentStatus {
   String option_key;
@@ -21,9 +20,14 @@ class PaymentStatus {
 
   static List<PaymentStatus> getPaymentStatusList() {
     return <PaymentStatus>[
-      PaymentStatus('', AppLocalizations.of(OneContext().context).order_list_screen_all_payments),
-      PaymentStatus('paid', AppLocalizations.of(OneContext().context).order_list_screen_paid),
-      PaymentStatus('unpaid', AppLocalizations.of(OneContext().context).order_list_screen_unpaid),
+      PaymentStatus(
+          '',
+          AppLocalizations.of(OneContext().context)
+              .order_list_screen_all_payments),
+      PaymentStatus('paid',
+          AppLocalizations.of(OneContext().context).order_list_screen_paid),
+      PaymentStatus('unpaid',
+          AppLocalizations.of(OneContext().context).order_list_screen_unpaid),
     ];
   }
 }
@@ -36,10 +40,22 @@ class DeliveryStatus {
 
   static List<DeliveryStatus> getDeliveryStatusList() {
     return <DeliveryStatus>[
-      DeliveryStatus('', AppLocalizations.of(OneContext().context).order_list_screen_all_deliveries),
-      DeliveryStatus('confirmed', AppLocalizations.of(OneContext().context).order_list_screen_confirmed),
-      DeliveryStatus('on_delivery', AppLocalizations.of(OneContext().context).order_list_screen_on_delivery),
-      DeliveryStatus('delivered', AppLocalizations.of(OneContext().context).order_list_screen_delivered),
+      DeliveryStatus(
+          '',
+          AppLocalizations.of(OneContext().context)
+              .order_list_screen_all_deliveries),
+      DeliveryStatus(
+          'confirmed',
+          AppLocalizations.of(OneContext().context)
+              .order_list_screen_confirmed),
+      DeliveryStatus(
+          'on_delivery',
+          AppLocalizations.of(OneContext().context)
+              .order_list_screen_on_delivery),
+      DeliveryStatus(
+          'delivered',
+          AppLocalizations.of(OneContext().context)
+              .order_list_screen_delivered),
     ];
   }
 }
@@ -238,7 +254,8 @@ class _OrderListState extends State<OrderList> {
       child: Center(
         child: Text(_totalData == _orderList.length
             ? AppLocalizations.of(context).order_list_screen_no_more_orders
-            : AppLocalizations.of(context).order_list_screen_loading_more_orders),
+            : AppLocalizations.of(context)
+                .order_list_screen_loading_more_orders),
       ),
     );
   }
@@ -279,7 +296,6 @@ class _OrderListState extends State<OrderList> {
               },
             ),
           ),
-
           Container(
             decoration: BoxDecorations.buildBoxDecoration_1(),
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -366,7 +382,10 @@ class _OrderListState extends State<OrderList> {
           ),
           Text(
             AppLocalizations.of(context).profile_screen_purchase_history,
-            style: TextStyle(fontSize: 16, color: MyTheme.dark_font_grey,fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: 16,
+                color: MyTheme.dark_font_grey,
+                fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -412,7 +431,8 @@ class _OrderListState extends State<OrderList> {
             separatorBuilder: (context, index) => SizedBox(
               height: 14,
             ),
-            padding: const EdgeInsets.only(left: 18,right:18,top:0,bottom: 0),
+            padding:
+                const EdgeInsets.only(left: 18, right: 18, top: 0, bottom: 0),
             itemCount: _orderList.length,
             scrollDirection: Axis.vertical,
             physics: NeverScrollableScrollPhysics(),
@@ -420,8 +440,7 @@ class _OrderListState extends State<OrderList> {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return OrderDetails(
                       id: _orderList[index].id,
                     );
@@ -434,13 +453,14 @@ class _OrderListState extends State<OrderList> {
         ),
       );
     } else if (_totalData == 0) {
-      return Center(child: Text(AppLocalizations.of(context).common_no_data_available));
+      return Center(
+          child: Text(AppLocalizations.of(context).common_no_data_available));
     } else {
       return Container(); // should never be happening
     }
   }
 
-   buildOrderListItemCard(int index) {
+  buildOrderListItemCard(int index) {
     return Container(
       decoration: BoxDecorations.buildBoxDecoration_1(),
       child: Padding(
@@ -462,9 +482,9 @@ class _OrderListState extends State<OrderList> {
               padding: const EdgeInsets.only(bottom: 4.0),
               child: Row(
                 children: [
-
                   Text(_orderList[index].date,
-                      style: TextStyle(color: MyTheme.dark_font_grey, fontSize: 12)),
+                      style: TextStyle(
+                          color: MyTheme.dark_font_grey, fontSize: 12)),
                   Spacer(),
                   Text(
                     _orderList[index].grand_total,
@@ -480,14 +500,19 @@ class _OrderListState extends State<OrderList> {
               padding: const EdgeInsets.only(bottom: 4.0),
               child: Row(
                 children: [
-
                   Text(
                     "${AppLocalizations.of(context).order_list_screen_payment_status} - ",
-                    style: TextStyle(color: MyTheme.dark_font_grey, fontSize: 12),
+                    style:
+                        TextStyle(color: MyTheme.dark_font_grey, fontSize: 12),
                   ),
                   Text(
                     _orderList[index].payment_status_string,
-                    style: TextStyle(color:_orderList[index].payment_status=="paid"? Colors.green:Colors.red, fontSize: 12,fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                        color: _orderList[index].payment_status == "paid"
+                            ? Colors.green
+                            : Colors.red,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
@@ -500,7 +525,10 @@ class _OrderListState extends State<OrderList> {
                 ),
                 Text(
                   _orderList[index].delivery_status_string,
-                  style: TextStyle(color: MyTheme.dark_font_grey, fontSize: 12,fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      color: MyTheme.dark_font_grey,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500),
                 ),
               ],
             )

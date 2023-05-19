@@ -1,16 +1,16 @@
 import 'dart:convert';
 
-import 'package:active_ecommerce_flutter/custom/app_bar.dart';
-import 'package:active_ecommerce_flutter/custom/device_info.dart';
-import 'package:active_ecommerce_flutter/custom/page_description.dart';
-import 'package:active_ecommerce_flutter/custom/resources.dart';
-import 'package:active_ecommerce_flutter/custom/spacers.dart';
-import 'package:active_ecommerce_flutter/custom/toast_component.dart';
-import 'package:active_ecommerce_flutter/data_model/destination_response.dart';
-import 'package:active_ecommerce_flutter/data_model/flights_response.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
-import 'package:active_ecommerce_flutter/repositories/airline_repository.dart';
-import 'package:active_ecommerce_flutter/screens/passenger_details.dart';
+import 'package:hustla/custom/app_bar.dart';
+import 'package:hustla/custom/device_info.dart';
+import 'package:hustla/custom/page_description.dart';
+import 'package:hustla/custom/resources.dart';
+import 'package:hustla/custom/spacers.dart';
+import 'package:hustla/custom/toast_component.dart';
+import 'package:hustla/data_model/destination_response.dart';
+import 'package:hustla/data_model/flights_response.dart';
+import 'package:hustla/my_theme.dart';
+import 'package:hustla/repositories/airline_repository.dart';
+import 'package:hustla/screens/passenger_details.dart';
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 

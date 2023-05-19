@@ -1,13 +1,12 @@
-import 'package:active_ecommerce_flutter/app_config.dart';
-import 'package:active_ecommerce_flutter/data_model/carriers_response.dart';
-import 'package:active_ecommerce_flutter/data_model/delivery_info_response.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:hustla/app_config.dart';
+import 'package:hustla/data_model/carriers_response.dart';
+import 'package:hustla/data_model/delivery_info_response.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
 import 'package:http/http.dart' as http;
 
-class ShippingRepository{
+class ShippingRepository {
   Future<List<DeliveryInfoResponse>> getDeliveryInfo() async {
-    Uri url =
-    Uri.parse("${AppConfig.BASE_URL}/delivery-info");
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/delivery-info");
     final response = await http.get(
       url,
       headers: {
@@ -20,5 +19,4 @@ class ShippingRepository{
 
     return deliveryInfoResponseFromJson(response.body);
   }
-
 }

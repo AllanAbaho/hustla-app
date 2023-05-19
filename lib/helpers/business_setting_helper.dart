@@ -1,7 +1,7 @@
-import 'package:active_ecommerce_flutter/data_model/business_setting_response.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
-import 'package:active_ecommerce_flutter/repositories/business_setting_repository.dart';
-import 'package:active_ecommerce_flutter/providers/locale_provider.dart';
+import 'package:hustla/data_model/business_setting_response.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
+import 'package:hustla/repositories/business_setting_repository.dart';
+import 'package:hustla/providers/locale_provider.dart';
 import 'package:one_context/one_context.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +9,6 @@ class BusinessSettingHelper {
   setBusinessSettingData() async {
     List<BusinessSettingListResponse> businessLists =
         await BusinessSettingRepository().getBusinessSettingList();
-
 
     businessLists.forEach((element) {
       switch (element.type) {

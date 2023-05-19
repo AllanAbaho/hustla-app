@@ -1,16 +1,15 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/screens/order_details.dart';
-import 'package:active_ecommerce_flutter/screens/login.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
-import 'package:active_ecommerce_flutter/repositories/profile_repository.dart';
+import 'package:hustla/screens/order_details.dart';
+import 'package:hustla/screens/login.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
+import 'package:hustla/repositories/profile_repository.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:one_context/one_context.dart';
-import 'package:active_ecommerce_flutter/custom/toast_component.dart';
+import 'package:hustla/custom/toast_component.dart';
 import 'package:toast/toast.dart';
 
 final FirebaseMessaging _fcm = FirebaseMessaging.instance;
-
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
   '0', // id
@@ -19,14 +18,10 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
 );
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin();
 
 class PushNotificationService {
-
-
-
   Future initialise() async {
-
     await _fcm.requestPermission(
       alert: true,
       announcement: false,
@@ -39,7 +34,8 @@ class PushNotificationService {
     String fcmToken = await _fcm.getToken();
 
     await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
 
     if (fcmToken != null) {
@@ -59,11 +55,13 @@ class PushNotificationService {
 
       RemoteNotification notification = event.notification;
       AndroidNotification android = event.notification?.android;
-      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-      var initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher'); // <- default icon name is @mipmap/ic_launcher
+      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+          FlutterLocalNotificationsPlugin();
+      var initializationSettingsAndroid = AndroidInitializationSettings(
+          '@mipmap/ic_launcher'); // <- default icon name is @mipmap/ic_launcher
 
-      var initializationSettings = InitializationSettings(android: initializationSettingsAndroid);
-
+      var initializationSettings =
+          InitializationSettings(android: initializationSettingsAndroid);
 
       flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
@@ -81,7 +79,6 @@ class PushNotificationService {
               ),
             ));
       }
-
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
@@ -109,7 +106,8 @@ class PushNotificationService {
             child: Text('GO'),
             onPressed: () {
               if (is_logged_in.$ == false) {
-                ToastComponent.showDialog("You are not logged in", gravity: Toast.top, duration: Toast.lengthLong);
+                ToastComponent.showDialog("You are not logged in",
+                    gravity: Toast.top, duration: Toast.lengthLong);
                 return;
               }
               //print(message);
@@ -132,25 +130,25 @@ class PushNotificationService {
     print(message.toString());
     if (is_logged_in.$ == false) {
       OneContext().showDialog(
-        // barrierDismissible: false,
+          // barrierDismissible: false,
           builder: (context) => AlertDialog(
-            title: new Text("You are not logged in"),
-            content: new Text("Please log in"),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('close'),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-              FlatButton(
-                  child: Text('Login'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    OneContext().push(MaterialPageRoute(builder: (_) {
-                      return Login();
-                    }));
-                  }),
-            ],
-          ));
+                title: new Text("You are not logged in"),
+                content: new Text("Please log in"),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('close'),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                  FlatButton(
+                      child: Text('Login'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        OneContext().push(MaterialPageRoute(builder: (_) {
+                          return Login();
+                        }));
+                      }),
+                ],
+              ));
       return;
     }
     if (message['data']['item_type'] == 'order') {
@@ -161,5 +159,4 @@ class PushNotificationService {
       }));
     } // If there's no view it'll just open the app on the first view    }
   }
-
 }

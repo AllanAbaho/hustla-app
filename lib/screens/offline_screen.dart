@@ -1,20 +1,20 @@
-import 'package:active_ecommerce_flutter/repositories/offline_wallet_recharge_repository.dart';
-import 'package:active_ecommerce_flutter/screens/main.dart';
-import 'package:active_ecommerce_flutter/screens/wallet.dart';
+import 'package:hustla/repositories/offline_wallet_recharge_repository.dart';
+import 'package:hustla/screens/main.dart';
+import 'package:hustla/screens/wallet.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
-import 'package:active_ecommerce_flutter/custom/toast_component.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
+import 'package:hustla/custom/toast_component.dart';
 import 'package:toast/toast.dart';
-import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
+import 'package:hustla/custom/input_decorations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:active_ecommerce_flutter/repositories/file_repository.dart';
-import 'package:active_ecommerce_flutter/repositories/offline_payment_repository.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:hustla/repositories/file_repository.dart';
+import 'package:hustla/repositories/offline_payment_repository.dart';
+import 'package:hustla/my_theme.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:active_ecommerce_flutter/screens/order_details.dart';
-import 'package:active_ecommerce_flutter/helpers/file_helper.dart';
+import 'package:hustla/screens/order_details.dart';
+import 'package:hustla/helpers/file_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OfflineScreen extends StatefulWidget {
@@ -80,7 +80,9 @@ class _OfflineState extends State<OfflineScreen> {
 
     if (_photo_path == "" || _photo_upload_id == 0) {
       ToastComponent.showDialog(
-          AppLocalizations.of(context).offline_screen_photo_warning, gravity: Toast.center, duration: Toast.lengthLong);
+          AppLocalizations.of(context).offline_screen_photo_warning,
+          gravity: Toast.center,
+          duration: Toast.lengthLong);
       return;
     }
     loading();
@@ -93,9 +95,11 @@ class _OfflineState extends State<OfflineScreen> {
               photo: _photo_upload_id);
       Navigator.pop(loadingcontext);
       if (submitResponse.result == false) {
-        ToastComponent.showDialog(submitResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
+        ToastComponent.showDialog(submitResponse.message,
+            gravity: Toast.center, duration: Toast.lengthLong);
       } else {
-        ToastComponent.showDialog(submitResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
+        ToastComponent.showDialog(submitResponse.message,
+            gravity: Toast.center, duration: Toast.lengthLong);
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return Wallet(from_recharge: true);
         }));
@@ -110,9 +114,11 @@ class _OfflineState extends State<OfflineScreen> {
               photo: _photo_upload_id);
       Navigator.pop(loadingcontext);
       if (submitResponse.result == false) {
-        ToastComponent.showDialog(submitResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
+        ToastComponent.showDialog(submitResponse.message,
+            gravity: Toast.center, duration: Toast.lengthLong);
       } else {
-        ToastComponent.showDialog(submitResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
+        ToastComponent.showDialog(submitResponse.message,
+            gravity: Toast.center, duration: Toast.lengthLong);
 
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return OrderDetails(id: widget.order_id, go_back: false);
@@ -146,14 +152,18 @@ class _OfflineState extends State<OfflineScreen> {
               ));
     } else if (status.isRestricted) {
       ToastComponent.showDialog(
-          AppLocalizations.of(context).common_give_photo_permission, gravity: Toast.center, duration: Toast.lengthLong);
+          AppLocalizations.of(context).common_give_photo_permission,
+          gravity: Toast.center,
+          duration: Toast.lengthLong);
     } else if (status.isGranted) {
       //file = await ImagePicker.pickImage(source: ImageSource.camera);
       _photo_file = await _picker.pickImage(source: ImageSource.gallery);
 
       if (_photo_file == null) {
         ToastComponent.showDialog(
-            AppLocalizations.of(context).common_no_file_chosen, gravity: Toast.center, duration: Toast.lengthLong);
+            AppLocalizations.of(context).common_no_file_chosen,
+            gravity: Toast.center,
+            duration: Toast.lengthLong);
         return;
       }
 
@@ -169,10 +179,12 @@ class _OfflineState extends State<OfflineScreen> {
 
       if (imageUpdateResponse.result == false) {
         print(imageUpdateResponse.message);
-        ToastComponent.showDialog(imageUpdateResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
+        ToastComponent.showDialog(imageUpdateResponse.message,
+            gravity: Toast.center, duration: Toast.lengthLong);
         return;
       } else {
-        ToastComponent.showDialog(imageUpdateResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
+        ToastComponent.showDialog(imageUpdateResponse.message,
+            gravity: Toast.center, duration: Toast.lengthLong);
 
         _photo_path = imageUpdateResponse.path;
         _photo_upload_id = imageUpdateResponse.upload_id;

@@ -1,10 +1,10 @@
-import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
-import 'package:active_ecommerce_flutter/custom/device_info.dart';
-import 'package:active_ecommerce_flutter/custom/resources.dart';
-import 'package:active_ecommerce_flutter/custom/spacers.dart';
-import 'package:active_ecommerce_flutter/custom/text.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:hustla/custom/box_decorations.dart';
+import 'package:hustla/custom/device_info.dart';
+import 'package:hustla/custom/resources.dart';
+import 'package:hustla/custom/spacers.dart';
+import 'package:hustla/custom/text.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
+import 'package:hustla/my_theme.dart';
 import 'package:flutter/material.dart';
 
 Widget buildDescription(String title,

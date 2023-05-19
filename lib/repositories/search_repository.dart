@@ -1,8 +1,8 @@
-import 'package:active_ecommerce_flutter/app_config.dart';
+import 'package:hustla/app_config.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:active_ecommerce_flutter/data_model/search_suggestion_response.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
+import 'package:hustla/data_model/search_suggestion_response.dart';
+import 'package:hustla/helpers/shared_value_helper.dart';
 
 class SearchRepository {
   Future<List<SearchSuggestionResponse>> getSearchSuggestionListResponse(

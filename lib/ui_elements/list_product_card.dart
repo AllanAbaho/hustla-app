@@ -1,7 +1,7 @@
-import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
-import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:hustla/custom/box_decorations.dart';
+import 'package:hustla/my_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_flutter/screens/product_details.dart';
+import 'package:hustla/screens/product_details.dart';
 
 class ListProductCard extends StatefulWidget {
   int id;
@@ -52,10 +52,10 @@ class _ListProductCardState extends State<ListProductCard> {
                     fit: BoxFit.cover,
                   ))),
           Container(
-            padding: EdgeInsets.only(top: 10, left: 12,right: 12,bottom: 14),
+            padding: EdgeInsets.only(top: 10, left: 12, right: 12, bottom: 14),
             width: 240,
             height: 100,
-           //color: Colors.red,
+            //color: Colors.red,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +66,6 @@ class _ListProductCardState extends State<ListProductCard> {
                     widget.name,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
-
                     style: TextStyle(
                         color: MyTheme.font_grey,
                         fontSize: 14,
@@ -85,22 +84,21 @@ class _ListProductCardState extends State<ListProductCard> {
                         textAlign: TextAlign.left,
                         maxLines: 1,
                         style: TextStyle(
-
                             color: MyTheme.accent_color,
                             fontSize: 16,
                             fontWeight: FontWeight.w700),
                       ),
                       widget.has_discount
                           ? Text(
-                            widget.stroked_price,
-                            textAlign: TextAlign.left,
-                            maxLines: 1,
-                            style: TextStyle(
-                                decoration: TextDecoration.lineThrough,
-                                color: MyTheme.medium_grey,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400),
-                          )
+                              widget.stroked_price,
+                              textAlign: TextAlign.left,
+                              maxLines: 1,
+                              style: TextStyle(
+                                  decoration: TextDecoration.lineThrough,
+                                  color: MyTheme.medium_grey,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400),
+                            )
                           : Container(),
                     ],
                   ),
